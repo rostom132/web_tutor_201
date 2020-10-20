@@ -16,7 +16,7 @@ Project
 │   └───models (.php)
 │   └───views (.html)
 │   |
-|	|	index.php
+|	index.php
 |
 └───public
     └───css (.css)
