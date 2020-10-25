@@ -1,9 +1,3 @@
-/* Class styles */
-.footer{
-    position: relative;
-    text-align: center;
-    width: 100%;
-}
 .flex_wrapper{
     display: flex;
     flex-direction: row;
@@ -12,6 +6,11 @@
     padding-right:0;
     padding-left:0;
 }
+footer{
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
 .main-container{
     position: absolute;
     width: 100%;
@@ -19,7 +18,15 @@
     resize: both;
     background-color: black;
 }
-.footer-box{
+.left-box{
+    position: relative;
+    text-align: left;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+.center-box{
     position: relative;
     text-align: left;
     justify-content: flex-start;
@@ -37,8 +44,18 @@
     background-color: red;
     transition: .25s;
 }
-.title:hover ~.underline{
+h4:hover ~.underline{
     width: 20%;
+}
+#about-text {
+    padding-top: 10px;
+    color: #b3b3b3;
+    font-size: 1.25rem;
+}
+#email-text{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color:#797D7F;
 }
 .social a span{
     height: 40px;
@@ -83,18 +100,15 @@
     padding-left: 10px;
     font-size: 1.2rem;
 }
-/* ID styles */
-#about-text {
-    padding-top: 10px;
-    color: #b3b3b3;
-    font-size: 1.25rem;
+.right-box{
+    position: relative;
+    text-align: left;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
-#email-text{
-    font-size: 1.5rem;
-    font-weight: 500;
-    color:#797D7F;
-}
-#email-input{
+input{
     width: 80%;
     font-size: 1.0625rem;
     background: #151515;
@@ -102,10 +116,10 @@
     border: 1px solid #797D7F;
     color: aliceblue;
 }
-#email-input:focus{
+input:focus{
     outline-color: #3498db;
 }
-#submit-button{
+button{
     margin-top: 5%;
     border-radius: 25px;
     width: 30%;
