@@ -24,6 +24,7 @@ Project
 ```
 ## Naming convention:
  - **Filenames**: follows lower Camel case and the filename must be noun.
- - **Classnames, id in css, javascript**: follow BEM convention ([BEM](http://getbem.com/naming/)).
- - **Function names**: follow lower Camel case and the function name must be verb.
+ - **html, css**: follow BEM convention ([BEM](http://getbem.com/naming/)).
+ - **Function names, function var**: follow lower Camel case and the function name must be verb.
+ - **id html**: follow example : popup_text
  - **Pictures**: follow lower Camel case and the function name must be noun.
