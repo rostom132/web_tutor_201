@@ -2,7 +2,7 @@ body {
     background: #f0f2f5;
 }
 
-.row {
+.row-registor {
     margin-left: -15px;
     margin-right: -15px;
 }
@@ -52,7 +52,6 @@ body {
 
 .btns {
     width: 100%;
-    /* overflow: hidden; */
     margin-left: 0px !important;
 }
 
@@ -71,7 +70,9 @@ body {
     align-items: center;
     text-decoration: none;
     position: relative;
-    transition: all .5s;
+    transition: all .5s;   
+    position: relative;
+    display: inline-block;
 }
 
 .desc>ul {
@@ -108,38 +109,9 @@ ul {
     transition: all .5s;
 }
 
-/* .btn-bl:before {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-top: 1px solid #45c0f8;
-    border-right: 1px solid #45c0f8;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transition: all .5s;
-
-    top: 50%;
-    right: 10px;
-    margin-top: -4px;
-    content: '';
-} */
-
 .btns>li>a {
     width: 100%;
     text-align: center;
-}
-
-/* .btns>li>a:hover{
-    width: 20px;
-    height: 20px;
-    background-color: pink;
-} */
-
-a:hover {
-    text-decoration: none;
-    background-color: #45C0F8;
-    color: white;
 }
 
 .left {
@@ -177,9 +149,10 @@ a:hover {
 
 }
 
-.popup {
-    position: relative;
-    display: inline-block;
+.btn-bl:hover {
+    text-decoration: none;
+    background-color: #45C0F8;
+    color: white;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -255,7 +228,6 @@ a:hover {
     height: 150px;
     background-color: pink;
     position: absolute;
-    /* top: 20%; */
     margin-top: 20%;
     margin-left: 15%;
     z-index: 3;
