@@ -129,16 +129,19 @@ input:focus {
     outline-color: #3498db;
 }
 
-button {
-    margin-top: 5%;
-    border-radius: 25px;
+.btn {
     width: 30%;
     height: 20%;
     border: none;
     outline: none;
-    background: #f12020;
     font-size: 1.0625rem;
     font-weight: 500;
     cursor: pointer;
-    color: aliceblue;
+}
+
+.btn-subscribe {
+    background-color: #f12020 !important;
+    color: aliceblue !important;
+    border-radius: 50px !important;
+    margin-top: 5%;
 }
