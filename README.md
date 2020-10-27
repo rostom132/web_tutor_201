@@ -21,6 +21,7 @@ Project
 └───public
     └───css (.css)
     └───js (.js)
+    └───images
 ```
 ## Naming convention:
  - **Filenames**: follows lower Camel case and the filename must be noun.
