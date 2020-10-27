@@ -1,5 +1,8 @@
 :root {
     --background-color: #fff;
+    --navbar-background: #1b2036;
+    --navbar-link: #fff;
+    --navbar-sticky-text: #000000;
 }
 
 * {
@@ -10,10 +13,28 @@
     outline: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+html,
 body {
     font-weight: 400;
     font-size: 100%;
-    line-height: 1;
     background-color: var(--background-color);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 100%;
     backface-visibility: hidden;
+    overflow-x: hidden;
+}
+
+.padding-0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+a {
+    text-decoration: none;
 }

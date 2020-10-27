@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <title>Counting</title>
 </head>
-<body>   
+
+<body>
     <div style="height:1000px;background-color: white;font-size:36px; color: black;">
-        Scroll Up and Down this page to see the parallax scrolling effect.
-        This div is just here to enable scrolling.
-        Tip: Try to remove the background-attachment property to remove the scrolling effect.
+        Scroll Up and Down this page to see the parallax scrolling effect. This div is just here to enable scrolling. Tip: Try to remove the background-attachment property to remove the scrolling effect.
     </div>
     <div class="parallax">
         <div class="container-fluid padding-0">
@@ -23,43 +23,60 @@
                 <div class="col-lg-3 col-wrapper">
                     <div class="content-wrapper" style="background-color: #4BBADC;">
                         <div class="white"><i class="fas fa-chalkboard-teacher fa-4x"></i></div>
-                        <div class="white"><h1><span class="num">700</span></h1></div>
-                        <div class="white"><h2>Tutors</h2></div>
+                        <div class="white">
+                            <h1><span class="num">700</span></h1>
+                        </div>
+                        <div class="white">
+                            <h2>Tutors</h2>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-wrapper" >
+                <div class="col-lg-3 col-wrapper">
                     <div class="content-wrapper" style="background-color: pink;">
                         <div class="white"><i class="fas fa-lightbulb fa-4x"></i></div>
-                        <div class="white"><h1><span class="num">3</span><span> years</span></h1></div>
-                        <div class="white"><h2>Experienced</h2></div>
+                        <div class="white">
+                            <h1><span class="num">3</span><span> years</span></h1>
+                        </div>
+                        <div class="white">
+                            <h2>Experienced</h2>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-wrapper">
                     <div class="content-wrapper" style="background-color: #F2C152;">
                         <div class="white"><i class="fas fa-university fa-4x"></i></div>
-                        <div class="white"><h1><span class="num">10</span></h1></div>
-                        <div class="white"><h2>Universities</h2></div>
+                        <div class="white">
+                            <h1><span class="num">10</span></h1>
+                        </div>
+                        <div class="white">
+                            <h2>Universities</h2>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-wrapper">
                     <div class="content-wrapper" style="background-color: #61B46B;">
                         <div class="white"><i class="fas fa-percentage fa-4x"></i></div>
-                        <div class="white"><h1><span class="num">70</span></h1></div>
-                        <div class="white"><h2>Test result</h2></div>
+                        <div class="white">
+                            <h1><span class="num">70</span></h1>
+                        </div>
+                        <div class="white">
+                            <h2>Test result</h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        jQuery(document).ready(function( $ ) {
+        jQuery(document).ready(function($) {
             $('.num').counterUp({
                 delay: 10,
                 time: 1000
             });
         });
-      </script>
+    </script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <script src="../../public/js/jquery.counterup.min.js"></script>
 </body>
+
 </html>
