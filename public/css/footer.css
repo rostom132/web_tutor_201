@@ -34,7 +34,7 @@
     position: absolute;
     width: 0;
     height: 3px;
-    background-color: blue;
+    background-color: #4BBADC;
     transition: .25s;
 }
 
@@ -68,7 +68,7 @@ h4:hover~.underline {
 }
 
 .social a span:hover {
-    background: #f12020;
+    background: #4BBADC;
 }
 
 .center-contain {
@@ -92,11 +92,13 @@ h4:hover~.underline {
     border-radius: 50%;
     transition: 0.3s;
     cursor: pointer;
-    padding-top: 10px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .fas:hover {
-    background: #f12020;
+    background: #4BBADC;
 }
 
 .text {
@@ -127,7 +129,7 @@ input:focus {
 }
 
 .btn_subscribe {
-    background-color: #f12020;
+    background-color: #4BBADC;
     color: aliceblue;
     padding-top: 10px;
     padding-bottom: 10px;

@@ -4,19 +4,15 @@
 }
 
 
-/* 
-.carousel {
-    position: absolute !important;
-    height: 100%;
+/* .carousel {
+    height: 75vh;
     width: 100%;
 } */
 
-
-/* .carousel-inner {
-    position: absolute !important;
-    height: 100%;
+.carousel-inner {
+    height: 500px;
     width: 100%;
-} */
+}
 
 .basic-item {
     position: relative;
@@ -209,16 +205,14 @@ ul {
 }
 
 
-/* Add animation (fade in the popup) */
-
-@-webkit-keyframes fadeIn {
+/* @-webkit-keyframes fadeIn {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
     }
-}
+} */
 
 @keyframes fadeIn {
     from {

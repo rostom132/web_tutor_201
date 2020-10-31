@@ -21,16 +21,16 @@
     <nav id="navbar" class="navbar-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
+                <div class="col-2 offset-1">
                     <a href="#">
-                        <img src="../../public/images/navbarLogo.png " width="60%" height="auto" alt="Logo ">
+                        <img id="navbar__logo" src="../../public/images/navbarLogo.png" class="logo" alt="Logo ">
                     </a>
                 </div>
-                <div class="col-9 offset-1 my-center text-right">
+                <div class="col-8 offset-1 text-right">
                     <ul>
-                        <li>
+                        <li class="navbar__li">
                             <a href="#" class="navbar-wrapper__link">
-                                <span class="lang" key="introduction">Introduction</span>
+                                <span class="lang" key="NAVBAR_LINK1"></span>
                             </a>
                             <div class="dropdown-container">
                                 <ul>
@@ -49,9 +49,9 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        <li class="navbar__li">
                             <a href="#" class="navbar-wrapper__link">
-                                <span>Users</span>
+                                <span class="lang" key="NAVBAR_LINK2"></span>
                             </a>
                             <div class="dropdown-container">
                                 <ul>
@@ -60,9 +60,9 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        <li class="navbar__li">
                             <a href="#" class="navbar-wrapper__link">
-                                <span>Parents</span>
+                                <span class="lang" key="NAVBAR_LINK3"></span>
                             </a>
                             <div class="dropdown-container">
                                 <ul>
@@ -71,36 +71,40 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        <li class="navbar__li">
                             <a href="#" class="navbar-wrapper__link">
-                                <span>Login</span>
+                                <span class="lang" key="NAVBAR_LINK4"></span>
                             </a>
                             <div class="dropdown-container">
                                 <ul>
-                                    <li><a href="#" class="dropdown__item">Link 1</a></li>
+                                    <li><a href="#" class="dropdown__item">Link 1</a>
+                                    </li>
                                     <li><a href="#" class="dropdown__item">Link 2</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li>
-                            <!-- <a href="#">
-                                <div class="dnf-avatar">
-                                    <img src="../../public/images/vn_language.png" alt="en_flag">
-                                </div>
-                            </a> -->
+                            <a class="dnf-avatar">
+                                <div id="language_flag" class="flag vn_flag">
+                            </a>
                         </li>
                         <li>
-                            <a href="#" class="contact-us">Contact Us</a>
+                            <a href="#"><span class="lang contact-us" key="NAVBAR_LINK5"></span></a>
                         </li>
                     </ul>
+                    </div>
                 </div>
             </div>
-        </div>
     </nav>
     <!-- Header -->
     <header id="header-wrapper">
         <div class="container-fluid padding-0">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="../../public/images/header_background_1.jpg" class="d-block w-100" alt="...">
