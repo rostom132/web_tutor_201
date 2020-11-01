@@ -2,7 +2,8 @@ import { arrLang, district, ward } from "./name.js";
 
 function translateLang(lang) {
     $('.lang').each(function(index, item) {
-        $(this).text(arrLang[lang][$(this).attr('key')]);
+        var $arrAttr = $(this).attr('key').split('.');
+        $(this).text(arrLang[lang][$arrAttr[0]][$arrAttr[1]]);
     });
 }
 
@@ -27,7 +28,7 @@ $(function() {
     if (stored_lang != null && stored_lang != undefined) {
         translateLang(stored_lang);
     } else {
-        localStorage.setItem("stored_lang");
+        localStorage.setItem("stored_lang", "en");
         translateLang("en");
     }
 

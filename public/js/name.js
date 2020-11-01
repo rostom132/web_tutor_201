@@ -1,39 +1,41 @@
 export const arrLang = {
     "en": {
         // HOMEPAGE
-        "NAVBAR_LINK1": "Introduction",
-        "NAVBAR_LINK2": "Users",
-        "NAVBAR_LINK3": "Parents",
-        "NAVBAR_LINK4": "Login",
-        "NAVBAR_LINK5": "Contact Us",
-        "BODY_TITLE": "Center Activity",
-        "BODY_SUB": "",
-        "COUNTING_SQUARE1_LINE1": "700",
-        "COUNTING_SQUARE1_LINE2": "Tutors",
-        'COUNTING_SQUARE2_LINE1': "3 years",
-        "COUNTING_SQUARE2_LINE2": "Experienced",
-        "COUNTING_SQUARE3_LINE1": "10",
-        "COUNTING_SQUARE3_LINE2": "Universities",
-        "COUNTING_SQUARE4_LINE1": "70",
-        "COUNTING_SQUARE4_LINE2": "Test result",
-        "FOOTER_LEFT_TITLE": "ABOUT US",
-        "FOOTER_LEFT_DES": "We are finding the best tutor that you can imagine about. With us you can get the best score for your assignment",
-        "FOOTER_CENTER_TITLE": "CONTACT",
-        "FOOTER_CENTER_POS": "HCMUT, Ho Chi Minh City",
-        "FOOTER_CENTER_PHONE": "+089-765432100",
-        "FOOTER_CENTER_EMAIL": "abc@example.com",
-        "FOOTER_RIGHT_TITLE": "FOLLOW US",
-        "FOOTER_RIGHT_EMAIL": "Email",
-        "FOOTER_RIGHT_SUBSCRIBE": "Subscribe"
-            // REGISTER CLASS
-
+        "COMMON": {
+            "NAVBAR_LINK1": "Introduction",
+            "NAVBAR_LINK2": "Users",
+            "NAVBAR_LINK3": "Parents",
+            "NAVBAR_LINK4": "Login",
+            "NAVBAR_LINK5": "Contact Us",
+            "BODY_TITLE": "Center Activity",
+            "BODY_SUB": "",
+            "COUNTING_SQUARE1_LINE1": "700",
+            "COUNTING_SQUARE1_LINE2": "Tutors",
+            'COUNTING_SQUARE2_LINE1': "3 years",
+            "COUNTING_SQUARE2_LINE2": "Experienced",
+            "COUNTING_SQUARE3_LINE1": "10",
+            "COUNTING_SQUARE3_LINE2": "Universities",
+            "COUNTING_SQUARE4_LINE1": "70",
+            "COUNTING_SQUARE4_LINE2": "Test result",
+            "FOOTER_LEFT_TITLE": "ABOUT US",
+            "FOOTER_LEFT_DES": "We are finding the best tutor that you can imagine about. With us you can get the best score for your assignment",
+            "FOOTER_CENTER_TITLE": "CONTACT",
+            "FOOTER_CENTER_POS": "HCMUT, Ho Chi Minh City",
+            "FOOTER_CENTER_PHONE": "+089-765432100",
+            "FOOTER_CENTER_EMAIL": "abc@example.com",
+            "FOOTER_RIGHT_TITLE": "FOLLOW US",
+            "FOOTER_RIGHT_EMAIL": "Email",
+            "FOOTER_RIGHT_SUBSCRIBE": "Subscribe"
+        }
     },
     "vn": {
-        "NAVBAR_LINK1": "Giới thiệu",
-        "NAVBAR_LINK2": "Người dùng",
-        "NAVBAR_LINK3": "Phụ huynh",
-        "NAVBAR_LINK4": "Đăng nhập",
-        "NAVBAR_LINK5": "Liên hệ",
+        "COMMON": {
+            "NAVBAR_LINK1": "Giới thiệu",
+            "NAVBAR_LINK2": "Người dùng",
+            "NAVBAR_LINK3": "Phụ huynh",
+            "NAVBAR_LINK4": "Đăng nhập",
+            "NAVBAR_LINK5": "Liên hệ",
+        }
     }
 };
 
@@ -128,7 +130,21 @@ export const ward = {
         "DIS6": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14",
         "DIS7": "Bình Thuận, Phú Mỹ, Phú Thuận, Tân Hưng, Tân Kiểng, Tân Phong, Tân Phú, Tân Quy, Tân Thuận Đông, Tân Thuận Tây",
         "DIS8": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 16",
-        "DIS9": "Hiệp Phú, Long Bình, Long Phước, Long Thạnh Mỹ, Long Trường, Phú Hữu, Phước Bình,  Phước Long A, Phước Long B, Tân Phú",
-        "DIS10": "",
+        "DIS9": "Hiệp Phú, Long Bình, Long Phước, Long Thạnh Mỹ, Long Trường, Phú Hữu, Phước Bình,  Phước Long A, Phước Long B, Tân Phú, Tăng Nhơn Phú A, Tăng Nhơn Phú B, Trường Thạnh",
+        "DIS10": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15",
+        "DIS11": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 16",
+        "DIS12": " An Phú Đông, Đông Hưng Thuận, Hiệp Thành, Tân Chánh Hiệp, Tân Hưng Thuận, Tân Thới Hiệp, Tân Thới Nhất, Thạnh Lộc, Thạnh Xuân, Thới An, Trung Mỹ Tây",
+        "DISBINHTAN": "An Lạc,  An Lạc A,  Bình Hưng Hòa, Bình Hưng Hoà A, Bình Hưng Hoà B, Bình Trị Đông, Bình Trị Đông A, Bình Trị Đông B, Tân Tạo,  Tân Tạo A",
+        "DISBINHTHANH": "Phường 01 Phường 02, Phường 03, Phường 05,Phường 06, Phường 07, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 17, Phường 19, Phường 21, Phường 22,Phường 24, Phường 25, Phường 26, Phường 27 ,Phường 28",
+        "DISGOVAP": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 16, Phường 17",
+        "DISPHUNHUAN": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15 Phường 17",
+        "DISTANBINH": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15",
+        "DISTANPHU": "Phường Hiệp Tân, Phường Hoà Thạnh, Phường Phú Thạnh, Phường Phú Thọ Hoà, Phường Phú Trung, Phường Sơn Kỳ,Phường Tân Qúy, Phường Tân Sơn Nhì, Phường Tân Thành, Phường Tân Thới Hoà, Phường Tây Thạnh",
+        "DISTHUDUC": "Phường Bình Chiểu, Phường Bình Thọ, Phường Hiệp Bình Chánh, Phường Hiệp Bình Phước, Phường Linh Chiểu, Phường Linh Đông, Phường Linh Tây, Phường Linh Trung, Phường Linh Xuân, Phường Tam Bình, Phường Tam Phú, Phường Trường Thọ",
+        "DISBINHCHANH": "Thị trấn Tân Túc, Xã An Phú Tây, Xã Bình Chánh, Xã Bình Hưng, Xã Bình Lợi, Xã Đa Phước, Xã Hưng Long, Xã Lê Minh Xuân, Xã Phạm Văn Hai, Xã Phong Phú, Xã Quy Đức, Xã Tân Kiên, Xã Tân Nhựt, Xã Tân Quý Tây, Xã Vĩnh Lộc A, Xã Vĩnh Lộc B",
+        "DISCANGIO": "Thị trấn Cần Thạnh, Xã An Thới Đông, Xã Bình Khánh, Xã Long Hòa, Xã Lý Nhơn, Xã Tam Thôn Hiệp, Xã Thạnh An",
+        "DISCUCHI": "Thị trấn Củ Chi, Xã An Nhơn Tây, Xã An Phú, Xã Bình Mỹ, Xã Hòa Phú, Xã Nhuận Đức, Xã Phạm Văn Cội, Xã Phú Hòa Đông, Xã Phú Mỹ Hưng, Xã Phước Hiệp, Xã Phước Thạnh, Xã Phước Vĩnh An, Xã Tân An Hội, Xã Tân Phú Trung, Xã Tân Thạnh Đông, Xã Tân Thạnh Tây, Xã Tân Thông Hội, Xã Thái Mỹ, Xã Trung An, Xã Trung Lập Hạ, Xã Trung Lập Thượng",
+        "DISHOCMON": "Thị trấn Hóc Môn, Xã Bà Điểm, Xã Đông Thạnh, Xã Nhị Bình, Xã Tân Hiệp, Xã Tân Thới Nhì, Xã Tân Xuân, Xã Thới Tam Thôn, Xã Trung Chánh, Xã Xuân Thới Đông, Xã Xuân Thới Sơn, Xã Xuân Thới Thượng",
+        "DISNHABE": "Thị trấn Nhà Bè, Xã Hiệp Phước, Xã Long Thới, Xã Nhơn Đức, Xã Phú Xuân, Xã Phước Kiển, Xã Phước Lộc"
     }
 };
