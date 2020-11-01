@@ -1,5 +1,6 @@
 const arrLang = {
     "en": {
+        // HOMEPAGE
         "NAVBAR_LINK1": "Introduction",
         "NAVBAR_LINK2": "Users",
         "NAVBAR_LINK3": "Parents",

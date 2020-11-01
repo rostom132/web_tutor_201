@@ -155,11 +155,11 @@
 }
 
 .vn_flag {
-    background-image: url("../../public/images/vn_language.png");
+    background-image: url("../../public/images/static_images/icon/vn_language.png");
 }
 
 .en_flag {
-    background-image: url("../../public/images/en_language.png");
+    background-image: url("../../public/images/static_images/icon/en_language.png");
 }
 
 .contact-us {
