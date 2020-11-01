@@ -1,1 +1,41 @@
-.register_form {}
+.register_form {
+    position: relative;
+    margin-top: 20px;
+    border-radius: 2px;
+    height: 70vh;
+    background-color: #fff;
+}
+
+.form__title {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    background-color: #069d86;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.form__body {
+    width: 100%;
+}
+
+.form__field--format {
+    color: #069d86;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.group-row {
+    padding: 10px;
+}
+
+.required {
+    color: red;
+}
+
+.form__select {
+    border: 1px solid #d3d3d3;
+}

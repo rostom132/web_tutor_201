@@ -1,4 +1,4 @@
-const arrLang = {
+export const arrLang = {
     "en": {
         // HOMEPAGE
         "NAVBAR_LINK1": "Introduction",
@@ -25,6 +25,8 @@ const arrLang = {
         "FOOTER_RIGHT_TITLE": "FOLLOW US",
         "FOOTER_RIGHT_EMAIL": "Email",
         "FOOTER_RIGHT_SUBSCRIBE": "Subscribe"
+            // REGISTER CLASS
+
     },
     "vn": {
         "NAVBAR_LINK1": "Giới thiệu",
@@ -33,6 +35,100 @@ const arrLang = {
         "NAVBAR_LINK4": "Đăng nhập",
         "NAVBAR_LINK5": "Liên hệ",
     }
-}
+};
 
-export default arrLang;
+export const district = {
+    "en": {
+        "DIS1": "District 1",
+        "DIS2": "District 2",
+        "DIS3": "District 3",
+        "DIS4": "District 4",
+        "DIS5": "District 5",
+        "DIS6": "District 6",
+        "DIS7": "District 7",
+        "DIS8": "District 8",
+        "DIS9": "District 9",
+        "DIS10": "District 10",
+        "DIS11": "District 11",
+        "DIS12": "District 12",
+        "DISBINHTAN": "Binh Tan District",
+        "DISBINHTHANH": "Binh Thanh District",
+        "DISGOVAP": "Go Vap District",
+        "DISPHUNHUAN": "Phu Nhuan District",
+        "DISTANBINH": "Tan Binh District",
+        "DISTANPHU": "Tan Phu District",
+        "DISTHUDUC": "Thu Duc District",
+        "DISBINHCHANH": "Binh Chanh District",
+        "DISCANGIO": "Can Gio District",
+        "DISCUCHI": "Cu Chi District",
+        "DISHOCMON": "Hoc Mon District",
+        "DISNHABE": "Nha Be District"
+    },
+    "vn": {
+        "DIS1": "Quận 1",
+        "DIS2": "Quận 2",
+        "DIS3": "Quận 3",
+        "DIS4": "Quận 4",
+        "DIS5": "Quận 5",
+        "DIS6": "Quận 6",
+        "DIS7": "Quận 7",
+        "DIS8": "Quận 8",
+        "DIS9": "Quận 9",
+        "DIS10": "Quận 10",
+        "DIS11": "Quận 11",
+        "DIS12": "Quận 12",
+        "DISBINHTAN": "Quận Bình Tân",
+        "DISBINHTHANH": "Quận Bình Thạnh",
+        "DISGOVAP": "Quận Gò Vấp",
+        "DISPHUNHUAN": "Quận Phú Nhuận",
+        "DISTANBINH": "Quận Tân Bình",
+        "DISTANPHU": "Quận Tân Phú",
+        "DISTHUDUC": "Quận Thủ Đức",
+        "DISBINHCHANH": "Huyện Bình Chánh",
+        "DISCANGIO": "Huyện Cần Giờ",
+        "DISCUCHI": "Huyện Củ Chi",
+        "DISHOCMON": "Huyện Hóc Môn",
+        "DISNHABE": "Huyện Nhà Bè"
+    }
+};
+
+export const ward = {
+    "en": {
+        "DIS1": "Ben Nghe, Ben Thanh, Cau Kho, Co Giang, Da Kao, Nguyen Cu Trinh, Nguyen Thai Binh, Pham Ngu Lao, Tan Dinh",
+        "DIS2": "An Khanh, An Loi Dong, An Phu, Binh An, Binh Khanh, Binh Trung Dong, Binh Trung Tay, Cat Lai, Thach My Loi, Thao Dien, Thu Thiem",
+        "DIS3": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14",
+        "DIS4": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16, Ward 17, Ward 18",
+        "DIS5": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15",
+        "DIS6": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14",
+        "DIS7": "Binh Thuan, Phu My, Phu Thuan, Tan Hung, Tan Kieng, Tan Phong, Tan Phu, Tan Quy, Tan Thuan Dong, Tan Thuan Tay",
+        "DIS8": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16",
+        "DIS9": "Hiep Phu, Long Binh, Long Phuoc, Long Thanh My, Long Truong, Phu Huu, Phuoc Binh, Phuoc Long A, Phuoc Long B, Tan Phu, Tan Nhon Phu A, Tan Nhon Phu B, Truong Thanh",
+        "DIS10": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15",
+        "DIS11": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16",
+        "DIS12": "An Phu Dong, Dong Hung Thuan, Hiep Thanh, Tan Chanh Hiep, Tan Hung Thuan, Tan Thoi Hiep, Tan Thoi Nhat, Thanh Loc, Thanh Xuan, Thoi An, Trung My Tay",
+        "DISBINHTAN": "An Lac, An Lac A, Binh Hung Hoa, Binh Hung Hoa A, Binh Hung Hoa B, Binh Tri Dong, Binh Tri Dong A, Binh Tri Dong B, Tan Tao, Tan Tao A",
+        "DISBINHTHANH": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16, Ward 17, Ward 18, Ward 19, Ward 20, Ward 21, Ward 22, Ward 24, Ward 25, Ward 26, Ward 27, Ward 28",
+        "DISGOVAP": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16, Ward 17",
+        "DISPHUNHUAN": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15, Ward 16, Ward 17",
+        "DISTANBINH": "Ward 1, Ward 2, Ward 3, Ward 4, Ward 5, Ward 6, Ward 7, Ward 8, Ward 9, Ward 10, Ward 11, Ward 12, Ward 13, Ward 14, Ward 15",
+        "DISTANPHU": "Hiep Tan, Hoa Thanh, Phu Thanh, Phu Tho Hoa, Phu Trung, Son Ky, Tan Quy, Tan Son Nhi, Tan Thanh, Tan Thoi Hoa, Tay Thanh",
+        "DISTHUDUC": "Binh Chieu, Binh Tho, Hiep Binh Chanh, Hiep Binh Phuoc, Linh Chieu, Linh Dong, Linh Tay, Linh Trung, Linh Xuan, Tam Binh, Tam Phu, Truong Tho",
+        "DISBINHCHANH": "Tan Tuc, An Phu Tay, Binh Chanh, Binh Hung, Binh Loi, Da Phuoc, Hung Long, Le Minh Xuan, Pham Van Hai, Phong Phu, Quy Duc, Tan Kien, Tan Nhut, Tan Quy Tay, Vinh Loc A, Vinh Loc B",
+        "DISCANGIO": "Can Thanh, An Thoi Dong, Binh Khanh, Long Hoa, Ly Nhon, Tam Thon Hiep, Thanh An",
+        "DISCUCHI": "Cu Chi, An Nhon Tay, An Phu, Binh My, Hoa Phu, Nhuan Duc, Pham Van Coi, Phu Hoa Dong, Phu My Hung, Phuoc Hiep, Phuoc Thanh, Phuoc Vinh An, Tan An Hoi, Tan Phu Trung, Tan Thanh Dong, Tan Thanh Tay, Tan Thong Hoi, Thai My, Trung An, Trung Lap Ha, Trung Lap Thuong",
+        "DISHOCMON": "Hoc Mon, Ba Diem, Dong Thanh, Nhi Binh, Tan Hiep, Tan Thoi Nhi, Tan Xuan, Tam Thon, Trung Chanh, Xuan Thoi Dong, Xuan Thoi Son, Thoi Thuong",
+        "DISNHABE": "Nha Be, Hiep Phuoc, Long Thoi, Nhon Duc, Phu Xuan, Phuoc Kien, Phuoc Loc",
+    },
+    "vn": {
+        "DIS1": "Bến Nghé, Bến Thành, Cầu Kho, Cầu Ông Lãnh, Cô Giang, Đa Kao,  Nguyễn Cư Trinh, Nguyễn Thái Bình, Phạm Ngũ Lão, Tân Định",
+        "DIS2": " An Khánh, An Lợi Đông, An Phú,  Bình An, Bình Khánh, Bình Trưng Đông, Bình Trưng Tây, Cát Lái, Thạnh Mỹ Lợi, Thảo Điền, Thủ Thiêm",
+        "DIS3": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14",
+        "DIS4": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 16, Phường 18",
+        "DIS5": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15",
+        "DIS6": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14",
+        "DIS7": "Bình Thuận, Phú Mỹ, Phú Thuận, Tân Hưng, Tân Kiểng, Tân Phong, Tân Phú, Tân Quy, Tân Thuận Đông, Tân Thuận Tây",
+        "DIS8": "Phường 01, Phường 02, Phường 03, Phường 04, Phường 05, Phường 06, Phường 07, Phường 08, Phường 09, Phường 10, Phường 11, Phường 12, Phường 13, Phường 14, Phường 15, Phường 16",
+        "DIS9": "Hiệp Phú, Long Bình, Long Phước, Long Thạnh Mỹ, Long Trường, Phú Hữu, Phước Bình,  Phước Long A, Phước Long B, Tân Phú",
+        "DIS10": "",
+    }
+};

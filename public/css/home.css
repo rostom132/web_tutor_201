@@ -43,3 +43,19 @@ body {
 a {
     text-decoration: none;
 }
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+select {
+    background-color: transparent;
+}

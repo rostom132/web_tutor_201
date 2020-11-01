@@ -9,6 +9,11 @@
     width: 100%;
 }
 
+.carousel-inner {
+    height: 500px;
+    width: 100%;
+}
+
 .header__title {
     position: absolute;
     top: 50%;
@@ -36,14 +41,6 @@
     100% {
         opacity: 1;
     }
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-center {
-    text-align: center;
 }
 
 .my-center {

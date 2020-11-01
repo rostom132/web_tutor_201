@@ -1,4 +1,4 @@
-import arrLang from "./name.js";
+import { arrLang, district, ward } from "./name.js";
 
 function translateLang(lang) {
     $('.lang').each(function(index, item) {
@@ -6,16 +6,28 @@ function translateLang(lang) {
     });
 }
 
+function renderDistrict(districtObj, lang) {
+    var $district = $("#district");
+    $district.empty();
+    if (lang === "en") $district.append('<option value="" disabled selected>- Choose district -</option>');
+    else $district.append('<option value="" disabled selected>- Chọn quận -</option>');
+    $.each(districtObj, function(key, value) {
+        $district.append('<option ' + 'value=' + key + '>' + value + '</option>')
+    });
+}
+
+function renderWard(wardObj) {
+
+}
 
 $(function() {
     //first check for stored language in localStorage i.e. fetch data from localStorage
     let stored_lang = localStorage.getItem("stored_lang");
     //if any then translate page accordingly
     if (stored_lang != null && stored_lang != undefined) {
-        console.log(stored_lang);
         translateLang(stored_lang);
     } else {
-        localStorage.setItem("stored_lang", "en");
+        localStorage.setItem("stored_lang");
         translateLang("en");
     }
 
@@ -34,4 +46,13 @@ $(function() {
             language_flag.classList.add("vn_flag");
         }
     });
+
+    $('#district').one("click", function() {
+        var currentLang = localStorage.getItem("stored_lang");
+        if (currentLang === "en") {
+            renderDistrict(district.en, "en");
+        } else {
+            renderDistrict(district.vn, "vn");
+        }
+    })
 });
