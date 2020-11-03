@@ -1,0 +1,61 @@
+:root {
+    --background-color: #fff;
+    --navbar-background: #1b2036;
+    --navbar-link: #fff;
+    --navbar-sticky-text: #000000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    font-weight: 400;
+    font-size: 100%;
+    background-color: var(--background-color);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+    backface-visibility: hidden;
+    overflow-x: hidden;
+}
+
+.padding-0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.padding-15 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+select {
+    background-color: transparent;
+}

@@ -1,0 +1,143 @@
+<div class="body-wrapper">
+    <div class="container">
+        <div class="row row-register">
+            <div class="col-6">
+                <div class="basic-item">
+                    <div class="course-name">
+                        <p>
+                            <!-- Img src -->
+                        </p>
+                    </div>
+                    <a class="thumb">
+                        <!-- Add image in thumb_bg -->
+                        <div class="thumb_bg">
+                        </div>
+                    </a>
+                    <div class="desc course">
+                        <p class="title_register">Tutors</p>
+                        <ul class="btns">
+
+                            <li>
+                                <a id="tutor_ex" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Experience
+                                </a>
+                            </li>
+                            <li><a id="tutor_ti" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Time
+                                </a>
+
+                            </li>
+                            <li><a id="tutor_at" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Attitude
+
+                                </a>
+                            </li>
+
+                        </ul>
+                        <p>
+                            <a title="Đăng ký" class="btn_register link-more">Register</a>
+                        </p>
+                        <div>
+                            <span class="popupTextTutor" id="tutor_ex_pop">epellat provident quia corrupti doloremque
+                                commodi tenetur eveniet dicta, esse obcaecati vero nam! Iste impedit saepe sed nihil
+                                amet.</span>
+                            <span class="popupTextTutor" id="tutor_ti_pop">Lorem ipsum, dolor sit amet consectetur
+                                adipisicing elit. Architecto nulla fuga repellat necessitatibus tempora iure
+                                quos error itaque facilis officia, ipsa tenetur! Natus voluptatem totam maxime
+                                dignissimos ipsa impedit in!</span>
+                            <span class="popupTextTutor" id="tutor_at_pop">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Voluptatum amet, blanditiis repellat numquam soluta corrupti
+                                iure quasi animi, tempore quisquam quod exercitationem itaque at repellendus
+                                inventore nam voluptate rem aut!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="basic-item">
+                    <div class="course-name">
+                        <p>
+                            <!-- Add Img src -->
+                        </p>
+                    </div>
+                    <a class="thumb">
+                        <div class="thumb_bg">
+
+                        </div>
+                    </a>
+                    <div class="desc course">
+                        <p class="title_register">Users</p>
+                        <ul class="btns">
+
+                            <li><a id="tutor_qu" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Quality
+                                </a>
+                            </li>
+                            <li><a id="tutor_fl" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Flexiable
+                                </a>
+                            </li>
+                            <li><a id="tutor_en" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Environment
+                                </a>
+                            </li>
+                        </ul>
+                        <p>
+                            <a title="Đăng ký" class="btn_register link-more">Register</a>
+                        </p>
+                        <div>
+                            <span class="popupTextParent" id="tutor_qu_pop">Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Nulla excepturi earum sed et mollitia vitae dolores laboriosam
+                                cum veritatis, nihil architecto non aliquam delectus explicabo eveniet.
+                                Repellendus magni voluptatem fugiat.</span>
+                            <span class="popupTextParent" id="tutor_fl_pop">Lorem ipsum, dolor sit amet consectetur
+                                adipisicing elit. Ab maxime aperiam consequuntur animi obcaecati consequatur
+                                rerum officia fuga quo, ducimus itaque necessitatibus quidem quaerat voluptas
+                                molestias vel maiores dolorem earum!</span>
+                            <span class="popupTextParent" id="tutor_en_pop">Lorem ipsum, dolor sit amet consectetur
+                                adipisicing elit. Ab maxime aperiam consequuntur animi obcaecati consequatur
+                                rerum officia fuga quo, ducimus itaque necessitatibus quidem quaerat voluptas
+                                molestias vel maiores dolorem earum!</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 style="text-align: center;">Center Activity</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis ea totam optio, esse sed sequi ullam necessitatibus voluptas, nisi, exercitationem architecto earum magnam vel maxime et vero quidem repellendus.
+        </p>
+        <img src="../../static/images/background/indexBG1.jpg" style="width: 100%">
+        <br>
+        <br>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="box_pink"></div>
+            <img src="../../static/images/background/indexBG1.jpg" class="zero_img">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-8 col-offset-6">
+            <div class="box_blue">
+            </div>
+            <div class="box_orange">
+            </div>
+            <img src="../../static/images/background/pic1.jpg" alt="Trung tâm &amp; Cơ sở vật chất" class="first_img">
+            <img src="../../static/images/background/pic2.jpg" alt="Trung tâm &amp; Cơ sở vật chất" class="second_img">
+            <img src="../../static/images/background/pic3.jpg" alt="Trung tâm &amp; Cơ sở vật chất" class="third_img">
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+    <script>
+        // When the user clicks on div, open the popup
+        function popupDesription(id) {
+            var popup = document.getElementById(id + "_pop");
+            popup.classList.toggle("show");
+        }
+
+        function hideDescription(id) {
+            var popup = document.getElementById(id + "_pop");
+            popup.classList.toggle("show");
+        }
+    </script>
+</div>
+
+<link rel="stylesheet" href="../../static/css/bodyBanner.css">

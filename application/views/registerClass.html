@@ -1,0 +1,53 @@
+<div class="body-wrapper">
+    <!-- Step how to register -->
+    <div class="register_instruction">
+
+    </div>
+    <!-- Register form -->
+    <div class="register_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form__title">
+                        Description for your new class
+                    </div>
+                    <div class="form__body">
+                        <div class="group-row">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form__field">
+                                        <p class="form__field--format">District<span class="required">*</span></p>
+                                        <select class="form__select" name="district_select" id="district_select" required>
+                                            <option class="lang" key="REGISTER.DISTRICT_PLACEHOLDER" value=""></option>
+                                            <optgroup label="District" name="district" id="district"></optgroup>
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form__field">
+                                        <p class="form__field--format">Ward<span class="required">*</span></p>
+                                        <select class="form__select" name="ward_select" id="ward_select">
+                                            <option class="lang" key="REGISTER.WARD_PLACEHOLDER"  value=""></option>
+                                            <optgroup name="ward" id="ward" label="Ward"></optgroup>
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form__field">
+                                        <p class="form__field--format">Street<span class="required">*</span></p>
+                                        <select class="form__select" name="street_select" id="street_select">
+                                            <option class="lang" key="REGISTER.STREET_PLACEHOLDER"  value=""></option>
+                                            <optgroup name="street" id="street" label="Street"></optgroup>
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="../../static/css/registerClass.css">
+<script type="module" src="../../static/js/registerClass.js"></script>
