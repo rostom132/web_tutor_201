@@ -26,6 +26,10 @@ export const arrLang = {
             "FOOTER_RIGHT_TITLE": "FOLLOW US",
             "FOOTER_RIGHT_EMAIL": "Email",
             "FOOTER_RIGHT_SUBSCRIBE": "Subscribe"
+        },
+        "REGISTER": {
+            "DISTRICT_PLACEHOLDER": "- Choose District -",
+            "WARD_PLACEHOLDER": "- Choose Ward - "
         }
     },
     "vn": {

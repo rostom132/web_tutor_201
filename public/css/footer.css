@@ -45,11 +45,11 @@ h4:hover~.underline {
 #about-text {
     padding-top: 10px;
     color: #b3b3b3;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 #email-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #b3b3b3
     /* color: #797D7F; */
@@ -83,11 +83,10 @@ h4:hover~.underline {
 }
 
 .fas {
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     background: #1a1a1a;
-    height: 60px;
-    width: 60px;
-    line-height: 45px;
+    height: 40px;
+    width: 40px;
     text-align: center;
     border-radius: 50%;
     transition: 0.3s;
@@ -102,9 +101,9 @@ h4:hover~.underline {
 }
 
 .text {
-    padding-top: 15px;
+    padding-top: 8px;
     padding-left: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .right-box {
@@ -115,7 +114,7 @@ h4:hover~.underline {
     height: 100%;
 }
 
-input {
+.footer__input {
     width: 80%;
     font-size: 1.0625rem;
     background: #151515;
@@ -124,7 +123,7 @@ input {
     color: aliceblue;
 }
 
-input:focus {
+.footer__input:focus {
     outline-color: #3498db;
 }
 

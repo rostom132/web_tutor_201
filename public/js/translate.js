@@ -17,9 +17,24 @@ function renderDistrict(districtObj, lang) {
     });
 }
 
-function renderWard(wardObj) {
-
-}
+$("#district").change(function() {
+    var $district_dropdown = $(this);
+    var $district_key = $district_dropdown.val();
+    let currentLang = localStorage.getItem("stored_lang");
+    let obj = {};
+    var ward_dropdown = [];
+    if (currentLang === "en") {
+        obj = ward.en;
+    } else {
+        obj = ward.vn;
+    }
+    ward_dropdown = obj[$district_key].split(",");
+    let $ward = $("#ward");
+    $ward.empty();
+    $.each(ward_dropdown, function(index, value) {
+        $ward.append('<option ' + 'value=' + value + '>' + value + '</option>')
+    })
+})
 
 $(function() {
     //first check for stored language in localStorage i.e. fetch data from localStorage

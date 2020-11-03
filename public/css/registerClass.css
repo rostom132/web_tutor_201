@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: left;
     width: 100%;
-    background-color: #069d86;
+    background-color: #4BBADC;
     padding: 10px;
     font-size: 24px;
     font-weight: 700;
@@ -23,7 +23,7 @@
 }
 
 .form__field--format {
-    color: #069d86;
+    color: #4BBADC;
     font-size: 18px;
     font-weight: 700;
 }
