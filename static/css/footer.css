@@ -14,6 +14,7 @@
     position: absolute;
     text-align: left;
     justify-content: flex-start;
+    left: 10%;
     width: 100%;
     height: 100%;
 }
@@ -22,28 +23,47 @@
     position: relative;
     text-align: left;
     justify-content: flex-start;
+    left: 30%;
     width: 100%;
     height: 100%;
 }
 
 .title {
+    position: relative;
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
     color: white;
 }
 
 .underline {
     position: absolute;
-    width: 0;
+    display: none;
+    top: 100%;
+    left: 0;
     height: 3px;
-    background-color: #4BBADC;
-    transition: .25s;
+    background: #4BBADC
 }
 
-h4:hover~.underline {
-    width: 20%;
+.title:hover .underline {
+    display: block;
+    width: 100%;
+    animation: FooterLeftToRight .5s;
+}
+
+@keyframes FooterLeftToRight {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 #about-text {
     padding-top: 10px;
+    max-width: 500px;
     color: #b3b3b3;
     font-size: 1rem;
 }
@@ -69,11 +89,6 @@ h4:hover~.underline {
 
 .social a span:hover {
     background: #4BBADC;
-}
-
-.center-contain {
-    position: absolute;
-    height: 100%;
 }
 
 .contact {
@@ -110,12 +125,13 @@ h4:hover~.underline {
     position: relative;
     text-align: left;
     justify-content: flex-start;
+    left: 20%;
     width: 100%;
     height: 100%;
 }
 
 .footer__input {
-    width: 80%;
+    width: 300px;
     font-size: 1.0625rem;
     background: #151515;
     padding-left: 10px;

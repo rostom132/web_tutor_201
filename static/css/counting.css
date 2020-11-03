@@ -1,5 +1,5 @@
 .parallax {
-    background-image: url('../../public/images/static_images/background/bg.jpg');
+    background-image: url('../../static/images/background/bg.jpg');
     opacity: 0.8;
     height: 60vh;
     width: 100%;
