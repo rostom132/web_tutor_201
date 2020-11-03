@@ -18,10 +18,12 @@ Project
 │   |
 |	index.php
 |
-└───public
-    └───css (.css)
-    └───js (.js)
-    └───images
+└───static
+|   └───css (.css)
+|   └───js (.js)
+|   └───images
+|
+└───secret
 ```
 ## Naming convention:
  - **Filenames**: follows lower Camel case and the filename must be noun.
