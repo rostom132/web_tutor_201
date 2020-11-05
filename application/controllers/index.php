@@ -5,8 +5,8 @@
         include "$page.php";
     }
     //  Two main part of homepage body
-    // include "../views/bodyBanner.html";
-    // include "../views/counting.html";
-    include "../views/registerClass.html";
+    //include "../views/bodyBanner.html";
+    //include "../views/counting.html";
+    include "../views/classView.html";
     include "../views/footer.html";
 ?>

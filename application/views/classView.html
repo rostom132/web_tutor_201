@@ -1,0 +1,37 @@
+<head>
+    <link rel="stylesheet" href="../../public/css/classView.css">
+    <script type="module" src="../../public/js/filterForm.js"></script>
+    <script src="../../public/js/getClass.js"></script>
+</head>
+<body>
+    <div style="background-color: #F0FFFF;">
+        <div class="class-container container-fluid">
+            <div class="class-header">
+                <span>Suitable classes for you!</span>
+            </div>
+            <div class="search-container">
+                <form>
+                    <select id="edit-place" class="form-select">
+                        <option selected="selected" value="">-District-</option>
+                        <optgroup id="district" label="District"></optgroup>
+                    </select>
+                    <select id="edit-subject" class="form-select">
+                        <option selected="selected" value="">-Subject-</option>
+                        <optgroup id="subject" label="Subject"></optgroup>
+                    </select>
+                    <select id="edit-gender" class="form-select">
+                        <option selected="selected" value="">-Gender-</option>
+                        <optgroup id="gender" label="Gender"></optgroup>
+                    </select>
+                    <input type="button" value="Filter" id="submit-button" onclick="getData()">
+                </form>
+                <p id="result-count" style="color: red;">You have <span id="count"></span></p>
+            </div>
+            <div id="show">
+                <!-- <div class="loader"></div> -->
+            </div>
+            <div id="page-wrapper"></div>
+        </div>
+    </div>
+</body>
+</html>
