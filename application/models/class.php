@@ -28,6 +28,7 @@
             );
             return $GLOBALS['db_conn']->convertToArray($result);
         }
+        
     }
 
 ?>
