@@ -18,6 +18,10 @@
             }
         }
 
+        function convertToArray($result){
+            return mysqli_fetch_all($result, 1);
+        }
+
         function __destruct(){
             $this->db_conn->close();
         }
