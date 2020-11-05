@@ -52,6 +52,13 @@
     text-indent: -9999px;
 }
 
+.thumb_bg {
+    /* background-image: ; */
+    width: 100%;
+    height: auto;
+    min-height: 360px;
+}
+
 .btns {
     width: 100%;
     margin-left: 0px !important;
