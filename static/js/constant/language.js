@@ -31,7 +31,18 @@ export const arrLang = {
             "DISTRICT_PLACEHOLDER": "- Choose District -",
             "WARD_PLACEHOLDER": "- Choose Ward - ",
             "STREET_PLACEHOLDER": "- Choose Street -"
+        },
+        "CLASSINFO": {
+            "HEADER":"SUITABLE CLASSES FOR YOU!",
+            "DISTRICT_FILTER": "-District-",
+            "SUBJECT_FILTER": "-Subject-",
+            "GENDER_FILTER": "-Gender-",
+            "CLASS": " class(s)",
+            "CLASS_COUNT": "You have ",
+            "FILTER_BUTTON": "Filter",
+            "SALARY": "/lesson"
         }
+        
     },
     "vn": {
         "COMMON": {
@@ -45,6 +56,16 @@ export const arrLang = {
             "DISTRICT_PLACEHOLDER": "- Chọn Quận/Huyện -",
             "WARD_PLACEHOLDER": "- Chọn Phường/Xã - ",
             "STREET_PLACEHOLDER": "- Chọn Đường -"
+        },
+        "CLASSINFO": {
+            "HEADER":"LỚP HỌC PHÙ HỢP VỚI BẠN!",
+            "DISTRICT_FILTER": "-Quận-",
+            "SUBJECT_FILTER": "-Môn học-",
+            "GENDER_FILTER": "-Giới tính-",
+            "CLASS_COUNT": "Bạn có ",
+            "CLASS": " lớp",
+            "FILTER_BUTTON": "Áp dụng",
+            "SALARY": "/buổi"
         }
     }
 };

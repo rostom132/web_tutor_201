@@ -7,25 +7,25 @@
     <div style="background-color: #F0FFFF;">
         <div class="class-container container-fluid">
             <div class="class-header">
-                <span>Suitable classes for you!</span>
+                <span class="lang" key="CLASSINFO.HEADER"></span>
             </div>
             <div class="search-container">
                 <form>
                     <select id="edit-place" class="form-select">
-                        <option selected="selected" value="">-District-</option>
+                        <option class="lang" key="CLASSINFO.DISTRICT_FILTER" selected="selected" value=""></option>
                         <optgroup id="district" label="District"></optgroup>
                     </select>
                     <select id="edit-subject" class="form-select">
-                        <option selected="selected" value="">-Subject-</option>
+                        <option class="lang" key="CLASSINFO.SUBJECT_FILTER" selected="selected" value=""></option>
                         <optgroup id="subject" label="Subject"></optgroup>
                     </select>
                     <select id="edit-gender" class="form-select">
-                        <option selected="selected" value="">-Gender-</option>
+                        <option class="lang" key="CLASSINFO.GENDER_FILTER" selected="selected" value=""></option>
                         <optgroup id="gender" label="Gender"></optgroup>
                     </select>
-                    <input type="button" value="Filter" id="submit-button" onclick="getData()">
+                    <button class="lang" key="CLASSINFO.FILTER_BUTTON" type="button" id="submit-button" onclick="getData()"></button>
                 </form>
-                <p id="result-count" style="color: red;">You have <span id="count"></span></p>
+                <span class="lang" key="CLASSINFO.CLASS_COUNT" id="result-count" style="color: red;">Toi have </span><span id="count" style="color: red;"></span></span><span class="lang" key="CLASSINFO.CLASS"  style="color: red;"></span>
             </div>
             <div id="show">
                 <!-- <div class="loader"></div> -->

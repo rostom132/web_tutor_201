@@ -5,10 +5,10 @@ var class_list;
 let current_page = 1;
 function renderClassNum(class_num) {
     if(class_num <= 1) {
-        document.getElementById('count').innerHTML = class_num + " class";
+        document.getElementById('count').innerHTML = class_num;
     }
     else {
-        document.getElementById('count').innerHTML = class_num + " classes";
+        document.getElementById('count').innerHTML = class_num;
     }
 }
 function createTemplate(class_list) {
@@ -19,18 +19,20 @@ function createTemplate(class_list) {
     var student_icon = "../../static/images/icon/student.png";
     for(let i = 0; i < class_list.length; i++)
     {
-        var class_title = class_list[i][5];
-        var dist = class_list[i][0];
+        var class_title = class_list[i]['description'];
+        var dist = class_list[i]['district'];
         var gender;
-        if(class_list[i][3] == 'F') {
+        if(class_list[i]['gender_of_tutor'] == 'F') {
             gender =  "Female";
         }
-        else if(class_list[i][3] == "M") {
+        else if(class_list[i]['gender_of_tutor'] == "M") {
             gender = "Male";
         }
         else {
             gender = "Male/Female";
         }
+        var salary = class_list[i]['salary'];
+        var student_no = class_list[i]['no_students'];
         var template = document.createElement('div');
         template.setAttribute('class', 'row-wrapper shadow-box');
         template.innerHTML = `<div class="ribbon">
@@ -62,11 +64,11 @@ function createTemplate(class_list) {
             </div>
             <div class="col-sm-2" style="text-align:center">
                 <img src=${money_icon} style="width: 30px; height: 30px;">
-                <div style="display:-webkit-inline-box;"><p style="font-size:25px; color:gold">${String(class_list[i][4]).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</p><p>/h</p></div>
+                <div style="display:-webkit-inline-box;"><p style="font-size:1.5em; color:gold">${String(salary).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</p><p class="lang" key="CLASSINFO.SALARY" id="salary"></p></div>
             </div>
             <div class="col-sm-2" style="text-align:center">
                 <img src=${student_icon} style="width: 30px; height: 30px;">
-                <p style="font-size:25px; bold ;color:#ff6600">${class_list[i][2]}</p>
+                <p style="font-size:25px; bold ;color:#ff6600">${student_no}</p>
             </div>
         </div>`;
         document.getElementById('show').appendChild(template);
@@ -99,24 +101,6 @@ function pagination(page_num) {
     num.innerHTML = '&raquo;';
     document.getElementById('pagination').appendChild(num);
 }   
-// function getData() {
-//     var ajax = new XMLHttpRequest();
-//     var method = "POST";
-//     var url = "ClassInfo.php";
-//     var loading = document.createElement('div');
-//     loading.setAttribute('class', 'loader');
-//     document.getElementById('show').appendChild(loading);
-//     ajax.open(method, url, true);
-//     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     ajax.send("dist=" + document.getElementById("edit-place").value + "&" + "subj=" + document.getElementById("edit-subject").value+ "&" + "gend=" + document.getElementById("edit-gender").value);
-//     ajax.onreadystatechange = function () {
-//         if (this.readyState == 4 && this.status == 200) {
-//             document.getElementById('show').removeChild(loading);
-//             createTemplate(this.responseText);
-//             // pagination(this.responseText);
-//         }
-//     };
-// }
 $(function initClass() {
     var ajax = new XMLHttpRequest();
     var method = "POST";
@@ -135,9 +119,10 @@ $(function initClass() {
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
-            for (i = 2; i < obj.length; i++) {
-                class_list.push(obj[i]);
+            for (i = 0; i < obj[2].length; i++) {
+                class_list.push(obj[2][i]);
             }
+            console.log(class_list); //debug
             renderClassNum(class_num);
             createTemplate(class_list);
             pagination(page_num);
@@ -167,8 +152,8 @@ function getPage(mess) {
             document.getElementById('show').removeChild(loading);
             var obj = JSON.parse(this.responseText);
             class_list = [];
-            for (i = 2; i < obj.length; i++) {
-                class_list.push(obj[i]);
+            for (i = 0; i < obj[2].length; i++) {
+                class_list.push(obj[2][i]);
             }
             createTemplate(class_list);
         }
@@ -200,8 +185,8 @@ function nextPage() {
             document.getElementById('show').removeChild(loading);
             var obj = JSON.parse(this.responseText);
             class_list = [];
-            for (i = 2; i < obj.length; i++) {
-                class_list.push(obj[i]);
+            for (i = 0; i < obj[2].length; i++) {
+                class_list.push(obj[2][i]);
             }
             createTemplate(class_list);
         }
@@ -231,8 +216,8 @@ function prevPage() {
             document.getElementById('show').removeChild(loading);
             var obj = JSON.parse(this.responseText);
             class_list = [];
-            for (i = 2; i < obj.length; i++) {
-                class_list.push(obj[i]);
+            for (i = 0; i < obj[2].length; i++) {
+                class_list.push(obj[2][i]);
             }
             createTemplate(class_list);
         }
@@ -241,12 +226,10 @@ function prevPage() {
 function checkPagingButton() {
     
     if(current_page == 1) {
-        console.log("dis prev");
         document.getElementById('prev').style.visibility = 'hidden';
         document.getElementById('next').style.visibility = 'visible';
     }
     if(current_page == page_num) {
-        console.log("dis next");
         document.getElementById('prev').style.visibility = 'visible';
         document.getElementById('next').style.visibility = 'hidden';
     }
