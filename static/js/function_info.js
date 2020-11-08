@@ -69,8 +69,13 @@ function getAllDataInForm() {
     allInputData['tutor']['language'] = document.getElementById("edit_tutor_language").value;
     allInputData['tutor']['present_job'] = document.getElementById("edit_tutor_job").value;
     allInputData['tutor']['description'] = document.getElementById("edit_tutor_description").value;
-    var gender = (document.getElementById("edit_tutor_gender_male").value == 'male') ? 'M' : 'F';
-    allInputData['tutor']['gender'] = gender;
+    var gender = document.getElementsByName("gender");
+    var genderResult;
+    if (gender[0].checked)
+        genderResult = 'M';
+    else
+        genderResult = 'F';
+    allInputData['tutor']['gender'] = genderResult;
 
     console.log(allInputData);
     return allInputData;
