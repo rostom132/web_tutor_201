@@ -1,5 +1,5 @@
 .register {
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: -webkit-linear-gradient(left, #4BBADC, #C4E0E5);
     margin-top: 3%;
     padding: 3%;
 }
@@ -74,14 +74,15 @@
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #0062cc;
+    background: #4BBADC;
     color: #fff;
     font-weight: 600;
     width: 50%;
     cursor: pointer;
 }
 
-.register .nav-tabs {
+
+/* .register .nav-tabs {
     margin-top: 3%;
     border: none;
     background: #0062cc;
@@ -109,7 +110,7 @@
     border: 2px solid #0062cc;
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
-}
+}*/
 
 .register-heading {
     text-align: center;
@@ -154,7 +155,7 @@
     position: absolute;
     color: red;
     display: none;
-    z-index: 100;
+    z-index: 0;
     font-size: 13px;
 }
 
@@ -205,7 +206,7 @@
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #0062cc;
+    background: #4BBADC;
     color: #fff;
     font-weight: 600;
     width: 100%;
@@ -230,3 +231,27 @@
 .uploader + label:hover {
     background-color: red;
 } */
+
+.tooltip {
+    position: relative;
+    opacity: 1;
+    z-index: unset !important;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

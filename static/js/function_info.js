@@ -4,16 +4,16 @@ var magicSelect;
 
 //Custom function
 function passDataIntoFormDB() {
-    var mess = localStorage.getItem("user_id");
+    var user_id = localStorage.getItem("user_id");
 
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "tutorInfo.php?tutor_id=1";
+    var url = "infoTutor.php?get_data_db=true";
     ajax.open(method, url, true);
     ajax.send();
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var obj = JSON.parse(this.responseText)['tutor'][0];
+            var obj = JSON.parse(this.responseText)['tutor'];
             for (var key in obj) {
                 localStorage.setItem(key, obj[key]);
                 if (document.getElementById("edit_tutor_" + key)) {
@@ -45,6 +45,9 @@ function passDataIntoFormDB() {
             });
             magicSelect.setValue(obj_specialize);
             magicSelect.disable();
+            document.getElementById("avatar_user").src = JSON.parse(this.responseText)['avatar_user'];
+            localStorage.setItem("avatar", JSON.parse(this.responseText)['avatar_user']);
+
         }
     };
 }
@@ -55,10 +58,12 @@ function getAllDataInForm() {
     allInputData['id'] = localStorage.getItem('user_id');
     allInputData['tutor'] = {};
     allInputData['speciality'] = magicSelect.getValue();
+    console.log(allInputData['speciality']);
     allInputData['password'] = document.getElementById("edit_tutor_main_pass").value;
 
     allInputData['tutor']['first_name'] = document.getElementById("edit_tutor_fname").value;
     allInputData['tutor']['last_name'] = document.getElementById("edit_tutor_lname").value;
+    allInputData['tutor']['date_of_birth'] = document.getElementById("edit_tutor_birth").value;
     allInputData['tutor']['email'] = document.getElementById("edit_tutor_check_email").value;
     allInputData['tutor']['phone_number'] = document.getElementById("edit_tutor_phone_number").value;
     allInputData['tutor']['language'] = document.getElementById("edit_tutor_language").value;
@@ -67,6 +72,7 @@ function getAllDataInForm() {
     var gender = (document.getElementById("edit_tutor_gender_male").value == 'male') ? 'M' : 'F';
     allInputData['tutor']['gender'] = gender;
 
+    console.log(allInputData);
     return allInputData;
 }
 
@@ -78,11 +84,14 @@ function passDataIntoFormStorage() {
     var edit_tutor_lnameValue = localStorage.getItem("lname");
     document.getElementById("edit_tutor_lname").value = edit_tutor_lnameValue;
 
-    var emailValue = localStorage.getItem("mailStore");
+    var emailValue = localStorage.getItem("check_email");
     document.getElementById("edit_tutor_check_email").value = emailValue;
 
     var phoneValue = localStorage.getItem("phone_number");
     document.getElementById("edit_tutor_phone_number").value = phoneValue;
+
+    var phoneValue = localStorage.getItem("birth");
+    document.getElementById("edit_tutor_birth").value = phoneValue;
 
     var languageValue = localStorage.getItem("language");
     var languaue = document.getElementById("edit_tutor_language");
@@ -155,10 +164,9 @@ $(".btnUpdate").click(function updateData() {
     document.querySelector("#edit_tutor_gender_female").disabled = true;
 
     var allInputData = getAllDataInForm();
-    console.log(allInputData);
     $.ajax({
         type: "POST",
-        url: "tutorInfo.php",
+        url: "infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
             if (data == 'true') {
@@ -187,7 +195,6 @@ $(".btnCancel").click(function cancleUpdateData() {
     document.querySelector("#speciality").disabled = true;
     document.querySelector("#edit_tutor_gender_male").disabled = true;
     document.querySelector("#edit_tutor_gender_female").disabled = true;
-
     passDataIntoFormStorage();
 });
 
@@ -330,70 +337,5 @@ for (let index in teaching_language) {
 
 
 $(document).ready(function() {
-
     passDataIntoFormDB();
-
-
-    // var img = $('#image').attr('src');
-    // localStorage.setItem("imgStore", img != null ? img : ("https://stockdep.net/files/images/8048665.jpg"));
-
-    // var edit_tutor_fname = document.getElementById("edit_tutor_fname").value;
-    // localStorage.setItem("edit_tutor_fnameStore", edit_tutor_fname != null ? edit_tutor_fname:"");
-
-    // var edit_tutor_lname = document.getElementById("edit_tutor_lname").value;
-    // localStorage.setItem("edit_tutor_lnameStore", edit_tutor_lname != null ? edit_tutor_lname:"");
-
-    // var email = document.getElementById("edit_tutor_check_email").value;
-    // if (email != "") {
-    //     var emailValue = document.getElementById("edit_tutor_check_email").value;
-    //     localStorage.setItem("mailStore", emailValue);
-    // } else {
-    //     localStorage.setItem("mailStore", "");
-    // }
-
-    // var phone = document.getElementById("edit_tutor_phone_number").value;
-    // if (phone != null) {
-    //     localStorage.setItem("phoneStore", phone);
-    // } else {
-    //     localStorage.setItem("phoneStore", "");
-    // }
-
-    // var language = document.getElementById("edit_tutor_language").value;
-    // if (language != null) {
-    //     localStorage.setItem("languageStore", language);
-    // } else {
-    //     localStorage.setItem("languageStore", "");
-    // }
-
-    // var job = document.getElementById("edit_tutor_job").value;
-    // if (job != null) {
-    //     localStorage.setItem("jobStore", job);
-    // } else {
-    //     localStorage.setItem("jobStore", "");
-    // }
-
-    // var speciality = document.getElementById("speciality").value;
-    // if (speciality != null) {
-    //     localStorage.setItem("specialityStore", speciality);
-
-    // } else {
-    //     localStorage.setItem("specialityStore", "");
-    // }
-
-
-    // var description = document.getElementById("edit_tutor_description").value;
-    // if (edit_tutor_lname != null) {
-    //     localStorage.setItem("descriptionStore", description);
-    // } else {
-    //     localStorage.setItem("descriptionStore", "");
-    // }
-
-    // var gender = document.getElementsByName("gender");
-    // for (let i = 0; i < gender.length; i++) {
-    //     if (gender[i].checked == true) {
-    //         let genderChoose = gender[i].value;
-    //         localStorage.setItem("genderStore", genderChoose);
-    //     }
-
-    // }
 });
