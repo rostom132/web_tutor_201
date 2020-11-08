@@ -1,5 +1,6 @@
 <?php
     include "../views/header.html";
+    include "../views/navbar_login.html";
     if (isset($_GET['page'])){
         $page = $_GET['page'];
         include "$page.php";
