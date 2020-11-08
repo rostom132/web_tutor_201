@@ -31,6 +31,8 @@
         public static function autoLogin($user) {
             $_SESSION['user_type'] = User::getUserType($user);
             $_SESSION['user_id'] = User::getId($user);
+            $_SESSION['username'] = $user;
+            error_log($_SESSION['username'].$_SESSION['user_id'].$_SESSION['user_type'], 3, '../my_errors.log');
         }
 
     }

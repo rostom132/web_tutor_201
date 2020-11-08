@@ -167,7 +167,7 @@
          * @return array id of new user
          */
         public static function register($input_array) {
-            $encrypt = encryptPassWord($input_array['password']);
+            $encrypt = User::encryptPassWord($input_array['password']);
             $input_array['password'] = $encrypt['password'];
             $input_array['salt'] = $encrypt['salt'];
 
@@ -208,16 +208,17 @@
          * @return boolean status
          */
         public static function updatePassword($username, $password) {
-            $encrypt = encryptPassWord($password);
+            $encrypt = User::encryptPassWord($password);
             $password = $encrypt['password'];
             $salt = $encrypt['salt'];
             $result = $GLOBALS['db_conn']->queryData(
                 "UPDATE UserInfo
                 SET password='$password', salt='$salt'"
-                ." WHERE id='$tutor_id'"
+                ." WHERE username='$username'"
             );
             if (!$result) return false;
             return true;
         }
     }
+
 ?>

@@ -1,6 +1,5 @@
 .register {
     background: -webkit-linear-gradient(left, #4BBADC, #C4E0E5);
-    margin-top: 3%;
     padding: 3%;
 }
 
@@ -81,37 +80,6 @@
     cursor: pointer;
 }
 
-
-/* .register .nav-tabs {
-    margin-top: 3%;
-    border: none;
-    background: #0062cc;
-    border-radius: 1.5rem;
-    width: 28%;
-    float: right;
-}
-
-.register .nav-tabs .nav-link {
-    padding: 2%;
-    height: 34px;
-    font-weight: 600;
-    color: #fff;
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-
-.register .nav-tabs .nav-link:hover {
-    border: none;
-}
-
-.register .nav-tabs .nav-link.active {
-    width: 100px;
-    color: #0062cc;
-    border: 2px solid #0062cc;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-}*/
-
 .register-heading {
     text-align: center;
     margin-top: 8%;
@@ -127,27 +95,27 @@
     margin-bottom: 35px;
 }
 
-#edit_tutor_phone_number.invalid+.error-message {
+.phone_number_validation.invalid+.error-message {
     display: initial;
 }
 
-#edit_tutor_check_email.invalid+.error-message {
+.email_validation.invalid+.error-message {
     display: initial;
 }
 
-#edit_tutor_fname.invalid+.error-message {
+.fname_validation.invalid+.error-message {
     display: initial;
 }
 
-#edit_tutor_lname.invalid+.error-message {
+.lname_validation.invalid+.error-message {
     display: initial;
 }
 
-#edit_tutor_check_pass.invalid+.error-message {
+.check_pass_validation.invalid+.error-message {
     display: initial;
 }
 
-#edit_tutor_main_pass.invalid+.error-message {
+.main_pass_validation.invalid+.error-message {
     display: initial;
 }
 
@@ -155,7 +123,6 @@
     position: absolute;
     color: red;
     display: none;
-    z-index: 0;
     font-size: 13px;
 }
 
@@ -218,24 +185,10 @@
     overflow: scroll;
 }
 
-
-/* .uploader + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-    cursor: pointer;
-}
-.uploader:focus + label,
-.uploader + label:hover {
-    background-color: red;
-} */
-
 .tooltip {
     position: relative;
     opacity: 1;
-    z-index: unset !important;
+    z-index: unset;
 }
 
 .tooltip .tooltiptext {
@@ -254,4 +207,28 @@
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.rule_box {
+    border-style: solid;
+    border-color: #4BBADC;
+    border-width: 15px;
+    background: -webkit-linear-gradient(left, #4BBADC, #C4E0E5);
+    color: black;
+}
+
+.rule_content {
+    padding: 20px;
+    max-width: fit-content;
+    line-height: 20px;
+}
+
+.rule_key {
+    font-weight: bold;
+}
+
+.rule_title {
+    font-weight: bold;
+    text-align: center;
+    color: red;
 }

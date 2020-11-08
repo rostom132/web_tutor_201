@@ -1,5 +1,5 @@
 <?php
-
+    
     class MyDatabase{
         private $ini ='../../secret/config.ini';
         private $db_conn;

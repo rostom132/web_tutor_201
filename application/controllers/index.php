@@ -4,8 +4,6 @@
     include "autoAuthen.php";
     include "../views/header.html";
 
-    $_SESSION['user_id'] = '1';
-    $_SESSION['user_type'] = 'tutor';
     $_GET['page'] = 'infoTutor';
 
     if (AutoAuthen::rememberMe()){
