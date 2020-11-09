@@ -13,35 +13,42 @@ function getAllClass($current_page) {
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
-        // while($row = $result->fetch_assoc()) {
-        //     $class_info = array(
-        //         $row['district'],
-        //         $row['phone_number'],
-        //         $row['no_students'],
-        //         $row['gender_of_tutor'],
-        //         $row['salary'],
-        //         $row['description'],
-        //     );
         array_push($data, $class_arr);
     }
     echo(json_encode($data));
 }
 
-//getAllClass(1);
-function getClassWithFilter() {
 
+function getClassWithFilter($filterVal) {
+
+    $filterArr = (array)$filterVal;
+    foreach ($filterArr as $key=>$value) {
+        if ($filterArr[$key] == "-1") {
+            unset($filterArr[$key]);
+        }
+    }
+    $total_records = Classs::getNumberOfClassFilter($filterArr);
+    $limit = 2;
+    $total_page = ceil($total_records / $limit);
+    $start = (1 - 1) * $limit;
+    $class_arr = Classs::getLimitClassesFilter($filterArr, 1, $limit);
+    if(sizeof($class_arr) > 0) {
+        $data = array();
+        array_push($data, $total_records);
+        array_push($data, $total_page);
+        array_push($data, $class_arr);
+        echo(json_encode($data));
+    }
+    else {
+        echo("0");
+    }
 }
 function getCurrentPage () {
     return $this->current_page;
 }
 
-if(isset($_POST['dist'])) {
-    if($_POST['dist'] != ""){
-        // $class_model->getAllClass();
-    }
-    else {
-        echo"haha";
-    }    
+if(isset($_POST['filter'])) {
+    getClassWithFilter(json_decode($_POST['filterVal']));
 }
 
 if(isset($_POST['init'])) {
