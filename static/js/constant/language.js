@@ -40,7 +40,11 @@ export const arrLang = {
             "CLASS": " class(s)",
             "CLASS_COUNT": "You have ",
             "FILTER_BUTTON": "Filter",
-            "SALARY": "/lesson"
+            "SALARY": "/lesson",
+            "DIST_TAG": "District ",
+            "GENDER_MALE": "Male",
+            "GENDER_FEMALE": "Female",
+            "GENDER_BOTH": "Male/Female",
         }
         
     },
@@ -65,7 +69,11 @@ export const arrLang = {
             "CLASS_COUNT": "Bạn có ",
             "CLASS": " lớp",
             "FILTER_BUTTON": "Áp dụng",
-            "SALARY": "/buổi"
+            "SALARY": "/buổi",
+            "DIST_TAG": "Quận ",
+            "GENDER_MALE": "Nam",
+            "GENDER_FEMALE": "Nữ",
+            "GENDER_BOTH": "Nam/Nữ",
         }
     }
 };
