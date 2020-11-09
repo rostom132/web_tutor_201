@@ -21,7 +21,7 @@
             return mysqli_num_rows($result);
         }
 
-        public static function getFirst10Classes($current_page, $limit) {
+        public static function getLimitClasses($current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $result = $GLOBALS['db_conn']->queryData(
                 "SELECT * FROM class LIMIT $start, $limit"
