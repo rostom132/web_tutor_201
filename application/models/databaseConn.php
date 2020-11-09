@@ -1,14 +1,23 @@
 <?php
-    
-    class MyDatabase{
-        private $ini ='../../secret/config.ini';
+    include_once '../../secret/config.php';
+
+    class MyDatabase {
         private $db_conn;
 
+        /**
+         * Innit database connection
+         */ 
         function __construct(){
-            $db_config = parse_ini_file($this->ini);
-            $this->db_conn = new mysqli($db_config['servername'], $db_config['username'], $db_config['password'], $db_config['dbname']);
+            $this->db_conn = new mysqli(Config::getDbConfig()['servername'], Config::getDbConfig()['username'], Config::getDbConfig()['password'], Config::getDbConfig()['dbname']);
         }
 
+        /**
+         * call SQL
+         *
+         * @param string $sql sql querry
+         * 
+         * @return result 
+         */ 
         function queryData($sql){
             if (!empty($sql)){
                 $result = $this->db_conn->query($sql);
@@ -18,6 +27,11 @@
             }
         }
 
+        /**
+         * convert outbut of data after query to array
+         *
+         * @return array 
+         */ 
         function convertToArray($result){
             return mysqli_fetch_all($result, 1);
         }
@@ -28,4 +42,5 @@
     }
 
     $db_conn = new MyDatabase();
+
 ?>

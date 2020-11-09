@@ -1,27 +1,37 @@
 <?php
     session_start();
-    $CONFIG = parse_ini_file('../../secret/config.ini');
+    include_once '../../secret/config.php';
 
-    if(isset($_FILES['file']['name'])){
-        
-        $filename = $_FILES['file']['name']; 
-        
+    /**
+     * save avatar into server
+     *
+     * @param file $file the image file of avatar
+     * 
+     * @return string salt of user
+     */ 
+    function saveAvatar($file) {
+        $filename = $file['name']; 
         $imageFileType = pathinfo($filename,PATHINFO_EXTENSION);
         $imageFileType = strtolower($imageFileType);
-        $location = $CONFIG['avatars_dir'].$_SESSION['user_id'].".".$imageFileType;
+        $location = Config::get()['avatar']['avatars_dir'].$_SESSION['user_id'].".".$imageFileType;
         
-        $valid_extensions = array("jpg","jpeg","png");
+        $valid_extensions = Config::get()['avatar']['valid_extentions'];
      
         $response = 0;
         if(in_array(strtolower($imageFileType), $valid_extensions)) {
-            $exist_avatar = glob( $CONFIG['avatars_dir'] .$_SESSION['user_id'] .".*");
+            $exist_avatar = glob( Config::get()['avatar']['avatars_dir'] .$_SESSION['user_id'] .".*");
             if (count($exist_avatar) > 0) {
                 unlink($exist_avatar[0]);
             }
-            if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+            if(move_uploaded_file($file['tmp_name'],$location)){
                 $response = $location;
             }
         }
+        echo $response;
     }
-    echo $response;
+
+    //Check if avatar file is comming
+    if(isset($_FILES['file']['name'])){
+        saveAvatar($_FILES['file']);
+    }
 ?>

@@ -1,0 +1,35 @@
+<head>
+    <title>LOGIN</title>
+
+    <link rel="stylesheet" href="../../static/css/formLoginStyleSheet.css">
+    <!--include file ".css" used for this document-->
+</head>
+
+<body>
+
+    <div id="contentLogin">
+        <form action="" class="login-form" method="POST">
+            <h1>Sign In</h1>
+            <div class="textb">
+                <input type="text" required id="loginFormUserName" oninput="isInputInvalid()" name="UserName">
+                <div class="placeholder">Username</div>
+                <p id="checkUserNameP"></p>
+            </div>
+
+            <div class="textb">
+                <input type="password" required id="loginFormPass" oninput="isInputInvalid()" name="PassWord">
+                <div class="placeholder">Password</div>
+                <p id="checkPassP"></p>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" name="RememberMeBox" id="rememberMe"> Remember me
+            </div>
+
+            <button class="loginFormBtn" type="button" id="loginButton" disabled>SUBMIT</button>
+            <a href="../folder_RegisterPage/formRegisterStep1.html" target="_blank">Create A New Account</a>
+        </form>
+    </div>
+
+    <script src="../../static/js/formLoginScript.js"></script>
+</body>

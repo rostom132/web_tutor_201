@@ -57,7 +57,6 @@
          * @return boolean status
          */ 
         public static function storeTokenForUser($username, $token) {
-            echo $token;
             $result = $GLOBALS['db_conn']->queryData(
                 "UPDATE `UserInfo`
                 SET token = '" .$token
