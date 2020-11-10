@@ -15,7 +15,9 @@
      */ 
     function getTutorInfo($tutor_id){
         if (count(glob(Config::get()['avatar']['avatars_dir'] .$tutor_id .".*")) > 0){
-            $avatar_dir = glob(Config::get()['avatar']['avatars_dir']  .$tutor_id .".*")[0];
+            $dir = explode('/',glob(Config::get()['avatar']['avatars_dir'] .$tutor_id.".*")[0]);
+            $name_of_avatar = end($dir);
+            $avatar_dir = Config::get()['avatar']['avatars_dir_frontend'] .$name_of_avatar;
         } else {
             $avatar_dir = '';
         }
@@ -24,7 +26,7 @@
         'specialize' => Tutor::getSpecialize($tutor_id),
         'subject' => Subject::getAll(),
         'avatar_user' => $avatar_dir);
-        echo (json_encode($response));     
+        echo (json_encode($response));
     }
 
     /**

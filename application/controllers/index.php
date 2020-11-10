@@ -5,7 +5,8 @@
     include "autoAuthen.php";
     include "../views/header.html";
 
-    // AutoAuthen::rememberMe();
+    AutoAuthen::rememberMe();
+    // else echo "andsakld";
 
     // $_SESSION['user_id'] = '1';
     // $_SESSION['username'] = 'tien';

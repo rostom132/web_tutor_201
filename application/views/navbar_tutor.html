@@ -1,9 +1,12 @@
+<link rel="stylesheet" href="./static/css/slideNav.css">
+<script src="./static/js/slideNav.js"></script>
+
 <nav id="navbar" class="navbar-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 offset-1">
                 <a href="#">
-                    <img id="navbar__logo" src="../../static/images/icon/navbarLogo.png" class="logo" alt="Logo ">
+                    <img id="navbar__logo" src="./static/images/icon/navbarLogo.png" class="logo" alt="Logo ">
                 </a>
             </div>
             <div class="col-8 offset-1 text-right">
@@ -72,14 +75,9 @@
                         <a href="#"><span class="lang contact-us" key="COMMON.NAVBAR_LINK5"></span></a>
                     </li>
                     <li class="navbar_li">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        <div class="dropdown-container">
-                            <ul>
-                                <li><a href="#" class="dropdown__item">Test 1</a>
-                                </li>
-                                <li><a href="#" class="dropdown__item">Test 2</a></li>
-                            </ul>
-                        </div>
+                        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </span>
                     </li>
                 </ul>
                 </div>
@@ -87,3 +85,10 @@
         </div>
     </div>
 </nav>
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="infoAdmin.html">About</a>
+    <a href="#">Infomation</a>
+    <a href="#">Classes&nbsp;List</a>
+    <a href="#">Contact</a>
+</div>
