@@ -6,7 +6,7 @@
 
         function __construct(){
             $db_config = parse_ini_file($this->ini);
-            $this->db_conn = new mysqli($db_config['servername'], $db_config['username'], $db_config['password'], $db_config['dbname']);
+            $this->db_conn = new mysqli('localhost', 'root', 'khoa1234', 'Class');
         }
 
         function queryData($sql){
@@ -17,7 +17,9 @@
                 return false;
             }
         }
-
+        function convertToArray($result){
+            return mysqli_fetch_all($result, 1);
+        }
         function __destruct(){
             $this->db_conn->close();
         }

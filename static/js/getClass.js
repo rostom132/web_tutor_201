@@ -1,3 +1,6 @@
+//depencies
+import {translate} from "./translate.js";
+import * as constants from "./constant/district_ward.js";
 // Global var
 var class_num;
 var page_num;
@@ -20,20 +23,25 @@ function createTemplate(class_list) {
     for(let i = 0; i < class_list.length; i++)
     {
         var class_title = class_list[i]['description'];
-        var dist = class_list[i]['district'];
-        var gender;
-        if(class_list[i]['gender_of_tutor'] == 'F') {
-            gender =  "Female";
-        }
-        else if(class_list[i]['gender_of_tutor'] == "M") {
-            gender = "Male";
-        }
-        else {
-            gender = "Male/Female";
-        }
+        var dist;
+        $.each(constants.cityData.districts, function(index, element){
+            if(class_list[i]['district'] == element.id) {
+                dist = element.name;
+            }
+        });
         var salary = class_list[i]['salary'];
         var student_no = class_list[i]['no_students'];
         var template = document.createElement('div');
+        var gender;
+        if(class_list[i]['gender_of_tutor'] == 'F') {
+            gender = 'CLASSINFO.GENDER_FEMALE';
+        }
+        else if(class_list[i]['gender_of_tutor'] == "M") {
+            gender = 'CLASSINFO.GENDER_MALE';
+        }
+        else {
+            gender = 'CLASSINFO.GENDER_BOTH';
+        }
         template.setAttribute('class', 'row-wrapper shadow-box');
         template.innerHTML = `<div class="ribbon">
         <p>ENG</p>
@@ -51,15 +59,15 @@ function createTemplate(class_list) {
             <div class="col-sm-6">
                 <div class="class-info-col">
                     <p>
-                        <img src=${infor_icon} style="width: 30px; height: 30px;">
+                        <img src=${infor_icon} style="width: 20px; height: 20px;">
                         <span id="class-title">${class_title}</span>
                     </p>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit hahahahahahaahahasdasdasdasasdasdasdasdaSDasdaSDasdaSDasdaS...
                     </p>
                     <span class="group-span">Toán(ENG)</span>
-                    <span class="group-span">Quận ${dist}</span>
-                    <span class="group-span">${gender}</span>
+                    <span class="group-span"><span></span> ${dist}</span>
+                    <span class="group-span lang" key="${gender}" id="gender_tag"></span>
                 </div>
             </div>
             <div class="col-sm-2" style="text-align:center">
@@ -73,6 +81,8 @@ function createTemplate(class_list) {
         </div>`;
         document.getElementById('show').appendChild(template);
     }
+    let current_lang = localStorage.getItem('stored_lang');
+    translate(current_lang);
 
 }
 function pagination(page_num) {
@@ -82,26 +92,26 @@ function pagination(page_num) {
     document.getElementById('page-wrapper').appendChild(page);
     var num = document.createElement('button');
     num.setAttribute('type', 'button');
-    num.setAttribute('onclick','prevPage();checkPagingButton()');
     num.setAttribute('id','prev');
     num.innerHTML='&laquo;';
     document.getElementById('pagination').appendChild(num);
-    for(i = 0; i < page_num; i++) {
+    document.getElementById('prev').addEventListener('click', function(){prevPage();checkPagingButton()});
+    for(let i = 0; i < page_num; i++) {
         num = document.createElement('button');
         num.setAttribute('id', i + 1);
         num.setAttribute('button', 'button');
-        num.setAttribute('onclick','getPage(this.id);checkPagingButton()');
         num.innerHTML = i + 1;
         document.getElementById('pagination').appendChild(num);
+        document.getElementById(i+1).addEventListener('click', function(){getPage(this.id);checkPagingButton()});
     }
     num = document.createElement('button');
     num.setAttribute('button', 'button');
-    num.setAttribute('onclick','nextPage();checkPagingButton()');
     num.setAttribute('id','next');
     num.innerHTML = '&raquo;';
     document.getElementById('pagination').appendChild(num);
+    document.getElementById('next').addEventListener('click', function(){nextPage();checkPagingButton()});
 }   
-$(function initClass() {
+export function initClass() {
     var ajax = new XMLHttpRequest();
     var method = "POST";
     var url = "ClassInfo.php";
@@ -119,10 +129,9 @@ $(function initClass() {
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
-            for (i = 0; i < obj[2].length; i++) {
+            for (let i = 0; i < obj[2].length; i++) {
                 class_list.push(obj[2][i]);
             }
-            console.log(class_list); //debug
             renderClassNum(class_num);
             createTemplate(class_list);
             pagination(page_num);
@@ -130,8 +139,61 @@ $(function initClass() {
             checkPagingButton();
         }
     };
-})
-function getPage(mess) {
+    
+}
+export function filterClass(dist, sub, gender) {
+    var ajax = new XMLHttpRequest();
+    var method = "POST";
+    var url = "ClassInfo.php";
+    var loading = document.createElement('div');
+    loading.setAttribute('class', 'loader');
+    document.getElementById('show').appendChild(loading);
+    ajax.open(method, url, true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var filterVal = {
+        "district":"-1",
+        "subject":"-1",
+        "gender_of_tutor":"-1",
+    };
+    filterVal['district'] = String(dist);
+    filterVal['subject'] = String(sub);
+    filterVal['gender_of_tutor'] = String(gender);
+    console.log(filterVal);
+    if(filterVal['district'] == "-1" && filterVal['subject'] == "-1" && filterVal['gender_of_tutor'] == "-1") {
+        console.log('day');
+        document.getElementById('page-wrapper').removeChild(document.getElementById('pagination'));
+        initClass();
+        return;
+    }
+    else
+    {
+        ajax.send("filter=1&filterVal="+JSON.stringify(filterVal));
+        current_page = 1;
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('show').removeChild(loading);
+                if(this.responseText == 0) {
+                    alert("no class");
+                    return;
+                }
+                var obj = JSON.parse(this.responseText);
+                class_num = obj[0];
+                page_num = obj[1];
+                class_list = [];
+                for (let i = 0; i < obj[2].length; i++) {
+                    class_list.push(obj[2][i]);
+                }
+                renderClassNum(class_num);
+                createTemplate(class_list);
+                document.getElementById('page-wrapper').removeChild(document.getElementById('pagination'));
+                pagination(page_num);
+                document.getElementById(current_page).setAttribute('class', 'active');
+                checkPagingButton();
+            }
+        };
+    }
+}
+export function getPage(mess) {
     var nodes = document.getElementById('pagination').childNodes;
     for(var i=0; i<nodes.length; i++) {
         nodes[i].setAttribute('class', '');
@@ -242,4 +304,8 @@ function checkPagingButton() {
         document.getElementById('next').style.visibility = 'hidden';
     }
 }
+export function getClassFiltered(dist, sub, gender) {
+    alert(dist+ " " + sub + " " + gender); 
+}
+
 
