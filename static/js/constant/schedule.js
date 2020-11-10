@@ -43,7 +43,7 @@ export const TimeSchedule = {
     "18:00:00": "18:00",
     "18:30:00": "18:30",
     "19:00:00": "19:00",
-    "19:30:00:": "19:30",
+    "19:30:00": "19:30",
     "20:00:00": "20:00",
     "20:30:00": "20:30",
     "21:00:00": "21:00",
@@ -51,4 +51,50 @@ export const TimeSchedule = {
     "22:00:00": "22:00",
     "22:30:00": "22:30",
     "23:00:00": "23:00",
+}
+
+export const DateScheduleObj = {
+    "MON": {
+        "TimeSlot": [{
+                "id": 2,
+                "start_index": 5,
+                "end_index": 10
+            },
+            {
+                "id": 3,
+                "start_index": 12,
+                "end_index": 15
+            },
+            {
+                "id": 4,
+                "start_index": 18,
+                "end_index": 19
+            }
+        ],
+    },
+    "TUE": {
+        "TimeSlot": [
+
+        ],
+    },
+    "WED": {
+        "start_index": -1,
+        "end_index": -1,
+    },
+    "THU": {
+        "start_index": -1,
+        "end_index": -1,
+    },
+    "FRI": {
+        "start_index": -1,
+        "end_index": -1,
+    },
+    "SAT": {
+        "start_index": -1,
+        "end_index": -1,
+    },
+    "SUN": {
+        "start_index": -1,
+        "end_index": -1,
+    }
 }
