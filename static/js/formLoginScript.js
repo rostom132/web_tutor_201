@@ -56,13 +56,14 @@ $('#loginButton').click(function() {
 
     $.ajax({
         type: "POST",
-        url: "formLogin.php",
+        url: "application/controllers/formLogin.php",
         data: { loginData: loginData },
         success: function(data) {
             if (data == 'success') {
-                window.location.replace("index.php?page=bodyBanner");
+                window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner.html");
             } else {
                 alert('Wrong password! please input again!');
+                console.log(loginData);
             }
         }
     });

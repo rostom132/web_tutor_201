@@ -6,7 +6,7 @@ var magicSelect;
 function passDataIntoFormDB() {
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "infoTutor.php?get_data_db=true";
+    var url = "application/controllers/infoTutor.php?get_data_db=true";
     ajax.open(method, url, true);
     ajax.send();
     ajax.onreadystatechange = function() {
@@ -151,7 +151,7 @@ $(".btnUpdate").click(function updateData() {
     var allInputData = getAllDataInForm();
     var update_info = $.ajax({
         type: "POST",
-        url: "infoTutor.php",
+        url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
             if (data == 'true') {
@@ -168,7 +168,7 @@ $(".btnUpdate").click(function updateData() {
         var files = $('.uploader')[0].files[0];
         fd.append('file', files);
         update_avatar = $.ajax({
-            url: 'updateInfo.php',
+            url: 'application/controllers/updateInfo.php',
             type: 'post',
             data: fd,
             contentType: false,
