@@ -1,15 +1,12 @@
+Options -Indexes
 RewriteEngine On
-RewriteBase /assignment_1/application/controllers/
+RewriteBase /web_tutor_201/application/controllers/
 
-RewriteCond %{REMOTE_ADDR} !=127.0.0.1
-RewriteCond %{REMOTE_ADDR} !=::1
-#RewriteRule ^static/images.*$ - [F,L,NC]
+# RewriteRule ^application/models/.*\.php - [F,L,NC]
 
-RewriteCond %{REMOTE_ADDR} !=127.0.0.1
-RewriteCond %{REMOTE_ADDR} !=::1
-RewriteRule ^application/models/.*\.php - [F,L,NC]
-
+RewriteRule ^secret/.*\.php - [F,L,NC]
 
 RewriteRule "^$" "index.php"
 
-RewriteRule "^([a-zA-Z0-9]+).html$" "index.php?page=$1"
+RewriteRule "^([a-zA-Z0-9]+)$" "index.php?page=$1"
+

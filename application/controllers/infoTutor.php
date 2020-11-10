@@ -25,7 +25,8 @@
         'tutor' => Tutor::getInfo($tutor_id),
         'specialize' => Tutor::getSpecialize($tutor_id),
         'subject' => Subject::getAll(),
-        'avatar_user' => $avatar_dir);
+        'avatar_user' => $avatar_dir,
+        'username' => $_SESSION['username']);
         echo (json_encode($response));
     }
 

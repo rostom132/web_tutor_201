@@ -46,6 +46,8 @@ function passDataIntoFormDB() {
             if (JSON.parse(this.responseText)['avatar_user'] != '')
                 document.getElementById("avatar_user").src = JSON.parse(this.responseText)['avatar_user'];
             localStorage.setItem("avatar", document.getElementById("avatar_user").src);
+
+            document.getElementById("tutor_username").innerText = JSON.parse(this.responseText)['username'];
         }
     };
 }
@@ -99,7 +101,7 @@ function passDataIntoFormStorage() {
     var languaue = document.getElementById("edit_tutor_language");
     languaue.value = languageValue;
 
-    var jobValue = localStorage.getItem("jobStore");
+    var jobValue = localStorage.getItem("job");
     document.getElementById("edit_tutor_job").value = jobValue;
 
     var descriptionValue = localStorage.getItem("description");
