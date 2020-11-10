@@ -60,7 +60,7 @@ $('#loginButton').click(function() {
         data: { loginData: loginData },
         success: function(data) {
             if (data == 'success') {
-                window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner.html");
+                window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
             } else {
                 alert('Wrong password! please input again!');
                 console.log(loginData);

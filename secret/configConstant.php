@@ -37,6 +37,9 @@
             'valid_extentions' => array (
                 'jpg','jpeg', 'png'
             )
-        )
+            ),
+
+        //expired days for remember token
+        'limit_days_remember' => 3,
     );
 ?>

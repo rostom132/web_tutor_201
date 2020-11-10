@@ -8,9 +8,9 @@
     AutoAuthen::rememberMe();
     // else echo "andsakld";
 
-    // $_SESSION['user_id'] = '1';
-    // $_SESSION['username'] = 'tien';
-    // $_SESSION['user_type'] = 'tutor';
+    $_SESSION['user_id'] = '2';
+    $_SESSION['username'] = 'khoangu';
+    $_SESSION['user_type'] = 'parent';
 
     
     if (isset($_SESSION['user_type'])){
@@ -26,7 +26,6 @@
     // } else 
     if (isset($_GET['page']) && in_array($_GET['page'],Config::getPermission()['common'])){
         $page = $_GET['page'];
-        error_log('common', 3, '../my_errors.log');
         include_once "../views/$page.html";
     } else if (isset($_GET['page']) && isset($_SESSION['user_type'])){
         $page = $_GET['page'];
@@ -36,7 +35,7 @@
             include_once "../views/formLogin.html";
         }
     } else {
-        include_once "../views/formLogin.html";
+        include_once "../views/infoParent.html";
         include_once "../views/counting.html";
     }
     
