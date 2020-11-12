@@ -6,6 +6,7 @@ var class_num;
 var page_num;
 var class_list;
 let current_page = 1;
+//Show number of class found
 function renderClassNum(class_num) {
     if(class_num <= 1) {
         document.getElementById('count').innerHTML = class_num;
@@ -14,6 +15,7 @@ function renderClassNum(class_num) {
         document.getElementById('count').innerHTML = class_num;
     }
 }
+//Render all class information
 function createTemplate(class_list) {
     document.getElementById('show').innerHTML="";
     var default_avatar = "https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/styles/baiviet_50_50/public/AAuE7mBFjncP4O9wWvDXYnppGHsN0WgfIA6rRp0AfKXw%3Ds96-c";
@@ -85,6 +87,7 @@ function createTemplate(class_list) {
     translate(current_lang);
 
 }
+//Render pagination part
 function pagination(page_num) {
     var page = document.createElement('div');
     page.setAttribute('class', 'pagination');
@@ -111,6 +114,8 @@ function pagination(page_num) {
     document.getElementById('pagination').appendChild(num);
     document.getElementById('next').addEventListener('click', function(){nextPage();checkPagingButton()});
 }   
+
+//Run at beginning with jquery
 export function initClass() {
     var ajax = new XMLHttpRequest();
     var method = "POST";
@@ -141,6 +146,7 @@ export function initClass() {
     };
     
 }
+//Get class with filter
 export function filterClass(dist, sub, gender) {
     var ajax = new XMLHttpRequest();
     var method = "POST";
@@ -193,6 +199,8 @@ export function filterClass(dist, sub, gender) {
         };
     }
 }
+
+//Render each specific page
 export function getPage(mess) {
     var nodes = document.getElementById('pagination').childNodes;
     for(var i=0; i<nodes.length; i++) {
@@ -221,6 +229,7 @@ export function getPage(mess) {
         }
     };
 }
+//Render next page
 function nextPage() {
     var nodes = document.getElementById('pagination').childNodes;
     for(var i=0; i<nodes.length; i++) {
@@ -254,6 +263,7 @@ function nextPage() {
         }
     };
 }
+//Render previous page
 function prevPage() {
     var nodes = document.getElementById('pagination').childNodes;
     for(var i=0; i<nodes.length; i++) {
@@ -285,6 +295,8 @@ function prevPage() {
         }
     };
 }
+
+//Check next, prev disable button
 function checkPagingButton() {
     
     if(current_page == 1) {
