@@ -127,12 +127,29 @@ $.fn.hasExtension = function(exts) {
 }
 
 $.fn.hasExtension = function(exts) {
-    return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test($(this).val());
+    return (new RegExp('(' + exts.map(function(x) { return x.replace(/^/g, '\\.'); }).join('|') + ')$')).test($(this).val());
 }
 
 $(".uploader").change(function upImg() {
     if (this.files && this.files[0]) {
-        if ($('.uploader').hasExtension(['.jpg', '.png', '.jpeg'])) {
+
+        var extentions = new Array();
+
+        $.ajax({
+            type: "POST",
+            url: "application/controllers/updateInfo.php",
+            async: false,
+            data: { getExtentions: 'true' },
+            success: function(data) {
+                extentions = data;
+            },
+            dataType: "json",
+            timeout: 3000
+        });
+
+        if (extentions.length == 0) extentions = ['jpg', 'png', 'jpeg'];
+
+        if ($('.uploader').hasExtension(extentions)) {
             var reader = new FileReader();
 
             reader.onload = function(e) {
@@ -143,7 +160,7 @@ $(".uploader").change(function upImg() {
             };
             reader.readAsDataURL(this.files[0]);
         } else {
-            alert("Please upload only .png .jpg .jpeg!!!");
+            alert("Please upload only " + extentions.join(", "));
         }
     }
 })

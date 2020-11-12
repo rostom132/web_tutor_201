@@ -18,7 +18,7 @@
             $_SESSION['user_id'] = $user_info['user_id'];
             $_SESSION['username'] = $loginData['username'];
             if ($loginData['rememberMe'] == 'true') {
-                AutoAuthen::loginWithRemember($loginData['username']);
+                AutoAuthen::loginWithRemember('tien');
             }
             echo ('success');
         }
@@ -28,8 +28,6 @@
     //Check for login request
     if(isset($_POST['loginData'])) {
         $loginData = $_POST['loginData'];
-        checkLogin($loginData);
-        
+        checkLogin($loginData); 
     }
-
 ?>

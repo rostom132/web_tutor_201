@@ -31,7 +31,11 @@
     }
 
     //Check if avatar file is comming
-    if(isset($_FILES['file']['name'])){
+    if(isset($_FILES['file']['name'])) {
         saveAvatar($_FILES['file']);
+    }
+
+    if(isset($_POST['getExtentions'])) {
+        echo (json_encode(Config::get()['avatar']['valid_extentions']));
     }
 ?>

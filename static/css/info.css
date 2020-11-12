@@ -232,3 +232,8 @@
     text-align: center;
     color: red;
 }
+
+.username {
+    font-size: 25px;
+    font-weight: 400 !important;
+}

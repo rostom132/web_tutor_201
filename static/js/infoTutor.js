@@ -6,7 +6,7 @@ var magicSelect;
 function passDataIntoFormDB() {
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "infoTutor.php?get_data_db=true";
+    var url = "application/controllers/infoTutor.php?get_data_db=true";
     ajax.open(method, url, true);
     ajax.send();
     ajax.onreadystatechange = function() {
@@ -46,6 +46,8 @@ function passDataIntoFormDB() {
             if (JSON.parse(this.responseText)['avatar_user'] != '')
                 document.getElementById("avatar_user").src = JSON.parse(this.responseText)['avatar_user'];
             localStorage.setItem("avatar", document.getElementById("avatar_user").src);
+
+            document.getElementById("tutor_username").innerText = JSON.parse(this.responseText)['username'];
         }
     };
 }
@@ -99,7 +101,7 @@ function passDataIntoFormStorage() {
     var languaue = document.getElementById("edit_tutor_language");
     languaue.value = languageValue;
 
-    var jobValue = localStorage.getItem("jobStore");
+    var jobValue = localStorage.getItem("job");
     document.getElementById("edit_tutor_job").value = jobValue;
 
     var descriptionValue = localStorage.getItem("description");
@@ -151,7 +153,7 @@ $(".btnUpdate").click(function updateData() {
     var allInputData = getAllDataInForm();
     var update_info = $.ajax({
         type: "POST",
-        url: "infoTutor.php",
+        url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
             if (data == 'true') {
@@ -168,7 +170,7 @@ $(".btnUpdate").click(function updateData() {
         var files = $('.uploader')[0].files[0];
         fd.append('file', files);
         update_avatar = $.ajax({
-            url: 'updateInfo.php',
+            url: 'application/controllers/updateInfo.php',
             type: 'post',
             data: fd,
             contentType: false,
