@@ -27,7 +27,7 @@ function tabHeader3() {
 /*check login JavaScript; begin*/
 function isInputInvalid() {
     var testUsername = /^[A-za-z0-9]{4,}$/.test(document.getElementById("loginFormUserName").value);
-    var testPassword = /^[A-za-z0-9]{8,}$/.test(document.getElementById("loginFormPass").value);
+    var testPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(document.getElementById("loginFormPass").value);
     if (testUsername) {
         document.getElementById("checkUserNameP").innerHTML = "";
     } else {

@@ -8,9 +8,9 @@
     AutoAuthen::rememberMe();
     // else echo "andsakld";
 
-    $_SESSION['user_id'] = '2';
-    $_SESSION['username'] = 'khoangu';
-    $_SESSION['user_type'] = 'parent';
+    // $_SESSION['user_id'] = '2';
+    // $_SESSION['username'] = 'khoangu';
+    // $_SESSION['user_type'] = 'parent';
 
     
     if (isset($_SESSION['user_type'])){
@@ -35,7 +35,7 @@
             include_once "../views/formLogin.html";
         }
     } else {
-        include_once "../views/infoParent.html";
+        include_once "../views/bodyBanner.html";
         include_once "../views/counting.html";
     }
     
