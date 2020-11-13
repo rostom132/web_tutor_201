@@ -1,37 +1,42 @@
 import { cityData } from "./constant/city.js";
-import { DateSchedule, TimeSchedule, DateScheduleObj } from "./constant/schedule.js";
+import { TimeSchedule, DateScheduleObj } from "./constant/schedule.js";
 import { translate } from "./translate.js";
 import { arrLang } from "./constant/language.js";
+
+const inputKeys = ["topic", "subject", "salary", "lession_per_week", "time_per_lesson", "gender", "no_student", "district", "ward", "street", "address", "phone_number", "schedule_container", "class_description"]
 
 let schedule_id = 1;
 let editMode = 0;
 let TimeSchedule_Keys = [];
+let TimeSchedule_Values = [];
 let TimeSchedule_StartTime_Keys = [];
 let TimeSchedule_StartTime_Values = [];
-let TimeSchedule_Values = [];
 const START_TIME_MAX = "20:00:00";
 
+const SUBMIT_PREFIX = "#registerClass-";
+const DATE_PREFIX = "#registerClass-date_";
+const START_TIME_PREFIX = "#registerClass-start_";
+const END_TIME_PREFIX = "#registerClass-end_";
 
 $("#schedule_add_btn").click(function() {
-    var $schedule_container = $("#schedule_container");
+    var $schedule_container = $("#registerClass-schedule_container");
     $schedule_container.append(`
     <div id="schedule_row_` + schedule_id + `"` + `class="row schedule_row">
         <div class="col-3">
-            <select disabled id="date_` + schedule_id + `"` + ` class="form__select date_select" required>
+            <select disabled id="registerClass-date_` + schedule_id + `"` + ` class="form__select date_select" required>
                 <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value=""></option>
             </select>
         </div>
         <div class="col-3">
-            <select disabled id="start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
+            <select disabled id="registerClass-start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
                 <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value=""></option>
             </select>
         </div>
         <div class="col-3">
-            <select disabled id="end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
+            <select disabled id="registerClass-end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
                 <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value=""></option>
             </select>
         </div>
-        <button id="schedule_delete_icon_` + schedule_id + `"` + `class="schedule_icon delete_icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
         <button id="schedule_edit_icon_` + schedule_id + `"` + ` class="schedule_icon edit_icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
     </div>
     `);
@@ -39,7 +44,7 @@ $("#schedule_add_btn").click(function() {
 })
 
 // The node to be monitored
-var target = $("#schedule_container")[0];
+var target = $("#registerClass-schedule_container")[0];
 
 // Create an observer instance
 var observer = new MutationObserver(function(mutations) {
@@ -67,16 +72,43 @@ var config = {
     characterData: true
 };
 
-$("#schedule_container").on("click", ".delete_icon", function() {
+function checkNotEmpty($id) {
+    var $check_date = $(DATE_PREFIX + $id).find("option:selected").val();
+    var $check_start_time = $(START_TIME_PREFIX + $id).find("option:selected").val();
+    var $check_end_time = $(END_TIME_PREFIX + $id).find("option:selected").val();
+    if ($check_date !== "" && $check_start_time !== "" && $check_end_time !== "") {
+        return 0;
+    } else return -1;
+}
+
+function appendDeleteButton($id) {
+    $("#schedule_row_" + $id).append(`<button id="schedule_delete_icon_` + $id + `"` + `class="schedule_icon delete_icon"><i class="fa fa-trash" aria-hidden="true"></i></button>`);
+}
+
+function removeDeleteButton($id) {
+    $("#schedule_row_" + $id).children().last().remove();
+}
+
+function appendTickIcon($id) {
+    $("#schedule_edit_icon_" + $id).children().removeClass("fa-pencil-square-o");
+    $("#schedule_edit_icon_" + $id).children().addClass("fa-check");
+}
+
+function removeTickIcon($id) {
+    $("#schedule_edit_icon_" + $id).children().removeClass("fa-check");
+    $("#schedule_edit_icon_" + $id).children().addClass("fa-pencil-square-o");
+}
+
+$("#registerClass-schedule_container").on("click", ".delete_icon", function() {
     var $current_id = $(this).attr("id").split("_")[3];
-    var $current_date = $("#date_" + $current_id).find("option:selected").val();
-    var $current_start_time = $("#start_" + $current_id).find("option:selected").val();
-    var $current_end_time = $("#end_" + $current_id).find("option:selected").val();
-    if ($current_date !== "" && $current_start_time && $current_end_time) {
-        $.each(DateScheduleObj[$current_date].TimeSlot, function(index, value) {
-            if (value.id === parseInt($current_id)) DateScheduleObj[$current_date].TimeSlot.splice(index, 1);
-        })
-        console.log(DateScheduleObj[$current_date].TimeSlot);
+    console.log($current_id + " " + typeof $current_id);
+    var $check_flag = checkNotEmpty($current_id);
+    if ($check_flag === 0) {
+        var $date_selected = $(DATE_PREFIX + $current_id).find("option:selected").val();
+        for (let i = 0; i < DateScheduleObj[$date_selected].TimeSlot.length; i++) {
+            if (DateScheduleObj[$date_selected].TimeSlot[i].id === parseInt($current_id)) DateScheduleObj[$date_selected].TimeSlot.splice(i, 1);
+        }
+        console.log(DateScheduleObj[$date_selected].TimeSlot);
     }
     if (editMode === 1) {
         // Reset state
@@ -89,63 +121,84 @@ $("#schedule_container").on("click", ".delete_icon", function() {
     $(this).parent().remove();
 })
 
-
 function changeFieldState($schedule_row_id, status) {
-    $("#date_" + $schedule_row_id).prop("disabled", status);
-    $("#start_" + $schedule_row_id).prop("disabled", status);
-    $("#end_" + $schedule_row_id).prop("disabled", status);
+    $(DATE_PREFIX + $schedule_row_id).prop("disabled", status);
+    $(START_TIME_PREFIX + $schedule_row_id).prop("disabled", status);
+    $(END_TIME_PREFIX + $schedule_row_id).prop("disabled", status);
 }
 
-$("#schedule_container").on("click", ".edit_icon", function() {
+function compareFreeTimeSlot(b, a) {
+    var first_sum = a.start_index + a.end_index;
+    var second_sum = b.start_index + b.end_index;
+    if (first_sum < second_sum) return 1;
+    if (first_sum > second_sum) return -1;
+    return 0;
+}
+
+$("#registerClass-schedule_container").on("click", ".edit_icon", function() {
     var $schedule_row_id = $(this).parent().attr("id").split("_")[2];
     var $add_bnt = $("#schedule_add_btn");
     if (editMode === 0) {
         $add_bnt.prop("disabled", true);
         $add_bnt.addClass("disable");
         changeFieldState($schedule_row_id, false);
+        var $check_flag = checkNotEmpty($schedule_row_id);
+        if ($check_flag === 0) {
+            onDateChange($schedule_row_id);
+            // get selected options;
+            var $start_selected = $(START_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+            var $end_selected = $(END_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+            renderOnEdit($schedule_row_id, $start_selected, $end_selected);
+        }
+        appendDeleteButton($schedule_row_id);
+        appendTickIcon($schedule_row_id);
         editMode = 1;
     } else {
-        $add_bnt.prop("disabled", false);
-        $add_bnt.removeClass("disable");
-        changeFieldState($schedule_row_id, true);
-        // Update the TimeSchedule Arr
-        var $date_selected = $("#date_" + $schedule_row_id).find("option:selected").val();
-        // Get start_time_selected;
-        var $start_time_selected = $("#start_" + $schedule_row_id).find("option:selected").val();
-        var $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_selected);
-        // Get selected end_time
-        var $end_time_selected = $("#end_" + $schedule_row_id).find("option:selected").val();
-        var $end_time_index = TimeSchedule_Keys.indexOf($end_time_selected);
-        // Check for range to store
-        var newObj = {
-            "id": parseInt($schedule_row_id),
-            "start_index": $start_time_index,
-            "end_index": $end_time_index,
+        var $check_flag = checkNotEmpty($schedule_row_id);
+        // Require user to choose all fields
+        console.log($check_flag);
+        if ($check_flag == 0) {
+            $add_bnt.prop("disabled", false);
+            $add_bnt.removeClass("disable");
+            changeFieldState($schedule_row_id, true);
+            // Update the TimeSchedule Arr
+            var $date_selected = $(DATE_PREFIX + $schedule_row_id).find("option:selected").val();
+            // Get start_time_selected;
+            var $start_time_selected = $(START_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+            var $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_selected);
+            // Get selected end_time
+            var $end_time_selected = $(END_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+            var $end_time_index = TimeSchedule_Keys.indexOf($end_time_selected);
+            // Check for range to store
+            var newObj = {
+                "id": parseInt($schedule_row_id),
+                "start_index": $start_time_index,
+                "end_index": $end_time_index,
+                "start_value": $start_time_selected,
+                "end_value": $end_time_selected
+            }
+            for (let i = 0; i < DateScheduleObj[$date_selected].TimeSlot.length; i++) {
+                if (DateScheduleObj[$date_selected].TimeSlot[i].id === parseInt($schedule_row_id)) DateScheduleObj[$date_selected].TimeSlot.splice(i, 1);
+            }
+            DateScheduleObj[$date_selected].TimeSlot.push(newObj);
+            DateScheduleObj[$date_selected].TimeSlot = DateScheduleObj[$date_selected].TimeSlot.sort(compareFreeTimeSlot);
+            console.log(DateScheduleObj[$date_selected].TimeSlot);
+            removeDeleteButton($schedule_row_id);
+            removeTickIcon($schedule_row_id);
+            editMode = 0;
         }
-        DateScheduleObj[$date_selected]["TimeSlot"].push(newObj);
-        console.log(DateScheduleObj[$date_selected]);
-        editMode = 0;
     }
 })
 
-$(".date_select").one("click", function() {
-    var stored_lang = localStorage.getItem("stored_lang");
-    var $current_el = $(this);
-    //$current_el.addClass("clicked");
-    $.each(DateSchedule[stored_lang], function(key, value) {
-        $current_el.append('<option ' + 'value=' + key + '>' + value + '</option>');
-    })
-})
-
 function getStartTimeObj($id, date) {
-    var TimeSlot = DateScheduleObj[date]["TimeSlot"];
+    var TimeSlot = DateScheduleObj[date].TimeSlot;
     var TimeSlot_length = TimeSlot.length;
     var Extract_Key = [];
     var TimeSlot_FreeObj_Keys = [];
     if (TimeSlot_length >= 1) {
         // extract occupied time slot except for the current id
         $.each(TimeSlot, function() {
-            if ($(this).id !== $id) {
+            if ($(this)[0].id !== parseInt($id)) {
                 Extract_Key.push($(this));
             }
         })
@@ -155,19 +208,15 @@ function getStartTimeObj($id, date) {
         if (Extract_Key.length >= 1) {
             let start_ref = 0;
             $.each(Extract_Key, function(index, value) {
-                console.log(value);
                 var $start_index = value[0].start_index;
-                var $end_index = value[0].end_index
-                console.log($start_index + " " + $end_index);
-                if ($start_index - start_ref >= 4 && $end_index <= TimeSchedule_StartTime_Keys.length - 1) {
-                    console.log("here");
+                var $end_index = value[0].end_index;
+                if ($start_index - start_ref >= 4) {
                     var free_slot = TimeSchedule_StartTime_Keys.filter(function(el, index) {
                         return index >= start_ref && index <= $start_index;
                     })
                     TimeSlot_FreeObj_Keys.push(free_slot);
                 }
                 start_ref = $end_index;
-                console.log(start_ref);
             })
 
             // check for final free space
@@ -175,9 +224,9 @@ function getStartTimeObj($id, date) {
                 var last_free_slot = TimeSchedule_StartTime_Keys.slice(start_ref, TimeSchedule_StartTime_Keys.length);
                 TimeSlot_FreeObj_Keys.push(last_free_slot);
             }
-            console.log(TimeSlot_FreeObj_Keys);
         }
     }
+    console.log(TimeSlot_FreeObj_Keys);
     return TimeSlot_FreeObj_Keys;
 }
 
@@ -192,7 +241,6 @@ function getTimeSlotFreeObjValues(TimeSlot_FreeObj) {
             // Check if the final part exist
             if (value === START_TIME_MAX) {
                 var $end_time_start_index = TimeSchedule_Keys.indexOf(value);
-                console.log($end_time_start_index);
                 for (let i = $end_time_start_index + 1; i < TimeSchedule_Values.length; i++) {
                     $get_current_key.push(TimeSchedule_Values[i]);
                 }
@@ -205,32 +253,69 @@ function getTimeSlotFreeObjValues(TimeSlot_FreeObj) {
 
 function renderDate($id) {
     var currentLang = localStorage.getItem("stored_lang");
-    var $date_select = $("#date_" + $id);
-    $.each(DateSchedule[currentLang], function(key, value) {
-            $date_select.append('<option ' + 'value=' + key + '>' + value + '</option>');
-        })
-        // Get the current index value of start and time and compare 
+    var $date_select = $(DATE_PREFIX + $id);
+    $.each(arrLang[currentLang].DATE, function(key, value) {
+        $date_select.append('<option class="lang" key="DATE.' + key + `"` + 'value=' + key + '>' + value + '</option>');
+    })
+    onDateChange($id);
+}
+
+function onDateChange($id) {
+    var $date_select = $(DATE_PREFIX + $id);
     $date_select.change(function() {
-        var $selected_date = $date_select.find("option:selected").val();
-        var TimeSlot_FreeObj_Keys = getStartTimeObj($id, $selected_date);
-        if (TimeSlot_FreeObj_Keys.length >= 1) {
-            var TimeSlot_FreeObj_Values = getTimeSlotFreeObjValues(TimeSlot_FreeObj_Keys);
-            console.log(TimeSlot_FreeObj_Values);
-            renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
-            renderEndTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
-        } else {
-            renderStartTimeDefault($id);
-            renderEndTimeDefault($id);
+        if ($date_select.find("option:selected").val() !== "") reRender($id);
+        else {
+            renderStartTimePlaceHolder($(START_TIME_PREFIX + $id));
+            renderEndTimePlaceholder($(END_TIME_PREFIX + $id));
         }
     })
 }
 
-function renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
-    let $start_time_select = $("#start_" + $id);
+function renderStartTimePlaceHolder($start_time_select) {
     $start_time_select.empty();
     var current_lang = localStorage.getItem("stored_lang");
     var option_placeholder = arrLang[current_lang]["REGISTER"]["START_TIME_PLACEHOLDER"];
     $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
+}
+
+function renderEndTimePlaceholder($end_time_select) {
+    $end_time_select.empty();
+    var current_lang = localStorage.getItem("stored_lang");
+    var option_placeholder = arrLang[current_lang]["REGISTER"]["END_TIME_PLACEHOLDER"];
+    $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
+}
+
+function renderStartTimeDefault($id) {
+    let $start_time_select = $(START_TIME_PREFIX + $id);
+    renderStartTimePlaceHolder($start_time_select);
+    $.each(TimeSchedule_StartTime_Keys, function(index, value) {
+        $start_time_select.append('<option class="start_time_option"' + 'value=' + value + '>' + TimeSchedule_StartTime_Values[index] + '</option>');
+    })
+}
+
+function renderEndTimeDefault($id) {
+    let $end_time_select = $(END_TIME_PREFIX + $id);
+    let $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
+    let $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_option);
+    renderEndTimePlaceholder($end_time_select);
+    $.each(TimeSchedule_Keys, function(index, value) {
+        if (index - $start_time_index >= 4) {
+            $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + TimeSchedule_Values[index] + '</option>');
+        }
+    })
+}
+
+function onEndTimeDefaultChange($id) {
+    $(START_TIME_PREFIX + $id).change(function() {
+        let $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
+        if ($start_time_option !== "") renderEndTimeDefault($id);
+        else renderEndTimePlaceholder($(END_TIME_PREFIX + $id));
+    });
+}
+
+function renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
+    let $start_time_select = $(START_TIME_PREFIX + $id);
+    renderStartTimePlaceHolder($start_time_select);
     $.each(TimeSlot_FreeObj_Keys, function(index, value) {
         var $current_keys = $(this);
         var $current_values = TimeSlot_FreeObj_Values[index];
@@ -240,98 +325,110 @@ function renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
                 $start_time_select.append('<option class="start_time_option"' + 'value=' + value + '>' + $current_values[index] + '</option>');
             }
         })
-
     })
 }
 
 function renderEndTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
-    $("#start_" + $id).change(function() {
-        var $end_time_select = $("#end_" + $id);
-        var $start_time_option = $(this).find("option:selected").val();
-        var $get_free_slot_keys = [];
-        var $get_free_slot_values = [];
-        var $is_in_this = -1;
-        $.each(TimeSlot_FreeObj_Keys, function(index, value) {
-            var $current_free_slot = $(this);
-            var $check_if_match = -1;
-            $.each($current_free_slot, function(index, value) {
-                if (value === $start_time_option) {
-                    console.log(value + " " + index);
-                    $is_in_this = index;
-                    $check_if_match = index;
-                }
-            })
-            if ($check_if_match > -1) {
-                $get_free_slot_keys = $current_free_slot;
-                $get_free_slot_values = TimeSlot_FreeObj_Values[index];
-                $check_if_match = -1;
-            }
-        });
-        $end_time_select.empty();
-        var current_lang = localStorage.getItem("stored_lang");
-        var option_placeholder = arrLang[current_lang]["REGISTER"]["END_TIME_PLACEHOLDER"];
-        $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
-        var $last_key_value = $get_free_slot_keys[$get_free_slot_keys.length - 1];
-        if ($last_key_value == START_TIME_MAX) {
-            console.log($is_in_this);
-            $.each($get_free_slot_values, function(index, value) {
-                if (index - $is_in_this >= 4) {
-                    console.log(index + " " + value);
-                    var $value_index = TimeSchedule_Values.indexOf(value);
-                    var $get_key = TimeSchedule_Keys[$value_index];
-                    $end_time_select.append('<option class="end_time_option"' + 'value=' + $get_key + '>' + value + '</option>');
-                }
-            })
-        } else {
-            $.each($get_free_slot_keys, function(index, value) {
-                if (index - $is_in_this >= 4) {
-                    $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + $get_free_slot_values[index] + '</option>');
-                }
-            })
-        }
-    })
-}
+    var $end_time_select = $(END_TIME_PREFIX + $id);
+    var $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
+    var $get_free_slot_keys = [];
+    var $get_free_slot_values = [];
+    var $is_in_this = -1;
+    renderEndTimePlaceholder($end_time_select);
 
-function renderStartTimeDefault($id) {
-    let $start_time_select = $("#start_" + $id);
-    $start_time_select.empty();
-    var current_lang = localStorage.getItem("stored_lang");
-    var option_placeholder = arrLang[current_lang]["REGISTER"]["START_TIME_PLACEHOLDER"];
-    $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
-    $.each(TimeSchedule_StartTime_Keys, function(index, value) {
-        $start_time_select.append('<option class="start_time_option"' + 'value=' + value + '>' + TimeSchedule_StartTime_Values[index] + '</option>');
-    })
-}
-
-
-function renderEndTimeDefault($id) {
-    $("#start_" + $id).change(function() {
-        let $end_time_select = $("#end_" + $id);
-        let $start_time_option = $(this).find("option:selected").val();
-        let $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_option);
-        $end_time_select.empty();
-        var current_lang = localStorage.getItem("stored_lang");
-        var option_placeholder = arrLang[current_lang]["REGISTER"]["END_TIME_PLACEHOLDER"];
-        $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
-        $.each(TimeSchedule_Keys, function(index, value) {
-            if (index - $start_time_index >= 4) {
-                $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + TimeSchedule_Values[index] + '</option>');
+    $.each(TimeSlot_FreeObj_Keys, function(index, value) {
+        var $current_free_slot = $(this);
+        var $check_if_match = -1;
+        $.each($current_free_slot, function(index, value) {
+            if (value === $start_time_option) {
+                $is_in_this = index;
+                $check_if_match = index;
             }
         })
-    })
+        if ($check_if_match > -1) {
+            $get_free_slot_keys = $current_free_slot;
+            $get_free_slot_values = TimeSlot_FreeObj_Values[index];
+            $check_if_match = -1;
+        }
+    });
+    var $last_key_value = $get_free_slot_keys[$get_free_slot_keys.length - 1];
+    if ($last_key_value == START_TIME_MAX) {
+        $.each($get_free_slot_values, function(index, value) {
+            if (index - $is_in_this >= 4) {
+                var $value_index = TimeSchedule_Values.indexOf(value);
+                var $get_key = TimeSchedule_Keys[$value_index];
+                $end_time_select.append('<option class="end_time_option"' + 'value=' + $get_key + '>' + value + '</option>');
+            }
+        })
+    } else {
+        $.each($get_free_slot_keys, function(index, value) {
+            if (index - $is_in_this >= 4) {
+                $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + $get_free_slot_values[index] + '</option>');
+            }
+        })
+    }
+}
+
+function onEndTimeChange($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
+    $(START_TIME_PREFIX + $id).change(function() {
+        var $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
+        if ($start_time_option !== "") renderEndTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+        else renderEndTimePlaceholder($(END_TIME_PREFIX + $id));
+    });
+}
+
+function reRender($id) {
+    var $date_select = $(DATE_PREFIX + $id);
+    var $selected_date = $date_select.find("option:selected").val();
+    if ($selected_date !== "") {
+        var TimeSlot_FreeObj_Keys = getStartTimeObj($id, $selected_date);
+        if (TimeSlot_FreeObj_Keys.length >= 1) {
+            var TimeSlot_FreeObj_Values = getTimeSlotFreeObjValues(TimeSlot_FreeObj_Keys);
+            renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+            onEndTimeChange($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+        } else {
+            renderStartTimeDefault($id);
+            onEndTimeDefaultChange($id);
+        }
+    }
+}
+
+function renderOnEdit($id, $start_selected, $end_selected) {
+    var $date_select = $(DATE_PREFIX + $id);
+    var $selected_date = $date_select.find("option:selected").val();
+    var TimeSlot_FreeObj_Keys = getStartTimeObj($id, $selected_date);
+    if (TimeSlot_FreeObj_Keys.length >= 1) {
+        console.log("renderOnEdit " + 1);
+        var TimeSlot_FreeObj_Values = getTimeSlotFreeObjValues(TimeSlot_FreeObj_Keys);
+        renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+        let $new_start = $(START_TIME_PREFIX + $id).find("option[value='" + $start_selected + "']");
+        $new_start.prop("selected", true);
+        renderEndTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+        let $new_end = $(END_TIME_PREFIX + $id).find("option[value='" + $end_selected + "']");
+        $new_end.prop("selected", true);
+        onEndTimeChange($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
+    } else {
+        renderStartTimeDefault($id);
+        let $new_start = $(START_TIME_PREFIX + $id).find("option[value='" + $start_selected + "']");
+        $new_start.prop("selected", true);
+        renderEndTimeDefault($id);
+        let $new_end = $(END_TIME_PREFIX + $id).find("option[value='" + $end_selected + "']");
+        $new_end.prop("selected", true);
+        onEndTimeDefaultChange($id);
+    }
 }
 
 function renderDistrict(districtObj) {
-    var $district = $("#district_select");
+    var $district = $("#registerClass-district");
     $.each(districtObj, function(index, value) {
         $district.append('<option class="district_option" ' + 'value=' + value.id + '>' + value.name + '</option>');
     });
 }
 
-$("#district_select").change(function() {
+$("#registerClass-district").change(function() {
     let $district_dropdown = $(this);
-    let $ward = $("#ward_select");
-    let $street = $("#street_select");
+    let $ward = $("#registerClass-ward");
+    let $street = $("#registerClass-street");
     if ($district_dropdown.find("option:selected").val() === "") {
         $(".ward_option").slice(1).remove();
         $(".street_option").slice(1).remove();
@@ -354,12 +451,54 @@ $("#district_select").change(function() {
     }
 })
 
+function renderSubject() {
+    $(".subject_option").slice(1).remove();
+    var current_lang = localStorage.getItem("stored_lang");
+    $.each(arrLang[current_lang].SUBJECT, function(index, value) {
+        $("#registerClass-subject").append('<option class="lang subject_option" key="SUBJECT.' + index + '"' + 'value=' + index + '>' + value + '</option>');
+    })
+}
+
+function checkFormFields() {
+    let sum = 0;
+    $.each(inputKeys, function(index, value) {
+        var $current_field = $(SUBMIT_PREFIX + value);
+        if (value === "schedule_container") {
+            // Different check for free time schedule
+            sum++;
+        } else if ($current_field.val() === "") {
+            var $p_field = $current_field.parent().children().first();
+            $p_field.append('<span class="error-message lang" key="REGISTER.ERROR"></span>');
+            var $current_lang = localStorage.getItem("stored_lang");
+            translate($current_lang);
+            sum++;
+        }
+    })
+    if (sum == inputKeys.length) {
+        // Execute ajax call
+        $.ajax({
+
+        })
+    }
+}
+
+function checkOnInput() {
+
+}
+
+function getInputValue() {
+
+}
+
 $(function() {
     renderDistrict(cityData.districts);
+    renderSubject();
     observer.observe(target, config);
     TimeSchedule_Keys = Object.keys(TimeSchedule);
     TimeSchedule_Values = Object.values(TimeSchedule);
     var maximum_start_time = TimeSchedule_Keys.indexOf(START_TIME_MAX);
     TimeSchedule_StartTime_Keys = TimeSchedule_Keys.slice(0, maximum_start_time + 1);
     TimeSchedule_StartTime_Values = TimeSchedule_Values.slice(0, maximum_start_time + 1);
+    // Form Observation
+    $(SUBMIT_PREFIX + "submit-btn").click(() => checkFormFields());
 })

@@ -1,24 +1,3 @@
-export const DateSchedule = {
-    "en": {
-        "MON": "Monday",
-        "TUE": "Tuesday",
-        "WED": "Wednesday",
-        "THU": "Thursday",
-        "FRI": "Friday",
-        "SAT": "Saturday",
-        "SUN": "Sunday"
-    },
-    "vn": {
-        "MON": "Thứ 2",
-        "TUE": "Thứ 3",
-        "WED": "Thứ 4",
-        "THU": "Thứ 5",
-        "FRI": "Thứ 6",
-        "SAT": "Thứ 7",
-        "SUN": "Chủ Nhật"
-    }
-}
-
 export const TimeSchedule = {
     "8:00:00": "8:00",
     "8:30:00": "8:30",
@@ -55,46 +34,24 @@ export const TimeSchedule = {
 
 export const DateScheduleObj = {
     "MON": {
-        "TimeSlot": [{
-                "id": 2,
-                "start_index": 5,
-                "end_index": 10
-            },
-            {
-                "id": 3,
-                "start_index": 12,
-                "end_index": 15
-            },
-            {
-                "id": 4,
-                "start_index": 18,
-                "end_index": 19
-            }
-        ],
+        "TimeSlot": [],
     },
     "TUE": {
-        "TimeSlot": [
-
-        ],
+        "TimeSlot": [],
     },
     "WED": {
-        "start_index": -1,
-        "end_index": -1,
+        "TimeSlot": [],
     },
     "THU": {
-        "start_index": -1,
-        "end_index": -1,
+        "TimeSlot": [],
     },
     "FRI": {
-        "start_index": -1,
-        "end_index": -1,
+        "TimeSlot": [],
     },
     "SAT": {
-        "start_index": -1,
-        "end_index": -1,
+        "TimeSlot": [],
     },
     "SUN": {
-        "start_index": -1,
-        "end_index": -1,
+        "TimeSlot": []
     }
 }

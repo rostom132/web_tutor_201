@@ -8,7 +8,8 @@
         ),
         'pagePermission' => array (
             'common' => array (
-                'bodyBanner'
+                'bodyBanner',
+                'registerClass'
             ),
             'tutor'=> array (
     

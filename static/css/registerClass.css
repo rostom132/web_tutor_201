@@ -89,9 +89,30 @@
     font-size: 24px;
 }
 
-#class-description {
+.schedule_icon i:hover {
+    font-size: 30px;
+    transition: .3s;
+}
+
+.class_description {
     border: 1px solid black;
     padding: 10px;
     min-height: 150px;
     width: 80%;
+}
+
+.registerClass-submit-btn {
+    padding: 20px 40px;
+    border-radius: 50px;
+    background-color: #4BBADC;
+    color: #ffffff
+}
+
+.registerClass-submit-btn:focus {
+    outline: none;
+}
+
+.error-message {
+    margin-left: 20px;
+    color: red;
 }
