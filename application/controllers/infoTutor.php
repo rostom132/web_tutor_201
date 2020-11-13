@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once "../../secret/config.php";
+    include_once "../controllers/validateInfo.php";
     include_once "../models/tutor.php";
     include_once "../models/subject.php";
     include_once "../models/users.php";
@@ -36,14 +37,31 @@
      * @return string true: update sucess | false: fail when update
      */ 
     function updateInfo($input_data) {
-        $result_tutor = Tutor::updateTutor($_SESSION['user_id'], $input_data['tutor']);
-        if (!empty($input_data['speciality'])) $result_speciality = Tutor::updateSpeciality($_SESSION['user_id'], $input_data['speciality']);
-        else $result_speciality = Tutor::updateSpeciality($_SESSION['user_id'], []);
-        $result_pass = true;
-        if (!empty($input_data['password'])) {
-            $result_pass = User::updatePassword($_SESSION['username'],$input_data['password'] );
-        }
-        echo (($result_tutor&&$result_speciality&&$result_pass) ? 'true' : 'false');
+        $valInfo = Validate::validateInfo($input_data['tutor']);
+        if ($valInfo != 'WRONG ELEMENT') {
+
+            if (!Validate::validatePass($input_data['password']) && !empty($input_data['password'])) {
+                array_push ($valInfo, 'password');
+            }
+
+            if ( sizeof($valInfo) == 0) {
+
+                $result_tutor = Tutor::updateTutor($_SESSION['user_id'], $input_data['tutor']);
+                if (!empty($input_data['speciality'])) $result_speciality = Tutor::updateSpeciality($_SESSION['user_id'], $input_data['speciality']);
+                else $result_speciality = Tutor::updateSpeciality($_SESSION['user_id'], []);
+
+                $result_pass = true;
+                if (!empty($input_data['password'])) {
+                    $result_pass = User::updatePassword($_SESSION['username'],$input_data['password'] );
+                }
+
+                echo (($result_tutor&&$result_speciality&&$result_pass) ? 'true' : 'false');
+            } else {
+                echo (json_encode($valInfo));
+            }
+        } else {
+            echo 'WRONG ELEMNT!';
+        }  
     }
 
     //Check for get Tutor request

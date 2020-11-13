@@ -61,7 +61,6 @@ function getAllDataInForm() {
     var allInputData = {};
     allInputData['tutor'] = {};
     allInputData['speciality'] = magicSelect.getValue();
-    console.log(allInputData['speciality']);
     allInputData['password'] = document.getElementById("edit_main_pass").value;
 
     allInputData['tutor']['first_name'] = document.getElementById("edit_fname").value;
@@ -79,8 +78,6 @@ function getAllDataInForm() {
     else
         genderResult = 'F';
     allInputData['tutor']['gender'] = genderResult;
-
-    console.log(allInputData);
     return allInputData;
 }
 
@@ -160,10 +157,17 @@ $(".btnUpdate").click(function updateData() {
         url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
-            if (data == 'true') {
+            if (data == 'true') {  
                 return true;
+            } else if (data == 'false'){
+                alert('Fail to update infomation!');
+            } else if(data == 'WRONG ELEMNT!') {
+                alert ('WRONG ELEMENT!');
+                return false;
             } else {
-                alert('Fail to upload tutor infomation!!');
+                var errors = new Array();
+                errors = JSON.parse(data);
+                alert('Please update again ' + errors.join(", ") + "!!");
                 return false;
             }
         }

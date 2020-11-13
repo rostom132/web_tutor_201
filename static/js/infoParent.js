@@ -40,7 +40,6 @@ function passDataIntoFormDB() {
 function getAllDataInForm() {
 
     var allInputData = {};
-    allInputData['id'] = localStorage.getItem('user_id');
     allInputData['parent'] = {};
     allInputData['password'] = document.getElementById("edit_main_pass").value;
 
@@ -48,8 +47,14 @@ function getAllDataInForm() {
     allInputData['parent']['last_name'] = document.getElementById("edit_lname").value;
     allInputData['parent']['email'] = document.getElementById("edit_check_email").value;
     allInputData['parent']['phone_number'] = document.getElementById("edit_phone_number").value;
-    var gender = (document.getElementById("edit_gender_male").value == 'male') ? 'M' : 'F';
-    allInputData['parent']['gender'] = gender;
+    var gender = document.getElementsByName("gender");
+    var genderResult;
+    if (gender[0].checked)
+        genderResult = 'M';
+    else
+        genderResult = 'F';
+    allInputData['parent']['gender'] = genderResult;
+    allInputData['parent']['date_of_birth'] = document.getElementById("edit_birth").value;
 
     return allInputData;
 }
@@ -110,16 +115,22 @@ $(".btnUpdate").click(function updateData() {
     document.querySelector("#edit_gender_female").disabled = true;
 
     var allInputData = getAllDataInForm();
-    console.log(allInputData);
     var update_info = $.ajax({
         type: "POST",
         url: "application/controllers/infoParent.php",
         data: { changeData: allInputData },
         success: function(data) {
-            if (data == 'true') {
+            if (data == 'true') {  
                 return true;
+            } else if (data == 'false'){
+                alert('Fail to update infomation!');
+            } else if(data == 'WRONG ELEMNT!') {
+                alert ('WRONG ELEMENT!');
+                return false;
             } else {
-                alert('Fail to upload tutor infomation!!');
+                var errors = new Array();
+                errors = JSON.parse(data);
+                alert('Please update again ' + errors.join(", ") + "!!");
                 return false;
             }
         }
@@ -153,7 +164,6 @@ $(".btnUpdate").click(function updateData() {
 
     if (update_avatar || update_info) {
         passDataIntoFormDB();
-        alert("Update infomation successful!");
     } else {
         passDataIntoFormStorage();
     }
