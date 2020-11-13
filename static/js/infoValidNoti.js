@@ -146,7 +146,7 @@ $.fn.hasExtension = function(exts) {
 
 $(".uploader").change(function upImg() {
     if (this.files && this.files[0]) {
-
+        
         var extentions = new Array();
 
         $.ajax({

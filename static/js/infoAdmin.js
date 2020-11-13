@@ -135,7 +135,6 @@ $(".btnUpdate").click(function updateData() {
     document.querySelector("#edit_admin_gender_female").disabled = true;
 
     var allInputData = getAllDataInForm();
-    console.log(allInputData);
     $.ajax({
         type: "POST",
         url: "adminInfo.php",

@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once "../../secret/config.php";
+    include_once "../controllers/validateInfo.php";
     include_once "../models/parent.php";
     include_once "../models/users.php";
     
@@ -35,12 +36,26 @@
      * @return string true: update sucess | false: fail when update
      */ 
     function updateInfo($input_data) {
-        $result_parent = Parents::updateParent($_SESSION['user_id'], $input_data['parent']);
-        $result_pass = true;
-        if (!empty($input_data['password'])) {
-            $result_pass = User::updatePassword($_SESSION['username'],$input_data['password'] );
-        }
-        echo (($result_parent&&$result_pass) ? 'true' : 'false');
+        $valInfo = Validate::validateInfo($input_data['parent']);
+        if ($valInfo != 'WRONG ELEMENT') {
+
+            if (!Validate::validatePass($input_data['password']) && !empty($input_data['password'])) {
+                array_push ($valInfo, 'password');
+            }
+
+            if ( sizeof($valInfo) == 0) {
+                $result_parent = Parents::updateParent($_SESSION['user_id'], $input_data['parent']);
+                $result_pass = true;
+                if (!empty($input_data['password'])) {
+                    $result_pass = User::updatePassword($_SESSION['username'],$input_data['password'] );
+                }
+                echo (($result_parent&&$result_pass) ? 'true' : 'false');
+            } else {
+                echo (json_encode($valInfo));
+            }
+        } else {
+            echo 'WRONG ELEMNT!';
+        } 
     }
 
     //Check for get Parent request
