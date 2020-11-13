@@ -70,6 +70,24 @@ export const arrLang = {
             "GENDER_BOTH": "Both",
             "NO_STUDENT_PLACEHOLDER": "Ex: 2",
             "DESCRIPTION_PLACEHOLDER": "Describe what you expect to learn from the course here...",
+            "SUBMIT_PLACEHOLDER": "Submit",
+            "ERROR": "You must fill/select value in this field"
+        },
+        "DATE": {
+            "MON": "Monday",
+            "TUE": "Tuesday",
+            "WED": "Wednesday",
+            "THU": "Thursday",
+            "FRI": "Friday",
+            "SAT": "Saturday",
+            "SUN": "Sunday"
+        },
+        "SUBJECT": {
+            "0": "Math",
+            "1": "Literature",
+            "2": "Chemistry",
+            "3": "Physics",
+            "4": "English",
         }
     },
     "vn": {
@@ -123,6 +141,24 @@ export const arrLang = {
             "GENDER_BOTH": "Cả hai",
             "NO_STUDENT_PLACEHOLDER": "Ví dụ: 2",
             "DESCRIPTION_PLACEHOLDER": "Mô tả các nội dung muốn học tại đây...",
+            "SUBMIT_PLACEHOLDER": "Đăng kí",
+            "ERROR": "Bạn phải điền/chọn vào ô này"
+        },
+        "DATE": {
+            "MON": "Thứ 2",
+            "TUE": "Thứ 3",
+            "WED": "Thứ 4",
+            "THU": "Thứ 5",
+            "FRI": "Thứ 6",
+            "SAT": "Thứ 7",
+            "SUN": "Chủ Nhật"
+        },
+        "SUBJECT": {
+            "0": "Toán",
+            "1": "Ngữ Văn",
+            "2": "Hóa học",
+            "3": "Vật lý",
+            "4": "Tiếng Anh",
         }
     }
 };
