@@ -28,8 +28,6 @@
     //Check for login request
     if(isset($_POST['loginData'])) {
         $loginData = $_POST['loginData'];
-        checkLogin($loginData);
-        
+        checkLogin($loginData); 
     }
-
 ?>

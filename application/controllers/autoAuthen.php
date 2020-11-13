@@ -14,7 +14,7 @@
             $cookie = $user . ':' . $token;
             $mac = hash_hmac('sha256', $cookie, Config::get()['secret_key']);
             $cookie .= ':' . $mac;
-            setcookie('rememberme', $cookie);
+            setcookie('rememberme', $cookie, time()+60*60*24*(int)Config::get()['limit_days_remember'],"/");
         }
 
         /**
@@ -50,5 +50,4 @@
         }
 
     }
-
 ?>

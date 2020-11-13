@@ -88,6 +88,30 @@ export const arrLang = {
             "2": "Chemistry",
             "3": "Physics",
             "4": "English",
+            "STREET_PLACEHOLDER": "- Choose Street -"
+        },
+
+        //infoTutor
+        "INFO_TUTOR": {
+            "WELCOME": "Welcome!",
+            "REGISTER_HEADING": "Tutor Profile",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "DATE_OF_BIRTH": "Date of birth",
+            "PASSWORD": "Password",
+            "CHECK_PASSWORD": "Check password",
+            "EMAIL": "Email",
+            "PHONE_NUMBER": "Phone number",
+            "TEACHING_LANGUAGE": "Teaching language",
+            "JOB": "Curent job",
+            "MALE": "Male",
+            "FEMALE": "Female",
+            "SPECIALITY": "speciality",
+            "DESCRIPTION": "Personal description",
+            "UPLOAD": "Upload Avatar",
+            "CHANGE": "Change",
+            "CANCEL": "Cancel",
+            "UPDATE": "Update"
         }
     },
     "vn": {
@@ -159,6 +183,30 @@ export const arrLang = {
             "2": "Hóa học",
             "3": "Vật lý",
             "4": "Tiếng Anh",
+            "STREET_PLACEHOLDER": "- Chọn Đường -"
+        },
+
+        //infoTutor
+        "INFO_TUTOR": {
+            "WELCOME": "Xin Chào!",
+            "REGISTER_HEADING": "Thông Tin Gia Sư",
+            "FIRST_NAME": "Tên",
+            "LAST_NAME": "Họ",
+            "DATE_OF_BIRTH": "Ngày,tháng,năm sinh",
+            "PASSWORD": "Mật Khẩu",
+            "CHECK_PASSWORD": "Kiểm tra mật khẩu",
+            "EMAIL": "Email",
+            "PHONE_NUMBER": "Số điện thoại",
+            "TEACHING_LANGUAGE": "Ngôn ngữ giảng dạy",
+            "JOB": "Công việc hiện tại",
+            "MALE": "Nam",
+            "FEMALE": "Nữ",
+            "SPECIALITY": "Môn học giảng dạy",
+            "DESCRIPTION": "Giới thiệu bản thân",
+            "UPLOAD": "Tải lên Avatar",
+            "CHANGE": "Thay đổi",
+            "CANCEL": "Hủy",
+            "UPDATE": "Cập nhật",
         }
     }
 };

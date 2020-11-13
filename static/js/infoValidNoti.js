@@ -1,3 +1,6 @@
+/**
+ * Validate the phonenumber when user input data
+ */
 $(".phone_number_validation").on("input", function insertNumber(evt) {
     let phonePattern = new RegExp(/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/);
     let phoneValue = evt.target.value;
@@ -20,33 +23,37 @@ $(".phone_number_validation").on("input", function insertNumber(evt) {
 
 $('.phone_number_validation').after('<div class="error-message">Wrong phone format!</div>');
 
-$(".email_validation").on("keyup", function insertEmail() {
-    let timeout = null;
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-        let emailPattern = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        let emailValue = document.getElementById("edit_tutor_check_email").value;
-        let ok = emailPattern.test(emailValue);
+
+/**
+ * Validate the email address when user input data
+ */
+$(".email_validation").on("input", function insertEmail(evt) {
+    let emailPattern = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    let emailValue = evt.target.value;
+    let ok = emailPattern.test(emailValue);
         if (emailValue.length === 0) {
             document.querySelector("#edit_tutor_check_email").className = "form-control email_validation";
             document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
             return
         }
         if (!ok) {
-            document.querySelector("#edit_tutor_check_email").className = "form-control email_validation invalid";
+            evt.target.className = "form-control email_validation invalid";
             document.querySelector(".btnUpdate").disabled = true;
             document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
         } else {
-            document.querySelector("#edit_tutor_check_email").className = "form-control email_validation";
+            evt.target.className = "form-control email_validation";
             document.querySelector(".btnUpdate").removeAttribute("disabled");
             document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
 
         }
-    }, 1000);
-
 })
+
 $('.email_validation').after('<div class="error-message">Please enter email again!</div>');
 
+
+/**
+ * Validate the firstname when user input data
+ */
 $(".fname_validation").on("input", function insertFname(evt) {
     let edit_fnamePattern = new RegExp(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s|_]+$/);
     let edit_fnameValue = evt.target.value;
@@ -69,6 +76,10 @@ $(".fname_validation").on("input", function insertFname(evt) {
 
 $('.fname_validation').after('<div class="error-message">Wrong name format!</div>');
 
+
+/**
+ * Validate the lastname when user input data
+ */
 $(".lname_validation").on("input", function insertLname(evt) {
     let edit_lnamePattern = new RegExp(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s|_]+$/);
     let edit_lnameValue = evt.target.value;
@@ -91,22 +102,26 @@ $(".lname_validation").on("input", function insertLname(evt) {
 
 $('.lname_validation').after('<div class="error-message">Wrong name format!</div>');
 
+
+/**
+ * Validate the password when user input data
+ */
 $(".pass_validation").on("input", function checkPass(evt) {
-    let edit_passPattern = new RegExp(/.{8,}/);
-    let mainPass = document.getElementById("edit_tutor_main_pass");
-    let checkPass = document.getElementById("edit_tutor_check_pass");
+    let edit_passPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+    let mainPass = document.getElementById("edit_main_pass");
+    let checkPass = document.getElementById("edit_check_pass");
     let passValidation = edit_passPattern.test(mainPass.value);
 
     if (checkPass.value != mainPass.value) {
-        checkPass.className = 'form-control check_pass_validation pass_validation invalid';
+        checkPass.className = 'form-control check_pass pass_validation check_pass_validation invalid';
     } else {
-        checkPass.className = 'form-control pass_validation main_pass_validation';
+        checkPass.className = 'form-control check_pass pass_validation';
     }
 
     if (!passValidation) {
-        mainPass.className = 'form-control main_pass_validation pass_validation invalid';
+        mainPass.className = 'form-control main_pass pass_validation main_pass_validation invalid';
     } else {
-        mainPass.className = 'form-control pass_validation check_pass_validation';
+        mainPass.className = 'form-control main_pass pass_validation';
     }
 
     if (checkPass.value != mainPass.value || !passValidation) {
@@ -118,32 +133,48 @@ $(".pass_validation").on("input", function checkPass(evt) {
     }
 })
 
-$('.main_pass_validation').after('<div class="error-message">Minimum 8 characters!</div>');
+$('.main_pass_validation').after('<div class="error-message">Minimum 8 characters, at least one letter and one number!</div>');
 
 $('.check_pass_validation').after('<div class="error-message">Not same password!</div>');
 
+/**
+ * Validate the extention of update files
+ */
 $.fn.hasExtension = function(exts) {
-    return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test($(this).val());
-}
-
-$.fn.hasExtension = function(exts) {
-    return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test($(this).val());
+    return (new RegExp('(' + exts.map(function(x) { return x.replace(/^/g, '\\.'); }).join('|') + ')$')).test($(this).val());
 }
 
 $(".uploader").change(function upImg() {
     if (this.files && this.files[0]) {
-        if ($('.uploader').hasExtension(['.jpg', '.png', '.jpeg'])) {
+
+        var extentions = new Array();
+
+        $.ajax({
+            type: "POST",
+            url: "application/controllers/updateInfo.php",
+            async: false,
+            data: { getExtentions: 'true' },
+            success: function(data) {
+                extentions = data;
+            },
+            dataType: "json",
+            timeout: 3000
+        });
+
+        if (extentions.length == 0) extentions = ['jpg', 'png', 'jpeg'];
+
+        if ($('.uploader').hasExtension(extentions)) {
             var reader = new FileReader();
 
             reader.onload = function(e) {
                 $('#avatar_user')
                     .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
+                    .width(200)
+                    .height('auto');
             };
             reader.readAsDataURL(this.files[0]);
         } else {
-            alert("Please upload only .png .jpg .jpeg!!!");
+            alert("Please upload only " + extentions.join(", "));
         }
     }
 })

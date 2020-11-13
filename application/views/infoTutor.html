@@ -1,10 +1,10 @@
 <head>
-    <link rel="stylesheet" href="../../static/css/info.css">
+    <link rel="stylesheet" href="./static/css/info.css">
     <!------ Include the above in your HEAD tag ---------->
-    <link href="../../static/assets/magicsuggest/magicsuggest-min.css" rel="stylesheet">
-    <script src="../../static/assets/magicsuggest/magicsuggest-min.js"></script>
-    <script type="module" src="../../static/js/infoTutor.js"></script>
-    <script type="module" src="../../static/js/infoValidNoti.js"></script>
+    <link href="./static/assets/magicsuggest/magicsuggest-min.css" rel="stylesheet">
+    <script src="./static/assets/magicsuggest/magicsuggest-min.js"></script>
+    <script type="module" src="./static/js/infoTutor.js"></script>
+    <script type="module" src="./static/js/infoValidNoti.js"></script>
 </head>
 
 <body>
@@ -17,76 +17,76 @@
                 <div>
                     <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="Profile image" id="avatar_user">
                 </div>
-                <h3>Welcome</h3>
-                <p>Your profile!</p>
+                <h3 class="lang" key="INFO_TUTOR.WELCOME">Welcome</h3>
+                <p id="tutor_username" class="username">Your profile!</p>
 
             </div>
             <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">Tutor Profile</h3>
+                        <h3 class="register-heading lang" key="INFO_TUTOR.REGISTER_HEADING">Tutor Profile</h3>
                         <form>
                             <div class="row register-form">
                                 <div class="col-md-4">
                                     <div class="form-group form-distance tooltip">
-                                        <input type="text" class="form-control fname_validation" placeholder="First Name *" id="edit_tutor_fname" name="ffname" disabled required />
-                                        <span class="tooltiptext">First name</span>
+                                        <input type="text" class="form-control fname_validation" placeholder="First Name *" id="edit_fname" name="ffname" disabled required />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.FIRST_NAME">First name</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input type="text" class="form-control lname_validation" placeholder="Last Name *" id="edit_tutor_lname" name="llname" disabled required />
-                                        <span class="tooltiptext">Last name</span>
+                                        <input type="text" class="form-control lname_validation" placeholder="Last Name *" id="edit_lname" name="llname" disabled required />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.LAST_NAME">Last name</span>
                                     </div>
                                     <div class="form-group form-distance tooltip" style="display: flex;">
-                                        <input id="edit_tutor_birth" type="date" class="form-control" value="" min="1900-01-01" max="2020-12-31" disabled />
-                                        <span class="tooltiptext">Date of birth</span>
+                                        <input id="edit_birth" type="date" class="form-control" value="" min="1900-01-01" max="2020-12-31" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.DATE_OF_BIRTH">Date of birth</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_tutor_main_pass" type="password" class="form-control main_pass_validation pass_validation" placeholder="********" value="" disabled />
-                                        <span class="tooltiptext">Password</span>
+                                        <input id="edit_main_pass" type="password" class="form-control main_pass_validation pass_validation" placeholder="********" value="" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.PASSWORD">Password</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_tutor_check_pass" type="password" class="form-control check_pass_validation pass_validation" placeholder="Confirm Password *" value="" disabled />
-                                        <span class="tooltiptext">Check password</span>
+                                        <input id="edit_check_pass" type="password" class="form-control check_pass_validation pass_validation" placeholder="Confirm Password *" value="" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.CHECK_PASSWORD">Check password</span>
                                     </div>
                                     <div class="form-group form-distance">
-                                        <input id="edit_tutor_fileInput" type='file' class='uploader image_avatar' />
-                                        <label for="edit_tutor_fileInput" class="btnUpload" style="display: none;">Upload
+                                        <input id="edit_fileInput" type='file' class='uploader image_avatar' />
+                                        <label for="edit_fileInput lang" class="btnUpload" style="display: none;" key="INFO_TUTOR.UPLOAD">Upload
                                             Avatar</label>
                                     </div>
 
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_tutor_check_email" class="form-control email_validation" placeholder="Your Email *" value="" disabled />
-                                        <span class="tooltiptext">Email</span>
+                                        <input id="edit_check_email" class="form-control email_validation" placeholder="Your Email *" value="" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.EMAIL">Email</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_tutor_phone_number" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control phone_number_validation" placeholder="Your Phone *" value="" disabled />
-                                        <span class="tooltiptext">Phone number</span>
+                                        <input id="edit_phone_number" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control phone_number_validation" placeholder="Your Phone *" value="" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.PHONE_NUMBER">Phone number</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <select id="edit_tutor_language" type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Language *" value="" disabled>
-                                            <option selected="false" disabled="disabled" value="">Language Teach
+                                        <select id="edit_language" type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Language *" value="" disabled>
+                                            <option selected="false" disabled="disabled" value="" key="INFO_TUTOR.TEACHING_LANGUAGE">Language Teach
                                             </option>
                                         </select>
-                                        <span class="tooltiptext">Language teaching</span>
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.TEACHING_LANGUAGE">Language teaching</span>
                                     </div>
 
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_tutor_job" type="text" class="form-control" placeholder="Present Job *" value="" disabled />
-                                        <span class="tooltiptext">Current job</span>
+                                        <input id="edit_job" type="text" class="form-control" placeholder="Present Job *" value="" disabled />
+                                        <span class="tooltiptext lang" key="INFO_TUTOR.JOB">Current job</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
                                         <div class="maxl">
                                             <label class="radio inline">
-                                                <input id="edit_tutor_gender_male" type="radio" name="gender"
+                                                <input id="edit_gender_male" type="radio" name="gender"
                                                     value="male" checked disabled>
-                                                <span> Male </span>
+                                                <span class="lang" key="INFO_TUTOR.MALE"> Male </span>
                                             </label>
                                             <label class="radio inline">
-                                                <input id="edit_tutor_gender_female" type="radio" name="gender"
+                                                <input id="edit_gender_female" type="radio" name="gender"
                                                     value="female" disabled>
-                                                <span>Female </span>
+                                                <span class="lang" key="INFO_TUTOR.FEMALE">Female </span>
                                             </label>
                                         </div>
                                     </div>
@@ -96,11 +96,11 @@
                                     <div>
                                         <div class="form-group form-distance tooltip">
                                             <input id="speciality" type="text" class="form-control" value="" placeholder="Speciality *" disabled>
-                                            <span class="tooltiptext">Speciality</span>
+                                            <span class="tooltiptext lang" key="INFO_TUTOR.SPECIALITY">Speciality</span>
                                         </div>
                                         <div class="form-group form-distance tooltip">
-                                            <textarea id="edit_tutor_description" type="text" class="form-control description" placeholder="Description" value="" disabled></textarea>
-                                            <span class="tooltiptext">Personal description</span>
+                                            <textarea id="edit_description" type="text" class="form-control description" placeholder="Description" value="" disabled></textarea>
+                                            <span class="tooltiptext lang" key="INFO_TUTOR.DESCRIPTION">Personal description</span>
                                         </div>
                                     </div>
                                 </div>

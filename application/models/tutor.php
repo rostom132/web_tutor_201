@@ -12,7 +12,7 @@
          */ 
         public static function getInfo($tutor_id) {
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT first_name AS fname, last_name AS lname, email AS check_email ,date_of_birth AS birth, gender, phone_number, present_job AS job, description, account_verified,language FROM Tutor
+                "SELECT first_name AS fname, last_name AS lname, email AS check_email ,date_of_birth AS birth, gender, phone_number, present_job AS job, description, language FROM Tutor
                 WHERE Tutor.id='$tutor_id'"
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0];

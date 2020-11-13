@@ -33,7 +33,8 @@
          * @return array 
          */ 
         function convertToArray($result){
-            return mysqli_fetch_all($result, 1);
+            if(mysqli_num_rows($result)) return mysqli_fetch_all($result, 1);
+            return [[]];
         }
 
         function __destruct(){

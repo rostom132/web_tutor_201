@@ -27,7 +27,7 @@ function tabHeader3() {
 /*check login JavaScript; begin*/
 function isInputInvalid() {
     var testUsername = /^[A-za-z0-9]{4,}$/.test(document.getElementById("loginFormUserName").value);
-    var testPassword = /^[A-za-z0-9]{8,}$/.test(document.getElementById("loginFormPass").value);
+    var testPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(document.getElementById("loginFormPass").value);
     if (testUsername) {
         document.getElementById("checkUserNameP").innerHTML = "";
     } else {
@@ -56,13 +56,14 @@ $('#loginButton').click(function() {
 
     $.ajax({
         type: "POST",
-        url: "formLogin.php",
+        url: "application/controllers/formLogin.php",
         data: { loginData: loginData },
         success: function(data) {
             if (data == 'success') {
-                window.location.replace("index.php?page=bodyBanner");
+                window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
             } else {
                 alert('Wrong password! please input again!');
+                console.log(loginData);
             }
         }
     });
