@@ -13,11 +13,8 @@
         'pagePermission' => array (
             'common' => array (
                 'bodyBanner',
-<<<<<<< HEAD
-                'registerClass'
-=======
+                'registerClass' // in working
                 'formLogin'
->>>>>>> b26d2bc6372d6ec126db87230ec5f9a8ae640b30
             ),
             'tutor' => array (
                 'infoTutor',
