@@ -13,7 +13,7 @@
         'pagePermission' => array (
             'common' => array (
                 'bodyBanner',
-                'registerClass' // in working
+                'registerClass', // in working
                 'formLogin'
             ),
             'tutor' => array (
