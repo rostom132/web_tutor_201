@@ -1,0 +1,195 @@
+#content1 {
+  background-image: url(../images/background/registerImage1.jpg); /*put an image into the background*/
+  height: 100vh;
+  /*background-size: contain;
+  background-repeat: no-repeat;*/
+  /*background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;*/
+  /*background-position: center center;*/
+  margin-top: 50px;
+  margin-bottom: 35px;
+
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+.padding-zero {
+  padding-left: 0%;
+  padding-right: 0%;
+}
+/*decorate the form; begin*/
+#regFormName {
+  width: 100%;
+  background-color: #4bbadc;
+  /* margin: auto; */
+  color: #ffffff;
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.regFormBody {
+  width: 100%;
+  
+  /* margin: auto; */
+  /* padding-top: 50px; */
+}
+.form-visible {
+  content-visibility: hidden;
+}
+.regFormBodyForm {
+  padding: 20px;
+}
+
+.regFormRow {
+  /* margin-left: 25px;
+  margin-top: 25px; */
+  width: 180px;
+  color: white;
+  font-size: 18px;
+  font-weight: 900;    
+}
+.margin-label {
+  margin: auto;
+}
+.row-margin {
+  margin-bottom: 20px;
+}
+.regFormRowInput {
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  background-color: white;
+}
+.fas{
+  background-color: #4bbadc !important;
+}
+.regFormRowBtn {
+}
+.regFormRowBtn1 {
+  background-color: #4bbadc;
+  display: block;
+  margin: 20px 0px 0px 20px;
+  text-align: center;
+  border-radius: 50px;
+  border: 2px solid #4bbadc;
+  padding: 14px 50px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.25px;
+  margin: auto;
+}
+
+.regFormRowBtn1:hover {
+  background-color: #114555;
+}
+/*decorate the form; end*/
+
+/*decorate the form page 2; begin*/
+
+#regFormRowFirstName {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 220px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+}
+
+#regFormRowLastName {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 220px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  margin-left: 40px;
+}
+
+#regFormRowInputMale {  
+  position: relative; /*position the circle*/
+  left: 200px;        /*position the circle*/
+  top: -37px;         /*position the circle*/
+  cursor: pointer;    /*change cursor to pointer*/
+  height: 30px;       /*make the circle bigger*/
+  width: 30px;        /*make the circle bigger*/
+}
+
+#regFormRowInputMaleLabel {
+  position: relative; /*position the circle*/
+  left: 205px;        /*position the circle*/
+  top: -45px;         /*position the circle*/
+  width: 160px;
+  color: #4bbadc;
+  font-size: 18px;
+  font-weight: 900;  
+}
+/*decorate the form page 2; end*/
+
+/*create tabs in the form; begin*/
+.tabHeader button {
+  width: 100%;
+  height: 100%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  /* background-color: #28a6cc; */
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+}
+#tabH1{
+  background-color: rgba(207, 239, 244, 0.5);
+}
+#tabH2{
+  background-color: #28a6cc;
+}
+#tabH3{
+  background-color: #28a6cc;
+}
+#user{
+  background-color: rgba(207, 239, 244, 0.5);
+}
+
+.tabHeader #tabH1:hover {
+  background-color:rgba(207, 239, 244, 0.5);
+}
+.tabHeader #tabH2:hover {
+  background-color:rgba(141, 213, 232, 0.5);
+}
+.tabHeader #tabH3:hover {
+  background-color:rgba(75, 186, 220, 0.5);
+}
+#formWrapper {
+  margin-top: 10%;
+}
+.tabHeader > button.active {
+  background-color: rgba(255, 255, 255, 0);
+  color: #4bbadc;
+  font-size: 18px;
+  font-weight: 900; 
+}
+
+.regFormBody > form.active {
+  display: block;
+}
+
+.regFormBody > form {
+  display: none;
+}
+/*create tabs in the form; end*/
