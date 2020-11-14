@@ -1,8 +1,8 @@
 Options -Indexes
 RewriteEngine On
 RewriteBase /web_tutor_201/application/controllers/
-
-# RewriteRule ^application/models/.*\.php - [F,L,NC]
+ 
+RewriteRule ^application/models/.*\.php - [F,L,NC]
 
 RewriteRule ^secret/.*\.php - [F,L,NC]
 

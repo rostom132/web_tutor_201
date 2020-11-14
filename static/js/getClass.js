@@ -19,9 +19,9 @@ function renderClassNum(class_num) {
 function createTemplate(class_list) {
     document.getElementById('show').innerHTML="";
     var default_avatar = "https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/styles/baiviet_50_50/public/AAuE7mBFjncP4O9wWvDXYnppGHsN0WgfIA6rRp0AfKXw%3Ds96-c";
-    var infor_icon = "../../static/images/icon/information.png";
-    var money_icon = "../../static/images/icon/moneybag.jpeg";
-    var student_icon = "../../static/images/icon/student.png";
+    var infor_icon = "./static/images/icon/information.png";
+    var money_icon = "./static/images/icon/moneybag.jpeg";
+    var student_icon = "./static/images/icon/student.png";
     for(let i = 0; i < class_list.length; i++)
     {
         var class_title = class_list[i]['description'];
@@ -119,7 +119,7 @@ function pagination(page_num) {
 export function initClass() {
     var ajax = new XMLHttpRequest();
     var method = "POST";
-    var url = "ClassInfo.php";
+    var url = "./application/controllers/ClassInfo.php";
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
@@ -150,7 +150,7 @@ export function initClass() {
 export function filterClass(dist, sub, gender) {
     var ajax = new XMLHttpRequest();
     var method = "POST";
-    var url = "ClassInfo.php";
+    var url = "./application/controllers/ClassInfo.php";
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
@@ -209,7 +209,7 @@ export function getPage(mess) {
     document.getElementById(mess).setAttribute('class', 'active');
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "ClassInfo.php?current="+mess;
+    var url = "./application/controllers/ClassInfo.php?current="+mess;
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
@@ -237,7 +237,7 @@ function nextPage() {
     }
     var ajax = new XMLHttpRequest();
     var method = "POST";
-    var url = "ClassInfo.php";
+    var url = "./application/controllers/ClassInfo.php";
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
@@ -271,7 +271,7 @@ function prevPage() {
     }
     var ajax = new XMLHttpRequest();
     var method = "POST";
-    var url = "ClassInfo.php";
+    var url = "./application/controllers/ClassInfo.php";
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);

@@ -35,13 +35,13 @@
             include_once "../views/formLogin.html";
         }
     } else {
-        include_once "../views/infoParent.html";
+        include_once "../views/formLogin.html";
         include_once "../views/counting.html";
     }
     
     //  Two main part of homepage body
     //include "../views/bodyBanner.html";
     //include "../views/counting.html";
-    include "../views/classView.html";
+    //include "../views/classView.html";
     include "../views/footer.html";
 ?>
