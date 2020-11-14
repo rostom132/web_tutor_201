@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "../models/users.php";
-    include_once "autoAuthen.php";
+    include_once "./common/autoAuthen.php";
 
     /**
      * Authorization

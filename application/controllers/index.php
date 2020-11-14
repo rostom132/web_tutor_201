@@ -2,7 +2,7 @@
     session_start();
 
     include '../../secret/config.php';
-    include "autoAuthen.php";
+    include "./common/autoAuthen.php";
     include "../views/header.html";
 
     AutoAuthen::rememberMe();
