@@ -9,8 +9,13 @@
     width: 100%;
 }
 
+.carousel {
+    height: 70vh;
+}
+
 .carousel-inner {
-    height: 500px !important;
+    position: absolute !important;
+    height: 100%;
     width: 100%;
 }
 

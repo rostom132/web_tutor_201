@@ -2,7 +2,6 @@
     position: relative;
     margin-top: 20px;
     border-radius: 2px;
-    height: 70vh;
     background-color: #fff;
 }
 
@@ -22,14 +21,16 @@
     width: 100%;
 }
 
+.group-row {
+    padding: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
 .form__field--format {
     color: #4BBADC;
     font-size: 18px;
     font-weight: 700;
-}
-
-.group-row {
-    padding: 10px;
 }
 
 .required {
@@ -37,5 +38,81 @@
 }
 
 .form__select {
+    width: 90%;
+    height: 35px;
     border: 1px solid #d3d3d3;
+}
+
+.input-label {
+    margin-right: 15px;
+    font-weight: 700;
+}
+
+.schedule_row {
+    margin-bottom: 20px;
+}
+
+.schedule_add_btn {
+    margin-bottom: 20px;
+    background-color: #4BBADC;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+.disable {
+    background-color: grey;
+}
+
+.schedule_add_btn:focus {
+    outline: none;
+}
+
+.schedule_add_label {
+    color: white;
+}
+
+.schedule_add_icon {
+    margin-left: 10px;
+    color: white;
+}
+
+.schedule_icon {
+    background-color: transparent;
+    margin-right: 20px;
+}
+
+.schedule_icon:focus {
+    outline: none;
+}
+
+.schedule_icon i {
+    font-size: 24px;
+}
+
+.schedule_icon i:hover {
+    font-size: 30px;
+    transition: .3s;
+}
+
+.class_description {
+    border: 1px solid black;
+    padding: 10px;
+    min-height: 150px;
+    width: 80%;
+}
+
+.registerClass-submit-btn {
+    padding: 20px 40px;
+    border-radius: 50px;
+    background-color: #4BBADC;
+    color: #ffffff
+}
+
+.registerClass-submit-btn:focus {
+    outline: none;
+}
+
+.error-message {
+    margin-left: 20px;
+    color: red;
 }

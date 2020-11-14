@@ -8,19 +8,18 @@ function passDataIntoFormDB() {
     var method = "GET";
     var url = "application/controllers/infoTutor.php?get_data_db=true";
     ajax.open(method, url, true);
-    ajax.send();
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText)['tutor'];
             for (var key in obj) {
                 localStorage.setItem(key, obj[key]);
-                if (document.getElementById("edit_tutor_" + key)) {
-                    document.getElementById("edit_tutor_" + key).value = obj[key];
+                if (document.getElementById("edit_" + key)) {
+                    document.getElementById("edit_" + key).value = obj[key];
                 }
             }
 
             var languageValue = obj['language'];
-            var languaue = document.getElementById("edit_tutor_language");
+            var languaue = document.getElementById("edit_language");
             languaue.value = languageValue;
 
             var genderValue = obj['gender'];
@@ -43,13 +42,18 @@ function passDataIntoFormDB() {
             });
             magicSelect.setValue(obj_specialize);
             magicSelect.disable();
-            if (JSON.parse(this.responseText)['avatar_user'] != '')
-                document.getElementById("avatar_user").src = JSON.parse(this.responseText)['avatar_user'];
+            if (JSON.parse(this.responseText)['avatar_user'] != ''){
+                $("#avatar_user")
+                    .attr("src", JSON.parse(this.responseText)['avatar_user']+"?" + new Date().getTime())
+                    .width(200)
+                    .height('auto');
+            }
             localStorage.setItem("avatar", document.getElementById("avatar_user").src);
 
             document.getElementById("tutor_username").innerText = JSON.parse(this.responseText)['username'];
         }
     };
+    ajax.send();
 }
 
 function getAllDataInForm() {
@@ -57,17 +61,16 @@ function getAllDataInForm() {
     var allInputData = {};
     allInputData['tutor'] = {};
     allInputData['speciality'] = magicSelect.getValue();
-    console.log(allInputData['speciality']);
-    allInputData['password'] = document.getElementById("edit_tutor_main_pass").value;
+    allInputData['password'] = document.getElementById("edit_main_pass").value;
 
-    allInputData['tutor']['first_name'] = document.getElementById("edit_tutor_fname").value;
-    allInputData['tutor']['last_name'] = document.getElementById("edit_tutor_lname").value;
-    allInputData['tutor']['date_of_birth'] = document.getElementById("edit_tutor_birth").value;
-    allInputData['tutor']['email'] = document.getElementById("edit_tutor_check_email").value;
-    allInputData['tutor']['phone_number'] = document.getElementById("edit_tutor_phone_number").value;
-    allInputData['tutor']['language'] = document.getElementById("edit_tutor_language").value;
-    allInputData['tutor']['present_job'] = document.getElementById("edit_tutor_job").value;
-    allInputData['tutor']['description'] = document.getElementById("edit_tutor_description").value;
+    allInputData['tutor']['first_name'] = document.getElementById("edit_fname").value;
+    allInputData['tutor']['last_name'] = document.getElementById("edit_lname").value;
+    allInputData['tutor']['date_of_birth'] = document.getElementById("edit_birth").value;
+    allInputData['tutor']['email'] = document.getElementById("edit_check_email").value;
+    allInputData['tutor']['phone_number'] = document.getElementById("edit_phone_number").value;
+    allInputData['tutor']['language'] = document.getElementById("edit_language").value;
+    allInputData['tutor']['present_job'] = document.getElementById("edit_job").value;
+    allInputData['tutor']['description'] = document.getElementById("edit_description").value;
     var gender = document.getElementsByName("gender");
     var genderResult;
     if (gender[0].checked)
@@ -75,37 +78,35 @@ function getAllDataInForm() {
     else
         genderResult = 'F';
     allInputData['tutor']['gender'] = genderResult;
-
-    console.log(allInputData);
     return allInputData;
 }
 
 function passDataIntoFormStorage() {
 
-    var edit_tutor_fnameValue = localStorage.getItem("fname");
-    document.getElementById("edit_tutor_fname").value = edit_tutor_fnameValue;
+    var edit_fnameValue = localStorage.getItem("fname");
+    document.getElementById("edit_fname").value = edit_fnameValue;
 
-    var edit_tutor_lnameValue = localStorage.getItem("lname");
-    document.getElementById("edit_tutor_lname").value = edit_tutor_lnameValue;
+    var edit_lnameValue = localStorage.getItem("lname");
+    document.getElementById("edit_lname").value = edit_lnameValue;
 
     var emailValue = localStorage.getItem("check_email");
-    document.getElementById("edit_tutor_check_email").value = emailValue;
+    document.getElementById("edit_check_email").value = emailValue;
 
     var phoneValue = localStorage.getItem("phone_number");
-    document.getElementById("edit_tutor_phone_number").value = phoneValue;
+    document.getElementById("edit_phone_number").value = phoneValue;
 
     var phoneValue = localStorage.getItem("birth");
-    document.getElementById("edit_tutor_birth").value = phoneValue;
+    document.getElementById("edit_birth").value = phoneValue;
 
     var languageValue = localStorage.getItem("language");
-    var languaue = document.getElementById("edit_tutor_language");
+    var languaue = document.getElementById("edit_language");
     languaue.value = languageValue;
 
     var jobValue = localStorage.getItem("job");
-    document.getElementById("edit_tutor_job").value = jobValue;
+    document.getElementById("edit_job").value = jobValue;
 
     var descriptionValue = localStorage.getItem("description");
-    document.getElementById("edit_tutor_description").value = descriptionValue;
+    document.getElementById("edit_description").value = descriptionValue;
 
     var genderValue = localStorage.getItem("gender");
     var gender = document.getElementsByName("gender");
@@ -133,8 +134,8 @@ $(".btnChange").click(function changeData() {
     document.querySelector(".btnUpdate").removeAttribute("style");
     document.querySelector(".btnCancel").removeAttribute("style");
     document.querySelector(".btnUpload").removeAttribute("style");
-    document.querySelector("#edit_tutor_gender_male").removeAttribute("disabled");
-    document.querySelector("#edit_tutor_gender_female").removeAttribute("disabled");
+    document.querySelector("#edit_gender_male").removeAttribute("disabled");
+    document.querySelector("#edit_gender_female").removeAttribute("disabled");
     magicSelect.enable();
 });
 
@@ -147,8 +148,8 @@ $(".btnUpdate").click(function updateData() {
     for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
         document.getElementsByClassName("form-control")[i].disabled = true;
     }
-    document.querySelector("#edit_tutor_gender_male").disabled = true;
-    document.querySelector("#edit_tutor_gender_female").disabled = true;
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
 
     var allInputData = getAllDataInForm();
     var update_info = $.ajax({
@@ -156,16 +157,24 @@ $(".btnUpdate").click(function updateData() {
         url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
-            if (data == 'true') {
+            if (data == 'true') {  
                 return true;
+            } else if (data == 'false'){
+                alert('Fail to update infomation!');
+            } else if(data == 'WRONG ELEMNT!') {
+                alert ('WRONG ELEMENT!');
+                return false;
             } else {
-                alert('Fail to upload tutor infomation!!');
+                var errors = new Array();
+                errors = JSON.parse(data);
+                alert('Please update again ' + errors.join(", ") + "!!");
                 return false;
             }
         }
     });
+
     var update_avatar = false;
-    if (update_info && document.getElementById("edit_tutor_fileInput").value != '') {
+    if (update_info && document.getElementById("edit_fileInput").value != '') {
         var fd = new FormData();
         var files = $('.uploader')[0].files[0];
         fd.append('file', files);
@@ -190,10 +199,12 @@ $(".btnUpdate").click(function updateData() {
         });
     }
 
-    if (update_avatar || update_info) location.reload();
-    passDataIntoFormStorage();
-    localStorage.setItem("selection", magicSelect.getValue());
-
+    if (update_avatar || update_info) {
+        passDataIntoFormDB();
+        alert("Update infomation successful!");
+    } else {
+        passDataIntoFormStorage();
+    }
 });
 
 //Cancel Button
@@ -207,13 +218,13 @@ $(".btnCancel").click(function cancleUpdateData() {
         document.getElementsByClassName("form-control")[i].disabled = true;
     }
     document.querySelector("#speciality").disabled = true;
-    document.querySelector("#edit_tutor_gender_male").disabled = true;
-    document.querySelector("#edit_tutor_gender_female").disabled = true;
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
     passDataIntoFormStorage();
 });
 
 $(document).ready(function() {
-    var selectLanguage = document.getElementById('edit_tutor_language');
+    var selectLanguage = document.getElementById('edit_language');
 
     for (let index in teaching_language) {
         selectLanguage.options[selectLanguage.options.length] = new Option(teaching_language[index], teaching_language[index]);

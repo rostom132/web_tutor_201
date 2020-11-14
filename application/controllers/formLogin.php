@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "../models/users.php";
-    include_once "autoAuthen.php";
+    include_once "./common/autoAuthen.php";
 
     /**
      * Authorization
@@ -18,7 +18,7 @@
             $_SESSION['user_id'] = $user_info['user_id'];
             $_SESSION['username'] = $loginData['username'];
             if ($loginData['rememberMe'] == 'true') {
-                AutoAuthen::loginWithRemember('tien');
+                AutoAuthen::loginWithRemember($loginData['username']);
             }
             echo ('success');
         }

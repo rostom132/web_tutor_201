@@ -3,14 +3,13 @@ import { arrLang } from "./constant/language.js";
 export function translate(lang) {
     $('.lang').each(function(index, item) {
         var $placeHolder = $(this).attr('placeholder');
-        var $key_placeHolder = $(this).attr('placeholder_key');
-        if ($key_placeHolder !== undefined && $placeHolder !== undefined) {
-            $key_placeHolder = $key_placeHolder.split(".");
-            $(this).attr('placeholder', arrLang[lang][$key_placeHolder[0]][$key_placeHolder[1]]);
-        }
         var $arrAttr = $(this).attr('key');
         if ($arrAttr !== undefined) {
             $arrAttr = $arrAttr.split(".");
+            if ($placeHolder !== undefined) {
+                $(this).attr('placeholder', arrLang[lang][$arrAttr[0]][$arrAttr[1]]);
+                return;
+            }
             $(this).text(arrLang[lang][$arrAttr[0]][$arrAttr[1]]);
         }
     });
