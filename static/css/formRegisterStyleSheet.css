@@ -167,13 +167,13 @@
 }
 
 .tabHeader #tabH1:hover {
-  background-color:rgba(207, 239, 244, 0.5);
+  background-color:rgba(207, 239, 244, 0.5) !important;
 }
 .tabHeader #tabH2:hover {
-  background-color:rgba(141, 213, 232, 0.5);
+  background-color:rgba(141, 213, 232, 0.5) !important;
 }
 .tabHeader #tabH3:hover {
-  background-color:rgba(75, 186, 220, 0.5);
+  background-color:rgba(75, 186, 220, 0.5) !important;
 }
 #formWrapper {
   margin-top: 10%;
@@ -191,5 +191,16 @@
 
 .regFormBody > form {
   display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 /*create tabs in the form; end*/

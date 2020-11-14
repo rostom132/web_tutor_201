@@ -1,13 +1,13 @@
 <?php
 
-    include_once "../../../secret/config.php";
+    include_once "../../secret/config.php";
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
     
     // Load Composer's autoloader
-    require './mail/vendor/autoload.php';
+    require './common/mail/vendor/autoload.php';
     
     class Email {
 

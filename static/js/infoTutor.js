@@ -30,10 +30,13 @@ function passDataIntoFormDB() {
                 gender[1].checked = true;
             }
 
+            
             var obj_specialize = JSON.parse(this.responseText)['specialize'].map(a => a.id);
+            if (obj_specialize[0] === undefined) obj_specialize = [];
             localStorage.setItem('speciality', obj_specialize);
 
             var obj_subject = JSON.parse(this.responseText)['subject'];
+            if (obj_subject[0].length == 0) obj_subject = [];
             magicSelect = $('#speciality').magicSuggest({
                 allowFreeEntries: false,
                 allowDuplicates: false,
@@ -116,7 +119,13 @@ function passDataIntoFormStorage() {
         gender[1].checked = true;
     }
 
-    var specialityValue = localStorage.getItem("speciality").split(",");
+    var speciality = localStorage.getItem("speciality");
+    var specialityValue;
+    if (speciality != ""){
+        specialityValue = localStorage.getItem("speciality").split(",");
+    } else {
+        specialityValue = [];
+    }
     magicSelect.clear();
     magicSelect.setValue(specialityValue);
     magicSelect.disable();
@@ -141,36 +150,30 @@ $(".btnChange").click(function changeData() {
 
 //Update Button
 $(".btnUpdate").click(function updateData() {
-    document.querySelector(".btnChange").removeAttribute("style");
-    document.querySelector(".btnCancel").style.display = "none";
-    document.querySelector(".btnUpdate").style.display = "none";
-    document.querySelector(".btnUpload").style.display = "none";
-    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
-        document.getElementsByClassName("form-control")[i].disabled = true;
-    }
-    document.querySelector("#edit_gender_male").disabled = true;
-    document.querySelector("#edit_gender_female").disabled = true;
 
     var allInputData = getAllDataInForm();
-    var update_info = $.ajax({
+    var update_info = false
+    $.ajax({
         type: "POST",
         url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
             if (data == 'true') {  
-                return true;
+                update_info = true;
             } else if (data == 'false'){
                 alert('Fail to update infomation!');
             } else if(data == 'WRONG ELEMNT!') {
                 alert ('WRONG ELEMENT!');
-                return false;
+                update_info = false;
             } else {
                 var errors = new Array();
                 errors = JSON.parse(data);
                 alert('Please update again ' + errors.join(", ") + "!!");
-                return false;
+                update_info = false;
             }
-        }
+        },
+        async: false,
+        timeout: 3000
     });
 
     var update_avatar = false;
@@ -186,24 +189,31 @@ $(".btnUpdate").click(function updateData() {
             processData: false,
             success: function(response) {
                 if (response != 0) {
-                    return true;
+                    update_avatar = true;
                 } else {
                     alert('Fail to upload tutor avatar!!');
-                    return false;
+                    update_avatar = false;
                 }
             },
             error: function(response) {
                 alert('Fail to upload tutor avatar!!');
-                return false;
-            }
+                update_avatar = false;
+            },
+            async: false,
+            timeout: 3000
         });
     }
 
     if (update_avatar || update_info) {
+        magicSelect.clear();
         passDataIntoFormDB();
         alert("Update infomation successful!");
-    } else {
-        passDataIntoFormStorage();
+        document.querySelector(".btnChange").removeAttribute("style");
+        document.querySelector(".btnCancel").style.display = "none";
+        document.querySelector(".btnUpdate").style.display = "none";
+        document.querySelector(".btnUpload").style.display = "none";
+        document.querySelector("#edit_gender_male").disabled = true;
+        document.querySelector("#edit_gender_female").disabled = true;
     }
 });
 

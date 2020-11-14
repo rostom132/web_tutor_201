@@ -1,5 +1,5 @@
 <?php
-    include_once "../../../secret/config.php";
+    include_once "../../secret/config.php";
 
     class Validate {
 

@@ -1,3 +1,28 @@
+function getAllInfo(role) {
+    var allInputData = {};
+    if (role == 'parent' || role =='tutor') {
+        allInputData['type'] = role;
+        allInputData['token'] = document.getElementById("token").value;
+        allInputData['email'] = document.getElementById("email").value;
+        allInputData[role] = {};
+        allInputData[role]['username'] = document.getElementById("username").value;
+        allInputData[role]['password'] = document.getElementById("password").value;
+    } else {
+        allInputData['type'] = role;
+        allInputData['token'] = document.getElementById("token-admin").value;
+        allInputData[role]['username'] = document.getElementById("username-admin").value;
+        allInputData[role]['email'] = document.getElementById("email-admin").value;
+        allInputData[role]['password'] = document.getElementById("password-admin").value;
+    }
+    return allInputData;
+}
+
+function resetAllData() {
+    Array.from(document.getElementsByClassName('regFormRowInput')).forEach(function(element) {
+        element.value = null;
+    });
+}
+
 /*decorate the header tab; begin*/
 $('#tabH1').click(function tabHeader1() {
     document.getElementById("tabH2").classList.remove("active");
@@ -10,8 +35,7 @@ $('#tabH1').click(function tabHeader1() {
     document.querySelector("#tabH1").style.backgroundColor = "rgba(207, 239, 244, 0.5)";
     document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
     document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
-
-
+    resetAllData();
 });
 
 $('#tabH2').click(function tabHeader2() {
@@ -25,7 +49,7 @@ $('#tabH2').click(function tabHeader2() {
     document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
     document.querySelector("#tabH2").style.backgroundColor = "rgba(141, 213, 232, 0.5)";
     document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
-
+    resetAllData();
 });
 
 $('#tabH3').click(function tabHeader3() {
@@ -34,39 +58,80 @@ $('#tabH3').click(function tabHeader3() {
     document.getElementById("tabH3").classList.add("active");
     document.getElementById("formParentAndTutor").classList.remove("active");
     document.getElementById("formAdmin").classList.add("active");
-    document.getElementById("email-input").value = null;
     document.querySelector("#admin").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
     document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
     document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
     document.querySelector("#tabH3").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
-    ``
+    resetAllData();
+});
+/*decorate the header tab; end*/
+
+$("#continue_admin").click(function continueButton() {
+    var infoRegister = getAllInfo('admin');
+    var update_info = $.ajax({
+        type: "POST",
+        url: "application/controllers/formRegister.php",
+        data: { registerData: infoRegister },
+        success: function(data) {
+            console.log(data);
+        }
+    });
 });
 
-function emailToken() {
-    var en = "Please check your mail and insert token";
-    var vn = "Vui lòng kiểm tra mail và nhập token";
-    var lang = localStorage.getItem('stored_lang')
-    if (lang == 'en') {
-        var token = prompt(en, "");
-        if (token != null) {
-            if (document.getElementById("email-input").value != null) {
-                alert(document.getElementById("email-input").value);
+$("#continue").click(function continueButton() {
+    var role;
+    if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
+    else role = 'tutor'
+
+    var infoRegister = getAllInfo(role);
+    console.log(infoRegister);
+    var update_info = $.ajax({
+        type: "POST",
+        url: "application/controllers/formRegister.php",
+        data: { registerData: infoRegister },
+        success: function(data) {
+            if (data == 'success') {
+                alert ('Create new account sucessful!!');
+                window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/info" + role.charAt(0).toUpperCase() + role.slice(1));
             } else {
-                alert(document.getElementById("email-admin").value);
+                alert (data);
             }
         }
-    } else {
-        var token = prompt(vn, "");
-        if (token != null) {
-            if (document.getElementById("email-input").value != null) {
-                alert(document.getElementById("email-input").value);
-            } else {
-                alert(document.getElementById("email-admin").value);
+    });
+});
+
+$("#email_admin_button").click(function sendMail() {
+    var email = document.getElementById("email-admin").value;
+    if (email) {
+        $.ajax({
+            type: "POST",
+            url: "application/controllers/formRegister.php",
+            data: { sendToken : email },
+            success: function(data) {
+                if (data == 'success') {
+
+                }else {
+
+                }
             }
-        }
+        });
     }
+});
 
-}
+$("#email_button").click(function sendMail() {
+    var email = document.getElementById("email").value;
+    if (email) {
+        $.ajax({
+            type: "POST",
+            url: "application/controllers/formRegister.php",
+            data: { sendToken : email },
+            success: function(data) {
+                if (data == 'success') {
 
+                }else {
 
-/*decorate the header tab; end*/
+                }
+            }
+        });
+    }
+});

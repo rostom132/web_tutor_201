@@ -82,6 +82,26 @@
             return true;
         }
 
+        /**
+         * Create new info for tutor
+         *
+         * @param integer $tutor_id id of the tutor
+         * @param array input data
+         * 
+         * @return boolean create status
+         */ 
+        public static function createInfo($tutor_id, $input_data) {
+            $columns=array_keys($input_data);
+            $values=array_values($input_data);
+
+            $result = $GLOBALS['db_conn']->queryData(
+                "INSERT INTO `Tutor` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
+                VALUES (" .$tutor_id .",'" . implode("', '", $values) . "' )"
+            );
+            if ($result) return true;
+            return false;
+        }
+
     }
 
 ?>

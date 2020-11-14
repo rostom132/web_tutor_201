@@ -177,7 +177,7 @@
                 "INSERT INTO `UserInfo` (" ."`" .implode("`, `",$columns) ."`" .") 
                 VALUES ('" . implode("', '", $values) . "' )"
             );
-            if ($result) return $GLOBALS['db_conn']->getLastId();
+            if ($result) return User::getId($input_array['username']);
             return false;
         }
 
