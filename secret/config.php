@@ -2,16 +2,25 @@
     class Config {
 
         static function get() {
-            return require "configConstant.php";;
+            return require "appSetting.php";
+        }
+
+        static function getConfig() {
+            return require "appConfig.php";
         }
 
         static function getDbConfig() {
-            return Config::get()['configDB'];
+            return Config::getConfig()['configDB'];
         }
 
         static function getPermission() {
             return Config::get()['pagePermission'];
         }
+        
+        static function getMailConfig() {
+            return Config::getConfig()['configMail'];
+        }
+
     }
 
 ?>

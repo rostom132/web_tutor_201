@@ -1,15 +1,6 @@
 <?php
     return array (
 
-        //Database configuration
-        'configDB' => array (
-            'servername' => "localhost",
-            'username' => "root",
-            'password' => "",
-            'dbname' => "web_ass",
-        ),
-
-
         //page permission of each user
         'pagePermission' => array (
             'common' => array (
