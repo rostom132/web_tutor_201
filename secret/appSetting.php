@@ -1,15 +1,6 @@
 <?php
     return array (
 
-        //Database configuration
-        'configDB' => array (
-            'servername' => "localhost",
-            'username' => "root",
-            'password' => "",
-            'dbname' => "web_ass",
-        ),
-
-
         //page permission of each user
         'pagePermission' => array (
             'common' => array (
@@ -55,6 +46,17 @@
         ),
 
 
+        'validateRegistor' => array(
+            'authen' => array (
+                'username' => '/^[A-za-z0-9]{4,}$/',
+                'password' => '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            ),
+            'type' => '/(tutor|parent|admin)/',
+            'token' => '/\d{7}/',
+            'code' => '/\d{7}/',
+        ),
+
+
         //Secret key for generating token
         'secret_key' => "2349230798532749853",
 
@@ -66,7 +68,7 @@
             'valid_extentions' => array (
                 'jpg','jpeg', 'png', 'gif'
             )
-            ),
+        ),
 
 
         //expired days for remember token

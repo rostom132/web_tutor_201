@@ -178,3 +178,7 @@ $(".uploader").change(function upImg() {
         }
     }
 })
+
+$(".btnCancel").click(function clearNoti(){
+   
+});

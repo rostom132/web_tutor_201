@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 03:03 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 15, 2020 lúc 09:19 AM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web_ass`
+-- Cơ sở dữ liệu: `web_ass`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `class`
+-- Cấu trúc bảng cho bảng `class`
 --
 
 CREATE TABLE `class` (
@@ -62,7 +62,7 @@ CREATE TABLE `class` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classschedule`
+-- Cấu trúc bảng cho bảng `classschedule`
 --
 
 CREATE TABLE `classschedule` (
@@ -76,24 +76,31 @@ CREATE TABLE `classschedule` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parent`
+-- Cấu trúc bảng cho bảng `parent`
 --
 
 CREATE TABLE `parent` (
   `id` int(10) UNSIGNED NOT NULL,
   `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `birth_of_date` date NOT NULL,
-  `gender` varchar(1) NOT NULL CHECK (`gender` in ('F','M')),
-  `phone_number` varchar(15) NOT NULL,
-  `mail` varchar(40) DEFAULT NULL,
-  `account_verified` varchar(5) NOT NULL CHECK (`account_verified` in ('T','F'))
+  `last_name` varchar(30) DEFAULT NULL,
+  `date_of_birth` date DEFAULT curdate(),
+  `gender` varchar(1) NOT NULL DEFAULT 'M',
+  `phone_number` varchar(15) DEFAULT NULL,
+  `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `parent`
+--
+
+INSERT INTO `parent` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`) VALUES
+(4, 'thienngu', NULL, '2020-11-15', 'M', NULL, 'nhanthien1012@gmail.com'),
+(7, 'khoangu', NULL, '2020-11-15', 'M', NULL, 'rostom13299@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request`
+-- Cấu trúc bảng cho bảng `request`
 --
 
 CREATE TABLE `request` (
@@ -107,7 +114,7 @@ CREATE TABLE `request` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specialize`
+-- Cấu trúc bảng cho bảng `specialize`
 --
 
 CREATE TABLE `specialize` (
@@ -117,17 +124,19 @@ CREATE TABLE `specialize` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `specialize`
+-- Đang đổ dữ liệu cho bảng `specialize`
 --
 
 INSERT INTO `specialize` (`years_of_ex`, `subject_id`, `tutor_id`) VALUES
 (NULL, 1, 1),
-(NULL, 3, 1);
+(NULL, 1, 6),
+(NULL, 3, 1),
+(NULL, 6, 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subject`
+-- Cấu trúc bảng cho bảng `subject`
 --
 
 CREATE TABLE `subject` (
@@ -138,7 +147,7 @@ CREATE TABLE `subject` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `subject`
+-- Đang đổ dữ liệu cho bảng `subject`
 --
 
 INSERT INTO `subject` (`id`, `name`, `grade`, `teaching_language`) VALUES
@@ -150,7 +159,7 @@ INSERT INTO `subject` (`id`, `name`, `grade`, `teaching_language`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teaching`
+-- Cấu trúc bảng cho bảng `teaching`
 --
 
 CREATE TABLE `teaching` (
@@ -165,34 +174,34 @@ CREATE TABLE `teaching` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tutor`
+-- Cấu trúc bảng cho bảng `tutor`
 --
 
 CREATE TABLE `tutor` (
   `id` int(10) UNSIGNED NOT NULL,
   `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `date_of_birth` date NOT NULL,
-  `gender` varchar(1) NOT NULL CHECK (`gender` in ('F','M')),
-  `phone_number` varchar(15) NOT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `language` varchar(30) NOT NULL,
-  `present_job` varchar(40) NOT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `account_verified` varchar(5) NOT NULL CHECK (`account_verified` in ('T','F'))
+  `last_name` varchar(30) DEFAULT NULL,
+  `date_of_birth` date DEFAULT curdate(),
+  `gender` varchar(1) NOT NULL DEFAULT 'M',
+  `phone_number` varchar(15) DEFAULT NULL,
+  `email` varchar(30) NOT NULL,
+  `language` varchar(30) DEFAULT NULL,
+  `present_job` varchar(40) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tutor`
+-- Đang đổ dữ liệu cho bảng `tutor`
 --
 
-INSERT INTO `tutor` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`, `language`, `present_job`, `description`, `account_verified`) VALUES
-(1, 'TIẾN PRO', 'Tran Dinh', '1999-04-30', 'M', '0845426661', 'tien.trantom@gmail.com', 'Both', '', 'gank full tem', 'T');
+INSERT INTO `tutor` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`, `language`, `present_job`, `description`) VALUES
+(1, 'TIẾN PRO', 'Tran Dinh', '1999-04-30', 'F', '0845426661', 'tien.trantom@gmail.com', 'Both', 'sinh vien DHBK', 'gank full tem'),
+(6, 'tienn', 'tran', '2020-11-15', 'F', '0845283742', 'rostom13299@gmail.com', 'Vietnamese', '', 'asdaf');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userinfo`
+-- Cấu trúc bảng cho bảng `userinfo`
 --
 
 CREATE TABLE `userinfo` (
@@ -205,16 +214,19 @@ CREATE TABLE `userinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `userinfo`
+-- Đang đổ dữ liệu cho bảng `userinfo`
 --
 
 INSERT INTO `userinfo` (`id`, `username`, `password`, `salt`, `user_type`, `token`) VALUES
-(1, 'tien', 'a0ee70298c764574e2f4af678f827d07419a903370086557e329c2513b208a43', '1604936216971', 'tutor', 'ad76ab3eee9c5364268902299bc295e385da3c19');
+(1, 'tien', 'a0ee70298c764574e2f4af678f827d07419a903370086557e329c2513b208a43', '1604936216971', 'tutor', '999f75f935bcc55ea9b028761f3964f42189bc70'),
+(4, 'thienngu', 'f57bd22a8f456f9e40a4ae5732d9fa2057afa50332e227882de593f0d567e2ae', '1605422611878', 'parent', NULL),
+(6, 'tienn', 'ec355c9fb964b230bd1e22aa23ef49eec3bbcc8965ae9db10522f5d1437bcda2', '1605426734783', 'tutor', '40c7464574263d8485000503f4206f4edfe01714'),
+(7, 'khoangu', '2e88bfeeebe8c6b947a20253d7d45154cbfc7726e744520ab832d1df689648f8', '1605428301016', 'parent', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `weakness`
+-- Cấu trúc bảng cho bảng `weakness`
 --
 
 CREATE TABLE `weakness` (
@@ -225,37 +237,37 @@ CREATE TABLE `weakness` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin`
+-- Chỉ mục cho bảng `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `class`
+-- Chỉ mục cho bảng `class`
 --
 ALTER TABLE `class`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `classschedule`
+-- Chỉ mục cho bảng `classschedule`
 --
 ALTER TABLE `classschedule`
   ADD PRIMARY KEY (`id`),
   ADD KEY `class_id` (`class_id`);
 
 --
--- Indexes for table `parent`
+-- Chỉ mục cho bảng `parent`
 --
 ALTER TABLE `parent`
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `request`
+-- Chỉ mục cho bảng `request`
 --
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
@@ -263,20 +275,20 @@ ALTER TABLE `request`
   ADD KEY `tutor_id` (`tutor_id`);
 
 --
--- Indexes for table `specialize`
+-- Chỉ mục cho bảng `specialize`
 --
 ALTER TABLE `specialize`
   ADD PRIMARY KEY (`subject_id`,`tutor_id`),
   ADD KEY `tutor_id` (`tutor_id`);
 
 --
--- Indexes for table `subject`
+-- Chỉ mục cho bảng `subject`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `teaching`
+-- Chỉ mục cho bảng `teaching`
 --
 ALTER TABLE `teaching`
   ADD PRIMARY KEY (`id`),
@@ -284,20 +296,20 @@ ALTER TABLE `teaching`
   ADD KEY `tutor_id` (`tutor_id`);
 
 --
--- Indexes for table `tutor`
+-- Chỉ mục cho bảng `tutor`
 --
 ALTER TABLE `tutor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `userinfo`
+-- Chỉ mục cho bảng `userinfo`
 --
 ALTER TABLE `userinfo`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `weakness`
+-- Chỉ mục cho bảng `weakness`
 --
 ALTER TABLE `weakness`
   ADD PRIMARY KEY (`id`),
@@ -305,88 +317,88 @@ ALTER TABLE `weakness`
   ADD KEY `subject_id` (`subject_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `class`
+-- AUTO_INCREMENT cho bảng `class`
 --
 ALTER TABLE `class`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `classschedule`
+-- AUTO_INCREMENT cho bảng `classschedule`
 --
 ALTER TABLE `classschedule`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `request`
+-- AUTO_INCREMENT cho bảng `request`
 --
 ALTER TABLE `request`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `subject`
+-- AUTO_INCREMENT cho bảng `subject`
 --
 ALTER TABLE `subject`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `teaching`
+-- AUTO_INCREMENT cho bảng `teaching`
 --
 ALTER TABLE `teaching`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `userinfo`
+-- AUTO_INCREMENT cho bảng `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `weakness`
+-- AUTO_INCREMENT cho bảng `weakness`
 --
 ALTER TABLE `weakness`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `admin`
+-- Các ràng buộc cho bảng `admin`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `class`
+-- Các ràng buộc cho bảng `class`
 --
 ALTER TABLE `class`
   ADD CONSTRAINT `class_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `classschedule`
+-- Các ràng buộc cho bảng `classschedule`
 --
 ALTER TABLE `classschedule`
   ADD CONSTRAINT `classschedule_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `parent`
+-- Các ràng buộc cho bảng `parent`
 --
 ALTER TABLE `parent`
   ADD CONSTRAINT `parent_ibfk_1` FOREIGN KEY (`id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `request`
+-- Các ràng buộc cho bảng `request`
 --
 ALTER TABLE `request`
   ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`tutor_id`) REFERENCES `tutor` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `specialize`
+-- Các ràng buộc cho bảng `specialize`
 --
 ALTER TABLE `specialize`
   ADD CONSTRAINT `specialize_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE CASCADE,
@@ -394,20 +406,20 @@ ALTER TABLE `specialize`
   ADD CONSTRAINT `specialize_ibfk_3` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `teaching`
+-- Các ràng buộc cho bảng `teaching`
 --
 ALTER TABLE `teaching`
   ADD CONSTRAINT `teaching_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `teaching_ibfk_2` FOREIGN KEY (`tutor_id`) REFERENCES `tutor` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `tutor`
+-- Các ràng buộc cho bảng `tutor`
 --
 ALTER TABLE `tutor`
   ADD CONSTRAINT `tutor_ibfk_1` FOREIGN KEY (`id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `weakness`
+-- Các ràng buộc cho bảng `weakness`
 --
 ALTER TABLE `weakness`
   ADD CONSTRAINT `weakness_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE,

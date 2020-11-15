@@ -8,9 +8,9 @@
     AutoAuthen::rememberMe();
     // else echo "andsakld";
 
-    $_SESSION['user_id'] = '2';
-    $_SESSION['username'] = 'khoangu';
-    $_SESSION['user_type'] = 'parent';
+    // $_SESSION['user_id'] = '2';
+    // $_SESSION['username'] = 'khoangu';
+    // $_SESSION['user_type'] = 'parent';
 
     
     if (isset($_SESSION['user_type'])){
@@ -35,14 +35,13 @@
             include_once "../views/formLogin.html";
         }
     } else {
-        include_once "../views/formLogin.html";
+        include_once "../views/formRegister.html";
         include_once "../views/counting.html";
     }
     
     //  Two main part of homepage body
-    // include "../views/bodyBanner.html";
-    // include "../views/counting.html";
-    // include "../views/info.html";
-    // include "../views/registerClass.html";
-    include_once "../views/footer.html";
+    //include "../views/bodyBanner.html";
+    //include "../views/counting.html";
+    //include "../views/classView.html";
+    include "../views/footer.html";
 ?>

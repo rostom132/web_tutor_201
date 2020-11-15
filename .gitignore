@@ -1,0 +1,5 @@
+# ignore VS code
+.vscode
+
+# ignore all logs 
+my_errors.log 

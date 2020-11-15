@@ -90,7 +90,20 @@ export const arrLang = {
             "4": "English",
             "STREET_PLACEHOLDER": "- Choose Street -"
         },
-
+        "CLASSINFO": {
+            "HEADER":"SUITABLE CLASSES FOR YOU!",
+            "DISTRICT_FILTER": "-District-",
+            "SUBJECT_FILTER": "-Subject-",
+            "GENDER_FILTER": "-Gender-",
+            "CLASS": " class(s)",
+            "CLASS_COUNT": "You have ",
+            "FILTER_BUTTON": "Filter",
+            "SALARY": "/lesson",
+            "DIST_TAG": "District ",
+            "GENDER_MALE": "Male",
+            "GENDER_FEMALE": "Female",
+            "GENDER_BOTH": "Male/Female",
+        },
         //infoTutor
         "INFO_TUTOR": {
             "WELCOME": "Welcome!",
@@ -113,6 +126,7 @@ export const arrLang = {
             "CANCEL": "Cancel",
             "UPDATE": "Update"
         }
+        
     },
     "vn": {
         "COMMON": {
@@ -184,6 +198,20 @@ export const arrLang = {
             "3": "Vật lý",
             "4": "Tiếng Anh",
             "STREET_PLACEHOLDER": "- Chọn Đường -"
+        },
+        "CLASSINFO": {
+            "HEADER":"LỚP HỌC PHÙ HỢP VỚI BẠN!",
+            "DISTRICT_FILTER": "-Quận-",
+            "SUBJECT_FILTER": "-Môn học-",
+            "GENDER_FILTER": "-Giới tính-",
+            "CLASS_COUNT": "Bạn có ",
+            "CLASS": " lớp",
+            "FILTER_BUTTON": "Áp dụng",
+            "SALARY": "/buổi",
+            "DIST_TAG": "Quận ",
+            "GENDER_MALE": "Nam",
+            "GENDER_FEMALE": "Nữ",
+            "GENDER_BOTH": "Nam/Nữ",
         },
 
         //infoTutor
