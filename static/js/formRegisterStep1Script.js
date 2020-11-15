@@ -118,6 +118,14 @@ $("#continue").click(function continueButton() {
                     alert('Please check your email and token!');
                     break;
 
+                case 'Username Existed!!':
+                    alert(data);
+                    break;
+
+                case 'Not send email':
+                    alert('Please click the send email button!');
+                    break;
+
                 default:
                     var errors = new Array();
                     errors = JSON.parse(data);
