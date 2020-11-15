@@ -6,7 +6,6 @@ function passDataIntoFormDB() {
     ajax.open(method, url, true);
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-
             var obj = JSON.parse(this.responseText)['parent'];
             for (var key in obj) {
                 localStorage.setItem(key, obj[key]);
@@ -25,10 +24,10 @@ function passDataIntoFormDB() {
 
             if (JSON.parse(this.responseText)['avatar_user'] != '')
                 $("#avatar_user")
-                    .attr("src", JSON.parse(this.responseText)['avatar_user']+"?" + new Date().getTime())
-                    .width(200)
-                    .height('auto');
-            
+                .attr("src", JSON.parse(this.responseText)['avatar_user'] + "?" + new Date().getTime())
+                .width(200)
+                .height('auto');
+
             localStorage.setItem("avatar", document.getElementById("avatar_user").src);
 
             document.getElementById("parent_username").innerText = JSON.parse(this.responseText)['username'];
@@ -121,12 +120,12 @@ $(".btnUpdate").click(function updateData() {
         url: "application/controllers/infoParent.php",
         data: { changeData: allInputData },
         success: function(data) {
-            if (data == 'true') {  
+            if (data == 'true') {
                 update_info = true;
-            } else if (data == 'false'){
+            } else if (data == 'false') {
                 alert('Fail to update infomation!');
-            } else if(data == 'WRONG ELEMNT!') {
-                alert ('WRONG ELEMENT!');
+            } else if (data == 'WRONG ELEMNT!') {
+                alert('WRONG ELEMENT!');
                 update_info = false;
             } else {
                 var errors = new Array();

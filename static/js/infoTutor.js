@@ -30,7 +30,7 @@ function passDataIntoFormDB() {
                 gender[1].checked = true;
             }
 
-            
+
             var obj_specialize = JSON.parse(this.responseText)['specialize'].map(a => a.id);
             if (obj_specialize[0] === undefined) obj_specialize = [];
             localStorage.setItem('speciality', obj_specialize);
@@ -45,9 +45,9 @@ function passDataIntoFormDB() {
             });
             magicSelect.setValue(obj_specialize);
             magicSelect.disable();
-            if (JSON.parse(this.responseText)['avatar_user'] != ''){
+            if (JSON.parse(this.responseText)['avatar_user'] != '') {
                 $("#avatar_user")
-                    .attr("src", JSON.parse(this.responseText)['avatar_user']+"?" + new Date().getTime())
+                    .attr("src", JSON.parse(this.responseText)['avatar_user'] + "?" + new Date().getTime())
                     .width(200)
                     .height('auto');
             }
@@ -57,6 +57,11 @@ function passDataIntoFormDB() {
         }
     };
     ajax.send();
+    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
+        document.getElementsByClassName("form-control")[i].disabled = true;
+    }
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
 }
 
 function getAllDataInForm() {
@@ -121,17 +126,22 @@ function passDataIntoFormStorage() {
 
     var speciality = localStorage.getItem("speciality");
     var specialityValue;
-    if (speciality != ""){
+    if (speciality != "") {
         specialityValue = localStorage.getItem("speciality").split(",");
     } else {
         specialityValue = [];
     }
     magicSelect.clear();
     magicSelect.setValue(specialityValue);
-    magicSelect.disable();
 
     var imgValue = localStorage.getItem("avatar");
     $('#avatar_user').attr('src', imgValue);
+    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
+        document.getElementsByClassName("form-control")[i].disabled = true;
+    }
+    magicSelect.disable();
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
 }
 
 //Change Button
@@ -158,12 +168,12 @@ $(".btnUpdate").click(function updateData() {
         url: "application/controllers/infoTutor.php",
         data: { changeData: allInputData },
         success: function(data) {
-            if (data == 'true') {  
+            if (data == 'true') {
                 update_info = true;
-            } else if (data == 'false'){
+            } else if (data == 'false') {
                 alert('Fail to update infomation!');
-            } else if(data == 'WRONG ELEMNT!') {
-                alert ('WRONG ELEMENT!');
+            } else if (data == 'WRONG ELEMNT!') {
+                alert('WRONG ELEMENT!');
                 update_info = false;
             } else {
                 var errors = new Array();
@@ -223,13 +233,6 @@ $(".btnCancel").click(function cancleUpdateData() {
     document.querySelector(".btnCancel").style.display = "none";
     document.querySelector(".btnUpdate").style.display = "none";
     document.querySelector(".btnUpload").style.display = "none";
-
-    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
-        document.getElementsByClassName("form-control")[i].disabled = true;
-    }
-    document.querySelector("#speciality").disabled = true;
-    document.querySelector("#edit_gender_male").disabled = true;
-    document.querySelector("#edit_gender_female").disabled = true;
     passDataIntoFormStorage();
 });
 

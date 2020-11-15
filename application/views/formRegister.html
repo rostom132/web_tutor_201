@@ -38,6 +38,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="username" type="text" name="userName" placeholder="Please enter your new username here">
+                                        <p class="validation" id="checkUsername"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -48,6 +49,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="email" type="email" name="email" placeholder="Please enter your email here">
+                                        <p class="validation" id="checkEmail"></p>
                                     </div>
                                     <div class="col-2"> <button id="email_button" style="background-color: transparent;" type="button"><i class="fas fa-user-check"></i></button></div>
                                 </div>
@@ -58,6 +60,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="token" type="number" name="token" placeholder="Please enter the code you receive from mail here">
+                                        <p class="validation" id="checkToken"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -68,6 +71,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="password" type="password" name="password" placeholder="Please enter your password here">
+                                        <p class="validation" id="checkPassword"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -78,10 +82,11 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="confirm-password" type="password" name="rePassword" placeholder="Please type again your password here">
+                                        <p class="validation" id="checkConfirmPassword"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
-                                <button type="button" id="continue" class="regFormRowBtn1">Continue</button>
+                                <button type="button" id="continue" class="regFormRowBtn1" disabled>Continue</button>
                             </form>
                         </div>
 
@@ -96,6 +101,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="username-admin" type="text" name="userName" placeholder="Please enter your new username here">
+                                        <p class="validation" id="checkUsername-admin"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -106,10 +112,12 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="email-admin" type="email" name="email" placeholder="Please enter your email here">
+                                        <p class="validation" id="checkEmail-admin"></p>
                                     </div>
                                     <div class="col-2">
                                         <button style="background-color: transparent;" name="Send message to your email!!" type="button" id="email_admin_button">
                                             <i class="fas fa-user-check" title="hello!"></i>
+                                            
                                         </button>
                                     </div>
                                 </div>
@@ -120,6 +128,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="token-admin" type="number" name="token" placeholder="Please enter the code you receive from mail here">
+                                        <p class="validation" id="checkToken-admin"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -130,6 +139,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="password-admin" type="password" name="password" placeholder="Please enter your password here">
+                                        <p class="validation" id="checkPassword-admin"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -140,6 +150,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="confirm-password-admin" type="password" name="rePassword" placeholder="Please type again your password here">
+                                        <p class="validation" id="checkConfirmPassword-admin"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
@@ -148,11 +159,12 @@
                                         <h2 class="regFormRow">Security Code</h2>
                                     </div>
                                     <div class="col-6">
-                                        <input class="regFormRowInput" type="password" name="securityCode" placeholder="Please enter your security code here">
+                                        <input class="regFormRowInput" type="password" id="security-code-admin" placeholder="Please enter your security code here">
+                                        <p class="validation" id="checkSecurityCode-admin"></p>
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
-                                <button type="button" id="continue_admin" class="regFormRowBtn1">Continue</button>
+                                <button type="button" id="continue-admin" class="regFormRowBtn1" disabled>Continue</button>
                             </form>
                         </div>
 
@@ -166,3 +178,4 @@
 
 
     <script src="static/js/formRegisterStep1Script.js"></script>
+    <script type="module" src="./static/js/validation/registerValidNoti.js"></script>

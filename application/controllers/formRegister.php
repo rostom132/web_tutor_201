@@ -6,6 +6,7 @@
     include_once "../models/admin.php";
     include_once "./common/mailTransform.php";
     include_once "./common/authentication.php";
+    include_once "./common/validateInfo.php";
 
     /**
      * Send token to verify email
@@ -32,6 +33,10 @@
      * @return string status of registeration
      */ 
     function register($input_data) {
+        $valInfo = Validate::validateRegiter($input_data);
+        if ($valInfo == 'WRONG ELEMENT') return $valInfo;
+        if (sizeof($valInfo) > 0) return json_encode($valInfo);
+
         if ($input_data['token'] == $_SESSION['token_register'] && $input_data['email'] == $_SESSION['token_email']) {
 
             $role = $input_data['type'];
@@ -58,7 +63,7 @@
             Authen::login($input_data[$role]['username']);
             return 'success';
         }
-        return 'Please check again your input token and your email!';
+        return 'mail';
     }
 
     //Check for login request
