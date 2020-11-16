@@ -5,7 +5,8 @@
         'configDB' => array (
             'servername' => "localhost",
             'username' => "root",
-            'password' => "",
+            // 'password' => "",
+            'password' => "abcdef1234",
             'dbname' => "web_ass",
         ),
 
@@ -14,15 +15,14 @@
         'pagePermission' => array (
             'common' => array (
                 'bodyBanner',
-                'registerClass', // in working
                 'formLogin'
             ),
             'tutor' => array (
                 'infoTutor',
-                'registerClass'
             ),
             'parent' => array (
-                'infoParent'
+                'infoParent',
+                'registerClass'
             ),
             'admin' => array (
                 'infoAdmin'

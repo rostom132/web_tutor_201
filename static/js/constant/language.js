@@ -82,15 +82,6 @@ export const arrLang = {
             "SAT": "Saturday",
             "SUN": "Sunday"
         },
-        "SUBJECT": {
-            "0": "Math",
-            "1": "Literature",
-            "2": "Chemistry",
-            "3": "Physics",
-            "4": "English",
-            "STREET_PLACEHOLDER": "- Choose Street -"
-        },
-
         //infoTutor
         "INFO_TUTOR": {
             "WELCOME": "Welcome!",
@@ -177,15 +168,6 @@ export const arrLang = {
             "SAT": "Thứ 7",
             "SUN": "Chủ Nhật"
         },
-        "SUBJECT": {
-            "0": "Toán",
-            "1": "Ngữ Văn",
-            "2": "Hóa học",
-            "3": "Vật lý",
-            "4": "Tiếng Anh",
-            "STREET_PLACEHOLDER": "- Chọn Đường -"
-        },
-
         //infoTutor
         "INFO_TUTOR": {
             "WELCOME": "Xin Chào!",
