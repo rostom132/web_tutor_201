@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "../../secret/config.php";
-    include_once "../controllers/common/validateInfo.php";
+    include_once "./common/validateInfo.php";
     include_once "../models/tutor.php";
     include_once "../models/subject.php";
     include_once "../models/users.php";

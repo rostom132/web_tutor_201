@@ -44,6 +44,26 @@
             return true;
         }
 
+        /**
+         * Create new info for parent
+         *
+         * @param integer $tutor_id id of the parent
+         * @param array input data
+         * 
+         * @return boolean update status
+         */ 
+        public static function createInfo($parent_id, $input_data) {
+            $columns=array_keys($input_data);
+            $values=array_values($input_data);
+
+            $result = $GLOBALS['db_conn']->queryData(
+                "INSERT INTO `Parent` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
+                VALUES (".$parent_id .",'" . implode("', '", $values) . "' )"
+            );
+            if ($result) return true;
+            return false;
+        }
+
     }
 
 ?>

@@ -1,5 +1,6 @@
 <?php
     include_once "../models/users.php";
+    include_once "./common/authentication.php";
 
     class AutoAuthen {
 
@@ -31,22 +32,11 @@
                 }
                 $usertoken = User::getToken($user);
                 if (hash_equals($usertoken, $token)) {
-                    AutoAuthen::autoLogin($user);
+                    Authen::login($user);
                     return true;
                 }
             }
             return false;
-        }
-
-        /**
-         * Login the user when recognize that the user has token
-         * 
-         * @param string $user name of user
-         */ 
-        public static function autoLogin($user) {
-            $_SESSION['user_type'] = User::getUserType($user);
-            $_SESSION['user_id'] = User::getId($user);
-            $_SESSION['username'] = $user;
         }
 
     }
