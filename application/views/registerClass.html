@@ -25,9 +25,10 @@
                                 <div class="col-6">
                                     <div class="form__field">
                                         <p class="form__field--format"><span class="lang" key="REGISTER.SUBJECT_LABEL"></span><span class="required">*</span></p>
-                                        <select class="form__select" name="registerClass-subject" id="registerClass-subject">
+                                        <!-- <select class="form__select" name="registerClass-subject" id="registerClass-subject">
                                             <option class="lang subject_option" key="REGISTER.SUBJECT_PLACEHOLDER" value=""></option>
-                                        </select>
+                                        </select> -->
+                                        <input type="text" id="registerClass-subject" class="lang form__select" key="REGISTER.SUBJECT_PLACEHOLDER" placeholder="- Choose Subject -">
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -150,3 +151,5 @@
 </div>
 <link rel="stylesheet" href="./static/css/registerClass.css">
 <script type="module" src="./static/js/registerClass.js"></script>
+<link href="./static/assets/magicsuggest/magicsuggest-min.css" rel="stylesheet">
+<script src="./static/assets/magicsuggest/magicsuggest-min.js"></script>

@@ -3,7 +3,10 @@ import { TimeSchedule, DateScheduleObj } from "./constant/schedule.js";
 import { translate } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 
-const inputKeys = ["topic", "subject", "salary", "lession_per_week", "time_per_lesson", "gender", "no_student", "district", "ward", "street", "address", "phone_number", "schedule_container", "class_description"]
+const inputKeys = ["topic", "subject", "salary", "lession_per_week", "time_per_lesson", "gender", "no_student", "district", "ward", "street", "address", "phone_number", "schedule_container", "class_description"];
+
+const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
+const get_data_url = "application/controllers/registerClass.php?get_data_db=true";
 
 let schedule_id = 1;
 let editMode = 0;
@@ -17,6 +20,8 @@ const SUBMIT_PREFIX = "#registerClass-";
 const DATE_PREFIX = "#registerClass-date_";
 const START_TIME_PREFIX = "#registerClass-start_";
 const END_TIME_PREFIX = "#registerClass-end_";
+
+var magicSelect;
 
 $("#schedule_add_btn").click(function() {
     var $schedule_container = $("#registerClass-schedule_container");
@@ -452,15 +457,30 @@ $("#registerClass-district").change(function() {
 })
 
 function renderSubject() {
-    $(".subject_option").slice(1).remove();
-    var current_lang = localStorage.getItem("stored_lang");
-    $.each(arrLang[current_lang].SUBJECT, function(index, value) {
-        $("#registerClass-subject").append('<option class="lang subject_option" key="SUBJECT.' + index + '"' + 'value=' + index + '>' + value + '</option>');
-    })
+    var arrSubject = {};
+    var arrSubject_Keys = [];
+    $.ajax({
+        type: "GET",
+        url: get_subject_url,
+        cache: false,
+        success: function(responseText) {
+            arrSubject = JSON.parse(responseText).subject;
+            arrSubject_Keys = arrSubject.map(a => a.id);
+            console.log(arrSubject_Keys);
+            // Render subject input
+            magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({
+                allowFreeEntries: false,
+                allowDuplicates: false,
+                maxSelection: 3,
+                data: arrSubject,
+            });
+        }
+    });
 }
 
 function checkFormFields() {
-    let sum = 0;
+    var sum = 0;
+    var storedObj = {};
     $.each(inputKeys, function(index, value) {
         var $current_field = $(SUBMIT_PREFIX + value);
         if (value === "schedule_container") {
@@ -472,13 +492,12 @@ function checkFormFields() {
             var $current_lang = localStorage.getItem("stored_lang");
             translate($current_lang);
             sum++;
+        } else {
+
         }
     })
     if (sum == inputKeys.length) {
         // Execute ajax call
-        $.ajax({
-
-        })
     }
 }
 
@@ -501,4 +520,5 @@ $(function() {
     TimeSchedule_StartTime_Values = TimeSchedule_Values.slice(0, maximum_start_time + 1);
     // Form Observation
     $(SUBMIT_PREFIX + "submit-btn").click(() => checkFormFields());
+    $(SUBMIT_PREFIX + "update-btn").click(() => updateData());
 })
