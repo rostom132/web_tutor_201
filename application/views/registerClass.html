@@ -34,7 +34,7 @@
                                 <div class="col-6">
                                     <div class="form__field">
                                         <p class="form__field--format"><span class="lang" key="REGISTER.SALARY"></span><span class="required">*</span></p>
-                                        <input id="registerClass-salary" placeholder="Ex: 250000 VND" key="REGISTER.SALARY_PLACEHOLDER" name="registerClass-salary" type="text" class="form__select lang">
+                                        <input id="registerClass-salary_per_lesson" placeholder="Ex: 250000 VND" key="REGISTER.SALARY_PLACEHOLDER" name="registerClass-salary_per_lesson" type="text" class="form__select lang">
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <p class="form__field--format"><span class="lang" key="REGISTER.NO_LESSON_PER_WEEK"></span><span class="required">*</span></p>
-                                    <form id="registerClass-lession_per_week">
+                                    <form id="registerClass-no_lesson_per_week" name="reigsterClass-no_lesson_per_week">
                                         <input type="radio" name="lesson_per_week" value="1">
                                         <label class="input-label lang" key="REGISTER.LESSON_PER_WEEK_OPTION1"></label>
                                         <input type="radio" name="lesson_per_week" value="2">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-6">
                                     <p class="form__field--format"><span class="lang" key="REGISTER.TIME_PER_LESSON"></span><span class="required">*</span></p>
-                                    <form id="registerClass-time_per_lesson">
+                                    <form id="registerClass-time_per_lesson" name="registerClass-time_per_lesson">
                                         <input type="radio" name="time_per_lesson" value="1.5">
                                         <label class="input-label lang" key="REGISTER.TIME_PER_LESSON_OPTION2"></label>
                                         <input type="radio" name="time_per_lesson" value="2">
@@ -73,17 +73,18 @@
                             <div class="row">
                                 <div class="col-6">
                                     <p class="form__field--format"><span class="lang" key="REGISTER.GENDER"></span><span class="required">*</span></p>
-                                    <form id="registerClass-gender"></form>
-                                    <input type="radio" name="gender" value="M">
-                                    <label class="input-label lang" key="REGISTER.GENDER_MALE"></label>
-                                    <input type="radio" name="gender" value="F">
-                                    <label class="input-label lang" key="REGISTER.GENDER_FEMALE"></label>
-                                    <input type="radio" name="gender" value="B">
-                                    <label class="input-label lang" key="REGISTER.GENDER_BOTH"></label>
+                                    <form id="registerClass-gender_of_tutor" name="registerClass-gender_of_tutor">
+                                        <input type="radio" name="gender" value="M">
+                                        <label class="input-label lang" key="REGISTER.GENDER_MALE"></label>
+                                        <input type="radio" name="gender" value="F">
+                                        <label class="input-label lang" key="REGISTER.GENDER_FEMALE"></label>
+                                        <input type="radio" name="gender" value="B">
+                                        <label class="input-label lang" key="REGISTER.GENDER_BOTH"></label>
+                                    </form>
                                 </div>
                                 <div class="col-6">
                                     <p class="form__field--format"><span class="lang" key="REGISTER.NO_STUDENT"></span><span class="required">*</span></p>
-                                    <input id="registerClass-no_student" placeholder="Ex: 2" key="REGISTER.NO_STUDENT_PLACEHOLDER" name="registerClass-no_student" type="text" class="form__select lang">
+                                    <input id="registerClass-no_students" placeholder="Ex: 2" key="REGISTER.NO_STUDENT_PLACEHOLDER" name="registerClass-no_students" type="text" class="form__select lang">
                                 </div>
                             </div>
                         </div>
@@ -135,7 +136,7 @@
                         </div>
                         <div class="group-row">
                             <p class="form__field--format"><span class="lang" key="REGISTER.DESCRIPTION"></span><span class="required">*</span></p>
-                            <textarea name="registerClass-class_description" id="registerClass-class_description" class="lang class_description" placeholder="Describe what you expect to learn from the course here..." key="REGISTER.DESCRIPTION_PLACEHOLDER"></textarea>
+                            <textarea name="registerClass-description" id="registerClass-description" class="lang class_description" placeholder="Describe what you expect to learn from the course here..." key="REGISTER.DESCRIPTION_PLACEHOLDER"></textarea>
                         </div>
                         <div class="group-row">
                             <div class="col text-center">

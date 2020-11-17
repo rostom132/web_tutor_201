@@ -3,7 +3,9 @@ import { TimeSchedule, DateScheduleObj } from "./constant/schedule.js";
 import { translate } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 
-const inputKeys = ["topic", "subject", "salary", "lession_per_week", "time_per_lesson", "gender", "no_student", "district", "ward", "street", "address", "phone_number", "schedule_container", "class_description"];
+const inputClassKeys = ["topic", "district", "ward", "address", "phone_number", "no_students", "gender_of_tutor", "salary_per_lesson", "no_lesson_per_week", "time_per_lesson", "description"];
+const inputClassScheduleKeys = ["schedule_container"];
+const intputSubjectKeys = ["subject"];
 
 const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
 const get_data_url = "application/controllers/registerClass.php?get_data_db=true";
@@ -22,6 +24,10 @@ const START_TIME_PREFIX = "#registerClass-start_";
 const END_TIME_PREFIX = "#registerClass-end_";
 
 var magicSelect;
+
+/*
+ *** Render input fields
+ */
 
 $("#schedule_add_btn").click(function() {
     var $schedule_container = $("#registerClass-schedule_container");
@@ -466,7 +472,6 @@ function renderSubject() {
         success: function(responseText) {
             arrSubject = JSON.parse(responseText).subject;
             arrSubject_Keys = arrSubject.map(a => a.id);
-            console.log(arrSubject_Keys);
             // Render subject input
             magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({
                 allowFreeEntries: false,
@@ -476,6 +481,35 @@ function renderSubject() {
             });
         }
     });
+}
+
+function renderAddress() {
+    var $address = $(SUBMIT_PREFIX + "address");
+    var $district = $(SUBMIT_PREFIX + "district");
+    var $ward = $(SUBMIT_PREFIX + "ward");
+    var $street = $(SUBMIT_PREFIX + "street");
+    $address.change(function() {
+        // Check if user has chosen district, ward, street
+        if ($district.val() !== "" || $ward.val() !== "" || $street.val() !== "") {
+            $address.val($address.val() + " " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " " + "TP.HCM");
+        }
+    })
+}
+
+/*
+ *** Validation
+ */
+
+function checkInputClassInfo() {
+
+}
+
+function checkInputSubjectInfo() {
+
+}
+
+function checkInputClassScheduleInfo() {
+
 }
 
 function checkFormFields() {
@@ -501,17 +535,11 @@ function checkFormFields() {
     }
 }
 
-function checkOnInput() {
-
-}
-
-function getInputValue() {
-
-}
 
 $(function() {
-    renderDistrict(cityData.districts);
     renderSubject();
+    renderDistrict(cityData.districts);
+    renderAddress();
     observer.observe(target, config);
     TimeSchedule_Keys = Object.keys(TimeSchedule);
     TimeSchedule_Values = Object.values(TimeSchedule);
