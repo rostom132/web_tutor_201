@@ -1,3 +1,5 @@
+import { getAvatar } from "./getAvaNavbar.js";
+
 //Custom function
 function passDataIntoFormDB() {
     var ajax = new XMLHttpRequest();
@@ -8,7 +10,7 @@ function passDataIntoFormDB() {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText)['parent'];
             for (var key in obj) {
-                localStorage.setItem(key, obj[key]);
+                sessionStorage.setItem(key, obj[key]);
                 if (document.getElementById("edit_" + key)) {
                     document.getElementById("edit_" + key).value = obj[key];
                 }
@@ -28,7 +30,7 @@ function passDataIntoFormDB() {
                 .width(200)
                 .height('auto');
 
-            localStorage.setItem("avatar", document.getElementById("avatar_user").src);
+            sessionStorage.setItem("avatar", document.getElementById("avatar_user").src);
 
             document.getElementById("parent_username").innerText = JSON.parse(this.responseText)['username'];
         }
@@ -65,22 +67,22 @@ function getAllDataInForm() {
 
 function passDataIntoFormStorage() {
 
-    var edit_fnameValue = localStorage.getItem("fname");
+    var edit_fnameValue = sessionStorage.getItem("fname");
     document.getElementById("edit_fname").value = edit_fnameValue;
 
-    var edit_lnameValue = localStorage.getItem("lname");
+    var edit_lnameValue = sessionStorage.getItem("lname");
     document.getElementById("edit_lname").value = edit_lnameValue;
 
-    var emailValue = localStorage.getItem("check_email");
+    var emailValue = sessionStorage.getItem("check_email");
     document.getElementById("edit_check_email").value = emailValue;
 
-    var phoneValue = localStorage.getItem("phone_number");
+    var phoneValue = sessionStorage.getItem("phone_number");
     document.getElementById("edit_phone_number").value = phoneValue;
 
-    var phoneValue = localStorage.getItem("birth");
+    var phoneValue = sessionStorage.getItem("birth");
     document.getElementById("edit_birth").value = phoneValue;
 
-    var genderValue = localStorage.getItem("gender");
+    var genderValue = sessionStorage.getItem("gender");
     var gender = document.getElementsByName("gender");
     if (genderValue == "M") {
         gender[0].checked = true;
@@ -94,7 +96,7 @@ function passDataIntoFormStorage() {
     document.querySelector("#edit_gender_male").disabled = true;
     document.querySelector("#edit_gender_female").disabled = true;
 
-    var imgValue = localStorage.getItem("avatar");
+    var imgValue = sessionStorage.getItem("avatar");
     $('#avatar_user').attr('src', imgValue);
 }
 
@@ -173,6 +175,7 @@ $(".btnUpdate").click(function updateData() {
         document.querySelector(".btnUpdate").style.display = "none";
         document.querySelector(".btnUpload").style.display = "none";
         passDataIntoFormDB();
+        getAvatar();
     }
 });
 

@@ -2,11 +2,11 @@ export const arrLang = {
     "en": {
         // HOMEPAGE
         "COMMON": {
-            "NAVBAR_LINK1": "Introduction",
-            "NAVBAR_LINK2": "Users",
-            "NAVBAR_LINK3": "Parents",
-            "NAVBAR_LINK4": "Login",
-            "NAVBAR_LINK5": "Contact Us",
+            "NAVBAR_HOMEPAGE": "Home Page",
+            "NAVBAR_ABOUTUS": "About Us",
+            "NAVBAR_ACCOUNT": "Account",
+            "NAVBAR_CONTACT": "Contact",
+            "NAVBAR_LOGOUT": "Logout",
             "BODY_TITLE": "Center Activity",
             "BODY_SUB": "",
             "COUNTING_SQUARE1_LINE1": "700",
@@ -122,11 +122,11 @@ export const arrLang = {
     },
     "vn": {
         "COMMON": {
-            "NAVBAR_LINK1": "Giới thiệu",
-            "NAVBAR_LINK2": "Người dùng",
-            "NAVBAR_LINK3": "Phụ huynh",
-            "NAVBAR_LINK4": "Đăng nhập",
-            "NAVBAR_LINK5": "Liên hệ",
+            "NAVBAR_HOMEPAGE": "Trang chủ",
+            "NAVBAR_ABOUTUS": "Về chúng tôi",
+            "NAVBAR_ACCOUNT": "Tài khoản",
+            "NAVBAR_CONTACT": "Liên hệ",
+            "NAVBAR_LOGOUT": "Đăng xuất"
         },
         "REGISTER": {
             // Title + placeholder

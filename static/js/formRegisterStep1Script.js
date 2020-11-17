@@ -34,8 +34,7 @@ function resetNoti() {
     });
 }
 
-/*decorate the header tab; begin*/
-$('#tabH1').click(function tabHeader1() {
+function chooseParent() {
     if (document.getElementById("tabH1").classList.contains("active")) return;
     document.getElementById("tabH2").classList.remove("active");
     document.getElementById("tabH3").classList.remove("active");
@@ -49,9 +48,9 @@ $('#tabH1').click(function tabHeader1() {
     document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
     resetAllData();
     resetNoti();
-});
+}
 
-$('#tabH2').click(function tabHeader2() {
+function chooseTutor() {
     if (document.getElementById("tabH2").classList.contains("active")) return;
     document.getElementById("tabH1").classList.remove("active");
     document.getElementById("tabH3").classList.remove("active");
@@ -65,9 +64,9 @@ $('#tabH2').click(function tabHeader2() {
     document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
     resetAllData();
     resetNoti();
-});
+}
 
-$('#tabH3').click(function tabHeader3() {
+function chooseAdmin() {
     if (document.getElementById("tabH3").classList.contains("active")) return;
     document.getElementById("tabH1").classList.remove("active");
     document.getElementById("tabH2").classList.remove("active");
@@ -80,6 +79,19 @@ $('#tabH3').click(function tabHeader3() {
     document.querySelector("#tabH3").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
     resetAllData();
     resetNoti();
+}
+
+/*decorate the header tab; begin*/
+$('#tabH1').click(function tabHeader1() {
+    chooseParent();
+});
+
+$('#tabH2').click(function tabHeader2() {
+    chooseTutor();
+});
+
+$('#tabH3').click(function tabHeader3() {
+    chooseAdmin();
 });
 /*decorate the header tab; end*/
 
@@ -169,5 +181,17 @@ $("#email_button").click(function sendMail() {
                 }
             }
         });
+    }
+});
+
+$(document).ready(function checkRole() {
+    var role = localStorage.getItem("register-role");
+    if (role != null) {
+        if (role == 'tutor') {
+            chooseTutor();
+        } else if (role == 'parent') {
+            chooseParent();
+        }
+        localStorage.removeItem('register-role');
     }
 });

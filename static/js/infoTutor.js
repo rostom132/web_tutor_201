@@ -1,4 +1,5 @@
 import teaching_language from "./constant/language.js";
+import { getAvatar } from "./getAvaNavbar.js";
 
 var magicSelect;
 
@@ -12,7 +13,7 @@ function passDataIntoFormDB() {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText)['tutor'];
             for (var key in obj) {
-                localStorage.setItem(key, obj[key]);
+                sessionStorage.setItem(key, obj[key]);
                 if (document.getElementById("edit_" + key)) {
                     document.getElementById("edit_" + key).value = obj[key];
                 }
@@ -20,7 +21,7 @@ function passDataIntoFormDB() {
 
             var languageValue = obj['language'];
             var languaue = document.getElementById("edit_language");
-            languaue.value = languageValue;
+            if (languageValue != "") languaue.value = languageValue;
 
             var genderValue = obj['gender'];
             var gender = document.getElementsByName("gender");
@@ -30,10 +31,9 @@ function passDataIntoFormDB() {
                 gender[1].checked = true;
             }
 
-
             var obj_specialize = JSON.parse(this.responseText)['specialize'].map(a => a.id);
             if (obj_specialize[0] === undefined) obj_specialize = [];
-            localStorage.setItem('speciality', obj_specialize);
+            sessionStorage.setItem('speciality', obj_specialize);
 
             var obj_subject = JSON.parse(this.responseText)['subject'];
             if (obj_subject[0].length == 0) obj_subject = [];
@@ -51,7 +51,7 @@ function passDataIntoFormDB() {
                     .width(200)
                     .height('auto');
             }
-            localStorage.setItem("avatar", document.getElementById("avatar_user").src);
+            sessionStorage.setItem("avatar", document.getElementById("avatar_user").src);
 
             document.getElementById("tutor_username").innerText = JSON.parse(this.responseText)['username'];
         }
@@ -91,32 +91,32 @@ function getAllDataInForm() {
 
 function passDataIntoFormStorage() {
 
-    var edit_fnameValue = localStorage.getItem("fname");
+    var edit_fnameValue = sessionStorage.getItem("fname");
     document.getElementById("edit_fname").value = edit_fnameValue;
 
-    var edit_lnameValue = localStorage.getItem("lname");
+    var edit_lnameValue = sessionStorage.getItem("lname");
     document.getElementById("edit_lname").value = edit_lnameValue;
 
-    var emailValue = localStorage.getItem("check_email");
+    var emailValue = sessionStorage.getItem("check_email");
     document.getElementById("edit_check_email").value = emailValue;
 
-    var phoneValue = localStorage.getItem("phone_number");
+    var phoneValue = sessionStorage.getItem("phone_number");
     document.getElementById("edit_phone_number").value = phoneValue;
 
-    var phoneValue = localStorage.getItem("birth");
+    var phoneValue = sessionStorage.getItem("birth");
     document.getElementById("edit_birth").value = phoneValue;
 
-    var languageValue = localStorage.getItem("language");
+    var languageValue = sessionStorage.getItem("language");
     var languaue = document.getElementById("edit_language");
     languaue.value = languageValue;
 
-    var jobValue = localStorage.getItem("job");
+    var jobValue = sessionStorage.getItem("job");
     document.getElementById("edit_job").value = jobValue;
 
-    var descriptionValue = localStorage.getItem("description");
+    var descriptionValue = sessionStorage.getItem("description");
     document.getElementById("edit_description").value = descriptionValue;
 
-    var genderValue = localStorage.getItem("gender");
+    var genderValue = sessionStorage.getItem("gender");
     var gender = document.getElementsByName("gender");
     if (genderValue == "M") {
         gender[0].checked = true;
@@ -124,17 +124,17 @@ function passDataIntoFormStorage() {
         gender[1].checked = true;
     }
 
-    var speciality = localStorage.getItem("speciality");
+    var speciality = sessionStorage.getItem("speciality");
     var specialityValue;
     if (speciality != "") {
-        specialityValue = localStorage.getItem("speciality").split(",");
+        specialityValue = sessionStorage.getItem("speciality").split(",");
     } else {
         specialityValue = [];
     }
     magicSelect.clear();
     magicSelect.setValue(specialityValue);
 
-    var imgValue = localStorage.getItem("avatar");
+    var imgValue = sessionStorage.getItem("avatar");
     $('#avatar_user').attr('src', imgValue);
     for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
         document.getElementsByClassName("form-control")[i].disabled = true;
@@ -224,6 +224,7 @@ $(".btnUpdate").click(function updateData() {
         document.querySelector(".btnUpload").style.display = "none";
         document.querySelector("#edit_gender_male").disabled = true;
         document.querySelector("#edit_gender_female").disabled = true;
+        getAvatar();
     }
 });
 
