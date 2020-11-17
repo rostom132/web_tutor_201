@@ -1,0 +1,152 @@
+/* .row {
+    margin-left: -5px;
+    margin-right: -5px;
+} */
+
+.container {
+    padding-right: 100px;
+    padding-left: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.detail_background {
+    background-color: #d2f9f9;
+    position: relative;
+}
+
+.pic_box {
+    float: left;
+    width: 20%;
+}
+
+.pic_box>img {
+    width: 100%;
+    height: 180px;
+}
+
+
+/* Clearfix (clear floats) */
+
+.row_AB::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.row_AB_2::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.row_AB_2 {
+    padding-bottom: 50px;
+}
+
+.profile_box {
+    float: left;
+    width: 50%;
+    /* border: black solid; */
+    text-align: center;
+}
+
+.profile_box>img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.profile_box_last {
+    /* border: black solid; */
+    text-align: center;
+}
+
+.profile_box_last>img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.AB_name {
+    font-weight: bold;
+}
+
+#myVideo {
+    object-fit: cover;
+    position: relative;
+    right: 0;
+    max-width: 100%;
+    /* min-width: 100%;
+    min-height: 100%; */
+}
+
+.content {
+    position: absolute;
+    text-align: center;
+    color: #f1f1f1;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(114, 71, 21, 1), 0 0 10px rgba(114, 71, 21, 1);
+    width: 100%;
+    top: 3%;
+}
+
+.container_video {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15%;
+}
+
+.title_AB {
+    font-size: 80px;
+}
+
+.smallTitle_AB {
+    font-size: 40px;
+}
+
+.row_AB_2 {
+    /* position: relative; */
+}
+
+.part2_AB {
+    /* position: relative; */
+}
+
+@media only screen and (max-width: 600px) {
+    .profile_box {
+        width: 100%;
+    }
+    .profile_box_last {
+        width: 100%;
+    }
+    .pic_hidden {
+        visibility: hidden;
+        width: 0%;
+    }
+    .pic_show {
+        width: 33.33%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .title_AB {
+        font-size: 60px;
+    }
+    .smallTitle_AB {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .title_AB {
+        font-size: 30px;
+    }
+    .smallTitle_AB {
+        font-size: 15px;
+    }
+}

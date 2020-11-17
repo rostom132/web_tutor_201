@@ -18,21 +18,21 @@
                         <ul class="btns">
 
                             <li>
-                                <a id="tutor_ex" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Experience
+                                <a id="tutor_ex" class="btn-bl">Experience
                                 </a>
                             </li>
-                            <li><a id="tutor_ti" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Time
+                            <li><a id="tutor_ti" class="btn-bl">Time
                                 </a>
 
                             </li>
-                            <li><a id="tutor_at" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Attitude
+                            <li><a id="tutor_at" class="btn-bl">Attitude
 
                                 </a>
                             </li>
 
                         </ul>
                         <p>
-                            <a title="Đăng ký" class="btn_register link-more">Register</a>
+                            <a id="register-tutor" title="Đăng ký" class="btn_register link-more">Register</a>
                         </p>
                         <div>
                             <span class="popupTextTutor" id="tutor_ex_pop">epellat provident quia corrupti doloremque
@@ -66,18 +66,18 @@
                         <p class="title_register">Users</p>
                         <ul class="btns">
 
-                            <li><a id="tutor_qu" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Quality
+                            <li><a id="tutor_qu" class="btn-bl">Quality
                                 </a>
                             </li>
-                            <li><a id="tutor_fl" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Flexiable
+                            <li><a id="tutor_fl" class="btn-bl">Flexiable
                                 </a>
                             </li>
-                            <li><a id="tutor_en" class="btn-bl" onmouseover="popupDesription(this.id)" onmouseout="hideDescription(this.id)">Environment
+                            <li><a id="tutor_en" class="btn-bl">Environment
                                 </a>
                             </li>
                         </ul>
                         <p>
-                            <a title="Đăng ký" class="btn_register link-more">Register</a>
+                            <a id="register-parent" title="Đăng ký" class="btn_register link-more">Register</a>
                         </p>
                         <div>
                             <span class="popupTextParent" id="tutor_qu_pop">Lorem ipsum dolor sit amet consectetur
@@ -126,7 +126,8 @@
         <br>
         <br>
     </div>
-    <script>
+
+    <!-- <script>
         // When the user clicks on div, open the popup
         function popupDesription(id) {
             var popup = document.getElementById(id + "_pop");
@@ -137,7 +138,8 @@
             var popup = document.getElementById(id + "_pop");
             popup.classList.toggle("show");
         }
-    </script>
+    </script> -->
 </div>
 
 <link rel="stylesheet" href="./static/css/bodyBanner.css">
+<script src="./static/js/bodyBanner.js"></script>
