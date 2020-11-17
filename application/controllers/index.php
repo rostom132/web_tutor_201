@@ -5,43 +5,42 @@
     include "./common/autoAuthen.php";
     include "../views/header.html";
 
-    AutoAuthen::rememberMe();
-    // else echo "andsakld";
+    $page_content = array();
 
-    // $_SESSION['user_id'] = '2';
-    // $_SESSION['username'] = 'khoangu';
-    // $_SESSION['user_type'] = 'parent';
+    AutoAuthen::rememberMe();
+
+    // $_SESSION['user_id'] = '6';
+    // $_SESSION['username'] = 'tienn';
+    // $_SESSION['user_type'] = 'tutor';
 
     
     if (isset($_SESSION['user_type'])){
         $nav = $_SESSION['user_type'];
-        include_once "../views/navbar_$nav.html";
+        array_push($page_content ,"../views/navbar_$nav.html");
     } else {
-        include_once "../views/navbar.html";
+        array_push($page_content , "../views/navbar.html");
     }
     
-    // if (isset($_SESSION['user_type']))error_log($_SESSION['username']."   ".$_SESSION['user_type'], 3, '../my_errors.log');
-    // if (isset($_SESSION['user_type'])) {
-    //     include_once "../views/bodyBanner.html";
-    // } else 
     if (isset($_GET['page']) && in_array($_GET['page'],Config::getPermission()['common'])){
         $page = $_GET['page'];
-        include_once "../views/$page.html";
+        array_push($page_content , "../views/$page.html");
+        if (in_array($_GET['page'],Config::get()['pageGoWithCouting'])){
+            array_push($page_content , "../views/counting.html");
+        }
     } else if (isset($_GET['page']) && isset($_SESSION['user_type'])){
         $page = $_GET['page'];
         if (in_array($page, Config::getPermission()[$_SESSION['user_type']])){
-            include_once "../views/$page.html";
+            array_push($page_content , "../views/$page.html");
         } else {
-            include_once "../views/formLogin.html";
+            header("Location: ".Config::getConfig()['domain'] ."formLogin");
         }
     } else {
-        include_once "../views/formRegister.html";
-        include_once "../views/counting.html";
+        header("Location: ".Config::getConfig()['domain'] ."bodyBanner");
     }
     
-    //  Two main part of homepage body
-    //include "../views/bodyBanner.html";
-    //include "../views/counting.html";
-    //include "../views/classView.html";
-    include "../views/footer.html";
+    array_push($page_content , "../views/footer.html");
+
+    foreach ($page_content as $value) {
+        include_once $value;
+    }
 ?>

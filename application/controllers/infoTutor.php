@@ -1,10 +1,10 @@
 <?php
     session_start();
-    include_once "../../secret/config.php";
     include_once "./common/validateInfo.php";
     include_once "../models/tutor.php";
     include_once "../models/subject.php";
     include_once "../models/users.php";
+    include_once "./common/getAvatar.php";
     
     /**
      * get info of tutor
@@ -12,13 +12,7 @@
      * @return string status of authorization
      */ 
     function getTutorInfo(){
-        if (count(glob(Config::get()['avatar']['avatars_dir'] .$_SESSION['user_id'] .".*")) > 0){
-            $dir = explode('/',glob(Config::get()['avatar']['avatars_dir'] .$_SESSION['user_id'] .".*")[0]);
-            $name_of_avatar = end($dir);
-            $avatar_dir = Config::get()['avatar']['avatars_dir_frontend'] .$name_of_avatar;
-        } else {
-            $avatar_dir = '';
-        }
+        $avatar_dir = getAva();
         $response = array(
         'tutor' => Tutor::getInfo($_SESSION['user_id']),
         'specialize' => Tutor::getSpecialize($_SESSION['user_id']),

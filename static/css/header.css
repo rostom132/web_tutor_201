@@ -145,9 +145,8 @@
 
 .flag {
     cursor: pointer;
-    position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-10%);
     width: 34px;
     height: 34px;
     border-radius: 50%;

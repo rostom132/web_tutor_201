@@ -21,7 +21,14 @@
          * @param string $user name of user
          */ 
         public static function logout() {
-
+            session_unset();
+            if (isset($_COOKIE['rememberme'])) {
+                unset($_COOKIE['rememberme']); 
+                setcookie('rememberme', null, -1, '/'); 
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>

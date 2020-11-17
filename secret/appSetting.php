@@ -5,8 +5,9 @@
         'pagePermission' => array (
             'common' => array (
                 'bodyBanner',
-                'registerClass', // in working
-                'formLogin'
+                'formLogin',
+                'formRegister',
+                'aboutUs'
             ),
             'tutor' => array (
                 'infoTutor',
@@ -20,6 +21,10 @@
             )
         ),
 
+        'pageGoWithCouting' => array (
+            'bodyBanner',
+            'aboutUs'
+        ),
 
         //Information must be input when update user info
         'validateInfo' => array (

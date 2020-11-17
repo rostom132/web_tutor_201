@@ -31,21 +31,21 @@ $(".email_validation").on("input", function insertEmail(evt) {
     let emailPattern = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     let emailValue = evt.target.value;
     let ok = emailPattern.test(emailValue);
-        if (emailValue.length === 0) {
-            document.querySelector("#edit_tutor_check_email").className = "form-control email_validation";
-            document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
-            return
-        }
-        if (!ok) {
-            evt.target.className = "form-control email_validation invalid";
-            document.querySelector(".btnUpdate").disabled = true;
-            document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
-        } else {
-            evt.target.className = "form-control email_validation";
-            document.querySelector(".btnUpdate").removeAttribute("disabled");
-            document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
+    if (emailValue.length === 0) {
+        document.querySelector("#edit_tutor_check_email").className = "form-control email_validation";
+        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
+        return
+    }
+    if (!ok) {
+        evt.target.className = "form-control email_validation invalid";
+        document.querySelector(".btnUpdate").disabled = true;
+        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
+    } else {
+        evt.target.className = "form-control email_validation";
+        document.querySelector(".btnUpdate").removeAttribute("disabled");
+        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
 
-        }
+    }
 })
 
 $('.email_validation').after('<div class="error-message">Please enter email again!</div>');
@@ -146,7 +146,7 @@ $.fn.hasExtension = function(exts) {
 
 $(".uploader").change(function upImg() {
     if (this.files && this.files[0]) {
-        
+
         var extentions = new Array();
 
         $.ajax({
@@ -174,11 +174,12 @@ $(".uploader").change(function upImg() {
             };
             reader.readAsDataURL(this.files[0]);
         } else {
+            this.files = null;
             alert("Please upload only " + extentions.join(", "));
         }
     }
 })
 
-$(".btnCancel").click(function clearNoti(){
-   
+$(".btnCancel").click(function clearNoti() {
+
 });
