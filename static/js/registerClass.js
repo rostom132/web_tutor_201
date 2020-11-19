@@ -488,11 +488,31 @@ function renderAddress() {
     var $district = $(SUBMIT_PREFIX + "district");
     var $ward = $(SUBMIT_PREFIX + "ward");
     var $street = $(SUBMIT_PREFIX + "street");
-    $address.change(function() {
-        // Check if user has chosen district, ward, street
-        if ($district.val() !== "" || $ward.val() !== "" || $street.val() !== "") {
-            $address.val($address.val() + " " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " " + "TP.HCM");
+    $address.one("click", function() {
+        // Extract user input
+        if ($district.val() !== "") {
+            $address.val($address.val() + "-" + $district.find("option:selected").text() + " ");
         }
+        if ($ward.val() !== "") {
+            var splitText = $address.val().split("-");
+            $address.val(splitText[0] + "-" + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " ");
+        }
+        if ($street.val() !== "") {
+            var splitText = $address.val().split("-");
+            $address.val(splitText[0] + "-" + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " " + $street.find("option:selected").text());
+        }
+    })
+    $district.change(function() {
+        var splitText = $address.val().split("-");
+        $address.val(splitText[0] + "-" + $district.find("option:selected").text() + " ");
+    })
+    $ward.change(function() {
+        var splitText = $address.val().split("-");
+        $address.val(splitText[0] + "-" + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " ");
+    })
+    $street.change(function() {
+        var splitText = $address.val().split("-");
+        $address.val(splitText[0] + "-" + $ward.find("option:selected").text() + " " + $district.find("option:selected").text() + " " + $street.find("option:selected").text());
     })
 }
 

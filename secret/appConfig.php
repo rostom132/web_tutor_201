@@ -23,6 +23,6 @@
             'body' => 'Please use the below code to verify your account: ',
             'altBody' => 'Please use the below code to verify your account: ',
         ),
-        'domain'=> 'http://192.168.1.144/assignment_1/'
+        // 'domain'=> 'localhost/assignment_1/'
     );
 ?>
