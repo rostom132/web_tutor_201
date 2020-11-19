@@ -1,17 +1,7 @@
 <?php
     return array (
 
-        //Database configuration
-        'configDB' => array (
-            'servername' => "localhost",
-            'username' => "root",
-            // 'password' => "",
-            'password' => "abcdef1234",
-            'dbname' => "web_ass",
-        ),
-
-
-        //page permission of each user
+        //Page permission of each user
         'pagePermission' => array (
             'common' => array (
                 'bodyBanner',
@@ -49,8 +39,8 @@
             'tutor' => array (
                 'date_of_birth' => '/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/',
                 'language' => '/^(Vietnamese|English|Both)$/',
-                'description' => '//',
-                'present_job' => '//',
+                'description' => '/^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s|_]{,200}$/',
+                'present_job' => '/^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s|_]{,20}$/',
             ),
             'parent' => array (
                 'date_of_birth' => '/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/',
@@ -85,7 +75,8 @@
             )
         ),
 
-        //expired days for remember token
+
+        //Expired days for remember token
         'limit_days_remember' => 3,
     );
 ?>
