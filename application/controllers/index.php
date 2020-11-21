@@ -3,7 +3,6 @@
 
     include '../../secret/config.php';
     include "./common/autoAuthen.php";
-    include "../views/header.html";
 
     $page_content = array();
 
@@ -13,7 +12,7 @@
     // $_SESSION['username'] = 'tienn';
     // $_SESSION['user_type'] = 'tutor';
 
-    
+    array_push($page_content , "../views/header.html");
     if (isset($_SESSION['user_type'])){
         $nav = $_SESSION['user_type'];
         array_push($page_content ,"../views/navbar_$nav.html");

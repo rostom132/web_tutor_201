@@ -1,12 +1,11 @@
 Options -Indexes
+DirectoryIndex /assignment_1/application/controllers/index.php
 RewriteEngine On
-RewriteBase /web_tutor_201/application/controllers/
  
 RewriteRule ^application/models/.*\.php - [F,L,NC]
 
 RewriteRule ^secret/.*\.php - [F,L,NC]
 
-RewriteRule "^$" "index.php"
+RewriteRule "^([a-zA-Z0-9]+)$" "?page=$1"
 
-RewriteRule "^([a-zA-Z0-9]+)$" "index.php?page=$1"
-
+RewriteRule ^infoClass/([0-9]+)$ "?page=infoClass"

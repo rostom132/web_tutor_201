@@ -125,6 +125,18 @@ export const arrLang = {
             "CHANGE": "Change",
             "CANCEL": "Cancel",
             "UPDATE": "Update"
+        },
+        "INFO_CLASS": {
+            "UPLOAD_PARENT": " Poster: ",
+            "UPLOAD_DATE": "  Post date: ",
+            "SUBJECT": "  Subject: ",
+            "GENDER_TUTOR": "  Tutor: ",
+            "NO_STUDENT": "  Number of student: ",
+            "SCHEDULE": "  Schedule: ",
+            "LESSON": " lesson/week ",
+            "FEE": "  Tuition fee: ",
+            "DES": "  Description ",
+            "BUTTON": " REGISTER "
         }
 
     },
@@ -235,6 +247,18 @@ export const arrLang = {
             "CHANGE": "Thay đổi",
             "CANCEL": "Hủy",
             "UPDATE": "Cập nhật",
+        },
+        "INFO_CLASS": {
+            "UPLOAD_PARENT": "  Người đăng: ",
+            "UPLOAD_DATE": "  Ngày đăng: ",
+            "SUBJECT": "  Môn học: ",
+            "GENDER_TUTOR": "  Tìm gia sư: ",
+            "NO_STUDENT": "  Số học viên kèm: ",
+            "SCHEDULE": "  Thời lượng: ",
+            "LESSON": " buổi/tuần ",
+            "FEE": "  Học phí: ",
+            "DES": "  Miêu tả ",
+            "BUTTON": " ĐĂNG KÝ "
         }
     }
 };

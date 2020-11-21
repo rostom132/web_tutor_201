@@ -7,7 +7,8 @@
                 'bodyBanner',
                 'formLogin',
                 'formRegister',
-                'aboutUs'
+                'aboutUs',
+                'infoClass'
             ),
             'tutor' => array (
                 'infoTutor',
