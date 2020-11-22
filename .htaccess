@@ -1,5 +1,5 @@
 Options -Indexes
-DirectoryIndex /assignment_1/application/controllers/index.php
+DirectoryIndex /web_tutor_201/application/controllers/index.php
 RewriteEngine On
  
 RewriteRule ^application/models/.*\.php - [F,L,NC]

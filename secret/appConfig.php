@@ -18,6 +18,6 @@
             'noReply' => 'noreply@tkteducation.com',
             'displayName' => 'TKT Education',
         ),
-        'domain'=> 'http://127.0.0.1/assignment_1/'
+        'domain'=> 'http://127.0.0.1/web_tutor_201/'
     );
 ?>

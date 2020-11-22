@@ -44,6 +44,10 @@
 
             $role = $input_data['type'];
             if (User::isUsernameExist($input_data[$role]['username'])) return 'Username Existed!!';
+            
+            if ($role == 'admin') {
+                if (!Admin::checkAdminCode($input_data['code'])) return 'Wrong Admin security code!';
+            }
 
             $register_info = $input_data[$role];
             unset($register_info['email']);
@@ -60,6 +64,8 @@
                             return 'fail';
                         break;
                     case "admin":
+                        if (!Admin::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email'])))
+                            return 'fail';
                         break;
                 }
             };
