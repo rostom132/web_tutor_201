@@ -15,6 +15,11 @@ export function translate(lang) {
     });
 }
 
+export function getText(key) {
+    var $arrAttr = key.split(".");
+    return arrLang[localStorage.getItem('stored_lang')][$arrAttr[0]][$arrAttr[1]];
+}
+
 function translateLang() {
     var currentLang = localStorage.getItem("stored_lang");
     var language_flag = document.getElementById("language_flag");
