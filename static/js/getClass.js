@@ -1,6 +1,6 @@
 //depencies
-import {translate} from "./translate.js";
-import * as constants from "./constant/district_ward.js";
+import {translate, getText} from "./translate.js";
+import * as constants from "./constant/city.js";
 // Global var
 var class_num;
 var page_num;
@@ -24,14 +24,15 @@ function createTemplate(class_list) {
     var student_icon = "./static/images/icon/student.png";
     for(let i = 0; i < class_list.length; i++)
     {
-        var class_title = class_list[i]['description'];
+        var class_title = class_list[i]['topic'];
+        var class_description = class_list[i]['description']
         var dist;
         $.each(constants.cityData.districts, function(index, element){
             if(class_list[i]['district'] == element.id) {
                 dist = element.name;
             }
         });
-        var salary = class_list[i]['salary'];
+        var salary = class_list[i]['salary_per_lesson'];
         var student_no = class_list[i]['no_students'];
         var template = document.createElement('div');
         var gender;
@@ -44,19 +45,16 @@ function createTemplate(class_list) {
         else {
             gender = 'CLASSINFO.GENDER_BOTH';
         }
+        var ava = class_list[i].ava;
         template.setAttribute('class', 'row-wrapper shadow-box');
-        template.innerHTML = `<div class="ribbon">
+        template.innerHTML = 
+        `
+        <div class="ribbon">
         <p>ENG</p>
         </div>
         <div class="row">
-            <div class="col-sm-2">
-                <div class="class-left-col">
-                    <p style="height: 50px;">
-                        <img src= ${default_avatar}  alt="" class="class-avatar">
-                    </p>
-                    <p>Anonimous</p>
-                    <p>10/12/2020</p>
-                </div>
+            <div class="col-sm-2 center-ava">
+                        <img src= ${ava} alt="" class="class-avatar">
             </div>
             <div class="col-sm-6">
                 <div class="class-info-col">
@@ -65,26 +63,25 @@ function createTemplate(class_list) {
                         <span id="class-title">${class_title}</span>
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit hahahahahahaahahasdasdasdasasdasdasdasdaSDasdaSDasdaSDasdaS...
+                        ${class_description}
                     </p>
                     <span class="group-span">Toán(ENG)</span>
                     <span class="group-span"><span></span> ${dist}</span>
-                    <span class="group-span lang" key="${gender}" id="gender_tag"></span>
+                    <span class="group-span lang" key="${gender}" id="gender_tag">${getText(gender)}</span>
                 </div>
             </div>
             <div class="col-sm-2" style="text-align:center">
                 <img src=${money_icon} style="width: 30px; height: 30px;">
-                <div style="display:-webkit-inline-box;"><p style="font-size:1.5em; color:gold">${String(salary).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</p><p class="lang" key="CLASSINFO.SALARY" id="salary"></p></div>
+                <div><span style="font-size:1.5em; color:gold">${String(salary).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</span><span class="lang" key="CLASSINFO.SALARY" id="salary">${getText("CLASSINFO.SALARY")}</span></div>
             </div>
             <div class="col-sm-2" style="text-align:center">
                 <img src=${student_icon} style="width: 30px; height: 30px;">
                 <p style="font-size:25px; bold ;color:#ff6600">${student_no}</p>
             </div>
-        </div>`;
+        </div>
+        `;
         document.getElementById('show').appendChild(template);
     }
-    let current_lang = localStorage.getItem('stored_lang');
-    translate(current_lang);
 
 }
 //Render pagination part
@@ -93,26 +90,23 @@ function pagination(page_num) {
     page.setAttribute('class', 'pagination');
     page.setAttribute('id', 'pagination');
     document.getElementById('page-wrapper').appendChild(page);
-    var num = document.createElement('button');
-    num.setAttribute('type', 'button');
+    var num = document.createElement('a');
+    num.setAttribute('href', pageButtonURL(parseInt(getURLParam()['page'])-1));
     num.setAttribute('id','prev');
     num.innerHTML='&laquo;';
     document.getElementById('pagination').appendChild(num);
-    document.getElementById('prev').addEventListener('click', function(){prevPage();checkPagingButton()});
     for(let i = 0; i < page_num; i++) {
-        num = document.createElement('button');
+        num = document.createElement('a');
         num.setAttribute('id', i + 1);
-        num.setAttribute('button', 'button');
+        num.setAttribute('href', pageButtonURL(i+1));
         num.innerHTML = i + 1;
         document.getElementById('pagination').appendChild(num);
-        document.getElementById(i+1).addEventListener('click', function(){getPage(this.id);checkPagingButton()});
     }
-    num = document.createElement('button');
-    num.setAttribute('button', 'button');
+    num = document.createElement('a');
+    num.setAttribute('href', pageButtonURL(parseInt(getURLParam()['page'])+1));
     num.setAttribute('id','next');
     num.innerHTML = '&raquo;';
     document.getElementById('pagination').appendChild(num);
-    document.getElementById('next').addEventListener('click', function(){nextPage();checkPagingButton()});
 }   
 
 //Run at beginning with jquery
@@ -125,16 +119,22 @@ export function initClass() {
     document.getElementById('show').appendChild(loading);
     ajax.open(method, url, true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.send("init=1&current=1");
-    current_page = 1;
+    current_page = getURLParam()['page'];
+    ajax.send("init=1&current="+current_page);
     ajax.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('show').removeChild(loading);
             var obj = JSON.parse(this.responseText);
+            console.log(obj);
+            if(obj == 0) {
+                alert("No class found!");
+                return;
+            }      
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
             for (let i = 0; i < obj[2].length; i++) {
+                obj[2][i].ava = obj[3][i];
                 class_list.push(obj[2][i]);
             }
             renderClassNum(class_num);
@@ -164,10 +164,7 @@ export function filterClass(dist, sub, gender) {
     filterVal['district'] = String(dist);
     filterVal['subject'] = String(sub);
     filterVal['gender_of_tutor'] = String(gender);
-    console.log(filterVal);
     if(filterVal['district'] == "-1" && filterVal['subject'] == "-1" && filterVal['gender_of_tutor'] == "-1") {
-        console.log('day');
-        document.getElementById('page-wrapper').removeChild(document.getElementById('pagination'));
         initClass();
         return;
     }
@@ -183,15 +180,21 @@ export function filterClass(dist, sub, gender) {
                     return;
                 }
                 var obj = JSON.parse(this.responseText);
+                console.log(obj);
+                if(obj[0] == 0) {
+                    alert("No class found!");
+                    return;
+                }      
                 class_num = obj[0];
                 page_num = obj[1];
                 class_list = [];
                 for (let i = 0; i < obj[2].length; i++) {
+                    obj[2][i].ava = obj[3][i];
                     class_list.push(obj[2][i]);
                 }
                 renderClassNum(class_num);
                 createTemplate(class_list);
-                document.getElementById('page-wrapper').removeChild(document.getElementById('pagination'));
+
                 pagination(page_num);
                 document.getElementById(current_page).setAttribute('class', 'active');
                 checkPagingButton();
@@ -200,105 +203,9 @@ export function filterClass(dist, sub, gender) {
     }
 }
 
-//Render each specific page
-export function getPage(mess) {
-    var nodes = document.getElementById('pagination').childNodes;
-    for(var i=0; i<nodes.length; i++) {
-        nodes[i].setAttribute('class', '');
-    }
-    document.getElementById(mess).setAttribute('class', 'active');
-    var ajax = new XMLHttpRequest();
-    var method = "GET";
-    var url = "./application/controllers/ClassInfo.php?current="+mess;
-    var loading = document.createElement('div');
-    loading.setAttribute('class', 'loader');
-    document.getElementById('show').appendChild(loading);
-    current_page = mess;
-    console.log(current_page);
-    ajax.open(method, url, true);
-    ajax.send();
-    ajax.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('show').removeChild(loading);
-            var obj = JSON.parse(this.responseText);
-            class_list = [];
-            for (i = 0; i < obj[2].length; i++) {
-                class_list.push(obj[2][i]);
-            }
-            createTemplate(class_list);
-        }
-    };
-}
-//Render next page
-function nextPage() {
-    var nodes = document.getElementById('pagination').childNodes;
-    for(var i=0; i<nodes.length; i++) {
-        nodes[i].setAttribute('class', '');
-    }
-    var ajax = new XMLHttpRequest();
-    var method = "POST";
-    var url = "./application/controllers/ClassInfo.php";
-    var loading = document.createElement('div');
-    loading.setAttribute('class', 'loader');
-    document.getElementById('show').appendChild(loading);
-    ajax.open(method, url, true);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    
-    current_page = parseInt(current_page);
-    if(current_page < page_num) {
-        current_page += 1;
-    }
-    document.getElementById(current_page).setAttribute('class', 'active');
-    console.log(current_page);
-    ajax.send("init=2&current="+current_page);
-    ajax.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('show').removeChild(loading);
-            var obj = JSON.parse(this.responseText);
-            class_list = [];
-            for (i = 0; i < obj[2].length; i++) {
-                class_list.push(obj[2][i]);
-            }
-            createTemplate(class_list);
-        }
-    };
-}
-//Render previous page
-function prevPage() {
-    var nodes = document.getElementById('pagination').childNodes;
-    for(var i=0; i<nodes.length; i++) {
-        nodes[i].setAttribute('class', '');
-    }
-    var ajax = new XMLHttpRequest();
-    var method = "POST";
-    var url = "./application/controllers/ClassInfo.php";
-    var loading = document.createElement('div');
-    loading.setAttribute('class', 'loader');
-    document.getElementById('show').appendChild(loading);
-    ajax.open(method, url, true);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    if(current_page > 1) {
-        current_page -= 1;
-    }
-    document.getElementById(current_page).setAttribute('class', 'active');
-    console.log(current_page);
-    ajax.send("init=3&current="+current_page);
-    ajax.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('show').removeChild(loading);
-            var obj = JSON.parse(this.responseText);
-            class_list = [];
-            for (i = 0; i < obj[2].length; i++) {
-                class_list.push(obj[2][i]);
-            }
-            createTemplate(class_list);
-        }
-    };
-}
 
 //Check next, prev disable button
 function checkPagingButton() {
-    
     if(current_page == 1) {
         document.getElementById('prev').style.visibility = 'hidden';
         document.getElementById('next').style.visibility = 'visible';
@@ -316,6 +223,35 @@ function checkPagingButton() {
         document.getElementById('next').style.visibility = 'hidden';
     }
 }
+export function getURLParam() {
+    
+    let urlString  = window.location.href;
+    let url = new URL(urlString);
+    let page = url.searchParams.get("page");
+    let dist = url.searchParams.get("dist");
+    let sub = url.searchParams.get("sub");
+    let gender = url.searchParams.get("gender");
+    return {page, dist, sub, gender};
+}
+function pageButtonURL(page) {
+    let param = getURLParam();
+    if(param['gender']!=null||param['dist']!=null||param['sub']!=null) {
+        return '?page='+page+"&dist="+$("#edit-place").val()+"&sub="+$("#edit-subject").val()+"&gender="+$("#edit-gender").val();
+    }
+    else return '?page='+page;
+}
+export function keepFilterValue() {
+    let param = getURLParam();
+    if(param['gender']==null||param['dist']==null||param['sub']==null) {
+        document.getElementById("edit-place").value = -1;
+        document.getElementById("edit-subject").value = -1;
+        document.getElementById("edit-gender").value = -1;
+    }
+    else {
+        document.getElementById("edit-place").value = getURLParam()['dist'];
+    }
+    
+} 
 export function getClassFiltered(dist, sub, gender) {
     alert(dist+ " " + sub + " " + gender); 
 }
