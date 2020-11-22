@@ -13,19 +13,19 @@
                     <div id="formWrapper">
 
                         <div id="regFormName">
-                            <h1>Registration Form</h1>
+                            <h1 class="lang" key="USER_REGISTER.TITLE"></h1>
                         </div>
                         <!--Draft adding new features; begin-->
                         <div class="tabHeader">
                             <div class="row">
                                 <div class="col-4" style="padding-right: 0%;">
-                                    <button class="tabButton active" id="tabH1">Parents</button>
+                                    <button class="tabButton active lang" id="tabH1" key="USER_REGISTER.PARENT"></button>
                                 </div>
                                 <div class="col-4 padding-zero">
-                                    <button class="tabButton" id="tabH2">Tutor</button>
+                                    <button class="tabButton lang" id="tabH2" key="USER_REGISTER.TUTOR"></button>
                                 </div>
                                 <div class="col-4" style="padding-left: 0%;">
-                                    <button class="tabButton" id="tabH3">Admin</button>
+                                    <button class="tabButton lang" id="tabH3" key="USER_REGISTER.ADMIN"></button>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <form class="regFormBodyForm active" id="formParentAndTutor">
                                 <div class="row row-margin">
                                     <div class="col-4 margin-label">
-                                        <h2 class="regFormRow">Username</h2>
+                                        <h2 class="regFormRow lang" key="USER_REGISTER.USER"></h2>
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="username" type="text" name="userName" placeholder="Please enter your new username here">
@@ -45,18 +45,18 @@
 
                                 <div class="row row-margin">
                                     <div class="col-4 margin-label">
-                                        <h2 class="regFormRow">Email</h2>
+                                        <h2 class="regFormRow lang" key="USER_REGISTER.EMAIL"></h2>
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="email" type="email" name="email" placeholder="Please enter your email here">
                                         <p class="validation" id="checkEmail"></p>
                                     </div>
-                                    <div class="col-2"> <button id="email_button" style="background-color: transparent;" type="button"><i class="fas fa-user-check"></i></button></div>
+                                    <div class="col-2"><div class="app" id="app-user"><button id="email_button" style="background-color: transparent;" type="button"><i class="rowContact fas fa-user-check"></i></button></div></div>
                                 </div>
 
                                 <div class="row row-margin">
                                     <div class="col-4 margin-label">
-                                        <h2 class="regFormRow">Token</h2>
+                                        <h2 class="regFormRow lang" key="USER_REGISTER.TOKEN"></h2>
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="token" type="number" name="token" placeholder="Please enter the code you receive from mail here">
@@ -67,7 +67,7 @@
 
                                 <div class="row row-margin">
                                     <div class="col-4 margin-label">
-                                        <h2 class="regFormRow">Password</h2>
+                                        <h2 class="regFormRow lang" key="USER_REGISTER.PASS"></h2>
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="password" type="password" name="password" placeholder="Please enter your password here">
@@ -78,7 +78,7 @@
 
                                 <div class="row row-margin">
                                     <div class="col-4 margin-label">
-                                        <h2 class="regFormRow">Confirm Password</h2>
+                                        <h2 class="regFormRow lang" key="USER_REGISTER.PASS_CONF"></h2>
                                     </div>
                                     <div class="col-6">
                                         <input class="regFormRowInput" id="confirm-password" type="password" name="rePassword" placeholder="Please type again your password here">
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-2"></div>
                                 </div>
-                                <button type="button" id="continue" class="regFormRowBtn1" disabled>Continue</button>
+                                <button type="button" id="continue" class="regFormRowBtn1 lang" key="USER_REGISTER.NEXT" disabled></button>
                             </form>
                         </div>
 
@@ -114,11 +114,12 @@
                                         <input class="regFormRowInput" id="email-admin" type="email" name="email" placeholder="Please enter your email here">
                                         <p class="validation" id="checkEmail-admin"></p>
                                     </div>
-                                    <div class="col-2">
-                                        <button style="background-color: transparent;" name="Send message to your email!!" type="button" id="email_admin_button">
-                                            <i class="fas fa-user-check" title="hello!"></i>
-                                            
-                                        </button>
+                                    <div class="col-2" >
+                                        <div class="app" id="app-admin">
+                                            <button id="email_admin_button" style="background-color: transparent;" type="button">
+                                                <i class="rowContact fas fa-user-check"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 

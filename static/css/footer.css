@@ -97,7 +97,7 @@
     padding-top: 10px;
 }
 
-.fas {
+.rowContact {
     font-size: 1.2rem;
     background: #1a1a1a;
     height: 40px;
@@ -111,7 +111,7 @@
     justify-content: center;
 }
 
-.fas:hover {
+.rowContact:hover {
     background: #4BBADC;
 }
 
