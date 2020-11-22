@@ -6,6 +6,8 @@ RewriteRule ^application/models/.*\.php - [F,L,NC]
 
 RewriteRule ^secret/.*\.php - [F,L,NC]
 
-RewriteRule "^([a-zA-Z0-9]+)$" "?page=$1"
-
 RewriteRule ^infoClass/([0-9]+)$ "?page=infoClass"
+
+RewriteRule ^infoClass$ "?page=bodyBanner"
+
+RewriteRule "^([a-zA-Z0-9]+)$" "?page=$1"
