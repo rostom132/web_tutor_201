@@ -202,8 +202,8 @@ function setCircleDasharray(timeLeft, TIME_LIMIT) {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 function emailButton() {
-    let button_user = `<button id="email_button" style="background-color: transparent;" type="button"><i class="fas fa-user-check"></i></button>`;
-    let button_admin = `<button id="email_admin_button" style="background-color: transparent;" type="button"><i class="fas fa-user-check"></i></button>`;
+    let button_user = `<button id="email_button" style="background-color: transparent;" type="button"><i class="rowContact fas fa-user-check"></i></button>`;
+    let button_admin = `<button id="email_admin_button" style="background-color: transparent;" type="button"><i class="rowContact fas fa-user-check"></i></button>`;
     document.querySelector('#app-user').innerHTML = button_user;
     document.querySelector('#app-admin').innerHTML = button_admin;
     
