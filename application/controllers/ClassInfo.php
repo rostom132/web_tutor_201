@@ -1,21 +1,33 @@
 <?php
 include_once '../models/class.php';
+include_once "./common/getAvatar.php";
 
-
+function getAllAvatar($class_arr) {
+    $arr = array();
+    foreach($class_arr as $user) {
+        array_push($arr, getUserAvatar($user['user_id']));
+    }
+    return $arr;
+}
 function getAllClass($current_page) {
 
     $total_records = Classs::getNumberOfClass();
-    $limit = 2;
+    $limit = 1;
     $total_page = ceil($total_records / $limit);
     $start = ($current_page - 1) * $limit;
     $class_arr = Classs::getLimitClasses($current_page, $limit);
+    $avatar_arr = getAllAvatar($class_arr);
     if(sizeof($class_arr) > 0) {
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
         array_push($data, $class_arr);
+        array_push($data, $avatar_arr);
+        echo(json_encode($data));
     }
-    echo(json_encode($data));
+    else {
+        echo("0");
+    }
 }
 
 
@@ -32,11 +44,13 @@ function getClassWithFilter($filterVal) {
     $total_page = ceil($total_records / $limit);
     $start = (1 - 1) * $limit;
     $class_arr = Classs::getLimitClassesFilter($filterArr, 1, $limit);
+    $avatar_arr = getAllAvatar($class_arr);
     if(sizeof($class_arr) > 0) {
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
         array_push($data, $class_arr);
+        array_push($data, $avatar_arr);
         echo(json_encode($data));
     }
     else {
