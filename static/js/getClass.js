@@ -113,7 +113,7 @@ function pagination(page_num) {
 export function initClass() {
     var ajax = new XMLHttpRequest();
     var method = "POST";
-    var url = "./application/controllers/ClassList.php";
+    var url = "./application/controllers/classList.php";
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
