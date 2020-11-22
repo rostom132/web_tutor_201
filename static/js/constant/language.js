@@ -156,6 +156,17 @@ export const arrLang = {
             "TOKEN": "Please enter the token",
             "PASS": "Please enter your password",
             "PASS_CONF": "Please re-enter your password",
+        },
+        "ADMIN_RULE": {
+            "RULE_TITLE": "ADMIN RULE",
+            "FIRST_RULE_LABEL": "FIRST RULE: ",
+            "FIRST_RULE": "- Maintaining web each months, trying to contact maintaince man when the web has trouble.",
+            "SECOND_RULE_LABEL": "SECOND RULE: ",
+            "SECOND_RULE": "- Good attitude with while interacting with customer and peers.",
+            "THIRD_RULE_LABEL": "THIRD RULE: ",
+            "THIRD_RULE": "- Always online on time.",
+            "FOURTH_RULE_LABEL": "THIRD RULE: ",
+            "FOURTH_RULE": "- Phone number for main admin: 0917565059."
         }
     },
     "vn": {
@@ -296,6 +307,17 @@ export const arrLang = {
             "TOKEN": "Vui lòng nhập token",
             "PASS": "Vui lòng nhập mật khẩu",
             "PASS_CONF": "Vui lòng nhập lại mật khẩu",
+        },
+        "ADMIN_RULE": {
+            "RULE_TITLE": "QUY ĐỊNH ADMIN",
+            "FIRST_RULE_LABEL": "QUY ĐỊNH 1: ",
+            "FIRST_RULE": "- Bảo trì web mỗi tháng một lần, thử liên lạc với nhân viên bảo trì khi web có vấn đề.",
+            "SECOND_RULE_LABEL": "QUY ĐỊNH 2: ",
+            "SECOND_RULE": "- Thái độ tốt khi tương tác với khách hàng và đồng nghiệp.",
+            "THIRD_RULE_LABEL": "QUY ĐỊNH 3: ",
+            "THIRD_RULE": "- Luôn online đúng giờ.",
+            "FOURTH_RULE_LABEL": "QUY ĐỊNH 4: ",
+            "FOURTH_RULE": "- Số quản lý chính: 0917565059."
         }
 
     }

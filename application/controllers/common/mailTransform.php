@@ -56,9 +56,9 @@
             
                 $mail->send();
             } catch (Exception $e) {
-                return false;
+                return "Message could not be sent: $mail->ErrorInfo";
             }
-            return true;
+            return 'success';
         }
 
     }

@@ -10,6 +10,11 @@
                 'aboutUs',
                 'infoClass'
             ),
+            'loginCommon' => array (
+                'bodyBanner',
+                'aboutUs',
+                'infoClass'
+            ),
             'tutor' => array (
                 'infoTutor',
                 'registerClass'
