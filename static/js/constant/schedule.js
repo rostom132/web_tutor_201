@@ -32,6 +32,49 @@ export const TimeSchedule = {
     "23:00:00": "23:00",
 }
 
+export const LessonPerWeek = {
+    "en": {
+        "1": "1 lesson",
+        "2": "2 lessons",
+        "3": "3 lessons",
+        "4": "More than 4 lessons",
+    },
+    "vn": {
+        "1": "1 buổi",
+        "2": "2 buổi",
+        "3": "3 buổi",
+        "4": "Từ 4 buổi",
+    }
+}
+
+export const HourPerLesson = {
+    "en": {
+        "1:30:00": "1.5 hours",
+        "2:00:00": "2 hours",
+        "2:30:00": "2.5 hours",
+        "3:00:00": "3 hours",
+    },
+    "vn": {
+        "1:30:00": "1.5 giờ",
+        "2:00:00": "2 giờ",
+        "2:30:00": "2.5 giờ",
+        "3:00:00": "3 giờ",
+    }
+}
+
+export const GenderOfTutor = {
+    "en": {
+        "M": "Male",
+        "F": "Female",
+        "B": "Male/Femal",
+    },
+    "vn": {
+        "M": "Nam",
+        "F": "Nữ",
+        "B": "Nam/Nữ",
+    }
+}
+
 export const DateScheduleObj = {
     "MON": {
         "TimeSlot": [],
