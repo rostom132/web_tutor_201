@@ -39,15 +39,16 @@
 }
 .class-avatar {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
-.class-left-col {
+
+.center-ava {
+    margin-top: auto;
+    margin-bottom: auto;
     text-align: center;
 }
-.class-left-col>p {
-    margin-bottom: 0%;
-}
+
 .class-info-col>p {
     margin-bottom: 0%;
     overflow: hidden;
@@ -88,18 +89,18 @@
     margin: auto;
     margin-top: 5px;
   }
-.pagination > button {
+.pagination > a {
 color: black;
 float: left;
 padding: 8px 16px;
 text-decoration: none;
 }
-.pagination button.active {
+.pagination a.active {
     background-color: #4CAF50;
     color: white;
   }
   
-.pagination button:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {background-color: #ddd;}
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */

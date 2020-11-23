@@ -92,7 +92,7 @@ export const arrLang = {
             "DISTRICT_FILTER": "-District-",
             "SUBJECT_FILTER": "-Subject-",
             "GENDER_FILTER": "-Gender-",
-            "CLASS": " class(s)",
+            "CLASS": " class(es)",
             "CLASS_COUNT": "You have ",
             "FILTER_BUTTON": "Filter",
             "SALARY": "/lesson",
@@ -123,6 +123,25 @@ export const arrLang = {
             "CANCEL": "Cancel",
             "UPDATE": "Update"
         },
+        "USER_REGISTER": {
+            "TITLE": "Registration Form",
+            "PARENT": "Parents",
+            "TUTOR": "Tutor",
+            "ADMIN": "Admin",
+            "USER": "Username",
+            "EMAIL": "Email",
+            "TOKEN": "Token",
+            "PASS": "Password",
+            "PASS_CONF": "Confirm Password",
+            "NEXT": "Continue",
+        },
+        "USER_REGISTER_PLACEHOLDER": {
+            "USER": "Please enter your username",
+            "EMAIL": "Please enter your email",
+            "TOKEN": "Please enter the token",
+            "PASS": "Please enter your password",
+            "PASS_CONF": "Please re-enter your password",
+        }
     },
     "vn": {
         "COMMON": {
@@ -229,6 +248,25 @@ export const arrLang = {
             "CANCEL": "Hủy",
             "UPDATE": "Cập nhật",
         },
+        "USER_REGISTER": {
+            "TITLE": "Đăng ký",
+            "PARENT": "Phụ huynh",
+            "TUTOR": "Giáo viên",
+            "ADMIN": "Quản trị",
+            "USER": "Tên người dùng",
+            "EMAIL": "Email",
+            "TOKEN": "Token",
+            "PASS": "Mật khẩu",
+            "PASS_CONF": "Xác nhận mật khẩu",
+            "NEXT": "Tiếp tục",
+        },
+        "USER_REGISTER_PLACEHOLDER": {
+            "USER": "Vui lòng nhập tên người dùng",
+            "EMAIL": "Vui lòng nhập email",
+            "TOKEN": "Vui lòng nhập token",
+            "PASS": "Vui lòng nhập mật khẩu",
+            "PASS_CONF": "Vui lòng nhập lại mật khẩu",
+        }
     }
 };
 
