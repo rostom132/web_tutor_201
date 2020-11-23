@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./static/css/slideNav.css">
-<script src="./static/js/slideNav.js"></script>
+<script type="module" src="./static/js/navbar.js"></script>
 
 <nav id="navbar" class="navbar-wrapper">
     <div class="container-fluid">
@@ -10,49 +10,45 @@
                 </a>
             </div>
             <div class="col-8 offset-1 text-right">
-                <ul>
+                <ul id="navbar__options">
                     <li class="navbar__li">
-                        <a href="#" class="navbar-wrapper__link">
-                            <span class="lang" key="COMMON.NAVBAR_LINK1"></span>
+                        <a href="bodyBanner" class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_HOMEPAGE"></span>
                         </a>
-                        <div class="dropdown-container">
-                            <ul>
-                                <li>
-                                    <a href="#" class="dropdown__item">Link 1</a>
-                                    <div class="side-dropdown">
-                                        <ul>
-                                            <li><a href="#" class="side-dropdown__item">Sublink 1</a></li>
-                                            <li><a href="#" class="side-dropdown__item">Sublink 2</a></li>
-                                            <li><a href="#" class="side-dropdown__item">Sublink 3</a></li>
-                                            <li><a href="#" class="side-dropdown__item">Sublink 4</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="#" class="dropdown__item">Link 2</a></li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="navbar__li h-100">
+                        <a href="aboutUs" class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_ABOUTUS"></span>
+                        </a>
                     </li>
                     <li class="navbar__li">
-                        <a href="#" class="navbar-wrapper__link">
-                            <span class="lang" key="COMMON.NAVBAR_LINK2"></span>
+                        <a href="registerClass" class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_REGISTERCLASS"></span>
                         </a>
-                        <div class="dropdown-container">
-                            <ul>
-                                <li><a href="#" class="dropdown__item">Link 1</a></li>
-                                <li><a href="#" class="dropdown__item">Link 2</a></li>
-                            </ul>
-                        </div>
                     </li>
-                    <li>
-                        <a class="dnf-avatar">
+                    <li class="navbar__li">
+                        <a href="classView" class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_CLASSESLIST"></span>
+                        </a>
+                    </li>
+                    <li class="navbar__li">
+                        <a role="button" id="logout-button" class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_LOGOUT"></span>
+                        </a>
+                    </li>
+                    <li class="navbar__li">
+                        <a>
                             <div id="language_flag" class="flag vn_flag">
                         </a>
                     </li>
-                    <li>
-                        <a href="#"><span class="lang contact-us" key="COMMON.NAVBAR_LINK5"></span></a>
+                    <li class="navbar__li">
+                        <a href="contact"><span class="lang contact-us" key="COMMON.NAVBAR_CONTACT"></span></a>
                     </li>
-                    <li class="navbar_li">
-                        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+                    <li class="navbar__li">
+                        <img href="infoParent" id="ava" src="https://image.ibb.co/n7oTvU/logo_white.png" class="flag">
+                    </li>
+                    <li class="navbar__li">
+                        <span style="padding-left: 20px; font-size:30px;cursor:pointer" id="hamberger-navbar">
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </span>
                     </li>
@@ -63,9 +59,10 @@
     </div>
 </nav>
 <div id="mySidenav" class="sidenav">
-    <a class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="infoParent">Infomation</a>
-    <a href="#">Classes&nbsp;List</a>
-    <a href="#">Contact</a>
+    <a class="closebtn" id="hamberger-navbar-close">&times;</a>
+    <a href="aboutUs" class="lang" key="COMMON.NAVBAR_ABOUTUS"></a>
+    <a href="infoParent" class="lang" key="COMMON.NAVBAR_PROFILE"></a>
+    <a href="registerClass" class="lang" key="COMMON.NAVBAR_REGISTERCLASS"></a>
+    <a href="classView" class="lang" key="COMMON.NAVBAR_CLASSESLIST"></a>
+    <a href="contact" class="lang" key="COMMON.NAVBAR_CONTACT"></a>
 </div>

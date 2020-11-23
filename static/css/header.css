@@ -57,6 +57,10 @@
     background-color: white;
 }
 
+ul {
+    margin-bottom: 0 !important;
+}
+
 .logo {
     width: 40%;
     height: auto;
@@ -84,7 +88,6 @@
 
 .navbar-wrapper ul {
     padding: 0;
-    margin-top: 20px;
 }
 
 .navbar-wrapper ul li {
@@ -95,17 +98,16 @@
 
 .navbar__li {
     padding-bottom: 30px;
-    margin-top: 20px;
 }
 
 .sticky-li {
-    padding-bottom: 10px !important;
-    margin-top: 5px !important;
+    top: -10px !important;
+    padding-bottom: 0px !important;
 }
 
 .navbar-wrapper ul li a {
     position: relative;
-    padding: 5px 20px;
+    padding: 0px 20px;
     color: black;
     text-transform: uppercase;
     font-size: .8125rem;
@@ -328,4 +330,10 @@
 .active {
     opacity: 1;
     visibility: visible;
+}
+
+.user-ava {
+    width: 50%;
+    height: auto;
+    padding-right: 20px;
 }
