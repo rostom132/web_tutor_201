@@ -126,6 +126,18 @@ export const arrLang = {
             "CANCEL": "Cancel",
             "UPDATE": "Update"
         },
+        "INFO_CLASS": {
+            "UPLOAD_PARENT": " Poster: ",
+            "UPLOAD_DATE": "  Post date: ",
+            "SUBJECT": "  Subject: ",
+            "GENDER_TUTOR": "  Tutor: ",
+            "NO_STUDENT": "  Number of student: ",
+            "SCHEDULE": "  Schedule: ",
+            "LESSON": " lesson/week ",
+            "FEE": "  Tuition fee: ",
+            "DES": "  Description ",
+            "BUTTON": " REGISTER "
+        },
         "USER_REGISTER": {
             "TITLE": "Registration Form",
             "PARENT": "Parents",
@@ -144,6 +156,17 @@ export const arrLang = {
             "TOKEN": "Please enter the token",
             "PASS": "Please enter your password",
             "PASS_CONF": "Please re-enter your password",
+        },
+        "ADMIN_RULE": {
+            "RULE_TITLE": "ADMIN RULE",
+            "FIRST_RULE_LABEL": "FIRST RULE: ",
+            "FIRST_RULE": "- Maintaining web each months, trying to contact maintaince man when the web has trouble.",
+            "SECOND_RULE_LABEL": "SECOND RULE: ",
+            "SECOND_RULE": "- Good attitude with while interacting with customer and peers.",
+            "THIRD_RULE_LABEL": "THIRD RULE: ",
+            "THIRD_RULE": "- Always online on time.",
+            "FOURTH_RULE_LABEL": "THIRD RULE: ",
+            "FOURTH_RULE": "- Phone number for main admin: 0917565059."
         }
     },
     "vn": {
@@ -254,6 +277,18 @@ export const arrLang = {
             "CANCEL": "Hủy",
             "UPDATE": "Cập nhật",
         },
+        "INFO_CLASS": {
+            "UPLOAD_PARENT": "  Người đăng: ",
+            "UPLOAD_DATE": "  Ngày đăng: ",
+            "SUBJECT": "  Môn học: ",
+            "GENDER_TUTOR": "  Tìm gia sư: ",
+            "NO_STUDENT": "  Số học viên kèm: ",
+            "SCHEDULE": "  Thời lượng: ",
+            "LESSON": " buổi/tuần ",
+            "FEE": "  Học phí: ",
+            "DES": "  Miêu tả ",
+            "BUTTON": " ĐĂNG KÝ ",
+        },
         "USER_REGISTER": {
             "TITLE": "Đăng ký",
             "PARENT": "Phụ huynh",
@@ -272,6 +307,17 @@ export const arrLang = {
             "TOKEN": "Vui lòng nhập token",
             "PASS": "Vui lòng nhập mật khẩu",
             "PASS_CONF": "Vui lòng nhập lại mật khẩu",
+        },
+        "ADMIN_RULE": {
+            "RULE_TITLE": "QUY ĐỊNH ADMIN",
+            "FIRST_RULE_LABEL": "QUY ĐỊNH 1: ",
+            "FIRST_RULE": "- Bảo trì web mỗi tháng một lần, thử liên lạc với nhân viên bảo trì khi web có vấn đề.",
+            "SECOND_RULE_LABEL": "QUY ĐỊNH 2: ",
+            "SECOND_RULE": "- Thái độ tốt khi tương tác với khách hàng và đồng nghiệp.",
+            "THIRD_RULE_LABEL": "QUY ĐỊNH 3: ",
+            "THIRD_RULE": "- Luôn online đúng giờ.",
+            "FOURTH_RULE_LABEL": "QUY ĐỊNH 4: ",
+            "FOURTH_RULE": "- Số quản lý chính: 0917565059."
         }
     }
 };

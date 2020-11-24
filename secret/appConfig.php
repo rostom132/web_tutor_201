@@ -18,9 +18,6 @@
             'port' => 465,
             'noReply' => 'noreply@tkteducation.com',
             'displayName' => 'TKT Education',
-            'topic' => 'TKT email verification!',
-            'body' => 'Please use the below code to verify your account: ',
-            'altBody' => 'Please use the below code to verify your account: ',
         ),
         'domain'=> 'http://127.0.0.1/web_tutor_201/'
     );
