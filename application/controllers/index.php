@@ -3,7 +3,6 @@
 
     include '../../secret/config.php';
     include "./common/autoAuthen.php";
-    include "../views/header.html";
 
     $page_content = array();
 
@@ -13,29 +12,39 @@
     // $_SESSION['username'] = 'tienn';
     // $_SESSION['user_type'] = 'tutor';
 
-    
+    array_push($page_content , "../views/header.html");
     if (isset($_SESSION['user_type'])){
         $nav = $_SESSION['user_type'];
         array_push($page_content ,"../views/navbar_$nav.html");
     } else {
         array_push($page_content , "../views/navbar.html");
     }
-    
-    if (isset($_GET['page']) && in_array($_GET['page'],Config::getPermission()['common'])){
-        $page = $_GET['page'];
-        array_push($page_content , "../views/$page.html");
-        if (in_array($_GET['page'],Config::get()['pageGoWithCouting'])){
-            array_push($page_content , "../views/counting.html");
-        }
-    } else if (isset($_GET['page']) && isset($_SESSION['user_type'])){
-        $page = $_GET['page'];
-        if (in_array($page, Config::getPermission()[$_SESSION['user_type']])){
+
+
+    $page = isset($_GET['page']) ? $_GET['page']: '';
+
+    switch(true) {
+        case !isset($_GET['page']):
+            header("Location: ".Config::getConfig()['domain'] ."bodyBanner");
+            break;
+
+        case (!isset($_SESSION['user_type']) && in_array($_GET['page'],Config::getPermission()['common'])):
             array_push($page_content , "../views/$page.html");
-        } else {
+            break;
+        case (!isset($_SESSION['user_type']) && !in_array($_GET['page'],Config::getPermission()['common'])):
             header("Location: ".Config::getConfig()['domain'] ."formLogin");
-        }
-    } else {
-        header("Location: ".Config::getConfig()['domain'] ."bodyBanner");
+            break;
+        case in_array($page, Config::getPermission()['loginCommon']):
+        case in_array($page, Config::getPermission()[$_SESSION['user_type']]):
+            array_push($page_content , "../views/$page.html");
+            break;
+        default:
+            error_log('loop', 3, '../my_errors.log');
+            header("Location: ".Config::getConfig()['domain'] ."bodyBanner");
+    }
+
+    if (in_array($_GET['page'],Config::get()['pageGoWithCouting'])){
+        array_push($page_content , "../views/counting.html");
     }
     
     array_push($page_content , "../views/footer.html");
