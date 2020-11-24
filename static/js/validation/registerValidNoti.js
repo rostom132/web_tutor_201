@@ -51,9 +51,13 @@ $("input[id^='email']").on("input", function validEmail() {
     var test = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(document.getElementById(id).value);
     if (test) {
         document.getElementById("checkEmail" + checkUser()).innerHTML = "";
+        document.getElementById("email_button").disabled = false;
+        document.getElementById("email_admin_button").disabled = false;
         checkEnable();
     } else {
         document.getElementById("checkEmail" + checkUser()).innerHTML = "Invalid gmail";
+        document.getElementById("email_button").disabled = true;
+        document.getElementById("email_admin_button").disabled = true;
         disableContinue();
     }
 });

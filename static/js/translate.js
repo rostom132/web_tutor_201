@@ -18,7 +18,8 @@ export function translate(lang) {
 export function getText(key) {
     var $arrAttr = key.split(".");
     let lang = localStorage.getItem("stored_lang");
-    if (lang == 'en' || lang == 'vn') {
+    if (lang != 'en' && lang != 'vn') {
+        localStorage.setItem("stored_lang", "en");
         return arrLang['en'][$arrAttr[0]][$arrAttr[1]];
     } else {
         return arrLang[localStorage.getItem('stored_lang')][$arrAttr[0]][$arrAttr[1]];
