@@ -32,8 +32,7 @@
         public static function createInfo($admin_id, $input_data) {
             $columns=array_keys($input_data);
             $values=array_values($input_data);
-            error_log( "INSERT INTO `admin` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
-            VALUES (".$admin_id .",'" . implode("', '", $values) . "' )", 3, '../my_errors.log');
+            
             $result = $GLOBALS['db_conn']->queryData(
                 "INSERT INTO `admin` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
                 VALUES (".$admin_id .",'" . implode("', '", $values) . "' )"
