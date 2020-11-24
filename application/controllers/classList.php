@@ -1,7 +1,7 @@
 <?php
 include_once '../models/class.php';
 include_once "./common/getAvatar.php";
-
+include_once "../models/subject.php";
 function getAllAvatar($class_arr) {
     $arr = array();
     foreach($class_arr as $user) {
@@ -30,7 +30,10 @@ function getAllClass($current_page) {
     }
 }
 
-
+function getWeaknesses() {
+    $weakness_list = Subject::getAll();
+    echo(json_encode($weakness_list));
+}
 function getClassWithFilter($filterVal) {
 
     $filterArr = (array)$filterVal;
@@ -84,5 +87,9 @@ if(isset($_POST['init'])) {
 if(isset($_GET['current'])) {
     getAllClass($_GET['current']);
 }
-
+if(isset($_POST['weakness'])) {
+    if($_POST['weakness'] == 1) {
+        getWeaknesses();
+    }
+}
 ?>
