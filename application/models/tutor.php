@@ -77,8 +77,6 @@
                     "INSERT INTO `specialize` (`tutor_id`, `subject_id`)
                     VALUES (" ."'$tutor_id','" .implode("'),('".$tutor_id ."','", $speciality) ."')"
                 );
-                error_log( "INSERT INTO `specialize` (`tutor_id`, `subject_id`)
-                VALUES (" ."'$tutor_id','" .implode("'),('".$tutor_id ."','", $speciality) ."')", 3, "./log.log");
             }
             if (!$result) return false;
             return true;
