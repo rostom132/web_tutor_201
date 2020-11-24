@@ -5,8 +5,7 @@
         'configDB' => array (
             'servername' => "localhost",
             'username' => "root",
-            // 'password' => "",
-            'password' => "abcdef1234",
+            'password' => "",
             'dbname' => "web_ass",
         ),
 
