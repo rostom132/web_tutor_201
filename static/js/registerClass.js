@@ -33,7 +33,6 @@ var magicSelect;
 
 $("#schedule_add_btn").click(function() {
     var $free_time_length = $(SUBMIT_PREFIX + "schedule_container").children().length;
-    console.log($free_time_length);
     if ($free_time_length === 11) {
         alert("You can only add maximum of 10 free slots");
         return;
@@ -406,8 +405,9 @@ function reRender($id) {
             var TimeSlot_FreeObj_Values = getTimeSlotFreeObjValues(TimeSlot_FreeObj_Keys);
             renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
             onEndTimeChange($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
-        } else {
+        } else if (DateScheduleObj[$selected_date].TimeSlot.length === 0) {
             renderStartTimeDefault($id);
+            renderEndTimeDefault($id);
             onEndTimeDefaultChange($id);
         }
     }
@@ -447,11 +447,15 @@ function renderDistrict(districtObj) {
 
 $("#registerClass-district").change(function() {
     let $district_dropdown = $(this);
+    $(SUBMIT_PREFIX + "ward").prop("disabled", false);
+    $(SUBMIT_PREFIX + "street").prop("disabled", false);
     let $ward = $("#registerClass-ward");
     let $street = $("#registerClass-street");
     if ($district_dropdown.find("option:selected").val() === "") {
         $(".ward_option").slice(1).remove();
         $(".street_option").slice(1).remove();
+        $(SUBMIT_PREFIX + "ward").prop("disabled", true);
+        $(SUBMIT_PREFIX + "street").prop("disabled", true);
     } else {
         var $district_name = $district_dropdown.find("option:selected").text();
         var ward_dropdown = [];
@@ -473,14 +477,12 @@ $("#registerClass-district").change(function() {
 
 function renderSubject() {
     var arrSubject = {};
-    var arrSubject_Keys = [];
     $.ajax({
         type: "GET",
         url: get_subject_url,
         cache: false,
         success: function(responseText) {
             arrSubject = JSON.parse(responseText).subject;
-            arrSubject_Keys = arrSubject.map(a => a.id);
             // Render subject input
             magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({
                 allowFreeEntries: false,
@@ -534,7 +536,7 @@ function renderAddress() {
                 } else $address.val(" " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
             }
             $address[0].setSelectionRange(0, 0);
-        } else $address[0].setSelectionRange($cursor_position, $cursor_position);
+        }
     })
     $address.on("input", function() {
         $cursor_position = $address[0].selectionStart;
@@ -712,13 +714,6 @@ function getAllDataInForm() {
         })
     })
 
-    // submitObj.registerSchedule.push({
-    //     "date": "MON",
-    //     "start_time": "9:30:00",
-    //     "end_time": "11:30:00",
-    //     "end_time": "12:30:00",
-    // })
-
     // Upload data to Weakness
     $.each(magicSelect.getValue(), function(index, value) {
         submitObj.registerWeakness.push({ "subject": value });
@@ -743,37 +738,33 @@ function submitClassInfo() {
             data: { createClass: newClass },
             cache: false,
             success: function(responseText) {
+                console.log(responseText);
                 if (responseText === "SUCCESS") {
                     // window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
-                    enableAll();
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
                     alert(responseText);
-                    enableAll();
                 } else {
                     var errors = new Array();
                     errors = JSON.parse(responseText);
                     alert('Please update again ' + errors.join(", ") + "!!");
-                    enableAll();
                 }
+                // enableAll();
             },
             timeout: 3000
         })
-    } else enableAll();
+    }
+    // else enableAll();
 }
 
 function disableAll() {
     $(".register-form").css("pointer-events", "hidden");
-    $(".register-form :input").prop("disabled", true);
-    magicSelect.disable();
 }
 
 function enableAll() {
     $(".register-form").css("pointer-events", "visible");
-    $(".register-form :input").prop("disabled", false);
-    magicSelect.enable();
 }
 
 $(function() {
