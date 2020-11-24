@@ -30,7 +30,7 @@
 			$parentID = $_SESSION["user_id"];
 			// Insert data -> on success get class id
 			$result = registerClass::createClass($parentID, $input_data["registerClass"]);
-			if($result !== "FAIL") {
+			if($result !== "FAIL") { 	
 				//  Validate Weakness
 				$isWeaknessValid = validateClassInfo($input_data["registerWeakness"], "registerWeakness");
 				if($isWeaknessValid === 'SUCCESS') {

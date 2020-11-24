@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 #header-wrapper {
     position: relative;
     display: block;

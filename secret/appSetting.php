@@ -8,16 +8,17 @@
                 'formLogin',
                 'formRegister',
                 'aboutUs',
+                'classList',
             ),
             'tutor' => array (
                 'infoTutor',
             ),
             'parent' => array (
                 'infoParent',
-                'registerClass'
+                'registerClass',
             ),
             'admin' => array (
-                'infoAdmin'
+                'infoAdmin',
             )
         ),
 
@@ -83,7 +84,7 @@
                 'end_time' => '/\b((1[0-9]|2[0-3]):00:00|(1[0-9]|2[0-3]):30:00)\b/',
             ),
             'registerWeakness' => array(
-                'subject' => '/\b[0-9]\b/'
+                'subject' => '/\b[0-9]+\b/'
             )
         ),
 

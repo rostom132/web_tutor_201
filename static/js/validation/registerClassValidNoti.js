@@ -8,7 +8,7 @@ export const registerClassRegex = {
     'no_lesson_per_week': /\b(1|2|3|4)\b/,
     'time_per_lesson': /(1:30:00|2:00:00|2:30:00|3:00:00)/,
     'gender_of_tutor': /(M|F|B)/,
-    'subject': /\b[0-9]\b/,
+    'subject': /\b[0-9]+\b/,
     'district': /\b([1-9]|1[0-9]|2[0-4])\b/,
     'ward': /\b([0-9]|1[0-9]|[2-9][0-9]|[1-2][0-9][0-9]|3[0-2][0-6])\b/,
     'street': /\b[0-9]+\b/,

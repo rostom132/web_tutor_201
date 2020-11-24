@@ -32,6 +32,12 @@ var magicSelect;
  */
 
 $("#schedule_add_btn").click(function() {
+    var $free_time_length = $(SUBMIT_PREFIX + "schedule_container").children().length;
+    console.log($free_time_length);
+    if ($free_time_length === 11) {
+        alert("You can only add maximum of 10 free slots");
+        return;
+    }
     var $schedule_container = $("#registerClass-schedule_container");
     $schedule_container.append(`
     <div id="schedule_row_` + schedule_id + `"` + `class="row schedule_row">
@@ -588,7 +594,7 @@ function renderErrorMsg($topic, $error_msg) {
     var $p_field = $topic.parent().children().first();
     $p_field.append('<span class="error-message lang" key="' + $error_msg + '"></span>');
     var $current_lang = localStorage.getItem("stored_lang");
-    if (current_lang !== "en" && current_lang !== "vn") translate("en");
+    if ($current_lang !== "en" && $current_lang !== "vn") translate("en");
     else translate($current_lang);
 }
 
@@ -623,7 +629,6 @@ function checkTextField() {
             renderErrorMsg($topic, "REGISTER.ERROR");
         }
     });
-    console.log(valid_field);
     if (valid_field === textField.length) {
         return 0;
     } else return -1;
@@ -633,23 +638,21 @@ function checkSelectField() {
     var valid_field = 0;
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        if (value === "schedule_container" && $topic.children().length > 1) valid_field++;
-        else {
-            renderErrorMsg($topic, "REGISTER.ERROR");
-            return;
-        }
         if (value === "schedule_container") {
-            valid_field++;
-            return;
+            if ($topic.children().length > 1) valid_field++;
+            else renderErrorMsg($topic, "REGISTER.ERROR");
+        } else {
+            let $regex_pattern = new RegExp(registerClassRegex[value]);
+            var $value = $topic.find("option:selected").val();
+            console.log(value);
+            if ($regex_pattern.test($value)) {
+                // Correct input
+                $topic.parent().find(".error-message").remove();
+                valid_field++;
+            } else renderErrorMsg($topic, "REGISTER.ERROR");
         }
-        let $regex_pattern = new RegExp(registerClassRegex[value]);
-        var $value = $topic.find("option:selected").val();
-        if ($regex_pattern.test($value)) {
-            // Correct input
-            $topic.parent().find(".error-message").remove();
-            valid_field++;
-        } else renderErrorMsg($topic, "REGISTER.ERROR");
     });
+    console.log(valid_field);
     if (valid_field === selectField.length) return 0;
     else return -1;
 }
