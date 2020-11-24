@@ -42,17 +42,18 @@
             return true;
         }
 
-        static function sendRegisterRequest($address, $confirm_code) {
+        static function sendRegisterClassMail() {
+            // $class_info, $tutor_info, $email_address
             $mail = new PHPMailer(true);
             try {
                 Email::configMailer($mail);
-                $mail->addAddress($address);                                                // Add a recipient
+                $mail->addAddress('rostom13299@gmail.com');                                                // Add a recipient
             
                 // Content
                 $mail->isHTML(true);                                                        // Set email format to HTML
-                $mail->Subject = Config::getMailConfig()['topic'];
-                $mail->Body    = Config::getMailConfig()['body'] .$confirm_code;
-                $mail->AltBody = Config::getMailConfig()['altBody'];
+                $mail->Subject = Config::getMailContent()['mailRegisterClass']['topic'];
+                $mail->Body    = str_replace("%domain%",Config::getConfig()['domain'],Config::getMailContent()['mailRegisterClass']['body']);
+                // $mail->AltBody = str_replace("%securityCode%",$confirm_code,Config::getMailContent()['verifyMail']['altBody']);
             
                 $mail->send();
             } catch (Exception $e) {

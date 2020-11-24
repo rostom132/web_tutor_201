@@ -479,6 +479,7 @@ function renderSubject() {
         url: get_subject_url,
         cache: false,
         success: function(responseText) {
+            console.log(responseText);
             arrSubject = JSON.parse(responseText).subject;
             arrSubject_Keys = arrSubject.map(a => a.id);
             // Render subject input
