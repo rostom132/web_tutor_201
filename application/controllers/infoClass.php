@@ -10,6 +10,7 @@
         $response['class']['publisher'] = Classs::getClassOwner($id)['first_name'];
         $response['class']['publisher_ava'] = getUserAvatar(Classs::getClassOwner($id)['id']);
         $response['class']['weakness'] = Classs::getWeakness($id);
+        $response['user'] = isset($_SESSION['user_type']) ? $_SESSION['user_type']:"";
         return json_encode($response);
     }
 

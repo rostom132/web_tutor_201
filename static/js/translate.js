@@ -18,10 +18,9 @@ export function translate(lang) {
 export function getText(key) {
     var $arrAttr = key.split(".");
     let lang = localStorage.getItem("stored_lang");
-    if(lang == 'en' || lang == 'vn') {
+    if (lang == 'en' || lang == 'vn') {
         return arrLang['en'][$arrAttr[0]][$arrAttr[1]];
-    }
-    else {
+    } else {
         return arrLang[localStorage.getItem('stored_lang')][$arrAttr[0]][$arrAttr[1]];
     }
 }
@@ -48,7 +47,6 @@ function translateLang() {
 $(function() {
     //first check for stored language in localStorage i.e. fetch data from localStorage
     let stored_lang = localStorage.getItem("stored_lang");
-    console.log(typeof(stored_lang));
     var language_flag = document.getElementById("language_flag");
     var contact_us = document.getElementsByClassName("contact-us");
     //if any then translate page accordingly
