@@ -120,7 +120,7 @@ ul {
 }
 
 .navbar-wrapper ul li .navbar-wrapper__link::after {
-    bottom: 0;
+    top: 110%;
     content: "";
     display: none;
     height: 3px;
