@@ -208,6 +208,10 @@
     background-color: #114555;
 }
 
+.loginFormBtn:focus {
+    outline: none;
+}
+
 .login-form a {
     display: block;
     text-align: center;

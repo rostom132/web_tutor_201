@@ -22,25 +22,40 @@
                         </a>
                     </li>
                     <li class="navbar__li">
+                        <a class="navbar-wrapper__link">
+                            <span class="lang" key="COMMON.NAVBAR_CLASS"></span>
+                        </a>
+                        <div class="dropdown-container">
+                            <ul>
+                                <li>
+                                    <a href="registerClass" class="dropdown__item lang" key="COMMON.NAVBAR_REGISTERCLASS">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="classList" class="dropdown__item lang" key="COMMON.NAVBAR_CLASSESLIST">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar__li">
                         <a role="button" id="logout-button" class="navbar-wrapper__link">
                             <span class="lang" key="COMMON.NAVBAR_LOGOUT"></span>
                         </a>
                     </li>
-                    <li>
+                    <li class="navbar__li">
                         <a>
                             <div id="language_flag" class="flag vn_flag">
                         </a>
                     </li>
-                    <li>
+                    <li class="navbar__li">
                         <a href="contact"><span class="lang contact-us" key="COMMON.NAVBAR_CONTACT"></span></a>
                     </li>
-                    <li>
-                        <a href="infoTutor">
-                            <img id="ava" src="https://image.ibb.co/n7oTvU/logo_white.png" class="flag">
-                        </a>
+                    <li class="navbar__li">
+                        <img href="infoParent" id="ava" src="https://image.ibb.co/n7oTvU/logo_white.png" class="flag">
                     </li>
-                    <li>
-                        <span style="font-size:30px;cursor:pointer" id="hamberger-navbar">
+                    <li class="navbar__li">
+                        <span style="padding-left: 20px; font-size:30px;cursor:pointer" id="hamberger-navbar">
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </span>
                     </li>
@@ -52,8 +67,9 @@
 </nav>
 <div id="mySidenav" class="sidenav">
     <a class="closebtn" id="hamberger-navbar-close">&times;</a>
-    <a href="aboutUs">About</a>
-    <a href="infoParent">Infomation</a>
-    <a href="classView">Classes&nbsp;List</a>
-    <a href="contact">Contact</a>
+    <a href="aboutUs" class="lang" key="COMMON.NAVBAR_ABOUTUS"></a>
+    <a href="infoParent" class="lang" key="COMMON.NAVBAR_PROFILE"></a>
+    <a href="registerClass" class="lang" key="COMMON.NAVBAR_REGISTERCLASS"></a>
+    <a href="classList" class="lang" key="COMMON.NAVBAR_CLASSESLIST"></a>
+    <a href="contact" class="lang" key="COMMON.NAVBAR_CONTACT"></a>
 </div>

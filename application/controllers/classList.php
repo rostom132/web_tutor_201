@@ -1,7 +1,7 @@
 <?php
 include_once '../models/class.php';
 include_once "./common/getAvatar.php";
-
+include_once "../models/subject.php";
 function getAllAvatar($class_arr) {
     $arr = array();
     foreach($class_arr as $user) {
@@ -9,6 +9,14 @@ function getAllAvatar($class_arr) {
     }
     return $arr;
 }
+
+function getAllWeakness($class_arr) {
+    $arr = array();
+    foreach($class_arr as $user) {
+        array_push($arr, )
+    }
+}
+
 function getAllClass($current_page) {
 
     $total_records = Classs::getNumberOfClass();
@@ -16,8 +24,8 @@ function getAllClass($current_page) {
     $total_page = ceil($total_records / $limit);
     $start = ($current_page - 1) * $limit;
     $class_arr = Classs::getLimitClasses($current_page, $limit);
-    $avatar_arr = getAllAvatar($class_arr);
-    if(sizeof($class_arr) > 0) {
+    if(sizeof($class_arr[0]) > 0) {
+        $avatar_arr = getAllAvatar($class_arr);
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
@@ -30,7 +38,10 @@ function getAllClass($current_page) {
     }
 }
 
-
+function getWeaknesses() {
+    $weakness_list = Subject::getAll();
+    echo(json_encode($weakness_list));
+}
 function getClassWithFilter($filterVal) {
 
     $filterArr = (array)$filterVal;
@@ -44,8 +55,8 @@ function getClassWithFilter($filterVal) {
     $total_page = ceil($total_records / $limit);
     $start = (1 - 1) * $limit;
     $class_arr = Classs::getLimitClassesFilter($filterArr, 1, $limit);
-    $avatar_arr = getAllAvatar($class_arr);
-    if(sizeof($class_arr) > 0) {
+    if(sizeof($class_arr[0]) > 0) { 
+        $avatar_arr = getAllAvatar($class_arr);
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
@@ -84,5 +95,9 @@ if(isset($_POST['init'])) {
 if(isset($_GET['current'])) {
     getAllClass($_GET['current']);
 }
-
+if(isset($_POST['weakness'])) {
+    if($_POST['weakness'] == 1) {
+        getWeaknesses();
+    }
+}
 ?>

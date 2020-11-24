@@ -1,9 +1,16 @@
 import { cityData } from "./constant/city.js";
-import { TimeSchedule, DateScheduleObj } from "./constant/schedule.js";
-import { translate } from "./translate.js";
+import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor } from "./constant/schedule.js";
+import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
+import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 
-const inputKeys = ["topic", "subject", "salary", "lession_per_week", "time_per_lesson", "gender", "no_student", "district", "ward", "street", "address", "phone_number", "schedule_container", "class_description"]
+const textField = ["topic", "salary_per_lesson", "no_students", "address", "phone_number", "description"];
+const selectField = ["district", "ward", "street", "schedule_container"];
+const radioField = ["no_lesson_per_week", "time_per_lesson", "gender_of_tutor"];
+const magicField = ["subject"];
+
+const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
+const submit_data_url = "application/controllers/registerClass.php";
 
 let schedule_id = 1;
 let editMode = 0;
@@ -18,23 +25,35 @@ const DATE_PREFIX = "#registerClass-date_";
 const START_TIME_PREFIX = "#registerClass-start_";
 const END_TIME_PREFIX = "#registerClass-end_";
 
+var magicSelect;
+
+/*
+ *** Render input fields
+ */
+
 $("#schedule_add_btn").click(function() {
+    var $free_time_length = $(SUBMIT_PREFIX + "schedule_container").children().length;
+    console.log($free_time_length);
+    if ($free_time_length === 11) {
+        alert("You can only add maximum of 10 free slots");
+        return;
+    }
     var $schedule_container = $("#registerClass-schedule_container");
     $schedule_container.append(`
     <div id="schedule_row_` + schedule_id + `"` + `class="row schedule_row">
         <div class="col-3">
             <select disabled id="registerClass-date_` + schedule_id + `"` + ` class="form__select date_select" required>
-                <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value=""></option>
+                <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value="">` + getText("REGISTER.DATE_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
             <select disabled id="registerClass-start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
-                <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value=""></option>
+                <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">` + getText("REGISTER.START_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
             <select disabled id="registerClass-end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
-                <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value=""></option>
+                <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">` + getText("REGISTER.END_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
         <button id="schedule_edit_icon_` + schedule_id + `"` + ` class="schedule_icon edit_icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -55,8 +74,6 @@ var observer = new MutationObserver(function(mutations) {
             $nodes.each(function() {
                 var $node = $(this);
                 if ($node.hasClass("schedule_row")) {
-                    var currentLang = localStorage.getItem("stored_lang");
-                    translate(currentLang);
                     var $id = $node.attr("id").split("_")[2];
                     renderDate($id);
                 }
@@ -252,9 +269,10 @@ function getTimeSlotFreeObjValues(TimeSlot_FreeObj) {
 }
 
 function renderDate($id) {
-    var currentLang = localStorage.getItem("stored_lang");
+    var current_lang = localStorage.getItem("stored_lang");
+    if (current_lang !== "en" && current_lang !== "vn") current_lang = "en";
     var $date_select = $(DATE_PREFIX + $id);
-    $.each(arrLang[currentLang].DATE, function(key, value) {
+    $.each(arrLang[current_lang].DATE, function(key, value) {
         $date_select.append('<option class="lang" key="DATE.' + key + `"` + 'value=' + key + '>' + value + '</option>');
     })
     onDateChange($id);
@@ -274,15 +292,17 @@ function onDateChange($id) {
 function renderStartTimePlaceHolder($start_time_select) {
     $start_time_select.empty();
     var current_lang = localStorage.getItem("stored_lang");
+    if (current_lang !== "en" && current_lang !== "vn") current_lang = "en";
     var option_placeholder = arrLang[current_lang]["REGISTER"]["START_TIME_PLACEHOLDER"];
-    $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
+    $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="----">' + option_placeholder + '</option>');
 }
 
 function renderEndTimePlaceholder($end_time_select) {
     $end_time_select.empty();
     var current_lang = localStorage.getItem("stored_lang");
+    if (current_lang !== "en" && current_lang !== "vn") current_lang = "en";
     var option_placeholder = arrLang[current_lang]["REGISTER"]["END_TIME_PLACEHOLDER"];
-    $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
+    $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="----">' + option_placeholder + '</option>');
 }
 
 function renderStartTimeDefault($id) {
@@ -452,47 +472,317 @@ $("#registerClass-district").change(function() {
 })
 
 function renderSubject() {
-    $(".subject_option").slice(1).remove();
-    var current_lang = localStorage.getItem("stored_lang");
-    $.each(arrLang[current_lang].SUBJECT, function(index, value) {
-        $("#registerClass-subject").append('<option class="lang subject_option" key="SUBJECT.' + index + '"' + 'value=' + index + '>' + value + '</option>');
-    })
+    var arrSubject = {};
+    var arrSubject_Keys = [];
+    $.ajax({
+        type: "GET",
+        url: get_subject_url,
+        cache: false,
+        success: function(responseText) {
+            arrSubject = JSON.parse(responseText).subject;
+            arrSubject_Keys = arrSubject.map(a => a.id);
+            // Render subject input
+            magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({
+                allowFreeEntries: false,
+                allowDuplicates: false,
+                maxSelection: 3,
+                data: arrSubject,
+            });
+        },
+        timeout: 3000
+    });
 }
 
-function checkFormFields() {
-    let sum = 0;
-    $.each(inputKeys, function(index, value) {
-        var $current_field = $(SUBMIT_PREFIX + value);
-        if (value === "schedule_container") {
-            // Different check for free time schedule
-            sum++;
-        } else if ($current_field.val() === "") {
-            var $p_field = $current_field.parent().children().first();
-            $p_field.append('<span class="error-message lang" key="REGISTER.ERROR"></span>');
-            var $current_lang = localStorage.getItem("stored_lang");
-            translate($current_lang);
-            sum++;
+function renderAddressOnChange($cursor_position) {
+    var $address = $(SUBMIT_PREFIX + "address");
+    var $district = $(SUBMIT_PREFIX + "district");
+    var $ward = $(SUBMIT_PREFIX + "ward");
+    var $street = $(SUBMIT_PREFIX + "street");
+    if ($address.val().length > 0) {
+        $address[0].selectionStart = $cursor_position;
+        if ($ward.val() !== "" && $street.val() !== "") {
+            $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
+        } else {
+            if ($ward.val() == "" && $street.val() !== "") {
+                $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
+            } else if ($ward.val() !== "" && $street.val() == "") {
+                $address.val($address.val().substr(0, $cursor_position) + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
+            } else {
+                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
+            }
         }
-    })
-    if (sum == inputKeys.length) {
-        // Execute ajax call
-        $.ajax({
-
-        })
     }
 }
 
-function checkOnInput() {
-
+function renderAddress() {
+    var $address = $(SUBMIT_PREFIX + "address");
+    var $district = $(SUBMIT_PREFIX + "district");
+    var $ward = $(SUBMIT_PREFIX + "ward");
+    var $street = $(SUBMIT_PREFIX + "street");
+    var $cursor_position = 0;
+    $address.click(function() {
+        if ($address.val() === "") {
+            if ($district.val() !== "") {
+                $address.val(" " + $district.find("option:selected").text());
+            }
+            if ($ward.val() !== "") {
+                $address.val(" " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
+            }
+            if ($street.val() !== "") {
+                if ($ward.val() !== "") {
+                    $address.val(" " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
+                } else $address.val(" " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
+            }
+            $address[0].setSelectionRange(0, 0);
+        } else $address[0].setSelectionRange($cursor_position, $cursor_position);
+    })
+    $address.on("input", function() {
+        $cursor_position = $address[0].selectionStart;
+    })
+    $district.change(function() {
+        if ($address.val().length > 0) {
+            $address[0].selectionStart = $cursor_position;
+            if ($district.val() !== "") {
+                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
+            } else $address.val($address.val().substr(0, $cursor_position));
+        }
+    })
+    $ward.change(() => renderAddressOnChange($cursor_position));
+    $street.change(() => renderAddressOnChange($cursor_position));
 }
 
-function getInputValue() {
+function renderLessonPerWeek() {
+    var $current_lang = localStorage.getItem("stored_lang");
+    if ($current_lang !== "en" && $current_lang !== "vn") $current_lang = "en";
+    $.each(LessonPerWeek[$current_lang], function(key, value) {
+        $(SUBMIT_PREFIX + "no_lesson_per_week").append(`
+        <input type="radio" name="no_lesson_per_week" value=` + key + `>
+        <label class="input-label lang" key="REGISTER.LESSON_PER_WEEK_` + key + `_LESSON">` + value + `</label>`);
+    })
+}
 
+function renderHourPerLesson() {
+    var $current_lang = localStorage.getItem("stored_lang");
+    if ($current_lang !== "en" && $current_lang !== "vn") $current_lang = "en";
+    $.each(HourPerLesson[$current_lang], function(key, value) {
+        $(SUBMIT_PREFIX + "time_per_lesson").append(`
+        <input type="radio" name="time_per_lesson" value=` + key + `>
+        <label class="input-label lang" key="REGISTER.TIME_PER_LESSON_` + value.split(" ")[0] + `_HOUR">` + value + `</label>`);
+    })
+}
+
+function renderGenderOfTutor() {
+    var $current_lang = localStorage.getItem("stored_lang");
+    if ($current_lang !== "en" && $current_lang !== "vn") $current_lang = "en";
+    $.each(GenderOfTutor[$current_lang], function(key, value) {
+        $(SUBMIT_PREFIX + "gender_of_tutor").append(`
+        <input type="radio" name="gender_of_tutor" value=` + key + `>
+        <label class="input-label lang" key="REGISTER.GENDER_` + key + `">` + value + `</label>`);
+    })
+}
+
+/*
+ *** Validation FE
+ */
+
+function renderErrorMsg($topic, $error_msg) {
+    console.log("here")
+    $topic.parent().find(".error-message").remove();
+    var $p_field = $topic.parent().children().first();
+    $p_field.append('<span class="error-message lang" key="' + $error_msg + '">' + getText($error_msg) + '</span>');
+}
+
+function checkTextField() {
+    var valid_field = 0;
+    $.each(textField, function(index, value) {
+        let $topic = $(SUBMIT_PREFIX + value);
+        let $regex_pattern = registerClassRegex[value];
+        if ($regex_pattern.test($topic.val())) {
+            console.log(value + " " + $topic.val() + " " + typeof $topic.val());
+            $topic.val($topic.val().trim());
+            if ($topic.val().length === 0 && value !== "description") {
+                // Empty string input
+                renderErrorMsg($topic, "REGISTER.ERROR");
+            } else {
+                // Correct input
+                $topic.parent().find(".error-message").remove();
+                valid_field++;
+            }
+        } else if ($topic.val().length > 0) {
+            // Fail regex pattern
+            if (value === "no_students") {
+                // Wrong range input
+                $topic.val("");
+                renderErrorMsg($topic, "REGISTER.WRONG_RANGE");
+            } else {
+                // Contain special characters
+                $topic.val("");
+                renderErrorMsg($topic, "REGISTER.WRONG_FORMAT");
+            }
+        } else {
+            renderErrorMsg($topic, "REGISTER.ERROR");
+        }
+    });
+    if (valid_field === textField.length) {
+        return 0;
+    } else return -1;
+}
+
+function checkSelectField() {
+    var valid_field = 0;
+    $.each(selectField, function(index, value) {
+        var $topic = $(SUBMIT_PREFIX + value);
+        if (value === "schedule_container") {
+            if ($topic.children().length > 1) valid_field++;
+            else renderErrorMsg($topic, "REGISTER.ERROR");
+        } else {
+            let $regex_pattern = new RegExp(registerClassRegex[value]);
+            var $value = $topic.find("option:selected").val();
+            console.log(value);
+            if ($regex_pattern.test($value)) {
+                // Correct input
+                $topic.parent().find(".error-message").remove();
+                valid_field++;
+            } else renderErrorMsg($topic, "REGISTER.ERROR");
+        }
+    });
+    console.log(valid_field);
+    if (valid_field === selectField.length) return 0;
+    else return -1;
+}
+
+function checkRadioField() {
+    var valid_field = 0;
+    $.each(radioField, function(index, value) {
+        var $topic = $(SUBMIT_PREFIX + value);
+        var $value = $topic.find("input[name=" + value + "]:checked").val();
+        let $regex_pattern = new RegExp(registerClassRegex[value]);
+        if ($regex_pattern.test($value)) {
+            // Correct input
+            $topic.parent().find(".error-message").remove();
+            valid_field++;
+        } else renderErrorMsg($topic, "REGISTER.ERROR");
+    });
+    if (valid_field === radioField.length) return 0;
+    else return -1;
+}
+
+function checkMagicSelect() {
+    var $value = magicSelect.getValue();
+    var $topic = $(SUBMIT_PREFIX + "subject");
+    if ($value.length == 0) {
+        renderErrorMsg($topic, "REGISTER.ERROR");
+        return -1;
+    } else return 0;
+}
+
+function getAllDataInForm() {
+    var submitObj = {};
+    // Upload data to Class 
+    submitObj.registerClass = {};
+    submitObj.registerSchedule = [];
+    submitObj.registerWeakness = [];
+    // Default value
+    submitObj.registerClass["city"] = cityData.id;
+    $.each(textField, function(index, value) {
+        var $topic = $(SUBMIT_PREFIX + value);
+        submitObj.registerClass[value] = $topic.val();
+    });
+    $.each(selectField, function(index, value) {
+        var $topic = $(SUBMIT_PREFIX + value);
+        if (value === "street" || value === "schedule_container") return;
+        submitObj.registerClass[value] = $topic.find("option:selected").val();
+    })
+    $.each(radioField, function(index, value) {
+        var $topic = $(SUBMIT_PREFIX + value);
+        submitObj.registerClass[value] = $topic.find("input[name=" + value + "]:checked").val();
+    })
+
+    // Upload data to Class Schedule
+    var $time_schedule = $(SUBMIT_PREFIX + "schedule_container").children();
+    $.each($time_schedule, function(index, value) {
+        if (index == 0) return;
+        var $date_now = $(DATE_PREFIX + index).find("option:selected").val();
+        var $start_now = $(START_TIME_PREFIX + index).find("option:selected").val();
+        var $end_now = $(END_TIME_PREFIX + index).find("option:selected").val();
+        submitObj.registerSchedule.push({
+            "date": $date_now,
+            "start_time": $start_now,
+            "end_time": $end_now
+        })
+    })
+
+    // submitObj.registerSchedule.push({
+    //     "date": "MON",
+    //     "start_time": "9:30:00",
+    //     "end_time": "11:30:00",
+    //     "end_time": "12:30:00",
+    // })
+
+    // Upload data to Weakness
+    $.each(magicSelect.getValue(), function(index, value) {
+        submitObj.registerWeakness.push({ "subject": value });
+    })
+    return submitObj;
+}
+
+function submitClassInfo() {
+    disableAll();
+    var isTextFieldValid = checkTextField();
+    var isSelectFieldValid = checkSelectField();
+    var isRadioFieldValid = checkRadioField();
+    var isMagicSelectValid = checkMagicSelect();
+    console.log(isTextFieldValid + " " + isSelectFieldValid + " " + isRadioFieldValid + " " + isMagicSelectValid);
+    if (isTextFieldValid + isSelectFieldValid + isRadioFieldValid + isMagicSelectValid === 0) {
+        var newClass = getAllDataInForm();
+        console.log(newClass);
+        // Pass all pre-check
+        $.ajax({
+            type: "POST",
+            url: submit_data_url,
+            data: { createClass: newClass },
+            cache: false,
+            success: function(responseText) {
+                if (responseText === "SUCCESS") {
+                    // window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    enableAll();
+                    // Change url
+                } else if (
+                    responseText === "WRONG ELEMENT INFO" ||
+                    responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
+                    alert(responseText);
+                    enableAll();
+                } else {
+                    var errors = new Array();
+                    errors = JSON.parse(responseText);
+                    alert('Please update again ' + errors.join(", ") + "!!");
+                    enableAll();
+                }
+            },
+            timeout: 3000
+        })
+    } else enableAll();
+}
+
+function disableAll() {
+    $(".register-form").css("pointer-events", "hidden");
+    $(".register-form :input").prop("disabled", true);
+    magicSelect.disable();
+}
+
+function enableAll() {
+    $(".register-form").css("pointer-events", "visible");
+    $(".register-form :input").prop("disabled", false);
+    magicSelect.enable();
 }
 
 $(function() {
-    renderDistrict(cityData.districts);
     renderSubject();
+    renderLessonPerWeek();
+    renderHourPerLesson();
+    renderGenderOfTutor();
+    renderDistrict(cityData.districts);
+    renderAddress();
     observer.observe(target, config);
     TimeSchedule_Keys = Object.keys(TimeSchedule);
     TimeSchedule_Values = Object.values(TimeSchedule);
@@ -500,5 +790,6 @@ $(function() {
     TimeSchedule_StartTime_Keys = TimeSchedule_Keys.slice(0, maximum_start_time + 1);
     TimeSchedule_StartTime_Values = TimeSchedule_Values.slice(0, maximum_start_time + 1);
     // Form Observation
-    $(SUBMIT_PREFIX + "submit-btn").click(() => checkFormFields());
+    $(SUBMIT_PREFIX + "submit-btn").click(() => submitClassInfo());
+    $(SUBMIT_PREFIX + "update-btn").click(() => updateData());
 })

@@ -19,3 +19,8 @@ $('#loginButton').click(function() {
     });
 
 })
+
+$(document).ready(function clearData() {
+    document.getElementById("loginFormPass").value = "";
+    document.getElementById("loginFormUserName").value = "";
+});
