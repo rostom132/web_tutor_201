@@ -16,11 +16,12 @@
      * @return string sucess|fail status of sending token
      */ 
     function sendToken($email) {
-        $token = rand(1000000,9999999);
-        $result = Email::sendConfirm($email, $token)? 'success':'fail';
+        $token = str_pad(rand(0, pow(10, 7)-1), 7, '0', STR_PAD_LEFT);
+        $result = Email::sendConfirm($email, $token);
         if ($result == 'success') {
             $_SESSION['token_register'] = $token;
             $_SESSION['token_email'] = $email;
+            return 'Success sendding mail to ' .$email;
         }
         return $result;
     }
@@ -44,6 +45,10 @@
 
             $role = $input_data['type'];
             if (User::isUsernameExist($input_data[$role]['username'])) return 'Username Existed!!';
+            
+            if ($role == 'admin') {
+                if (!Admin::checkAdminCode($input_data['code'])) return 'Wrong Admin security code!';
+            }
 
             $register_info = $input_data[$role];
             unset($register_info['email']);
@@ -60,6 +65,8 @@
                             return 'fail';
                         break;
                     case "admin":
+                        if (!Admin::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email'])))
+                            return 'fail';
                         break;
                 }
             };

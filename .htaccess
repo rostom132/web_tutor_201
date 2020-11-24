@@ -1,12 +1,13 @@
 Options -Indexes
+DirectoryIndex /web_tutor_201/application/controllers/index.php
 RewriteEngine On
-RewriteBase /web_tutor_201/application/controllers/
  
 RewriteRule ^application/models/.*\.php - [F,L,NC]
 
 RewriteRule ^secret/.*\.php - [F,L,NC]
 
-RewriteRule "^$" "index.php"
+RewriteRule ^infoClass/([0-9]+)$ "?page=infoClass"
 
-RewriteRule "^([a-zA-Z0-9]+)$" "index.php?page=$1"
+RewriteRule ^infoClass$ "?page=bodyBanner"
 
+RewriteRule "^([a-zA-Z0-9]+)$" "?page=$1"

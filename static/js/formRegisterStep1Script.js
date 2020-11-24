@@ -218,23 +218,12 @@ function emailButton() {
     document.querySelector('#app-admin').innerHTML = button_admin;
     
 }
-//End button countdown
 
-
-$("#continue-admin").click(function continueButton() {
-    var infoRegister = getAllInfo('admin');
-    var update_info = $.ajax({
-        type: "POST",
-        url: "application/controllers/formRegister.php",
-        data: { registerData: infoRegister },
-        success: function(data) {}
-    });
-});
-
-$("#continue").click(function continueButton() {
+$("button[id^='continue']").click(function continueButton() {
     var role;
     if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
-    else role = 'tutor'
+    if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
+    else role = 'admin'
 
     var infoRegister = getAllInfo(role);
     var update_info = $.ajax({
@@ -263,7 +252,9 @@ $("#continue").click(function continueButton() {
                 case 'Not send email':
                     alert('Please click the send email button!');
                     break;
-
+                case 'Wrong Admin security code!':
+                    alert(data);
+                    break;
                 default:
                     var errors = new Array();
                     errors = JSON.parse(data);
@@ -281,11 +272,7 @@ function sendAdminMail() {
             url: "application/controllers/formRegister.php",
             data: { sendToken: email },
             success: function(data) {
-                if (data == 'success') {
-
-                } else {
-
-                }
+                alert(data);
             }
         });
     }
@@ -300,11 +287,7 @@ function sendUserMail() {
             url: "application/controllers/formRegister.php",
             data: { sendToken: email },
             success: function(data) {
-                if (data == 'success') {
-
-                } else {
-
-                }
+                alert(data);
             }
         });
     }

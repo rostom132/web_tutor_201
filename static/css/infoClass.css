@@ -1,0 +1,50 @@
+.row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: white;
+    border: solid 20px #4BBADC;
+    border-radius: 30px;
+}
+
+.infoClass_background {
+    background-color: #d2f9f9;
+    padding: 5%;
+}
+
+.infoClass_background h1 {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.infoClass_img {
+    width: 150px;
+    height: 150px;
+}
+
+.infoClass_style {
+    font-weight: 700;
+    font-size: 20px;
+    color: orange;
+}
+
+.btnRegister {
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #4BBADC;
+    color: #fff;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+}

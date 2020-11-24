@@ -12,6 +12,7 @@
         }
         return $avatar_dir;
     }
+    
     function getUserAvatar($user_id) {
         if (count(glob(Config::get()['avatar']['avatars_dir'] .$user_id.".*")) > 0){
             $dir = explode('/',glob(Config::get()['avatar']['avatars_dir'] .$user_id .".*")[0]);

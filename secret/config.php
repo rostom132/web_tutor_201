@@ -21,6 +21,10 @@
             return Config::getConfig()['configMail'];
         }
 
+        static function getMailContent() {
+            return Config::get()['mailContent'];
+        }
+
     }
 
 ?>
