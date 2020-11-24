@@ -50,7 +50,7 @@ $('#tabH1').click(function tabHeader1() {
     resetAllData();
     resetIntervalId(timerIntervalId);
     emailButton();
-    $('#email_button').bind("click", ()=>sendUserMail());
+    $('#email_button').bind("click", () => sendUserMail());
     resetNoti();
 });
 
@@ -69,7 +69,7 @@ $('#tabH2').click(function tabHeader2() {
     resetAllData();
     resetIntervalId(timerIntervalId);
     emailButton();
-    $('#email_button').bind("click", ()=>sendUserMail());
+    $('#email_button').bind("click", () => sendUserMail());
     resetNoti();
 });
 
@@ -87,7 +87,7 @@ $('#tabH3').click(function tabHeader3() {
     resetAllData();
     resetIntervalId(timerIntervalId);
     emailButton();
-    $('#email_admin_button').bind("click", ()=>sendAdminMail());
+    $('#email_admin_button').bind("click", () => sendAdminMail());
     resetNoti();
 });
 /*decorate the header tab; end*/
@@ -95,9 +95,11 @@ $('#tabH3').click(function tabHeader3() {
 //Countdown button
 var timerIntervalId = null;
 var time_limit = 10;
+
 function resetIntervalId(timerIntervalId) {
-  clearInterval(timerIntervalId);
+    clearInterval(timerIntervalId);
 }
+
 function resetTimer() {
     let timePassed = 0;
     let timeLeft = time_limit;
@@ -124,34 +126,32 @@ function resetTimer() {
     <span id="base-timer-label" class="base-timer__label">${timeLeft}</span>
     </div>
     `;
-    if(document.getElementById('formParentAndTutor').classList.contains('active')) {
+    if (document.getElementById('formParentAndTutor').classList.contains('active')) {
         document.querySelector("#app-user").innerHTML = template;
-    }
-    else {
+    } else {
         document.querySelector("#app-admin").innerHTML = template;
     }
     return [timePassed, time_limit, timeLeft];
 }
 
 function startTimer(timePassed, TIME_LIMIT, timeLeft) {
-    
+
     timerIntervalId = setInterval(() => {
-    timePassed += 1;
-    timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = timeLeft;
-    setCircleDasharray(timeLeft, TIME_LIMIT);
-    setRemainingPathColor(timeLeft);
-    if (timeLeft === 0) {
-        resetIntervalId(timerIntervalId);
-        emailButton();
-        if(document.getElementById('formParentAndTutor').classList.contains('active')) {
-            $('#email_button').bind("click", ()=>sendUserMail());
+        timePassed += 1;
+        timeLeft = TIME_LIMIT - timePassed;
+        document.getElementById("base-timer-label").innerHTML = timeLeft;
+        setCircleDasharray(timeLeft, TIME_LIMIT);
+        setRemainingPathColor(timeLeft);
+        if (timeLeft === 0) {
+            resetIntervalId(timerIntervalId);
+            emailButton();
+            if (document.getElementById('formParentAndTutor').classList.contains('active')) {
+                $('#email_button').bind("click", () => sendUserMail());
+            } else {
+                $('#email_admin_button').bind("click", () => sendUserMail());
+            }
         }
-        else {
-            $('#email_admin_button').bind("click", ()=>sendUserMail());
-        }
-    }
-  }, 1000);
+    }, 1000);
 }
 
 function setRemainingPathColor(timeLeft) {
@@ -169,38 +169,39 @@ function setRemainingPathColor(timeLeft) {
             color: "red",
             threshold: ALERT_THRESHOLD
         }
-        };
+    };
     const { alert, warning, info } = COLOR_CODES;
     if (timeLeft <= alert.threshold) {
         document
-        .getElementById("base-timer-path-remaining")
-        .classList.remove(warning.color);
+            .getElementById("base-timer-path-remaining")
+            .classList.remove(warning.color);
         document
-        .getElementById("base-timer-path-remaining")
-        .classList.add(alert.color);
+            .getElementById("base-timer-path-remaining")
+            .classList.add(alert.color);
     } else if (timeLeft <= warning.threshold) {
         document
-        .getElementById("base-timer-path-remaining")
-        .classList.remove(info.color);
+            .getElementById("base-timer-path-remaining")
+            .classList.remove(info.color);
         document
-        .getElementById("base-timer-path-remaining")
-        .classList.add(warning.color);
+            .getElementById("base-timer-path-remaining")
+            .classList.add(warning.color);
     }
 }
 
 function calculateTimeFraction(timeLeft, TIME_LIMIT) {
-  const rawTimeFraction = timeLeft / TIME_LIMIT;
-  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+    const rawTimeFraction = timeLeft / TIME_LIMIT;
+    return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
 }
 
 function setCircleDasharray(timeLeft, TIME_LIMIT) {
-  const circleDasharray = `${(
+    const circleDasharray = `${(
     calculateTimeFraction(timeLeft, TIME_LIMIT) * 283
   ).toFixed(0)} 283`;
-  document
-    .getElementById("base-timer-path-remaining")
-    .setAttribute("stroke-dasharray", circleDasharray);
+    document
+        .getElementById("base-timer-path-remaining")
+        .setAttribute("stroke-dasharray", circleDasharray);
 }
+
 function emailButton() {
     let button_user = `<button id="email_button" style="background-color: transparent;" type="button">
                         <div style="position:absolute;">
@@ -216,7 +217,7 @@ function emailButton() {
                         </button>`;
     document.querySelector('#app-user').innerHTML = button_user;
     document.querySelector('#app-admin').innerHTML = button_admin;
-    
+
 }
 
 $("button[id^='continue']").click(function continueButton() {
@@ -231,6 +232,7 @@ $("button[id^='continue']").click(function continueButton() {
         url: "application/controllers/formRegister.php",
         data: { registerData: infoRegister },
         success: function(data) {
+            console.log(data);
             switch (data) {
                 case 'success':
                     alert('Create new account sucessful!!');
@@ -264,6 +266,7 @@ $("button[id^='continue']").click(function continueButton() {
         }
     });
 });
+
 function sendAdminMail() {
     var email = document.getElementById("email-admin").value;
     if (email) {
@@ -279,6 +282,7 @@ function sendAdminMail() {
     let timeSetting = resetTimer();
     startTimer(timeSetting[0], timeSetting[1], timeSetting[2]);
 }
+
 function sendUserMail() {
     var email = document.getElementById("email").value;
     if (email) {
@@ -295,6 +299,6 @@ function sendUserMail() {
     startTimer(timeSetting[0], timeSetting[1], timeSetting[2]);
 }
 
-$("#email_admin_button").click(()=>sendAdminMail());
+$("#email_admin_button").click(() => sendAdminMail());
 
-$("#email_button").click(()=>sendUserMail());
+$("#email_button").click(() => sendUserMail());

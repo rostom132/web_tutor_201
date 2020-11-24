@@ -12,7 +12,7 @@
      * @return string status of authorization
      */ 
     function getTutorInfo(){
-        $avatar_dir = getAva();
+        $avatar_dir = getUserAvatar($_SESSION['user_id']);
         $response = array(
         'tutor' => Tutor::getInfo($_SESSION['user_id']),
         'specialize' => Tutor::getSpecialize($_SESSION['user_id']),

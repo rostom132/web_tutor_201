@@ -34,10 +34,10 @@
             if ( preg_match(Config::get()['validateRegistor']['type'], $input_data['type'])) {
                 $role  = $input_data['type'];
                 if (!Validate::checkIsset($input_data[$role], ['username','password'])) return 'WRONG ELEMENT';
-                if( !preg_match(Config::get()['validateRegistor']['authen']['username'], $input_data[$role]['username'])){
+                if( !preg_match(Config::get()['validateCommon']['username'], $input_data[$role]['username'])){
                     array_push($failValidate, 'Username');
                 }
-                if( !preg_match(Config::get()['validateRegistor']['authen']['password'], $input_data[$role]['password'])){
+                if( !preg_match(Config::get()['validateCommon']['password'], $input_data[$role]['password'])){
                     array_push($failValidate, 'Password');
                 }
                 if (isset($input_data['code']) && !preg_match(Config::get()['validateRegistor']['code'], $input_data['code']) ) {
@@ -138,7 +138,7 @@
         }
 
         static function validatePass($password) {
-            return preg_match(Config::get()['validateInfo']['password'], $password);
+            return preg_match(Config::get()['validateCommon']['password'], $password);
         }
 
     }

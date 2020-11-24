@@ -16,7 +16,6 @@ function getClassInfo() {
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var info = JSON.parse(this.responseText);
-            console.log(info);
             if (info['class'].length !== 0) {
                 getDistrict(info['class']);
                 for (var key in info['class']) {
@@ -34,6 +33,9 @@ function getClassInfo() {
                         .attr("src", info['class']['publisher_ava'] + "?" + new Date().getTime())
                         .width(250)
                         .height('auto');
+                }
+                if (info['user'] == "tutor") {
+                    document.getElementById("register_button").hidden = false;
                 }
             }
         }
