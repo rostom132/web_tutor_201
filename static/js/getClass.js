@@ -17,7 +17,7 @@ function renderClassNum(class_num) {
 //Render all class information
 function createTemplate(class_list) {
     document.getElementById('show').innerHTML = "";
-    var default_avatar = "https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/styles/baiviet_50_50/public/AAuE7mBFjncP4O9wWvDXYnppGHsN0WgfIA6rRp0AfKXw%3Ds96-c";
+    var default_avatar = "https://cdn.dribbble.com/users/813156/screenshots/3557331/profile_pic-01.png";
     var infor_icon = "./static/images/icon/information.png";
     var money_icon = "./static/images/icon/moneybag.jpeg";
     var student_icon = "./static/images/icon/student.png";
@@ -42,7 +42,10 @@ function createTemplate(class_list) {
         } else {
             gender = 'CLASSINFO.GENDER_BOTH';
         }
-        var ava = class_list[i].ava;
+        var ava;
+        if (class_list[i].ava == "") {
+            ava = default_avatar;
+        } else ava = class_list[i].ava;
         template.setAttribute('class', 'row-wrapper shadow-box');
         template.innerHTML =
             `
@@ -59,7 +62,7 @@ function createTemplate(class_list) {
                         <img src=${infor_icon} style="width: 20px; height: 20px;">
                         <a href="infoClass/${class_id}" target="_blank" id="class-title">${class_title}</a>
                     </p>
-                    <p>
+                    <p style="height:100px; max-height:100px">
                         ${class_description}
                     </p>
                     <span class="group-span">Toán(ENG)</span>
@@ -121,12 +124,12 @@ export function initClass() {
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('show').removeChild(loading);
-            var obj = JSON.parse(this.responseText);
-            console.log(obj);
-            if (obj == 0) {
-                alert("No class found!");
+            if (this.responseText == 0) {
+                renderClassNum(0);
+                noResultTemplate();
                 return;
             }
+            var obj = JSON.parse(this.responseText);
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
@@ -170,17 +173,13 @@ export function filterClass(dist, sub, gender) {
         ajax.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('show').removeChild(loading);
+                console.log(this.responseText);
                 if (this.responseText == 0) {
-                    alert("no class");
-                    return;
-                }
-                var obj = JSON.parse(this.responseText);
-                console.log(obj);
-                if (obj[0] == 0) {
                     renderClassNum(0);
                     noResultTemplate();
                     return;
                 }
+                var obj = JSON.parse(this.responseText);
                 class_num = obj[0];
                 page_num = obj[1];
                 class_list = [];
