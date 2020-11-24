@@ -32,13 +32,55 @@
         public static function createInfo($admin_id, $input_data) {
             $columns=array_keys($input_data);
             $values=array_values($input_data);
-
+            error_log( "INSERT INTO `admin` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
+            VALUES (".$admin_id .",'" . implode("', '", $values) . "' )", 3, '../my_errors.log');
             $result = $GLOBALS['db_conn']->queryData(
                 "INSERT INTO `admin` (`id`," ."`" .implode("`, `",$columns) ."`" .") 
                 VALUES (".$admin_id .",'" . implode("', '", $values) . "' )"
             );
             if ($result) return true;
             return false;
+        }
+
+        /**
+         * Get information of one admin
+         *
+         * @param integer $admin_id id of the admin
+         * 
+         * @return array info include (fname, lname, gender, phone_number)
+         */ 
+        public static function getInfo($admin_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT first_name AS fname, last_name AS lname, gender, phone_number FROM Admin
+                WHERE Admin.id='$admin_id'"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result)[0];
+        }
+
+        /**
+         * update information of one admin
+         *
+         * @param integer $admin_id id of the admin
+         * @param array $input_data include all info mation that want to update with these keys (first_name, last_name,
+         *              phone_number)
+         * 
+         * @return boolean update status
+         */ 
+        public static function updateAdmin($admin_id, $input_data) {
+            $sql = "";
+            foreach ($input_data AS $col=>$val) {
+                if ($sql != "") $sql.= ", ";
+                $sql .= "$col = '$val'";
+            }
+
+            $result_admin = $GLOBALS['db_conn']->queryData(
+                "UPDATE Admin
+                SET " .$sql
+                ." WHERE id='$admin_id'"
+            );
+            
+            if (!$result_admin) return false;
+            return true;
         }
     }
 

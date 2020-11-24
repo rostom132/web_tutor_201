@@ -1,27 +1,20 @@
-var magicSelect;
+import { getAvatar } from "./getAvaNavbar.js";
 
 //Custom function
 function passDataIntoFormDB() {
-    var mess = localStorage.getItem("user_id");
-
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "adminInfo.php?admin_id=1";
+    var url = "application/controllers/infoAdmin.php?get_data_db=true";
     ajax.open(method, url, true);
-    ajax.send();
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var obj = JSON.parse(this.responseText)['admin'][0];
+            var obj = JSON.parse(this.responseText)['admin'];
             for (var key in obj) {
-                localStorage.setItem(key, obj[key]);
-                if (document.getElementById("edit_admin_" + key)) {
-                    document.getElementById("edit_admin_" + key).value = obj[key];
+                sessionStorage.setItem(key, obj[key]);
+                if (document.getElementById("edit_" + key)) {
+                    document.getElementById("edit_" + key).value = obj[key];
                 }
             }
-
-            var languageValue = obj['language'];
-            var languaue = document.getElementById("edit_admin_language");
-            languaue.value = languageValue;
 
             var genderValue = obj['gender'];
             var gender = document.getElementsByName("gender");
@@ -31,54 +24,57 @@ function passDataIntoFormDB() {
                 gender[1].checked = true;
             }
 
-            var obj_specialize = JSON.parse(this.responseText)['specialize'].map(a => a.id);
-            localStorage.setItem('speciality', obj_specialize);
+            if (JSON.parse(this.responseText)['avatar_user'] != '')
+                $("#avatar_user")
+                .attr("src", JSON.parse(this.responseText)['avatar_user'] + "?" + new Date().getTime())
+                .width(200)
+                .height('auto');
 
-            var obj_subject = JSON.parse(this.responseText)['subject'];
-            magicSelect = $('#speciality').magicSuggest({
-                allowFreeEntries: false,
-                allowDuplicates: false,
-                maxSelection: 8,
-                data: obj_subject,
-            });
-            magicSelect.setValue(obj_specialize);
-            magicSelect.disable();
+            sessionStorage.setItem("avatar", document.getElementById("avatar_user").src);
+
+            document.getElementById("admin_username").innerText = JSON.parse(this.responseText)['username'];
         }
     };
+    ajax.send();
+    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
+        document.getElementsByClassName("form-control")[i].disabled = true;
+    }
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
 }
 
 function getAllDataInForm() {
 
     var allInputData = {};
-    allInputData['id'] = localStorage.getItem('user_id');
     allInputData['admin'] = {};
-    allInputData['password'] = document.getElementById("edit_admin_main_pass").value;
+    allInputData['password'] = document.getElementById("edit_main_pass").value;
 
-    allInputData['admin']['first_name'] = document.getElementById("edit_admin_fname").value;
-    allInputData['admin']['last_name'] = document.getElementById("edit_admin_lname").value;
-    allInputData['admin']['email'] = document.getElementById("edit_admin_check_email").value;
-    allInputData['admin']['phone_number'] = document.getElementById("edit_admin_phone_number").value;
-    var gender = (document.getElementById("edit_admin_gender_male").value == 'male') ? 'M' : 'F';
-    allInputData['admin']['gender'] = gender;
+    allInputData['admin']['first_name'] = document.getElementById("edit_fname").value;
+    allInputData['admin']['last_name'] = document.getElementById("edit_lname").value;
+    allInputData['admin']['phone_number'] = document.getElementById("edit_phone_number").value;
+    var gender = document.getElementsByName("gender");
+    var genderResult;
+    if (gender[0].checked)
+        genderResult = 'M';
+    else
+        genderResult = 'F';
+    allInputData['admin']['gender'] = genderResult;
 
     return allInputData;
 }
 
 function passDataIntoFormStorage() {
 
-    var edit_admin_fnameValue = localStorage.getItem("fname");
-    document.getElementById("edit_admin_fname").value = edit_admin_fnameValue;
+    var edit_fnameValue = sessionStorage.getItem("fname");
+    document.getElementById("edit_fname").value = edit_fnameValue;
 
-    var edit_admin_lnameValue = localStorage.getItem("lname");
-    document.getElementById("edit_admin_lname").value = edit_admin_lnameValue;
+    var edit_lnameValue = sessionStorage.getItem("lname");
+    document.getElementById("edit_lname").value = edit_lnameValue;
 
-    var emailValue = localStorage.getItem("mailStore");
-    document.getElementById("edit_admin_check_email").value = emailValue;
+    var phoneValue = sessionStorage.getItem("phone_number");
+    document.getElementById("edit_phone_number").value = phoneValue;
 
-    var phoneValue = localStorage.getItem("phone_number");
-    document.getElementById("edit_admin_phone_number").value = phoneValue;
-
-    var genderValue = localStorage.getItem("gender");
+    var genderValue = sessionStorage.getItem("gender");
     var gender = document.getElementsByName("gender");
     if (genderValue == "M") {
         gender[0].checked = true;
@@ -86,27 +82,15 @@ function passDataIntoFormStorage() {
         gender[1].checked = true;
     }
 
-
-    // var imgValue = localStorage.getItem("avatar");
-    // $('#image').attr('src', imgValue);
-}
-
-//Image Button
-$(".uploader").change(function upImg() {
-    if (this.files && this.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            $('#image')
-                .attr('src', e.target.result)
-                // .width(150)
-                // .height(200);
-        };
-
-        reader.readAsDataURL(this.files[0]);
+    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
+        document.getElementsByClassName("form-control")[i].disabled = true;
     }
-    this.value = null;
-})
+    document.querySelector("#edit_gender_male").disabled = true;
+    document.querySelector("#edit_gender_female").disabled = true;
+
+    var imgValue = sessionStorage.getItem("avatar");
+    $('#avatar_user').attr('src', imgValue);
+}
 
 //Change Button
 $(".btnChange").click(function changeData() {
@@ -117,37 +101,74 @@ $(".btnChange").click(function changeData() {
     document.querySelector(".btnUpdate").removeAttribute("style");
     document.querySelector(".btnCancel").removeAttribute("style");
     document.querySelector(".btnUpload").removeAttribute("style");
-    document.querySelector("#edit_admin_gender_male").removeAttribute("disabled");
-    document.querySelector("#edit_admin_gender_female").removeAttribute("disabled");
-    magicSelect.enable();
+    document.querySelector("#edit_gender_male").removeAttribute("disabled");
+    document.querySelector("#edit_gender_female").removeAttribute("disabled");
 });
 
 //Update Button
 $(".btnUpdate").click(function updateData() {
-    document.querySelector(".btnChange").removeAttribute("style");
-    document.querySelector(".btnCancel").style.display = "none";
-    document.querySelector(".btnUpdate").style.display = "none";
-    document.querySelector(".btnUpload").style.display = "none";
-    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
-        document.getElementsByClassName("form-control")[i].disabled = true;
-    }
-    document.querySelector("#edit_admin_gender_male").disabled = true;
-    document.querySelector("#edit_admin_gender_female").disabled = true;
-
     var allInputData = getAllDataInForm();
+    var update_info = false;
     $.ajax({
         type: "POST",
-        url: "adminInfo.php",
+        url: "application/controllers/infoAdmin.php",
         data: { changeData: allInputData },
         success: function(data) {
             if (data == 'true') {
-                location.reload();
+                update_info = true;
+            } else if (data == 'false') {
+                alert('Fail to update infomation!');
+            } else if (data == 'WRONG ELEMNT!') {
+                alert('WRONG ELEMENT!');
+                update_info = false;
             } else {
-                passDataIntoFormStorage();
-                alert("Error while updating data!!!");
+                var errors = new Array();
+                errors = JSON.parse(data);
+                alert('Please update again ' + errors.join(", ") + "!!");
+                update_info = false;
             }
-        }
+        },
+        async: false,
+        timeout: 3000
     });
+
+    var update_avatar = false;
+    if (update_info && document.getElementById("edit_fileInput").value != '') {
+        var fd = new FormData();
+        var files = $('.uploader')[0].files[0];
+        fd.append('file', files);
+        update_avatar = $.ajax({
+            url: 'application/controllers/updateInfo.php',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response != 0) {
+                    update_avatar = true;
+                } else {
+                    alert('Fail to upload tutor avatar!!');
+                    update_avatar = false;
+                }
+            },
+            error: function(response) {
+                alert('Fail to upload tutor avatar!!');
+                update_avatar = false;
+            },
+            async: false,
+            timeout: 3000
+        });
+    }
+
+    if (update_avatar || update_info) {
+        alert("Update infomation successful!");
+        document.querySelector(".btnChange").removeAttribute("style");
+        document.querySelector(".btnCancel").style.display = "none";
+        document.querySelector(".btnUpdate").style.display = "none";
+        document.querySelector(".btnUpload").style.display = "none";
+        passDataIntoFormDB();
+        getAvatar();
+    }
 });
 
 //Cancel Button
@@ -157,19 +178,12 @@ $(".btnCancel").click(function cancleUpdateData() {
     document.querySelector(".btnUpdate").style.display = "none";
     document.querySelector(".btnUpload").style.display = "none";
 
-    for (let i = 0; i < document.getElementsByClassName("form-control").length; i++) {
-        document.getElementsByClassName("form-control")[i].disabled = true;
-    }
-    document.querySelector("#edit_admin_gender_male").disabled = true;
-    document.querySelector("#edit_admin_gender_female").disabled = true;
-
     passDataIntoFormStorage();
 });
 
 
 
+
 $(document).ready(function() {
-
     passDataIntoFormDB();
-
 });

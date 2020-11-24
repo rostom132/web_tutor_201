@@ -1,3 +1,30 @@
+function disableUpdate() {
+    document.querySelector(".btnUpdate").disabled = true;
+    document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
+}
+
+function enableUpdate() {
+    document.querySelector(".btnUpdate").removeAttribute("disabled");
+    document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
+}
+
+function resetNoti() {
+    $("input[class*='_validation invalid']").each(function(index, value) {
+        $(this).removeClass("invalid");
+    });
+}
+
+function checkEnableUpdate() {
+
+    var enableUpdateFlag = true;
+    $("input[class*='_validation invalid']").each(function(index, value) {
+        enableUpdateFlag = false;
+    });
+
+    if (enableUpdateFlag) enableUpdate();
+    else disableUpdate();
+}
+
 /**
  * Validate the phonenumber when user input data
  */
@@ -12,13 +39,10 @@ $(".phone_number_validation").on("input", function insertNumber(evt) {
     }
     if (!ok) {
         evt.target.className = 'form-control phone_number_validation invalid';
-        document.querySelector(".btnUpdate").disabled = true;
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
     } else {
         evt.target.className = 'form-control phone_number_validation';
-        document.querySelector(".btnUpdate").removeAttribute("disabled");
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
     }
+    checkEnableUpdate();
 })
 
 $('.phone_number_validation').after('<div class="error-message">Wrong phone format!</div>');
@@ -32,20 +56,17 @@ $(".email_validation").on("input", function insertEmail(evt) {
     let emailValue = evt.target.value;
     let ok = emailPattern.test(emailValue);
     if (emailValue.length === 0) {
-        document.querySelector("#edit_tutor_check_email").className = "form-control email_validation";
+        document.querySelector("#edit_check_email").className = "form-control email_validation";
         document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
         return
     }
     if (!ok) {
         evt.target.className = "form-control email_validation invalid";
-        document.querySelector(".btnUpdate").disabled = true;
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
     } else {
         evt.target.className = "form-control email_validation";
-        document.querySelector(".btnUpdate").removeAttribute("disabled");
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
 
     }
+    checkEnableUpdate();
 })
 
 $('.email_validation').after('<div class="error-message">Please enter email again!</div>');
@@ -65,13 +86,10 @@ $(".fname_validation").on("input", function insertFname(evt) {
     }
     if (!ok) {
         evt.target.className = 'form-control fname_validation invalid';
-        document.querySelector(".btnUpdate").disabled = true;
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
     } else {
         evt.target.className = 'form-control fname_validation';
-        document.querySelector(".btnUpdate").removeAttribute("disabled");
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
     }
+    checkEnableUpdate();
 })
 
 $('.fname_validation').after('<div class="error-message">Wrong name format!</div>');
@@ -91,13 +109,10 @@ $(".lname_validation").on("input", function insertLname(evt) {
     }
     if (!ok) {
         evt.target.className = 'form-control lname_validation invalid';
-        document.querySelector(".btnUpdate").disabled = true;
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
     } else {
         evt.target.className = 'form-control lname_validation';
-        document.querySelector(".btnUpdate").removeAttribute("disabled");
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
     }
+    checkEnableUpdate();
 })
 
 $('.lname_validation').after('<div class="error-message">Wrong name format!</div>');
@@ -110,7 +125,7 @@ $(".pass_validation").on("input", function checkPass(evt) {
     let edit_passPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
     let mainPass = document.getElementById("edit_main_pass");
     let checkPass = document.getElementById("edit_check_pass");
-    let passValidation = edit_passPattern.test(mainPass.value);
+    let passValidation = (mainPass.value != '') ? edit_passPattern.test(mainPass.value) : true;
 
     if (checkPass.value != mainPass.value) {
         checkPass.className = 'form-control check_pass pass_validation check_pass_validation invalid';
@@ -123,14 +138,7 @@ $(".pass_validation").on("input", function checkPass(evt) {
     } else {
         mainPass.className = 'form-control main_pass pass_validation';
     }
-
-    if (checkPass.value != mainPass.value || !passValidation) {
-        document.querySelector(".btnUpdate").disabled = true;
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate disableBtn";
-    } else {
-        document.querySelector(".btnUpdate").removeAttribute("disabled");
-        document.querySelector(".btnUpdate").className = "btnRegister btnUpdate";
-    }
+    checkEnableUpdate();
 })
 
 $('.main_pass_validation').after('<div class="error-message">Minimum 8 characters, at least one letter and one number!</div>');
@@ -181,5 +189,5 @@ $(".uploader").change(function upImg() {
 })
 
 $(".btnCancel").click(function clearNoti() {
-
+    resetNoti();
 });

@@ -15,10 +15,10 @@
 
 
                 <div>
-                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="Profile image" id="image">
+                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="Profile image" id="avatar_user">
                 </div>
                 <h3>Welcome</h3>
-                <p>Your profile!</p>
+                <p id="admin_username">Your profile!</p>
 
             </div>
             <div class="col-md-9 register-right">
@@ -29,42 +29,42 @@
                             <div class="row register-form">
                                 <div class="col-md-6">
                                     <div class="form-group form-distance tooltip">
-                                        <input type="text" class="form-control fname_validation" placeholder="First Name *" id="edit_admin_fname" name="ffname" disabled required />
+                                        <input type="text" class="form-control fname_validation" placeholder="First Name *" id="edit_fname" name="ffname" disabled required />
                                         <span class="tooltiptext">First name</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input type="text" class="form-control lname_validation" placeholder="Last Name *" id="edit_admin_lname" name="llname" disabled required />
+                                        <input type="text" class="form-control lname_validation" placeholder="Last Name *" id="edit_lname" name="llname" disabled required />
                                         <span class="tooltiptext">Last name</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_admin_phone_number" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control phone_number_validation" placeholder="Your Phone *" value="" disabled />
+                                        <input id="edit_phone_number" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control phone_number_validation" placeholder="Your Phone *" value="" disabled />
                                         <span class="tooltiptext">Phone number</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_admin_main_pass" type="password" class="form-control main_pass_validation" placeholder="Password *" value="" disabled />
+                                        <input id="edit_main_pass" type="password" class="form-control main_pass_validation pass_validation" placeholder="Password *" value="" disabled />
                                         <span class="tooltiptext">Password</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
-                                        <input id="edit_admin_check_pass" type="password" class="form-control check_pass_validation" placeholder="Confirm Password *" value="" disabled />
+                                        <input id="edit_check_pass" type="password" class="form-control check_pass_validation pass_validation" placeholder="Confirm Password *" value="" disabled />
                                         <span class="tooltiptext">Check password</span>
                                     </div>
                                     <div class="form-group form-distance tooltip">
                                         <div class="maxl">
                                             <label class="radio inline">
-                                                <input id="edit_admin_gender_male" type="radio" name="gender"
+                                                <input id="edit_gender_male" type="radio" name="gender"
                                                     value="male" checked disabled>
                                                 <span> Male </span>
                                             </label>
                                             <label class="radio inline">
-                                                <input id="edit_admin_gender_female" type="radio" name="gender"
+                                                <input id="edit_gender_female" type="radio" name="gender"
                                                     value="female" disabled>
                                                 <span>Female </span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group form-distance">
-                                        <input id="edit_admin_fileInput" type='file' class='uploader' />
-                                        <label for="edit_admin_fileInput" class="btnUpload" style="display: none;">Upload
+                                        <input id="edit_fileInput" type='file' class='uploader' />
+                                        <label for="edit_fileInput" class="btnUpload" style="display: none;">Upload
                                             Avatar</label>
                                     </div>
 
@@ -84,7 +84,7 @@
                                 <div class="infoBtn">
                                     <input type="button" class="btnRegister btnChange" value="Change" />
                                     <input type="button" class="btnRegister btnCancel" value="Cancel" style="display: none;" />
-                                    <input type="button" class="btnRegister btnUpdate" value="Update" style="display: none;" />
+                                    <input type="button" class="btnRegister btnUpdate disableBtn" value="Update" style="display: none;" disabled/>
                                 </div>
                             </div>
                     </div>
