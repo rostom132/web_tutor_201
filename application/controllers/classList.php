@@ -10,13 +10,6 @@ function getAllAvatar($class_arr) {
     return $arr;
 }
 
-function getAllWeakness($class_arr) {
-    $arr = array();
-    foreach($class_arr as $user) {
-        array_push($arr, )
-    }
-}
-
 function getAllClass($current_page) {
 
     $total_records = Classs::getNumberOfClass();
