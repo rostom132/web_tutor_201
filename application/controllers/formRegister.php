@@ -57,19 +57,18 @@
             if ($register_status) {
                 switch ($role) {
                     case "tutor":
-                        if (!Tutor::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email'])))
-                            return 'fail';
+                        Tutor::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email']));
                         break;
                     case "parent":
-                        if (!Parents::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email'])))
-                            return 'fail';
+                        Parents::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email']));
                         break;
                     case "admin":
-                        if (!Admin::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email'])))
-                            return 'fail';
+                        Admin::createInfo($register_status, array('first_name' => $input_data[$role]['username'], 'email' => $input_data['email']));
                         break;
                 }
             };
+            unset($_SESSION['token_register']);
+            unset($_SESSION['token_email']);
             Authen::login($input_data[$role]['username']);
             return 'success';
         }

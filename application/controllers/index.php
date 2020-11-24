@@ -8,8 +8,8 @@
 
     AutoAuthen::rememberMe();
 
-    // $_SESSION['user_id'] = '6';
-    // $_SESSION['username'] = 'tienn';
+    // $_SESSION['user_id'] = '1';
+    // $_SESSION['username'] = 'tien';
     // $_SESSION['user_type'] = 'tutor';
 
     array_push($page_content , "../views/header.html");

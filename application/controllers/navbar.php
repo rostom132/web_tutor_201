@@ -4,7 +4,7 @@
     include_once "./common/authentication.php";
 
     if(isset($_GET['getAva']) && $_GET['getAva'] == 'true') {
-        echo(getAva()); 
+        echo(getUserAvatar($_SESSION['user_id'])); 
     }
 
     if(isset($_GET['logout']) && $_GET['logout'] == 'true'){
