@@ -1,6 +1,6 @@
 import { cityData } from "./constant/city.js";
 import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor } from "./constant/schedule.js";
-import { translate } from "./translate.js";
+import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 
@@ -43,17 +43,17 @@ $("#schedule_add_btn").click(function() {
     <div id="schedule_row_` + schedule_id + `"` + `class="row schedule_row">
         <div class="col-3">
             <select disabled id="registerClass-date_` + schedule_id + `"` + ` class="form__select date_select" required>
-                <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value=""></option>
+                <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value="">` + getText("REGISTER.DATE_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
             <select disabled id="registerClass-start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
-                <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value=""></option>
+                <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">` + getText("REGISTER.START_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
             <select disabled id="registerClass-end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
-                <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value=""></option>
+                <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">` + getText("REGISTER.END_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
         <button id="schedule_edit_icon_` + schedule_id + `"` + ` class="schedule_icon edit_icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -74,10 +74,6 @@ var observer = new MutationObserver(function(mutations) {
             $nodes.each(function() {
                 var $node = $(this);
                 if ($node.hasClass("schedule_row")) {
-                    var current_lang = localStorage.getItem("stored_lang");
-                    if (current_lang !== "en" && current_lang !== "vn")
-                        translate("en");
-                    else translate(current_lang);
                     var $id = $node.attr("id").split("_")[2];
                     renderDate($id);
                 }
@@ -590,12 +586,10 @@ function renderGenderOfTutor() {
  */
 
 function renderErrorMsg($topic, $error_msg) {
+    console.log("here")
     $topic.parent().find(".error-message").remove();
     var $p_field = $topic.parent().children().first();
-    $p_field.append('<span class="error-message lang" key="' + $error_msg + '"></span>');
-    var $current_lang = localStorage.getItem("stored_lang");
-    if ($current_lang !== "en" && $current_lang !== "vn") translate("en");
-    else translate($current_lang);
+    $p_field.append('<span class="error-message lang" key="' + $error_msg + '">' + getText($error_msg) + '</span>');
 }
 
 function checkTextField() {
@@ -707,21 +701,23 @@ function getAllDataInForm() {
     // Upload data to Class Schedule
     var $time_schedule = $(SUBMIT_PREFIX + "schedule_container").children();
     $.each($time_schedule, function(index, value) {
-            if (index == 0) return;
-            var $date_now = $(DATE_PREFIX + index).find("option:selected").val();
-            var $start_now = $(START_TIME_PREFIX + index).find("option:selected").val();
-            var $end_now = $(END_TIME_PREFIX + index).find("option:selected").val();
-            submitObj.registerSchedule.push({
-                "date": $date_now,
-                "start_time": $start_now,
-                "end_time": $end_now
-            })
+        if (index == 0) return;
+        var $date_now = $(DATE_PREFIX + index).find("option:selected").val();
+        var $start_now = $(START_TIME_PREFIX + index).find("option:selected").val();
+        var $end_now = $(END_TIME_PREFIX + index).find("option:selected").val();
+        submitObj.registerSchedule.push({
+            "date": $date_now,
+            "start_time": $start_now,
+            "end_time": $end_now
         })
-        // submitObj.registerSchedule.push({
-        //     "date": "MON",
-        //     "start_time": "9:30:00",
-        //     "end_time": "11:30:00",
-        // })
+    })
+
+    // submitObj.registerSchedule.push({
+    //     "date": "MON",
+    //     "start_time": "9:30:00",
+    //     "end_time": "11:30:00",
+    //     "end_time": "12:30:00",
+    // })
 
     // Upload data to Weakness
     $.each(magicSelect.getValue(), function(index, value) {
@@ -748,7 +744,8 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    // window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    enableAll();
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
