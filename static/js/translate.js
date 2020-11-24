@@ -48,7 +48,6 @@ function translateLang() {
 $(function() {
     //first check for stored language in localStorage i.e. fetch data from localStorage
     let stored_lang = localStorage.getItem("stored_lang");
-    console.log(typeof(stored_lang));
     var language_flag = document.getElementById("language_flag");
     var contact_us = document.getElementsByClassName("contact-us");
     //if any then translate page accordingly

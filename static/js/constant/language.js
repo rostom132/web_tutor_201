@@ -100,9 +100,9 @@ export const arrLang = {
             "FILTER_BUTTON": "Filter",
             "SALARY": "/lesson",
             "DIST_TAG": "District ",
-            "GENDER_MALE": "Male",
-            "GENDER_FEMALE": "Female",
-            "GENDER_BOTH": "Male/Female",
+            "GENDER_MALE": "Male Teacher",
+            "GENDER_FEMALE": "Female Teacher",
+            "GENDER_BOTH": "Male/Female Teacher",
         },
         //infoTutor
         "INFO_TUTOR": {
@@ -250,9 +250,9 @@ export const arrLang = {
             "FILTER_BUTTON": "Áp dụng",
             "SALARY": "/buổi",
             "DIST_TAG": "Quận ",
-            "GENDER_MALE": "Nam",
-            "GENDER_FEMALE": "Nữ",
-            "GENDER_BOTH": "Nam/Nữ",
+            "GENDER_MALE": "Giáo viên Nam",
+            "GENDER_FEMALE": "Giáo viên Nữ",
+            "GENDER_BOTH": "Giáo viên Nam/Nữ",
         },
 
         //infoTutor
