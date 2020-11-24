@@ -49,7 +49,93 @@
             return $failValidate;
         }
 
-        
+        static function validateClassInfo($input_data, $type) {
+            $failValidate = array();
+            switch($type) {
+                case "registerClass":
+                    $count = 0;
+                    foreach($input_data as $col => $values) {
+                        if(in_array($col, array_keys(Config::get()['validateClassInfo'][$type]))) {
+                            if(!preg_match(Config::get()['validateClassInfo'][$type][$col], trim($values))) {
+                                array_push($failValidate, $col);
+                            }
+                            else $count += 1;
+                        }
+                        else {
+                            return 'WRONG ELEMENT';
+                        }
+                    }
+                    $length_to_check = sizeof(Config::get()['validateClassInfo'][$type]);
+                    if($count !== $length_to_check) return 'WRONG ELEMENT';
+                    break;
+                case "registerSchedule":
+                    $count = 0;
+                    if((sizeof($input_data) > 0) && (sizeof($input_data) <= 10)) {
+                        foreach($input_data as $el) {
+                            foreach($el as $col => $values) {
+                                if(in_array($col, array_keys(Config::get()['validateClassInfo'][$type]))) {
+                                    if(!preg_match(Config::get()['validateClassInfo'][$type][$col], $values)) {
+                                        array_push($failValidate, "Time Schedule");
+                                        return $failValidate;
+                                    } else $count += 1;
+                                }
+                                else {
+                                    return 'WRONG ELEMENT';
+                                }
+                            }
+                            // Check if there is all 3 fields
+                            $length_to_check = sizeof(Config::get()['validateClassInfo'][$type]);
+                            if($count !== $length_to_check) return 'WRONG ELEMENT';
+                            else $count = 0;
+                            // Check if end_time - start_time >= 2
+                            list($start_hour, $start_minute, $start_second) = explode(":", $el["start_time"]);
+                            list($end_hour, $end_minute, $end_second) = explode(":", $el["end_time"]);
+                            if($start_minute !== "30") {
+                                if(intval($end_hour) - intval($start_hour) < 2) {
+                                    array_push($failValidate, "Time Schedule");
+                                    return $failValidate;
+                                }
+                            }
+                            else if($start_minute === "30") {
+                                if((intval($end_hour) - intval($start_hour) < 2) && $end_minute === "30") {
+                                    array_push($failValidate, "Time Schedule");
+                                    return $failValidate;
+                                }
+                                else if((intval($end_hour) - intval($start_hour) < 3) && $end_minute !== "30") {
+                                    array_push($failValidate, "Time Schedule");
+                                    return $failValidate;
+                                }
+                            }
+                        }
+                    }
+                    else array_push($failValidate, "Time Schedule");
+                    break;
+                case "registerWeakness":
+                    $count = 0;
+                    if((sizeof($input_data) > 0) && (sizeof($input_data) <= 3)) {
+                        foreach($input_data as $el) {
+                            foreach($el as $col => $values) {
+                                if(in_array($col, array_keys(Config::get()['validateClassInfo'][$type]))) {
+                                    if(!preg_match(Config::get()['validateClassInfo'][$type][$col], $values)) {
+                                        array_push($failValidate, "Subject");
+                                        return $failValidate;
+                                    }
+                                    else $count += 1;
+                                }
+                                else {
+                                    return 'WRONG ELEMENT';
+                                }
+                            }
+                            $length_to_check = sizeof(Config::get()['validateClassInfo'][$type]);
+                            if($count !== $length_to_check) return 'WRONG ELEMENT';
+                            else $count = 0;
+                        }
+                    }
+                    else array_push($failValidate, "Subject");
+                    break;
+            }
+            return $failValidate;
+        }
 
         static function validatePass($password) {
             return preg_match(Config::get()['validateCommon']['password'], $password);

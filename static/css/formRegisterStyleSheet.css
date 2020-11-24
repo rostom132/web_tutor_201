@@ -104,6 +104,10 @@
     background-color: #727a7c !important;
 }
 
+.regFormRowBtn1:focus {
+    outline: none;
+}
+
 
 /*decorate the form; end*/
 
@@ -251,47 +255,55 @@ input[type=number] {
     color: red;
     font-weight: 500;
 }
+
 #email_button:focus {
     outline: none;
 }
+
 #email_admin_button:focus {
     outline: none;
 }
+
 #email_button:hover {
     color: white;
+}
 
+#email_button:hover .tooltiptext {
+    visibility: visible;
 }
-#email_button:hover .tooltiptext{
-    visibility: visible; 
-}
+
 #email_admin_button:hover {
     color: white;
 }
-#email_admin_button:hover .tooltiptext{
+
+#email_admin_button:hover .tooltiptext {
     visibility: visible;
 }
+
+
 /* countdown button */
+
 .base-timer {
     position: relative;
     width: 40px;
     height: 40px;
-  }
-  
-  .base-timer__svg {
+}
+
+.base-timer__svg {
     transform: scaleX(-1);
-  }
-  
-  .base-timer__circle {
+}
+
+.base-timer__circle {
     fill: none;
     stroke: none;
-  }
-  
-  .base-timer__path-elapsed {
+}
+
+.base-timer__path-elapsed {
     stroke-width: 7px;
     stroke: grey;
-  }
-  
-  .base-timer__path-remaining {
+}
+
+.base-timer__path-remaining {
     stroke-width: 7px;
     stroke-linecap: round;
     transform: rotate(90deg);
@@ -299,21 +311,21 @@ input[type=number] {
     transition: 1s linear all;
     fill-rule: nonzero;
     stroke: currentColor;
-  }
-  
-  .base-timer__path-remaining.green {
+}
+
+.base-timer__path-remaining.green {
     color: rgb(65, 184, 131);
-  }
-  
-  .base-timer__path-remaining.orange {
+}
+
+.base-timer__path-remaining.orange {
     color: orange;
-  }
-  
-  .base-timer__path-remaining.red {
+}
+
+.base-timer__path-remaining.red {
     color: red;
-  }
-  
-  .base-timer__label {
+}
+
+.base-timer__label {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -322,9 +334,9 @@ input[type=number] {
     align-items: center;
     justify-content: center;
     font-size: 14px;
-  }
+}
 
-  .tooltiptext {
+.tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -338,8 +350,9 @@ input[type=number] {
     left: 50%;
     margin-left: -42px;
     margin-bottom: 5px;
-  }
-  .tooltiptext::after {
+}
+
+.tooltiptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -348,4 +361,4 @@ input[type=number] {
     border-width: 5px;
     border-style: solid;
     border-color: black transparent transparent transparent;
-  }
+}

@@ -37,6 +37,15 @@
             return [[]];
         }
 
+        /**
+         * get the row inserted id from the query
+         *
+         * @return integer id
+         */ 
+        function getNewInsertedId() {
+            return $this->db_conn->insert_id;
+        }
+
         function __destruct(){
             $this->db_conn->close();
         }
