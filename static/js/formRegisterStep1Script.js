@@ -155,8 +155,8 @@ function startTimer(timePassed, TIME_LIMIT, timeLeft) {
 }
 
 function setRemainingPathColor(timeLeft) {
-    const WARNING_THRESHOLD = 10;
-    const ALERT_THRESHOLD = 5;
+    const WARNING_THRESHOLD = 6;
+    const ALERT_THRESHOLD = 3;
     const COLOR_CODES = {
         info: {
             color: "green"
@@ -202,8 +202,18 @@ function setCircleDasharray(timeLeft, TIME_LIMIT) {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 function emailButton() {
-    let button_user = `<button id="email_button" style="background-color: transparent;" type="button"><i class="rowContact fas fa-user-check"></i></button>`;
-    let button_admin = `<button id="email_admin_button" style="background-color: transparent;" type="button"><i class="rowContact fas fa-user-check"></i></button>`;
+    let button_user = `<button id="email_button" style="background-color: transparent;" type="button">
+                        <div style="position:absolute;">
+                            <span class="tooltiptext">Verify email</span>
+                        </div>
+                        <i class="rowContact fas fa-user-check"></i>
+                        </button>`;
+    let button_admin = `<button id="email_admin_button" style="background-color: transparent;" type="button">
+                        <div style="position:absolute;">
+                            <span class="tooltiptext">Verify email</span>
+                        </div>
+                        <i class="rowContact fas fa-user-check"></i>
+                        </button>`;
     document.querySelector('#app-user').innerHTML = button_user;
     document.querySelector('#app-admin').innerHTML = button_admin;
     

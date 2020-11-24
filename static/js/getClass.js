@@ -25,6 +25,7 @@ function createTemplate(class_list) {
     for(let i = 0; i < class_list.length; i++)
     {
         var class_title = class_list[i]['topic'];
+        var class_id = class_list[i]['id'];
         var class_description = class_list[i]['description']
         var dist;
         $.each(constants.cityData.districts, function(index, element){
@@ -60,7 +61,7 @@ function createTemplate(class_list) {
                 <div class="class-info-col">
                     <p>
                         <img src=${infor_icon} style="width: 20px; height: 20px;">
-                        <span id="class-title">${class_title}</span>
+                        <a href="infoClass/${class_id}" target="_blank" id="class-title">${class_title}</a>
                     </p>
                     <p>
                         ${class_description}
@@ -182,7 +183,8 @@ export function filterClass(dist, sub, gender) {
                 var obj = JSON.parse(this.responseText);
                 console.log(obj);
                 if(obj[0] == 0) {
-                    alert("No class found!");
+                    renderClassNum(0);
+                    noResultTemplate();
                     return;
                 }      
                 class_num = obj[0];
@@ -255,5 +257,7 @@ export function keepFilterValue() {
 export function getClassFiltered(dist, sub, gender) {
     alert(dist+ " " + sub + " " + gender); 
 }
-
-
+function noResultTemplate() {
+    document.getElementById("show").setAttribute('style','text-align:center')
+    document.getElementById("show").innerHTML= `<img src="./static/images/background/404.jpg" style="margin-left:auto; margin-right:auto">`;
+}
