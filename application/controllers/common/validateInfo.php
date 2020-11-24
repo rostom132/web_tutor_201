@@ -123,7 +123,6 @@
                                     else $count += 1;
                                 }
                                 else {
-                                    error_log("Wrong key", 3, "./log.log");
                                     return 'WRONG ELEMENT';
                                 }
                             }
