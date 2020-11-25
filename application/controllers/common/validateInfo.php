@@ -76,7 +76,6 @@
                             foreach($el as $col => $values) {
                                 if(in_array($col, array_keys(Config::get()['validateClassInfo'][$type]))) {
                                     if(!preg_match(Config::get()['validateClassInfo'][$type][$col], $values)) {
-                                        error_log($col, 3, "./log.log");
                                         array_push($failValidate, "Time Schedule");
                                         return $failValidate;
                                     } else $count += 1;
@@ -119,7 +118,6 @@
                             foreach($el as $col => $values) {
                                 if(in_array($col, array_keys(Config::get()['validateClassInfo'][$type]))) {
                                     if(!preg_match(Config::get()['validateClassInfo'][$type][$col], $values)) {
-                                        error_log($col, 3, "./log.log");
                                         array_push($failValidate, "Subject");
                                         return $failValidate;
                                     }
