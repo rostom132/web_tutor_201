@@ -121,19 +121,22 @@ function removeTickIcon($id) {
     $("#schedule_edit_icon_" + $id).children().addClass("fa-pencil-square-o");
 }
 
-$("#registerClass-schedule_container").on("click", ".delete_icon", function() {
-    var $current_id = $(this).attr("id").split("_")[3];
+function removeTimeSlot($id) {
     // Find the Id to delete in Schedule Object
     $.each(DateScheduleObj, function(key, value) {
         var delete_Id = DateScheduleObj[key].TimeSlot.findIndex(function(timeSlot) {
-            return timeSlot.id === parseInt($current_id);
+            return timeSlot.id === parseInt($id);
         })
         if (delete_Id !== -1) {
             DateScheduleObj[key].TimeSlot.splice(delete_Id, 1);
             return true;
         }
     })
+}
 
+$("#registerClass-schedule_container").on("click", ".delete_icon", function() {
+    var $current_id = $(this).attr("id").split("_")[3];
+    removeTimeSlot($current_id);
     // Reset state
     var $add_bnt = $("#schedule_add_btn");
     $add_bnt.prop("disabled", false);
@@ -193,6 +196,8 @@ $("#registerClass-schedule_container").on("click", ".edit_icon", function() {
         // Require user to choose all fields
         // console.log($check_flag);
         if ($check_flag == 0) {
+            // Delete the existed time slot in other date DateSchedule
+            removeTimeSlot($schedule_row_id);
             // Update the TimeSchedule Arr
             var $date_selected = $(DATE_PREFIX + $schedule_row_id).find("option:selected").val();
             // Get start_time_selected;
@@ -769,7 +774,7 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    // window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
                     alert("SUCCESS");
                     // Change url
                 } else if (
@@ -796,7 +801,24 @@ function enableAll() {
     $(".register-form").css("pointer-events", "visible");
 }
 
+// On user input check
+function onInputCheck() {
+    $.each(textField, function(index, value) {
+        var $check_val = $(SUBMIT_PREFIX + value);
+        $check_val.on("input", function() {
+            var $val = $check_val.val();
+            let $regex_pattern = registerClassRegex[value];
+            if ($val !== "" && !$regex_pattern.test($val)) {
+                renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
+            } else {
+                $check_val.parent().find(".error-message").remove();
+            }
+        });
+    });
+}
+
 $(function() {
+    onInputCheck();
     renderSubject();
     renderLessonPerWeek();
     renderHourPerLesson();

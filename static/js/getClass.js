@@ -123,6 +123,7 @@ export function initClass() {
     ajax.send("init=1&current=" + current_page);
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
             document.getElementById('show').removeChild(loading);
             if (this.responseText == 0) {
                 renderClassNum(0);
@@ -170,7 +171,7 @@ export function filterClass(dist, sub, gender) {
         initClass();
         return;
     } else {
-        ajax.send("filter=1&filterVal=" + JSON.stringify(filterVal)+"&current="+getURLParam()['page']);
+        ajax.send("filter=1&filterVal=" + JSON.stringify(filterVal) + "&current=" + getURLParam()['page']);
         current_page = getURLParam()['page'];
         ajax.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
