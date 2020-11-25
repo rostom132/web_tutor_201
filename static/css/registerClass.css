@@ -1,17 +1,23 @@
-.register-form {
+.body-wrapper {
     position: relative;
-    margin-top: 20px;
-    border-radius: 2px;
-    background-color: #fff;
+    background-color: #d2f9f9;
+    padding: 50px 0px;
+}
+
+.register-form {
+    background-color: white;
+    border-left: solid 20px #4BBADC;
+    border-right: solid 20px #4BBADC;
+    border-bottom: solid 20px #4BBADC;
 }
 
 .form__title {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     width: 100%;
     background-color: #4BBADC;
-    padding: 10px;
+    padding: 10px 0px;
     font-size: 24px;
     font-weight: 700;
     color: #fff;
@@ -22,7 +28,7 @@
 }
 
 .group-row {
-    padding: 10px;
+    padding: 10px 40px;
     margin-bottom: 30px;
     margin-top: 30px;
 }
@@ -117,26 +123,7 @@
     color: red;
 }
 
-.tooltip {
-    position: relative;
-    opacity: 1;
-    z-index: unset;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+.no-padding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }

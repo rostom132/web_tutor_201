@@ -101,6 +101,7 @@ ul {
 }
 
 .navbar__li {
+    top: 5px;
     padding-bottom: 30px;
 }
 
