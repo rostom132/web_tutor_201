@@ -94,6 +94,7 @@
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0]['name'];
         }
+
         public static function getWeaknessOfClass($class_list) {
             $str = null;
             for($i = 0; $i < sizeof($class_list); $i++) {
@@ -112,6 +113,15 @@
                 HAVING class.id IN ($str)"
             );
             return $GLOBALS['db_conn']->convertToArray($result);
+        }
+
+        public static function getDetaiClassInfo($class_id){
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT parent.first_name as fname, parent.last_name as lname, parent.email, parent.phone_number, class.no_students, class.gender_of_tutor, class.salary_per_lesson as salary, class.no_lesson_per_week as no_lesson, class.address, class.ward, class.district FROM class 
+                JOIN parent ON class.user_id = parent.id
+                Where class.id = '$class_id'"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result)[0];
         }
     }
 

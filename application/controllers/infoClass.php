@@ -1,6 +1,8 @@
 <?php
     session_start();
     include_once "../models/class.php";
+    include_once "../models/tutor.php";
+    include_once "../models/class.php";
     include_once "./common/getAvatar.php"; 
     include_once "./common/mailTransform.php";
 
@@ -15,7 +17,18 @@
         return json_encode($response);
     }
 
+    function buildClassDataEmail($class_id) {
+        $info_class = Classs::getDetaiClassInfo($class_id);
+        
+    }
+
+    function buildTutorDataEmail($tutor_id) {
+        $info_tutor = Tutor::getInfo($tutor_id);
+        
+    }
+
     function registerClass($class_id){
+        
         return Email::sendRegisterClassMail();
     }
 
