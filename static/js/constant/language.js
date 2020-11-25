@@ -79,7 +79,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Submit",
             "ERROR": "You must fill/select value in this field",
             "WRONG_FORMAT": "Invalid format",
-            "WRONG_RANGE": "Minium 1 and maximum 100",
+            "WRONG_RANGE": "Minium 1 and maximum 5",
         },
         "DATE": {
             "MON": "Monday",
@@ -229,7 +229,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Đăng kí",
             "ERROR": "Bạn phải điền/chọn vào ô này",
             "WRONG_FORMAT": "Không hợp lệ",
-            "WRONG_RANGE": "Tối thiểu 1 và tối đa 100",
+            "WRONG_RANGE": "Tối thiểu 1 và tối đa 5",
         },
         "DATE": {
             "MON": "Thứ 2",
