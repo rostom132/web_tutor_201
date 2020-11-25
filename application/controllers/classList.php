@@ -56,7 +56,7 @@ function getClassWithFilter($filterVal, $current_page) {
     $total_page = ceil($total_records / $limit);
     $start = ($current_page - 1) * $limit;
     $class_arr = Classs::getLimitClassesFilter($filterArr, $current_page, $limit);
-    error_log($total_records. " " . $class_arr,3,"./log.log");
+    // error_log($total_records. " " . $class_arr,3,"./log.log");
     if($total_records > 0 && $class_arr != "0") { 
         $avatar_arr = getAllAvatar($class_arr);
         $sub_arr = getAllWeaknessOfClass($class_arr);

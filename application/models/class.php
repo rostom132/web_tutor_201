@@ -39,6 +39,7 @@
             $result = $GLOBALS['db_conn']->queryData(
                 "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit"
             );
+            error_log("SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit", 3, "./log.log");
             if($result->num_rows != 0) {
                 return $GLOBALS['db_conn']->convertToArray($result);
             }
@@ -51,6 +52,7 @@
             $start = ($current_page - 1) * $limit;
             $prefix ="SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id ";
             $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $sql = null;
             if(sizeof($input_array) > 0) {
                 $prefix .= "WHERE ";
             }
@@ -94,6 +96,7 @@
             return $GLOBALS['db_conn']->convertToArray($result)[0]['name'];
         }
         public static function getWeaknessOfClass($class_list) {
+            $str = null;
             for($i = 0; $i < sizeof($class_list); $i++) {
                 if($i < sizeof($class_list) - 1) {
                     $str .= "'".$class_list[$i]."',";

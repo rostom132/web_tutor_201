@@ -10,6 +10,7 @@
                 'aboutUs',
                 'infoClass',
                 'classList',
+                'registerClass',
             ),
             'loginCommon' => array (
                 'bodyBanner',
