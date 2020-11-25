@@ -39,7 +39,6 @@
             $result = $GLOBALS['db_conn']->queryData(
                 "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit"
             );
-            error_log("SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit", 3, "./log.log");
             if($result->num_rows != 0) {
                 return $GLOBALS['db_conn']->convertToArray($result);
             }
