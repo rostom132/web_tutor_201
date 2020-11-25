@@ -31,7 +31,8 @@ $(document).ready(function() {
                         opt.text = obj[i]['name'];
                         optgroup.appendChild(opt);
                     }
-                }
+                },
+                async: false
             })
             //Render Gender
         optgroup = document.getElementById("gender");
@@ -54,7 +55,7 @@ $(document).ready(function() {
         if (param['gender'] == null || param['dist'] == null || param['sub'] == null) {
             initClass();
         } else {
-            filterClass($("#edit-place").val(), $("#edit-subject").val(), $("#edit-gender").val());
+            filterClass($("#edit-place").val(), getURLParam()['sub'], $("#edit-gender").val());
         }
     }
 })

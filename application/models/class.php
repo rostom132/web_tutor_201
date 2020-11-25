@@ -2,45 +2,69 @@
     include_once 'databaseConn.php';
 
     class Classs {
-        function console_log( $data ){
-            echo '<script>';
-            echo 'console.log('. json_encode( $data ) .')';
-            echo '</script>';
-          }
         public static function getNumberOfClass() {
             $result = $GLOBALS['db_conn']->queryData(
                 "SELECT id FROM Class"
             );
-            return mysqli_num_rows($result);
+            if($result->num_rows != 0) {
+                return mysqli_num_rows($result);
+            }
+            else {
+                return "0";
+            }
         }
 
         public static function getNumberOfClassFilter($input_array) {
             $sql = '';
+            if(sizeof($input_array) > 0) {
+                $sql .= "WHERE ";
+            }
             foreach ($input_array AS $col=>$val) {
-                if ($sql != '') $sql.= ' and ';
+                if ($sql != "WHERE ") $sql.= ' and ';
                 $sql .= "$col LIKE '$val'";
             }
-            $result = $GLOBALS['db_conn']->queryData("SELECT id FROM Class WHERE " .$sql);
-            return mysqli_num_rows($result);
+            $temp = "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id " .$sql;
+            $temp.=" GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $result = $GLOBALS['db_conn']->queryData($temp);
+            if($result->num_rows != 0) {
+                return mysqli_num_rows($result);
+            }
+            else {
+                return "0";
+            }
         }
 
         public static function getLimitClasses($current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT * FROM class LIMIT $start, $limit"
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit"
             );
-            return $GLOBALS['db_conn']->convertToArray($result);
+            if($result->num_rows != 0) {
+                return $GLOBALS['db_conn']->convertToArray($result);
+            }
+            else {
+                return "0";
+            }
         }
 
         public static function getLimitClassesFilter($input_array, $current_page, $limit) {
             $start = ($current_page - 1) * $limit;
-            $sql ="SELECT * FROM class WHERE ";
+            $prefix ="SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id ";
+            $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            if(sizeof($input_array) > 0) {
+                $prefix .= "WHERE ";
+            }
+            $sql .= $prefix;
             foreach ($input_array AS $col=>$val) {
-                if ($sql != 'SELECT * FROM class WHERE ') $sql.= ' and ';
+                if ($sql !=  $prefix) $sql.= ' and ';
                 $sql .= "$col LIKE '$val'";
             }
+            $sql .= $postfix;
             $sql.= " LIMIT $start, $limit";
             $result = $GLOBALS['db_conn']->queryData($sql);
+            if($result->num_rows == 0) {
+                return "0";
+            }
             return $GLOBALS['db_conn']->convertToArray($result);
         }
 
@@ -68,6 +92,24 @@
                 WHERE class.id = '$class_id'"
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0]['name'];
+        }
+        public static function getWeaknessOfClass($class_list) {
+            for($i = 0; $i < sizeof($class_list); $i++) {
+                if($i < sizeof($class_list) - 1) {
+                    $str .= "'".$class_list[$i]."',";
+                }
+                else {
+                    $str .= "'".$class_list[$i]."'";
+                }
+            }
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT class.id ,GROUP_CONCAT(CONCAT(name,'_', grade,'_', teaching_language)  SEPARATOR ', ') AS name FROM class
+                JOIN weakness ON weakness.class_id = class.id
+                JOIN subject ON subject.id = weakness.subject_id
+                GROUP BY class.id
+                HAVING class.id IN ($str)"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result);
         }
     }
 

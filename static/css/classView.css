@@ -34,10 +34,14 @@
     background: #fff;
     position: relative;
     border-radius: 20px;
-    width: 75%;
     margin: auto;
     border: 1px solid black;
     margin-top: 10px;
+}
+
+.classView-container {
+    width: 60%;
+    margin: auto;
 }
 
 .shadow-box {
@@ -75,7 +79,7 @@
 
 .ribbon {
     position: relative;
-    width: 75px;
+    width: 90px;
     height: 20px;
     background: #4BBADC;
     left: -15px;
