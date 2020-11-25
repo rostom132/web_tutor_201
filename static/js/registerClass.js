@@ -5,7 +5,7 @@ import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 
 const textField = ["topic", "salary_per_lesson", "no_students", "address", "phone_number", "description"];
-const selectField = ["district", "ward", "street", "schedule_container"];
+const selectField = ["district", "ward", "street"];
 const radioField = ["no_lesson_per_week", "time_per_lesson", "gender_of_tutor"];
 const magicField = ["subject"];
 
@@ -32,6 +32,11 @@ var magicSelect;
  */
 
 $("#schedule_add_btn").click(function() {
+    editMode = 1;
+    var $add_bnt = $("#schedule_add_btn");
+    $add_bnt.prop("disabled", true);
+    $add_bnt.addClass("disable");
+    disableAllEditIcon(0);
     var $free_time_length = $(SUBMIT_PREFIX + "schedule_container").children().length;
     if ($free_time_length === 11) {
         alert("You can only add maximum of 10 free slots");
@@ -41,21 +46,22 @@ $("#schedule_add_btn").click(function() {
     $schedule_container.append(`
     <div id="schedule_row_` + schedule_id + `"` + `class="row schedule_row">
         <div class="col-3">
-            <select disabled id="registerClass-date_` + schedule_id + `"` + ` class="form__select date_select" required>
+            <select id="registerClass-date_` + schedule_id + `"` + ` class="form__select date_select" required>
                 <option class="lang date_option" key="REGISTER.DATE_PLACEHOLDER" value="">` + getText("REGISTER.DATE_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
-            <select disabled id="registerClass-start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
+            <select id="registerClass-start_` + schedule_id + `"` + ` class="form__select start_time_select" required>
                 <option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">` + getText("REGISTER.START_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
         <div class="col-3">
-            <select disabled id="registerClass-end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
+            <select id="registerClass-end_` + schedule_id + `"` + ` class="form__select end_time_select" required>
                 <option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">` + getText("REGISTER.END_TIME_PLACEHOLDER") + `</option>
             </select>
         </div>
-        <button id="schedule_edit_icon_` + schedule_id + `"` + ` class="schedule_icon edit_icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        <button id="schedule_edit_icon_` + schedule_id + `"` + ` class="schedule_icon edit_icon"><i class="fa fa-check" aria-hidden="true"></i></button>
+        <button id="schedule_delete_icon_` + schedule_id + `"` + `class="schedule_icon delete_icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
     `);
     schedule_id += 1;
@@ -117,23 +123,24 @@ function removeTickIcon($id) {
 
 $("#registerClass-schedule_container").on("click", ".delete_icon", function() {
     var $current_id = $(this).attr("id").split("_")[3];
-    console.log($current_id + " " + typeof $current_id);
-    var $check_flag = checkNotEmpty($current_id);
-    if ($check_flag === 0) {
-        var $date_selected = $(DATE_PREFIX + $current_id).find("option:selected").val();
-        for (let i = 0; i < DateScheduleObj[$date_selected].TimeSlot.length; i++) {
-            if (DateScheduleObj[$date_selected].TimeSlot[i].id === parseInt($current_id)) DateScheduleObj[$date_selected].TimeSlot.splice(i, 1);
+    // Find the Id to delete in Schedule Object
+    $.each(DateScheduleObj, function(key, value) {
+        var delete_Id = DateScheduleObj[key].TimeSlot.findIndex(function(timeSlot) {
+            return timeSlot.id === parseInt($current_id);
+        })
+        if (delete_Id !== -1) {
+            DateScheduleObj[key].TimeSlot.splice(delete_Id, 1);
+            return true;
         }
-        console.log(DateScheduleObj[$date_selected].TimeSlot);
-    }
-    if (editMode === 1) {
-        // Reset state
-        var $add_bnt = $("#schedule_add_btn");
-        $add_bnt.prop("disabled", false);
-        $add_bnt.removeClass("disable");
-        changeFieldState($current_id, true);
-        editMode = 0;
-    }
+    })
+
+    // Reset state
+    var $add_bnt = $("#schedule_add_btn");
+    $add_bnt.prop("disabled", false);
+    $add_bnt.removeClass("disable");
+    changeFieldState($current_id, true);
+    enableAllEditIcon($current_id);
+    editMode = 0;
     $(this).parent().remove();
 })
 
@@ -151,32 +158,41 @@ function compareFreeTimeSlot(b, a) {
     return 0;
 }
 
+function disableAllEditIcon($id) {
+    $(".schedule_row").each(function() {
+        var $current_id = $(this).attr("id").split("_")[2];
+        if ($current_id !== $id) $("#schedule_edit_icon_" + $current_id).prop("disabled", true);
+    })
+}
+
+function enableAllEditIcon($id) {
+    $(".schedule_row").each(function() {
+        var $current_id = $(this).attr("id").split("_")[2];
+        if ($current_id !== $id) $("#schedule_edit_icon_" + $current_id).prop("disabled", false);
+    })
+}
+
 $("#registerClass-schedule_container").on("click", ".edit_icon", function() {
     var $schedule_row_id = $(this).parent().attr("id").split("_")[2];
     var $add_bnt = $("#schedule_add_btn");
     if (editMode === 0) {
+        changeFieldState($schedule_row_id, false);
         $add_bnt.prop("disabled", true);
         $add_bnt.addClass("disable");
-        changeFieldState($schedule_row_id, false);
-        var $check_flag = checkNotEmpty($schedule_row_id);
-        if ($check_flag === 0) {
-            onDateChange($schedule_row_id);
-            // get selected options;
-            var $start_selected = $(START_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
-            var $end_selected = $(END_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
-            renderOnEdit($schedule_row_id, $start_selected, $end_selected);
-        }
+        disableAllEditIcon($schedule_row_id);
+        onDateChange($schedule_row_id);
+        // get selected options;
+        var $start_selected = $(START_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+        var $end_selected = $(END_TIME_PREFIX + $schedule_row_id).find("option:selected").val();
+        renderOnEdit($schedule_row_id, $start_selected, $end_selected);
         appendDeleteButton($schedule_row_id);
         appendTickIcon($schedule_row_id);
         editMode = 1;
     } else {
         var $check_flag = checkNotEmpty($schedule_row_id);
         // Require user to choose all fields
-        console.log($check_flag);
+        // console.log($check_flag);
         if ($check_flag == 0) {
-            $add_bnt.prop("disabled", false);
-            $add_bnt.removeClass("disable");
-            changeFieldState($schedule_row_id, true);
             // Update the TimeSchedule Arr
             var $date_selected = $(DATE_PREFIX + $schedule_row_id).find("option:selected").val();
             // Get start_time_selected;
@@ -198,9 +214,12 @@ $("#registerClass-schedule_container").on("click", ".edit_icon", function() {
             }
             DateScheduleObj[$date_selected].TimeSlot.push(newObj);
             DateScheduleObj[$date_selected].TimeSlot = DateScheduleObj[$date_selected].TimeSlot.sort(compareFreeTimeSlot);
-            console.log(DateScheduleObj[$date_selected].TimeSlot);
+            changeFieldState($schedule_row_id, true);
             removeDeleteButton($schedule_row_id);
             removeTickIcon($schedule_row_id);
+            $add_bnt.prop("disabled", false);
+            $add_bnt.removeClass("disable");
+            enableAllEditIcon($schedule_row_id);
             editMode = 0;
         }
     }
@@ -220,7 +239,7 @@ function getStartTimeObj($id, date) {
         })
 
         // get all remaining free time slot
-        console.log(Extract_Key);
+        // console.log(Extract_Key);
         if (Extract_Key.length >= 1) {
             let start_ref = 0;
             $.each(Extract_Key, function(index, value) {
@@ -242,7 +261,6 @@ function getStartTimeObj($id, date) {
             }
         }
     }
-    console.log(TimeSlot_FreeObj_Keys);
     return TimeSlot_FreeObj_Keys;
 }
 
@@ -280,8 +298,9 @@ function renderDate($id) {
 function onDateChange($id) {
     var $date_select = $(DATE_PREFIX + $id);
     $date_select.change(function() {
-        if ($date_select.find("option:selected").val() !== "") reRender($id);
-        else {
+        if ($date_select.find("option:selected").val() !== "") {
+            reRender($id);
+        } else {
             renderStartTimePlaceHolder($(START_TIME_PREFIX + $id));
             renderEndTimePlaceholder($(END_TIME_PREFIX + $id));
         }
@@ -293,7 +312,7 @@ function renderStartTimePlaceHolder($start_time_select) {
     var current_lang = localStorage.getItem("stored_lang");
     if (current_lang !== "en" && current_lang !== "vn") current_lang = "en";
     var option_placeholder = arrLang[current_lang]["REGISTER"]["START_TIME_PLACEHOLDER"];
-    $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="----">' + option_placeholder + '</option>');
+    $start_time_select.append('<option class="lang start_time_option" key="REGISTER.START_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
 }
 
 function renderEndTimePlaceholder($end_time_select) {
@@ -301,7 +320,7 @@ function renderEndTimePlaceholder($end_time_select) {
     var current_lang = localStorage.getItem("stored_lang");
     if (current_lang !== "en" && current_lang !== "vn") current_lang = "en";
     var option_placeholder = arrLang[current_lang]["REGISTER"]["END_TIME_PLACEHOLDER"];
-    $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="----">' + option_placeholder + '</option>');
+    $end_time_select.append('<option class="lang end_time_option" key="REGISTER.END_TIME_PLACEHOLDER" value="">' + option_placeholder + '</option>');
 }
 
 function renderStartTimeDefault($id) {
@@ -315,13 +334,15 @@ function renderStartTimeDefault($id) {
 function renderEndTimeDefault($id) {
     let $end_time_select = $(END_TIME_PREFIX + $id);
     let $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
-    let $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_option);
-    renderEndTimePlaceholder($end_time_select);
-    $.each(TimeSchedule_Keys, function(index, value) {
-        if (index - $start_time_index >= 4) {
-            $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + TimeSchedule_Values[index] + '</option>');
-        }
-    })
+    if ($start_time_option !== "") {
+        let $start_time_index = TimeSchedule_StartTime_Keys.indexOf($start_time_option);
+        renderEndTimePlaceholder($end_time_select);
+        $.each(TimeSchedule_Keys, function(index, value) {
+            if (index - $start_time_index >= 4) {
+                $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + TimeSchedule_Values[index] + '</option>');
+            }
+        })
+    }
 }
 
 function onEndTimeDefaultChange($id) {
@@ -350,41 +371,43 @@ function renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
 function renderEndTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values) {
     var $end_time_select = $(END_TIME_PREFIX + $id);
     var $start_time_option = $(START_TIME_PREFIX + $id).find("option:selected").val();
-    var $get_free_slot_keys = [];
-    var $get_free_slot_values = [];
-    var $is_in_this = -1;
-    renderEndTimePlaceholder($end_time_select);
+    if ($start_time_option !== "") {
+        var $get_free_slot_keys = [];
+        var $get_free_slot_values = [];
+        var $is_in_this = -1;
+        renderEndTimePlaceholder($end_time_select);
 
-    $.each(TimeSlot_FreeObj_Keys, function(index, value) {
-        var $current_free_slot = $(this);
-        var $check_if_match = -1;
-        $.each($current_free_slot, function(index, value) {
-            if (value === $start_time_option) {
-                $is_in_this = index;
-                $check_if_match = index;
+        $.each(TimeSlot_FreeObj_Keys, function(index, value) {
+            var $current_free_slot = $(this);
+            var $check_if_match = -1;
+            $.each($current_free_slot, function(index, value) {
+                if (value === $start_time_option) {
+                    $is_in_this = index;
+                    $check_if_match = index;
+                }
+            })
+            if ($check_if_match > -1) {
+                $get_free_slot_keys = $current_free_slot;
+                $get_free_slot_values = TimeSlot_FreeObj_Values[index];
+                $check_if_match = -1;
             }
-        })
-        if ($check_if_match > -1) {
-            $get_free_slot_keys = $current_free_slot;
-            $get_free_slot_values = TimeSlot_FreeObj_Values[index];
-            $check_if_match = -1;
+        });
+        var $last_key_value = $get_free_slot_keys[$get_free_slot_keys.length - 1];
+        if ($last_key_value == START_TIME_MAX) {
+            $.each($get_free_slot_values, function(index, value) {
+                if (index - $is_in_this >= 4) {
+                    var $value_index = TimeSchedule_Values.indexOf(value);
+                    var $get_key = TimeSchedule_Keys[$value_index];
+                    $end_time_select.append('<option class="end_time_option"' + 'value=' + $get_key + '>' + value + '</option>');
+                }
+            })
+        } else {
+            $.each($get_free_slot_keys, function(index, value) {
+                if (index - $is_in_this >= 4) {
+                    $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + $get_free_slot_values[index] + '</option>');
+                }
+            })
         }
-    });
-    var $last_key_value = $get_free_slot_keys[$get_free_slot_keys.length - 1];
-    if ($last_key_value == START_TIME_MAX) {
-        $.each($get_free_slot_values, function(index, value) {
-            if (index - $is_in_this >= 4) {
-                var $value_index = TimeSchedule_Values.indexOf(value);
-                var $get_key = TimeSchedule_Keys[$value_index];
-                $end_time_select.append('<option class="end_time_option"' + 'value=' + $get_key + '>' + value + '</option>');
-            }
-        })
-    } else {
-        $.each($get_free_slot_keys, function(index, value) {
-            if (index - $is_in_this >= 4) {
-                $end_time_select.append('<option class="end_time_option"' + 'value=' + value + '>' + $get_free_slot_values[index] + '</option>');
-            }
-        })
     }
 }
 
@@ -409,6 +432,9 @@ function reRender($id) {
             renderStartTimeDefault($id);
             renderEndTimeDefault($id);
             onEndTimeDefaultChange($id);
+        } else {
+            renderStartTimePlaceHolder($(START_TIME_PREFIX + $id));
+            renderEndTimePlaceholder($(END_TIME_PREFIX + $id));
         }
     }
 }
@@ -418,7 +444,6 @@ function renderOnEdit($id, $start_selected, $end_selected) {
     var $selected_date = $date_select.find("option:selected").val();
     var TimeSlot_FreeObj_Keys = getStartTimeObj($id, $selected_date);
     if (TimeSlot_FreeObj_Keys.length >= 1) {
-        console.log("renderOnEdit " + 1);
         var TimeSlot_FreeObj_Values = getTimeSlotFreeObjValues(TimeSlot_FreeObj_Keys);
         renderStartTime($id, TimeSlot_FreeObj_Keys, TimeSlot_FreeObj_Values);
         let $new_start = $(START_TIME_PREFIX + $id).find("option[value='" + $start_selected + "']");
@@ -588,7 +613,6 @@ function renderGenderOfTutor() {
  */
 
 function renderErrorMsg($topic, $error_msg) {
-    console.log("here")
     $topic.parent().find(".error-message").remove();
     var $p_field = $topic.parent().children().first();
     $p_field.append('<span class="error-message lang" key="' + $error_msg + '">' + getText($error_msg) + '</span>');
@@ -600,7 +624,6 @@ function checkTextField() {
         let $topic = $(SUBMIT_PREFIX + value);
         let $regex_pattern = registerClassRegex[value];
         if ($regex_pattern.test($topic.val())) {
-            console.log(value + " " + $topic.val() + " " + typeof $topic.val());
             $topic.val($topic.val().trim());
             if ($topic.val().length === 0 && value !== "description") {
                 // Empty string input
@@ -634,21 +657,15 @@ function checkSelectField() {
     var valid_field = 0;
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        if (value === "schedule_container") {
-            if ($topic.children().length > 1) valid_field++;
-            else renderErrorMsg($topic, "REGISTER.ERROR");
-        } else {
-            let $regex_pattern = new RegExp(registerClassRegex[value]);
-            var $value = $topic.find("option:selected").val();
-            console.log(value);
-            if ($regex_pattern.test($value)) {
-                // Correct input
-                $topic.parent().find(".error-message").remove();
-                valid_field++;
-            } else renderErrorMsg($topic, "REGISTER.ERROR");
-        }
+        let $regex_pattern = new RegExp(registerClassRegex[value]);
+        var $value = $topic.find("option:selected").val();
+        if ($regex_pattern.test($value)) {
+            // Correct input
+            $topic.parent().find(".error-message").remove();
+            valid_field++;
+        } else renderErrorMsg($topic, "REGISTER.ERROR");
+
     });
-    console.log(valid_field);
     if (valid_field === selectField.length) return 0;
     else return -1;
 }
@@ -678,6 +695,20 @@ function checkMagicSelect() {
     } else return 0;
 }
 
+function checkTimeSchedule() {
+    var sum_of_empty = 0;
+    $.each(DateScheduleObj, function(key, value) {
+        if (DateScheduleObj[key].TimeSlot.length <= 0) sum_of_empty += 1;
+    })
+    if (sum_of_empty === Object.keys(DateScheduleObj).length) {
+        renderErrorMsg($(SUBMIT_PREFIX + "schedule_container"), "REGISTER.ERROR");
+        return -1;
+    } else {
+        $(SUBMIT_PREFIX + "schedule_container").parent().find(".error-message").remove();
+        return 0;
+    }
+}
+
 function getAllDataInForm() {
     var submitObj = {};
     // Upload data to Class 
@@ -692,7 +723,7 @@ function getAllDataInForm() {
     });
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        if (value === "street" || value === "schedule_container") return;
+        if (value === "street") return;
         submitObj.registerClass[value] = $topic.find("option:selected").val();
     })
     $.each(radioField, function(index, value) {
@@ -701,17 +732,16 @@ function getAllDataInForm() {
     })
 
     // Upload data to Class Schedule
-    var $time_schedule = $(SUBMIT_PREFIX + "schedule_container").children();
-    $.each($time_schedule, function(index, value) {
-        if (index == 0) return;
-        var $date_now = $(DATE_PREFIX + index).find("option:selected").val();
-        var $start_now = $(START_TIME_PREFIX + index).find("option:selected").val();
-        var $end_now = $(END_TIME_PREFIX + index).find("option:selected").val();
-        submitObj.registerSchedule.push({
-            "date": $date_now,
-            "start_time": $start_now,
-            "end_time": $end_now
-        })
+    $.each(DateScheduleObj, function(key, value) {
+        if (DateScheduleObj[key].TimeSlot.length > 0) {
+            $.each(DateScheduleObj[key].TimeSlot, function(index, value) {
+                submitObj.registerSchedule.push({
+                    "date": key,
+                    "start_time": value.start_value,
+                    "end_time": value.end_value
+                })
+            })
+        } else return;
     })
 
     // Upload data to Weakness
@@ -727,8 +757,8 @@ function submitClassInfo() {
     var isSelectFieldValid = checkSelectField();
     var isRadioFieldValid = checkRadioField();
     var isMagicSelectValid = checkMagicSelect();
-    console.log(isTextFieldValid + " " + isSelectFieldValid + " " + isRadioFieldValid + " " + isMagicSelectValid);
-    if (isTextFieldValid + isSelectFieldValid + isRadioFieldValid + isMagicSelectValid === 0) {
+    var isTimeScheduleValid = checkTimeSchedule();
+    if (isTextFieldValid + isSelectFieldValid + isRadioFieldValid + isMagicSelectValid + isTimeScheduleValid === 0) {
         var newClass = getAllDataInForm();
         console.log(newClass);
         // Pass all pre-check
@@ -738,9 +768,9 @@ function submitClassInfo() {
             data: { createClass: newClass },
             cache: false,
             success: function(responseText) {
-                console.log(responseText);
                 if (responseText === "SUCCESS") {
                     // window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    alert("SUCCESS");
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
@@ -751,12 +781,11 @@ function submitClassInfo() {
                     errors = JSON.parse(responseText);
                     alert('Please update again ' + errors.join(", ") + "!!");
                 }
-                // enableAll();
+                enableAll();
             },
             timeout: 3000
         })
-    }
-    // else enableAll();
+    } else enableAll();
 }
 
 function disableAll() {
