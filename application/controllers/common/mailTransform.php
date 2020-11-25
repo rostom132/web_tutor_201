@@ -48,13 +48,28 @@
             try {
                 Email::configMailer($mail);
                 $mail->addAddress('rostom13299@gmail.com');                                                // Add a recipient
-            
+                $mail_content = Config::getMailContent()['mailRegisterClass']['body'];
+
+                $array_cid = array_keys(Config::getMailContent()['mailRegisterClassImages']);
+                array_walk( $array_cid, function(&$value, $key) { $value =  'cid:'.str_replace('%','',$value); } );
+
+                $mail_content = str_replace(array_keys(Config::getMailContent()['mailRegisterClassImages']) , $array_cid, $mail_content);
+                $random_value = round(microtime(true) * 1000);
+                $mail_content = str_replace("%random_value%" , $random_value, $mail_content);
+
+                array_walk( $array_cid, function(&$value, $key) { $value =  str_replace('cid:','',$value); } );
+
                 // Content
                 $mail->isHTML(true);                                                        // Set email format to HTML
                 $mail->Subject = Config::getMailContent()['mailRegisterClass']['topic'];
-                $mail->Body    = str_replace("%domain%",Config::getConfig()['domain'],Config::getMailContent()['mailRegisterClass']['body']);
-                // $mail->AltBody = str_replace("%securityCode%",$confirm_code,Config::getMailContent()['verifyMail']['altBody']);
-            
+                // $mail->Body    = $mail_content;
+                $mail->msgHTML( $mail_content, __DIR__);
+                
+                foreach ( array_values(Config::getMailContent()['mailRegisterClassImages']) as $key => $value) {
+                    error_log($value,3,'../my_errors.log');
+                    $mail->AddEmbeddedImage($value, $array_cid[$key]);
+                }
+
                 $mail->send();
             } catch (Exception $e) {
                 return "Message could not be sent: $mail->ErrorInfo";

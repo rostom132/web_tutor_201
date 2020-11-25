@@ -124,6 +124,14 @@
             'mailRegisterClass' => array (
                 'topic' => 'TKT register class notification',
                 'body' => file_get_contents('../../secret/constants/mail_register_class.html'),
+            ),
+            'mailRegisterClassImages' => array(
+                '%logoImage%' => '../../static/images/mail_images/Job_logo.png',
+                '%part1Image%' => '../../static/images/mail_images/first_imag.png',
+                '%middle12Image%' => '../../static/images/mail_images/logoos.png',
+                '%part2Image%' => '../../static/images/mail_images/Guy_computer.png',
+                '%part3Image%' => '../../static/images/mail_images/Guy_texting.png',
+                '%logoFacebook%' => '../../static/images/mail_images/facebook2x.png'
             )
         )
     );

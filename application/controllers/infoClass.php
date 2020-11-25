@@ -24,7 +24,6 @@
     }
 
     if(isset($_GET['registerClass']) && $_SESSION['user_type'] == 'tutor') {
-        error_log('goin', 3, '../error.log');
         echo(registerClass($_GET['registerClass']));
     }
 ?>
