@@ -512,6 +512,7 @@ function renderSubject() {
         url: get_subject_url,
         cache: false,
         success: function(responseText) {
+            console.log(responseText);
             arrSubject = JSON.parse(responseText).subject;
             // Render subject input
             magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({

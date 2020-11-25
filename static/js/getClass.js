@@ -258,5 +258,5 @@ export function getClassFiltered(dist, sub, gender) {
 
 function noResultTemplate() {
     document.getElementById("show").setAttribute('style', 'text-align:center')
-    document.getElementById("show").innerHTML = `<img src="./static/images/background/404.jpg" style="margin-left:auto; margin-right:auto">`;
+    document.getElementById("show").innerHTML = `<img src="./static/images/background/404.png" style="margin-left:auto; margin-right:auto">`;
 }

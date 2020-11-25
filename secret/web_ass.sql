@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2020 at 09:00 AM
+-- Generation Time: Nov 24, 2020 at 03:30 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -93,10 +93,11 @@ CREATE TABLE `class` (
 INSERT INTO `class` (`id`, `city`, `district`, `ward`, `address`, `phone_number`, `no_students`, `gender_of_tutor`, `salary_per_lesson`, `no_lesson_per_week`, `time_per_lesson`, `user_id`, `description`, `topic`, `post_date`) VALUES
 (1, '1', '10', '134', '82/8 Mạc Đỉnh Chi', '0908933671', 1, 'F', 200000, 3, '01:30:00', 4, 'Cần giáo viên nữ dạy cho con gái tui, dạy giỏi có thêm tiền. Con tui hơi rụt rè muốn có giáo viên nhiệt tình để quan tâm cháu hơn kjdfbkjsdnflskdlskdmflskdfmlSKDnJLFSNlKnvlklz;jnblzn;kxcmv;xc,b;bmlcvb', 'Cần giáo viên nữ dạy môn Toán', '2020-11-20'),
 (2, '1', '19', '254', '465/1/12 Trần Xuân Soạn', '0708091941', 2, 'M', 150000, 4, '02:00:00', 7, 'Con tôi cần giáo viên dạy Lý bằng Tiếng Anh vì cháu học trường quốc tế', 'Cần giáo viên dạy Lý Tiếng Anh', '2020-11-10'),
-(84, '1', '10', '129', '17/10 Đường Cây Điệp Phường Bến Nghé Quận 1', '0969935447', 4, 'M', 100000, 2, '02:30:00', 10, '', 'Tìm gia sư Toán quận', '2020-11-24'),
-(85, '1', '2', '20', '17/10 Đường 11A Phường Bình Hưng Hòa A Bình Tân', '0969935447', 4, 'M', 200000, 2, '03:00:00', 10, '', 'tìm gia sư abcd', '2020-11-24'),
-(87, '1', '19', '254', '110 Đường 11 Phường Tân Kiểng Quận 7', '0969935447', 6, 'M', 100000, 2, '02:30:00', 10, '', 'Tìm gia sư ở quận 1', '2020-11-24'),
-(88, '1', '14', '185', '220A Đường 10G Phường Bình An Quận 2', '0969935447', 10, 'B', 300000, 2, '03:00:00', 10, 'Ngọc Thiện đẹp trai', 'Tìm gia sư ở Quận 2', '2020-11-24');
+(84, '1', '10', '129', '17/10 Đường Cây Điệp Phường Bến Nghé Quận 1', '0969935447', 4, 'M', 100000, 2, '02:30:00', 4, '', 'Tìm gia sư Toán quận', '2020-11-24'),
+(85, '1', '2', '20', '17/10 Đường 11A Phường Bình Hưng Hòa A Bình Tân', '0969935447', 4, 'M', 200000, 2, '03:00:00', 4, '', 'tìm gia sư abcd', '2020-11-24'),
+(90, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
+(91, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
+(92, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24');
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,18 @@ CREATE TABLE `classschedule` (
   `date` varchar(3) NOT NULL CHECK (`date` in ('MON','TUE','WED','THU','FRI','SAT','SUN')),
   `class_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `classschedule`
+--
+
+INSERT INTO `classschedule` (`id`, `start_time`, `end_time`, `date`, `class_id`) VALUES
+(1, '08:30:00', '10:30:00', 'MON', 90),
+(2, '10:30:00', '23:00:00', 'MON', 90),
+(3, '08:30:00', '11:30:00', 'MON', 90),
+(4, '08:30:00', '10:30:00', 'MON', 91),
+(5, '10:30:00', '23:00:00', 'MON', 91),
+(6, '10:30:00', '13:30:00', 'TUE', 91);
 
 -- --------------------------------------------------------
 
@@ -170,6 +183,8 @@ INSERT INTO `specialize` (`years_of_ex`, `subject_id`, `tutor_id`) VALUES
 (NULL, 1, 1),
 (NULL, 1, 6),
 (NULL, 1, 9),
+(NULL, 1, 18),
+(NULL, 2, 18),
 (NULL, 3, 1),
 (NULL, 6, 6);
 
@@ -239,7 +254,7 @@ INSERT INTO `tutor` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`,
 (6, 'tienn', 'tran', '2020-11-15', 'F', '0845283742', 'rostom13299@gmail.com', 'Vietnamese', '', 'asdaf'),
 (8, 'thienn', NULL, '2020-11-17', 'M', NULL, 'nhanthien1012@gmail.com', NULL, NULL, NULL),
 (9, 'tiennn', 'tien', '2020-11-17', 'M', '0845162387', 'tien.trandinh99@gmail.com', 'Vietnamese', '', ''),
-(10, 'tiennnnn', NULL, '2020-11-22', 'M', NULL, 'rostom13299@gmail.com', NULL, NULL, NULL);
+(18, 'thien', 'aaa', '2020-11-24', 'F', '0972753757', 'nhanthien1012@gmail.com', 'Both', '', 'sadfdsafkjdsngkjfdngkjfdngkjdnfkjdsfkjsadnfkjsadnfkjsnfjksndfkjsndfkjsadf');
 
 -- --------------------------------------------------------
 
@@ -264,11 +279,11 @@ INSERT INTO `userinfo` (`id`, `username`, `password`, `salt`, `user_type`, `toke
 (1, 'tien', 'a0ee70298c764574e2f4af678f827d07419a903370086557e329c2513b208a43', '1604936216971', 'tutor', '999f75f935bcc55ea9b028761f3964f42189bc70'),
 (4, 'thienngu', 'f57bd22a8f456f9e40a4ae5732d9fa2057afa50332e227882de593f0d567e2ae', '1605422611878', 'parent', NULL),
 (6, 'tienn', 'ec355c9fb964b230bd1e22aa23ef49eec3bbcc8965ae9db10522f5d1437bcda2', '1605426734783', 'tutor', '6636914328d0942498e06d06b8585970b7e4add4'),
-(7, 'khoangu', '2e88bfeeebe8c6b947a20253d7d45154cbfc7726e744520ab832d1df689648f8', '1605428301016', 'parent', NULL),
+(7, 'khoangu', '2e88bfeeebe8c6b947a20253d7d45154cbfc7726e744520ab832d1df689648f8', '1605428301016', 'parent', '3fec52ba11ebdbea5c34d75c4337c9d04998b5ed'),
 (8, 'thienn', '63c854642c3194cd1ad0b3b89895a12a6f1f874ee293261de531678134e2e63d', '1605613059924', 'tutor', NULL),
 (9, 'tiennn', '3294a05f6bd3dd40d5a853dc925f68abe45120a050fa156b428cbef08a0a5666', '1605613199261', 'tutor', NULL),
-(10, 'tiennnnn', '5c789bba3ab73fc346b245d04cce889f979c7fa075975af532a4765c22f9a07b', '1606039156956', 'tutor', NULL),
-(17, 'tkteducation', '1a3836f03122df6d092a01ea94cffb4ac13191b042e96312656c61f5c7a9fe70', '1606196535645', 'admin', '371c2631e44dcbaceb05e195c4f8c27f9ce0b27c');
+(17, 'tkteducation', '1a3836f03122df6d092a01ea94cffb4ac13191b042e96312656c61f5c7a9fe70', '1606196535645', 'admin', '371c2631e44dcbaceb05e195c4f8c27f9ce0b27c'),
+(18, 'eduedu', '565ce7e300e213efd7e9a68aee18421f0999f58dae5447e4ff403dd9854e9053', '1606206036221', 'tutor', NULL);
 
 -- --------------------------------------------------------
 
@@ -289,14 +304,9 @@ INSERT INTO `weakness` (`class_id`, `subject_id`) VALUES
 (1, 1),
 (2, 1),
 (2, 6),
-(84, 1),
-(84, 3),
-(84, 6),
-(85, 1),
-(85, 3),
-(87, 2),
-(88, 2),
-(88, 6);
+(90, 1),
+(91, 1),
+(92, 1);
 
 --
 -- Indexes for dumped tables
@@ -392,13 +402,13 @@ ALTER TABLE `weakness`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `classschedule`
 --
 ALTER TABLE `classschedule`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `request`
@@ -422,7 +432,7 @@ ALTER TABLE `teaching`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
