@@ -78,6 +78,8 @@
 	}
 
 	if(isset($_POST["createClass"]) && $_SESSION["user_type"] == "parent") {
-		createClass($_POST["createClass"]);
+		// Pre-check if all attribute exists
+		if(sizeof($_REQUEST["createClass"]) !== 3) echo "FAIL";
+		else createClass($_POST["createClass"]);
 	}
 ?>

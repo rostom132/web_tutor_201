@@ -46,17 +46,19 @@ function createTemplate(class_list) {
         if (class_list[i].ava == "") {
             ava = default_avatar;
         } else ava = class_list[i].ava;
+        var weak = class_list[i].weak;
+        var date = class_list[i]['post_date'];
         template.setAttribute('class', 'row-wrapper shadow-box');
         template.innerHTML =
             `
         <div class="ribbon">
-        <p>ENG</p>
+        <p>${date}</p>
         </div>
         <div class="row">
             <div class="col-sm-2 center-ava">
                         <img src= ${ava} alt="" class="class-avatar">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <div class="class-info-col">
                     <p>
                         <img src=${infor_icon} style="width: 20px; height: 20px;">
@@ -65,17 +67,15 @@ function createTemplate(class_list) {
                     <p style="height:100px; max-height:100px">
                         ${class_description}
                     </p>
-                    <span class="group-span">Toán(ENG)</span>
+                    <span class="group-span">${weak}</span>
                     <span class="group-span"><span></span> ${dist}</span>
                     <span class="group-span lang" key="${gender}" id="gender_tag">${getText(gender)}</span>
                 </div>
             </div>
-            <div class="col-sm-2" style="text-align:center">
+            <div class="col-sm-3" style="text-align:center">
                 <img src=${money_icon} style="width: 30px; height: 30px;">
                 <div><span style="font-size:1.5em; color:gold">${String(salary).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</span><span class="lang" key="CLASSINFO.SALARY" id="salary">${getText("CLASSINFO.SALARY")}</span></div>
-            </div>
-            <div class="col-sm-2" style="text-align:center">
-                <img src=${student_icon} style="width: 30px; height: 30px;">
+                <img src=${student_icon} style="width: 30px; height: 30px; margin-top:20%">
                 <p style="font-size:25px; bold ;color:#ff6600">${student_no}</p>
             </div>
         </div>
@@ -123,6 +123,7 @@ export function initClass() {
     ajax.send("init=1&current=" + current_page);
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
             document.getElementById('show').removeChild(loading);
             if (this.responseText == 0) {
                 renderClassNum(0);
@@ -130,11 +131,13 @@ export function initClass() {
                 return;
             }
             var obj = JSON.parse(this.responseText);
+            console.log(obj[4][0]['name']);
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
             for (let i = 0; i < obj[2].length; i++) {
                 obj[2][i].ava = obj[3][i];
+                obj[2][i].weak = obj[4][i]['name'];
                 class_list.push(obj[2][i]);
             }
             renderClassNum(class_num);
@@ -158,18 +161,18 @@ export function filterClass(dist, sub, gender) {
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     var filterVal = {
         "district": "-1",
-        "subject": "-1",
+        "subject_id": "-1",
         "gender_of_tutor": "-1",
     };
     filterVal['district'] = String(dist);
-    filterVal['subject'] = String(sub);
+    filterVal['subject_id'] = String(sub);
     filterVal['gender_of_tutor'] = String(gender);
     if (filterVal['district'] == "-1" && filterVal['subject'] == "-1" && filterVal['gender_of_tutor'] == "-1") {
         initClass();
         return;
     } else {
-        ajax.send("filter=1&filterVal=" + JSON.stringify(filterVal));
-        current_page = 1;
+        ajax.send("filter=1&filterVal=" + JSON.stringify(filterVal) + "&current=" + getURLParam()['page']);
+        current_page = getURLParam()['page'];
         ajax.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('show').removeChild(loading);
@@ -185,6 +188,7 @@ export function filterClass(dist, sub, gender) {
                 class_list = [];
                 for (let i = 0; i < obj[2].length; i++) {
                     obj[2][i].ava = obj[3][i];
+                    obj[2][i].weak = obj[4][i]['name'];
                     class_list.push(obj[2][i]);
                 }
                 renderClassNum(class_num);
@@ -243,6 +247,8 @@ export function keepFilterValue() {
         document.getElementById("edit-gender").value = -1;
     } else {
         document.getElementById("edit-place").value = getURLParam()['dist'];
+        document.getElementById("edit-subject").value = getURLParam()['sub'];
+        document.getElementById("edit-gender").value = getURLParam()['gender'];
     }
 
 }

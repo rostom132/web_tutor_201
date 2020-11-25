@@ -50,13 +50,16 @@
          * @return boolean create status
          */ 
         public static function createSchedule($input_data, $class_id) {
+            $arr = array();
             foreach($input_data as $el) {
-                $result = $GLOBALS['db_conn']->queryData(
-                    "INSERT INTO `classschedule` (`class_id`, `date`, `start_time`, `end_time`)
-                    VALUES (" ."'$class_id','" . $el["date"] . "','" . $el["start_time"] . "','" . $el["end_time"] ."')"
-                );
-                if (!$result) return false;
+                $temp = "'" .$el['date'] . "'," . "'" .$el['start_time']."'," . "'" .$el['end_time'] ."'";
+                array_push($arr, $temp);
             }
+            $result = $GLOBALS['db_conn']->queryData(
+                "INSERT INTO `classschedule` (`class_id`, `date`, `start_time`, `end_time`)
+                VALUES (" ."'$class_id'," .implode("),('".$class_id ."',", $arr) .")"
+            );
+            if (!$result) return false;
             return true;
         }
 	}

@@ -10,12 +10,11 @@ function getAllAvatar($class_arr) {
     return $arr;
 }
 
-// function getAllWeakness($class_arr) {
-//     $arr = array();
-//     foreach($class_arr as $user) {
-//         array_push($arr, )
-//     }
-// }
+function getAllWeaknessOfClass($class_list) {
+    $arr = array();
+    $arr = Classs::getWeaknessOfClass(array_column($class_list, 'id'));
+    return $arr;
+}
 
 function getAllClass($current_page) {
 
@@ -24,13 +23,15 @@ function getAllClass($current_page) {
     $total_page = ceil($total_records / $limit);
     $start = ($current_page - 1) * $limit;
     $class_arr = Classs::getLimitClasses($current_page, $limit);
-    if(sizeof($class_arr[0]) > 0) {
+    if($total_records > 0 && $class_arr != "0") {
         $avatar_arr = getAllAvatar($class_arr);
+        $sub_arr = getAllWeaknessOfClass($class_arr);
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
         array_push($data, $class_arr);
         array_push($data, $avatar_arr);
+        array_push($data, $sub_arr);
         echo(json_encode($data));
     }
     else {
@@ -42,7 +43,7 @@ function getWeaknesses() {
     $weakness_list = Subject::getAll();
     echo(json_encode($weakness_list));
 }
-function getClassWithFilter($filterVal) {
+function getClassWithFilter($filterVal, $current_page) {
 
     $filterArr = (array)$filterVal;
     foreach ($filterArr as $key=>$value) {
@@ -51,17 +52,20 @@ function getClassWithFilter($filterVal) {
         }
     }
     $total_records = Classs::getNumberOfClassFilter($filterArr);
-    $limit = 2;
+    $limit = 1;
     $total_page = ceil($total_records / $limit);
-    $start = (1 - 1) * $limit;
-    $class_arr = Classs::getLimitClassesFilter($filterArr, 1, $limit);
-    if(sizeof($class_arr[0]) > 0) { 
+    $start = ($current_page - 1) * $limit;
+    $class_arr = Classs::getLimitClassesFilter($filterArr, $current_page, $limit);
+    // error_log($total_records. " " . $class_arr,3,"./log.log");
+    if($total_records > 0 && $class_arr != "0") { 
         $avatar_arr = getAllAvatar($class_arr);
+        $sub_arr = getAllWeaknessOfClass($class_arr);
         $data = array();
         array_push($data, $total_records);
         array_push($data, $total_page);
         array_push($data, $class_arr);
         array_push($data, $avatar_arr);
+        array_push($data, $sub_arr);
         echo(json_encode($data));
     }
     else {
@@ -73,7 +77,7 @@ function getCurrentPage () {
 }
 
 if(isset($_POST['filter'])) {
-    getClassWithFilter(json_decode($_POST['filterVal']));
+    getClassWithFilter(json_decode($_POST['filterVal']),$_POST['current']);
 }
 
 if(isset($_POST['init'])) {

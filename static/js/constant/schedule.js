@@ -1,100 +1,11 @@
-export const TimeSchedule = {
-    "8:00:00": "8:00",
-    "8:30:00": "8:30",
-    "9:00:00": "9:00",
-    "9:30:00": "9:30",
-    "10:00:00": "10:00",
-    "10:30:00": "10:30",
-    "11:00:00": "11:00",
-    "11:30:00": "11:30",
-    "12:00:00": "12:00",
-    "12:30:00": "12:30",
-    "13:00:00": "13:00",
-    "13:30:00": "13:30",
-    "14:00:00": "14:00",
-    "14:30:00": "14:30",
-    "15:00:00": "15:00",
-    "15:30:00": "15:30",
-    "16:00:00": "16:00",
-    "16:30:00": "16:30",
-    "17:00:00": "17:00",
-    "17:30:00": "17:30",
-    "18:00:00": "18:00",
-    "18:30:00": "18:30",
-    "19:00:00": "19:00",
-    "19:30:00": "19:30",
-    "20:00:00": "20:00",
-    "20:30:00": "20:30",
-    "21:00:00": "21:00",
-    "21:30:00": "21:30",
-    "22:00:00": "22:00",
-    "22:30:00": "22:30",
-    "23:00:00": "23:00",
-}
+import { getData } from "./getData.js";
 
-export const LessonPerWeek = {
-    "en": {
-        "1": "1 lesson",
-        "2": "2 lessons",
-        "3": "3 lessons",
-        "4": "More than 4 lessons",
-    },
-    "vn": {
-        "1": "1 buổi",
-        "2": "2 buổi",
-        "3": "3 buổi",
-        "4": "Từ 4 buổi",
-    }
-}
+export const TimeSchedule = getData("./secret/constants/schedule.json");
 
-export const HourPerLesson = {
-    "en": {
-        "1:30:00": "1.5 hours",
-        "2:00:00": "2 hours",
-        "2:30:00": "2.5 hours",
-        "3:00:00": "3 hours",
-    },
-    "vn": {
-        "1:30:00": "1.5 giờ",
-        "2:00:00": "2 giờ",
-        "2:30:00": "2.5 giờ",
-        "3:00:00": "3 giờ",
-    }
-}
+export const LessonPerWeek = getData("./secret/constants/lesson_per_week.json");
 
-export const GenderOfTutor = {
-    "en": {
-        "M": "Male",
-        "F": "Female",
-        "B": "Male/Femal",
-    },
-    "vn": {
-        "M": "Nam",
-        "F": "Nữ",
-        "B": "Nam/Nữ",
-    }
-}
+export const HourPerLesson = getData("./secret/constants/hour_per_lesson.json");
 
-export const DateScheduleObj = {
-    "MON": {
-        "TimeSlot": [],
-    },
-    "TUE": {
-        "TimeSlot": [],
-    },
-    "WED": {
-        "TimeSlot": [],
-    },
-    "THU": {
-        "TimeSlot": [],
-    },
-    "FRI": {
-        "TimeSlot": [],
-    },
-    "SAT": {
-        "TimeSlot": [],
-    },
-    "SUN": {
-        "TimeSlot": []
-    }
-}
+export const GenderOfTutor = getData("./secret/constants/gender_of_tutor.json");
+
+export const DateScheduleObj = getData("./secret/constants/date_obj.json");
