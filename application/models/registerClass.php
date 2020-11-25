@@ -59,8 +59,6 @@
                 "INSERT INTO `classschedule` (`class_id`, `date`, `start_time`, `end_time`)
                 VALUES (" ."'$class_id'," .implode("),('".$class_id ."',", $arr) .")"
             );
-            error_log("INSERT INTO `classschedule` (`class_id`, `date`, `start_time`, `end_time`)
-            VALUES (" ."'$class_id'," .implode("),('".$class_id ."',", $arr) .")", 3, "./log.log");
             if (!$result) return false;
             return true;
         }
