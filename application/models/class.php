@@ -123,6 +123,14 @@
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0];
         }
+
+        public static function getAvailableTime($class_id){
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT  GROUP_CONCAT(CONCAT('(' ,TIME_FORMAT(`start_time`, '%H:%i'), '-', TIME_FORMAT(`end_time`, '%H:%i'), ') ', `date`) SEPARATOR ', ') as time FROM classschedule
+                WHERE class_id = '$class_id'"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result)[0];
+        }
     }
 
 ?>

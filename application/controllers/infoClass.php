@@ -15,7 +15,9 @@
         $response['class']['publisher'] = Classs::getClassOwner($id)['first_name'];
         $response['class']['publisher_ava'] = getUserAvatar(Classs::getClassOwner($id)['id']);
         $response['class']['weakness'] = Classs::getWeakness($id);
+        $response['class']['available_time'] = Classs::getAvailableTime($id)['time'];
         $response['user'] = isset($_SESSION['user_type']) ? $_SESSION['user_type']:"";
+        
         return json_encode($response);
     }
 
@@ -25,6 +27,7 @@
         $info_class['district'] = Convert::getDisctrict($info_class['district']);
         $info_class['gender_of_tutor'] = $info_class['gender_of_tutor'] == 'M' ? 'male' : 'female';
         $info_class['weaknesses'] = Classs::getWeakness($class_id);
+        $info_class['available_time'] = Classs::getAvailableTime($class_id)['time'];
         return $info_class;
     }
 
