@@ -148,7 +148,7 @@ function startTimer(timePassed, TIME_LIMIT, timeLeft) {
             if (document.getElementById('formParentAndTutor').classList.contains('active')) {
                 $('#email_button').bind("click", () => sendUserMail());
             } else {
-                $('#email_admin_button').bind("click", () => sendUserMail());
+                $('#email_admin_button').bind("click", () => sendAdminMail());
             }
         }
     }, 1000);
@@ -170,7 +170,11 @@ function setRemainingPathColor(timeLeft) {
             threshold: ALERT_THRESHOLD
         }
     };
-    const { alert, warning, info } = COLOR_CODES;
+    const {
+        alert,
+        warning,
+        info
+    } = COLOR_CODES;
     if (timeLeft <= alert.threshold) {
         document
             .getElementById("base-timer-path-remaining")
@@ -223,14 +227,16 @@ function emailButton() {
 $("button[id^='continue']").click(function continueButton() {
     var role;
     if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
-    else if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
+    if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
     else role = 'admin'
 
     var infoRegister = getAllInfo(role);
     var update_info = $.ajax({
         type: "POST",
         url: "application/controllers/formRegister.php",
-        data: { registerData: infoRegister },
+        data: {
+            registerData: infoRegister
+        },
         success: function(data) {
             console.log(data);
             switch (data) {
@@ -273,7 +279,9 @@ function sendAdminMail() {
         $.ajax({
             type: "POST",
             url: "application/controllers/formRegister.php",
-            data: { sendToken: email },
+            data: {
+                sendToken: email
+            },
             success: function(data) {
                 alert(data);
             }
@@ -289,7 +297,9 @@ function sendUserMail() {
         $.ajax({
             type: "POST",
             url: "application/controllers/formRegister.php",
-            data: { sendToken: email },
+            data: {
+                sendToken: email
+            },
             success: function(data) {
                 alert(data);
             }
