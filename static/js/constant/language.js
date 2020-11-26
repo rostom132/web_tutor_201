@@ -79,7 +79,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Submit",
             "ERROR": "You must fill/select value in this field",
             "WRONG_FORMAT": "Invalid format",
-            "WRONG_RANGE": "Minium 1 and maximum 5",
+            "WRONG_RANGE": "Minium 1 and maximum 100",
         },
         "DATE": {
             "MON": "Monday",
@@ -167,6 +167,12 @@ export const arrLang = {
             "THIRD_RULE": "- Always online on time.",
             "FOURTH_RULE_LABEL": "THIRD RULE: ",
             "FOURTH_RULE": "- Phone number for main admin: 0917565059."
+        },
+
+        "CONTACT": {
+            "TITLE": "Find your nearest center",
+            "ADDRESS1": "268 Ly Thuong Kiet, District 10, Ho Chi Minh City",
+            "ADDRESS2": "Vietnam National University, Linh Trung Ward, Thu Duc District, Ho Chi Minh City"
         }
     },
     "vn": {
@@ -229,7 +235,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Đăng kí",
             "ERROR": "Bạn phải điền/chọn vào ô này",
             "WRONG_FORMAT": "Không hợp lệ",
-            "WRONG_RANGE": "Tối thiểu 1 và tối đa 5",
+            "WRONG_RANGE": "Tối thiểu 1 và tối đa 100",
         },
         "DATE": {
             "MON": "Thứ 2",
@@ -318,6 +324,12 @@ export const arrLang = {
             "THIRD_RULE": "- Luôn online đúng giờ.",
             "FOURTH_RULE_LABEL": "QUY ĐỊNH 4: ",
             "FOURTH_RULE": "- Số quản lý chính: 0917565059."
+        },
+
+        "CONTACT": {
+            "TITLE": "Tìm trung tâm gần nhất",
+            "ADDRESS1": "268 Lý Thường Kiệt, quận 10, thành phố Hồ Chí Minh",
+            "ADDRESS2": "Khu Đại học quốc gia, phường Linh Trung, quận Thủ Đức, thành phố Hồ Chí Minh"
         }
     }
 };
