@@ -117,12 +117,12 @@
         'mailContent' => array(
             'verifyMail' => array(
                 'topic' => 'TKT email verification!',
-                'body' => file_get_contents('../../secret/constants/mail_validation.html'),
+                'body' => file_get_contents('../../static/constants/mail_content/mail_validation.html'),
                 'altBody' => 'Please use the below code to verify your account: %securityCode%',
             ),
             'mailRegisterClass' => array (
                 'topic' => 'TKT register class notification',
-                'body' => file_get_contents('../../secret/constants/mail_register_class.html'),
+                'body' => file_get_contents('../../static/constants/mail_content/mail_register_class.html'),
             ),
             'mailRegisterClassImages' => array(
                 '%logoImage%' => '../../static/images/mail_images/Job_logo.png',
@@ -160,7 +160,7 @@
 
 
         'convertData' => array (
-            'city.json' => json_decode(file_get_contents('../../../secret/constants/city.json'),true),
+            'city.json' => json_decode(file_get_contents('../../static/constants/city.json'),true),
         )
     );
 ?>
