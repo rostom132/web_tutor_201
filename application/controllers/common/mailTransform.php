@@ -42,7 +42,7 @@
             return true;
         }
 
-        static function sendRegisterClassMail() {
+        static function sendRegisterClassMail($data_class, $data_tutor, $admin_emails) {
             // $class_info, $tutor_info, $email_address
             $mail = new PHPMailer(true);
             try {
@@ -58,6 +58,17 @@
                 $mail_content = str_replace("%random_value%" , $random_value, $mail_content);
 
                 array_walk( $array_cid, function(&$value, $key) { $value =  str_replace('cid:','',$value); } );
+
+                //Insert data of class 
+                // $mail_content = str_replace(array_keys(Config::getMailContent()['mailRegisterClassMatches']['class']), $data_class[]);
+                foreach( Config::getMailContent()['mailRegisterClassMatches']['class'] as $key => $value) {
+                    $mail_content = str_replace($key, 'TIẾn',$mail_content);
+                }
+
+                //Insert data of tutor
+                foreach( Config::getMailContent()['mailRegisterClassMatches']['tutor'] as $key => $value) {
+                    $mail_content = str_replace($key, utf8_decode ($data_tutor[$value]),$mail_content);
+                }
 
                 // Content
                 $mail->isHTML(true);                                                        // Set email format to HTML

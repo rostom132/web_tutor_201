@@ -21,7 +21,7 @@
     function buildClassDataEmail($class_id) {
         $info_class = Classs::getDetaiClassInfo($class_id);
         $info_class['ward'] = Convert::getWard($info_class['district'], $info_class['ward']);
-        $info_class['district'] = Convert::getWard($info_class['district']);
+        $info_class['district'] = Convert::getDisctrict($info_class['district']);
         $info_class['gender_of_tutor'] = $info_class['gender_of_tutor'] == 'M' ? 'male' : 'female';
         return $info_class;
     }
@@ -29,16 +29,16 @@
     function buildTutorDataEmail($tutor_id) {
         $info_tutor = Tutor::getInfo($tutor_id);
         $info_tutor['gender'] = $info_tutor['gender'] == 'M' ? 'male' : 'female';
+        error_log($info_tutor['fname'],3,'../my_errors.log');
         return $info_tutor;
     }  
 
-    fucntion getAdminEmail () {
+    function getAdminEmail () {
         
     }
 
     function registerClass($class_id){
-        
-        return Email::sendRegisterClassMail();
+        return Email::sendRegisterClassMail(buildClassDataEmail($class_id),buildTutorDataEmail($_SESSION['user_id']),'');
     }
 
     if(isset($_GET['classInfoId'])) {
