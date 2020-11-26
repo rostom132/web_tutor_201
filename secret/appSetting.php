@@ -117,12 +117,12 @@
         'mailContent' => array(
             'verifyMail' => array(
                 'topic' => 'TKT email verification!',
-                'body' => file_get_contents('../../secret/constants/mail_validation.html'),
+                'body' => file_get_contents('../../static/constants/mail_content/mail_validation.html'),
                 'altBody' => 'Please use the below code to verify your account: %securityCode%',
             ),
             'mailRegisterClass' => array (
                 'topic' => 'TKT register class notification',
-                'body' => file_get_contents('../../secret/constants/mail_register_class.html'),
+                'body' => file_get_contents('../../static/constants/mail_content/mail_register_class.html'),
             ),
             'mailRegisterClassImages' => array(
                 '%logoImage%' => '../../static/images/mail_images/Job_logo.png',
@@ -131,7 +131,36 @@
                 '%part2Image%' => '../../static/images/mail_images/Guy_computer.png',
                 '%part3Image%' => '../../static/images/mail_images/Guy_texting.png',
                 '%logoFacebook%' => '../../static/images/mail_images/facebook2x.png'
+            ),
+            'mailRegisterClassMatches' => array(
+                'tutor' => array (
+                    '%lname_tutor%' => 'lname',
+                    '%fname_tutor%' => 'fname',
+                    '%email_tutor%' => 'check_email',
+                    '%phone_number_tutor%' => 'phone_number',
+                    '%gender_tutor%' => 'gender',
+                    '%job_tutor%' => 'job',
+                    '%description_tutor%' => 'description'
+                ),
+                'class' => array (
+                    '%lname_class%' => 'lname',
+                    '%fname_class%' => 'fname',
+                    '%email_class%' =>  'email',
+                    '%phone_number_class%' => 'phone_number',
+                    '%no_student_class%' => 'no_students',
+                    '%gender_class%' => 'gender_of_tutor',
+                    '%salary_class%' => 'salary',
+                    '%lesson_class%' => 'no_lesson',
+                    '%address_class%' => 'address',
+                    '%ward_class%' => 'ward',
+                    '%district_class%' => 'district'
+                )
             )
+        ),
+
+
+        'convertData' => array (
+            'city.json' => json_decode(file_get_contents('../../static/constants/city.json'),true),
         )
     );
 ?>

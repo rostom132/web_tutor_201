@@ -2,9 +2,13 @@ Options -Indexes
 DirectoryIndex /web_tutor_201/application/controllers/index.php
 RewriteEngine On
  
-RewriteRule ^application/models/.*\.php - [F,L,NC]
+RewriteRule ^application/models/.*\ - [F,L,NC]
 
-RewriteRule ^secret/.*\.php - [F,L,NC]
+RewriteRule ^application/controllers/common/.* - [F,L,NC]
+
+RewriteRule ^application/views/.* - [F,L,NC]
+
+RewriteRule ^secret/.* - [F,L,NC]
 
 RewriteRule ^infoClass/([0-9]+)$ "?page=infoClass"
 

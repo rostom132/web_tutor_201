@@ -66,7 +66,6 @@
                 $mail->msgHTML( $mail_content, __DIR__);
                 
                 foreach ( array_values(Config::getMailContent()['mailRegisterClassImages']) as $key => $value) {
-                    error_log($value,3,'../my_errors.log');
                     $mail->AddEmbeddedImage($value, $array_cid[$key]);
                 }
 
