@@ -32,7 +32,7 @@ function getClassInfo() {
                     if (info['class']['publisher_ava'] != '') {
                         $("#infoClass_avatar")
                             .attr("src", info['class']['publisher_ava'] + "?" + new Date().getTime())
-                            .width(250)
+                            .width(220)
                             .height('auto');
                     }
                     if (info['user'] == "tutor") {

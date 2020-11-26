@@ -155,7 +155,8 @@
                     '%address_class%' => 'address',
                     '%ward_class%' => 'ward',
                     '%district_class%' => 'district',
-                    '%weaknesses_class%' => 'weaknesses'
+                    '%weaknesses_class%' => 'weaknesses',
+                    '%available_time%'=> 'available_time'
                 )
             )
         ),
