@@ -1,5 +1,5 @@
 <?php
-    include_once "../../../secret/config.php";
+    include_once "../../secret/config.php";
 
     class Convert {
         public static function getDisctrict($district_id) {
@@ -19,7 +19,7 @@
 
             return $result;
         }
+
     }
 
-    echo Convert::getWard('23','314');
 ?>

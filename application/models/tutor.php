@@ -102,6 +102,22 @@
             return false;
         }
 
+        /**
+         * Get group concat of speciality of one tutor
+         *
+         * @param integer $tutor_id id of the tutor
+         * 
+         * @return array speciality concat
+         */ 
+        public static function getSpecializeGroupConcat($tutor_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT GROUP_CONCAT(CONCAT(name,'_', grade,'_', teaching_language)  SEPARATOR ', ') as subject FROM Specialize
+                JOIN subject ON subject.id = specialize.subject_id
+                                WHERE tutor_id='$tutor_id'"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result)[0];
+        }
+
     }
 
 ?>
