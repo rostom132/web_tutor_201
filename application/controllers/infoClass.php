@@ -3,6 +3,7 @@
     include_once "../models/class.php";
     include_once "../models/tutor.php";
     include_once "../models/class.php";
+    include_once "../models/admin.php";
     include_once "./common/getAvatar.php"; 
     include_once "./common/mailTransform.php";
     include_once "./common/convertData.php";
@@ -23,22 +24,24 @@
         $info_class['ward'] = Convert::getWard($info_class['district'], $info_class['ward']);
         $info_class['district'] = Convert::getDisctrict($info_class['district']);
         $info_class['gender_of_tutor'] = $info_class['gender_of_tutor'] == 'M' ? 'male' : 'female';
+        $info_class['weaknesses'] = Classs::getWeakness($class_id);
         return $info_class;
     }
 
     function buildTutorDataEmail($tutor_id) {
         $info_tutor = Tutor::getInfo($tutor_id);
         $info_tutor['gender'] = $info_tutor['gender'] == 'M' ? 'male' : 'female';
-        error_log($info_tutor['fname'],3,'../my_errors.log');
+        $info_tutor['specialize'] = Tutor::getSpecializeGroupConcat($tutor_id)['subject'];
+        error_log($info_tutor['specialize'], 3, '../my_errors.log');
         return $info_tutor;
     }  
 
-    function getAdminEmail () {
-        
+    function getAdminEmail() {
+        return array_column(Admin::getAllEmails(),'email');
     }
 
     function registerClass($class_id){
-        return Email::sendRegisterClassMail(buildClassDataEmail($class_id),buildTutorDataEmail($_SESSION['user_id']),'');
+        return Email::sendRegisterClassMail(buildClassDataEmail($class_id),buildTutorDataEmail($_SESSION['user_id']),getAdminEmail ());
     }
 
     if(isset($_GET['classInfoId'])) {

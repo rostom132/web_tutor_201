@@ -140,7 +140,8 @@
                     '%phone_number_tutor%' => 'phone_number',
                     '%gender_tutor%' => 'gender',
                     '%job_tutor%' => 'job',
-                    '%description_tutor%' => 'description'
+                    '%description_tutor%' => 'description',
+                    '%speciality_tutor%' => 'specialize'
                 ),
                 'class' => array (
                     '%lname_class%' => 'lname',
@@ -153,7 +154,8 @@
                     '%lesson_class%' => 'no_lesson',
                     '%address_class%' => 'address',
                     '%ward_class%' => 'ward',
-                    '%district_class%' => 'district'
+                    '%district_class%' => 'district',
+                    '%weaknesses_class%' => 'weaknesses'
                 )
             )
         ),

@@ -87,7 +87,7 @@
             $result = $GLOBALS['db_conn']->queryData(
                 "SELECT email FROM Admin"
             );
-            return $GLOBALS['db_conn']->convertToArray($result)[0];
+            return $GLOBALS['db_conn']->convertToArray($result);
         }
     }
 
