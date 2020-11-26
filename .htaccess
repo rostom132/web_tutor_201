@@ -2,7 +2,7 @@ Options -Indexes
 DirectoryIndex /web_tutor_201/application/controllers/index.php
 RewriteEngine On
  
-RewriteRule ^application/models/.*\ - [F,L,NC]
+RewriteRule ^application/models/.* - [F,L,NC]
 
 RewriteRule ^application/controllers/common/.* - [F,L,NC]
 

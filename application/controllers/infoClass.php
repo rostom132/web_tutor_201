@@ -5,6 +5,7 @@
     include_once "../models/class.php";
     include_once "./common/getAvatar.php"; 
     include_once "./common/mailTransform.php";
+    include_once "./common/convertData.php";
 
     function getClassInfo($id){
         $response = array(
@@ -19,11 +20,19 @@
 
     function buildClassDataEmail($class_id) {
         $info_class = Classs::getDetaiClassInfo($class_id);
-        
+        $info_class['ward'] = Convert::getWard($info_class['district'], $info_class['ward']);
+        $info_class['district'] = Convert::getWard($info_class['district']);
+        $info_class['gender_of_tutor'] = $info_class['gender_of_tutor'] == 'M' ? 'male' : 'female';
+        return $info_class;
     }
 
     function buildTutorDataEmail($tutor_id) {
         $info_tutor = Tutor::getInfo($tutor_id);
+        $info_tutor['gender'] = $info_tutor['gender'] == 'M' ? 'male' : 'female';
+        return $info_tutor;
+    }  
+
+    fucntion getAdminEmail () {
         
     }
 
