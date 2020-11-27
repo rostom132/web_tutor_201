@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2020 at 03:30 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Nov 27, 2020 at 06:45 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.3.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `first_name`, `last_name`, `gender`, `phone_number`, `description`, `email`) VALUES
-(17, 'tkteducation', 'asdas', 'F', '0845425551', NULL, 'vietkhoa1999@gmail.com');
+(17, 'tkteducation', 'asdas', 'F', '0845425551', NULL, 'tien.trandinh99@gmail.com'),
+(19, 'tientien', NULL, 'M', NULL, NULL, 'rostom13299@gmail.com'),
+(20, 'khoakhoa', NULL, 'M', NULL, NULL, 'unrealhappiness13@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,7 @@ CREATE TABLE `admincode` (
 --
 
 INSERT INTO `admincode` (`code`, `use_time`) VALUES
-(0004646, 45);
+(0004646, 43);
 
 -- --------------------------------------------------------
 
@@ -93,11 +95,11 @@ CREATE TABLE `class` (
 INSERT INTO `class` (`id`, `city`, `district`, `ward`, `address`, `phone_number`, `no_students`, `gender_of_tutor`, `salary_per_lesson`, `no_lesson_per_week`, `time_per_lesson`, `user_id`, `description`, `topic`, `post_date`) VALUES
 (1, '1', '10', '134', '82/8 Mạc Đỉnh Chi', '0908933671', 1, 'F', 200000, 3, '01:30:00', 4, 'Cần giáo viên nữ dạy cho con gái tui, dạy giỏi có thêm tiền. Con tui hơi rụt rè muốn có giáo viên nhiệt tình để quan tâm cháu hơn kjdfbkjsdnflskdlskdmflskdfmlSKDnJLFSNlKnvlklz;jnblzn;kxcmv;xc,b;bmlcvb', 'Cần giáo viên nữ dạy môn Toán', '2020-11-20'),
 (2, '1', '19', '254', '465/1/12 Trần Xuân Soạn', '0708091941', 2, 'M', 150000, 4, '02:00:00', 7, 'Con tôi cần giáo viên dạy Lý bằng Tiếng Anh vì cháu học trường quốc tế', 'Cần giáo viên dạy Lý Tiếng Anh', '2020-11-10'),
-(84, '1', '10', '129', '17/10 Đường Cây Điệp Phường Bến Nghé Quận 1', '0969935447', 4, 'M', 100000, 2, '02:30:00', 4, '', 'Tìm gia sư Toán quận', '2020-11-24'),
-(85, '1', '2', '20', '17/10 Đường 11A Phường Bình Hưng Hòa A Bình Tân', '0969935447', 4, 'M', 200000, 2, '03:00:00', 4, '', 'tìm gia sư abcd', '2020-11-24'),
-(90, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
-(91, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
-(92, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24');
+(84, '1', '10', '129', '17/10 Đường Cây Điệp Phường Bến Nghé Quận 1', '0969935447', 4, 'M', 100000, 2, '02:30:00', 4, '', 'Tìm gia sư Toán quận', '2020-11-05'),
+(85, '1', '2', '20', '17/10 Đường 11A Phường Bình Hưng Hòa A Bình Tân', '0969935447', 4, 'M', 200000, 2, '03:00:00', 4, '', 'tìm gia sư abcd', '2020-10-24'),
+(91, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-09-09'),
+(92, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
+(93, '1', '8', '105', 'Đường D6 Phường Hiệp Phước Nhà Bè', '0845425213', 1, 'B', 500000, 3, '02:00:00', 21, '', 'Find the best tutor for my child', '2020-11-27');
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,6 @@ INSERT INTO `class` (`id`, `city`, `district`, `ward`, `address`, `phone_number`
 --
 
 CREATE TABLE `classschedule` (
-  `id` int(10) UNSIGNED NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `date` varchar(3) NOT NULL CHECK (`date` in ('MON','TUE','WED','THU','FRI','SAT','SUN')),
@@ -117,13 +118,11 @@ CREATE TABLE `classschedule` (
 -- Dumping data for table `classschedule`
 --
 
-INSERT INTO `classschedule` (`id`, `start_time`, `end_time`, `date`, `class_id`) VALUES
-(1, '08:30:00', '10:30:00', 'MON', 90),
-(2, '10:30:00', '23:00:00', 'MON', 90),
-(3, '08:30:00', '11:30:00', 'MON', 90),
-(4, '08:30:00', '10:30:00', 'MON', 91),
-(5, '10:30:00', '23:00:00', 'MON', 91),
-(6, '10:30:00', '13:30:00', 'TUE', 91);
+INSERT INTO `classschedule` (`start_time`, `end_time`, `date`, `class_id`) VALUES
+('08:00:00', '23:00:00', 'SUN', 93),
+('08:30:00', '10:30:00', 'MON', 91),
+('10:30:00', '13:30:00', 'TUE', 91),
+('10:30:00', '23:00:00', 'MON', 91);
 
 -- --------------------------------------------------------
 
@@ -147,21 +146,27 @@ CREATE TABLE `parent` (
 
 INSERT INTO `parent` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`) VALUES
 (4, 'thienngu', NULL, '2020-11-15', 'M', NULL, 'nhanthien1012@gmail.com'),
-(7, 'khoangu', NULL, '2020-11-15', 'M', NULL, 'rostom13299@gmail.com');
+(7, 'khoangu', NULL, '2020-11-15', 'M', NULL, 'rostom13299@gmail.com'),
+(21, 'tientutor', NULL, '2020-11-27', 'M', NULL, 'rostom13299@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request`
+-- Table structure for table `registeredclass`
 --
 
-CREATE TABLE `request` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `request_date` datetime NOT NULL,
-  `status` varchar(20) DEFAULT NULL CHECK (`status` in ('PASSED','NOT PAIED','DONE')),
-  `class_id` int(10) UNSIGNED NOT NULL,
-  `tutor_id` int(10) UNSIGNED NOT NULL
+CREATE TABLE `registeredclass` (
+  `register_date` date DEFAULT curdate(),
+  `tutor_id` int(10) UNSIGNED NOT NULL,
+  `class_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `registeredclass`
+--
+
+INSERT INTO `registeredclass` (`register_date`, `tutor_id`, `class_id`) VALUES
+('2020-11-27', 6, 92);
 
 -- --------------------------------------------------------
 
@@ -283,7 +288,10 @@ INSERT INTO `userinfo` (`id`, `username`, `password`, `salt`, `user_type`, `toke
 (8, 'thienn', '63c854642c3194cd1ad0b3b89895a12a6f1f874ee293261de531678134e2e63d', '1605613059924', 'tutor', NULL),
 (9, 'tiennn', '3294a05f6bd3dd40d5a853dc925f68abe45120a050fa156b428cbef08a0a5666', '1605613199261', 'tutor', NULL),
 (17, 'tkteducation', '1a3836f03122df6d092a01ea94cffb4ac13191b042e96312656c61f5c7a9fe70', '1606196535645', 'admin', '371c2631e44dcbaceb05e195c4f8c27f9ce0b27c'),
-(18, 'eduedu', '565ce7e300e213efd7e9a68aee18421f0999f58dae5447e4ff403dd9854e9053', '1606206036221', 'tutor', NULL);
+(18, 'eduedu', '565ce7e300e213efd7e9a68aee18421f0999f58dae5447e4ff403dd9854e9053', '1606206036221', 'tutor', NULL),
+(19, 'tientien', 'bd8e35c35e54fc4a3ee91e5adb7dc9eb17cf0bed1bfc76b7fff567b00b8405bb', '1606363845701', 'admin', NULL),
+(20, 'khoakhoa', 'c9b9dcaba556572cf16ed985a1d4db3824cce65c12bf20e1615856bef444eb9b', '1606397164568', 'admin', NULL),
+(21, 'tientutor', 'f2975b09a1351a4f260299bcd401a3f2de2c9d4e1dd30724c83efb7758c3aa6c', '1606494708093', 'parent', NULL);
 
 -- --------------------------------------------------------
 
@@ -304,9 +312,12 @@ INSERT INTO `weakness` (`class_id`, `subject_id`) VALUES
 (1, 1),
 (2, 1),
 (2, 6),
-(90, 1),
+(84, 2),
+(85, 3),
 (91, 1),
-(92, 1);
+(92, 1),
+(93, 2),
+(93, 3);
 
 --
 -- Indexes for dumped tables
@@ -335,7 +346,7 @@ ALTER TABLE `class`
 -- Indexes for table `classschedule`
 --
 ALTER TABLE `classschedule`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`start_time`,`end_time`,`date`,`class_id`),
   ADD KEY `class_id` (`class_id`);
 
 --
@@ -345,12 +356,11 @@ ALTER TABLE `parent`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `request`
+-- Indexes for table `registeredclass`
 --
-ALTER TABLE `request`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `class_id` (`class_id`),
-  ADD KEY `tutor_id` (`tutor_id`);
+ALTER TABLE `registeredclass`
+  ADD PRIMARY KEY (`tutor_id`,`class_id`),
+  ADD KEY `registeredclass_fk_class` (`class_id`);
 
 --
 -- Indexes for table `specialize`
@@ -402,19 +412,7 @@ ALTER TABLE `weakness`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
-
---
--- AUTO_INCREMENT for table `classschedule`
---
-ALTER TABLE `classschedule`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `request`
---
-ALTER TABLE `request`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -432,7 +430,7 @@ ALTER TABLE `teaching`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -448,7 +446,7 @@ ALTER TABLE `admin`
 -- Constraints for table `class`
 --
 ALTER TABLE `class`
-  ADD CONSTRAINT `class_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `class_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `parent` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `classschedule`
@@ -463,11 +461,11 @@ ALTER TABLE `parent`
   ADD CONSTRAINT `parent_ibfk_1` FOREIGN KEY (`id`) REFERENCES `userinfo` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `request`
+-- Constraints for table `registeredclass`
 --
-ALTER TABLE `request`
-  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`tutor_id`) REFERENCES `tutor` (`id`) ON DELETE CASCADE;
+ALTER TABLE `registeredclass`
+  ADD CONSTRAINT `registeredclass_fk_class` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `registeredclass_fk_tutor` FOREIGN KEY (`tutor_id`) REFERENCES `tutor` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `specialize`
