@@ -81,6 +81,14 @@
             if (!$result_admin) return false;
             return true;
         }
+
+
+        public static function getAllEmails() {
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT email FROM Admin"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result);
+        }
     }
 
 ?>

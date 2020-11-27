@@ -136,7 +136,8 @@ export const arrLang = {
             "LESSON": " lesson/week ",
             "FEE": "  Tuition fee: ",
             "DES": "  Description ",
-            "BUTTON": " REGISTER "
+            "BUTTON": " REGISTER ",
+            "AVAILABLE_TIME" : "Available time: "
         },
         "USER_REGISTER": {
             "TITLE": "Registration Form",
@@ -294,6 +295,7 @@ export const arrLang = {
             "FEE": "  Học phí: ",
             "DES": "  Miêu tả ",
             "BUTTON": " ĐĂNG KÝ ",
+            "AVAILABLE_TIME": "Thời gian: "
         },
         "USER_REGISTER": {
             "TITLE": "Đăng ký",

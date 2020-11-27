@@ -42,12 +42,16 @@
             return true;
         }
 
-        static function sendRegisterClassMail() {
+        static function sendRegisterClassMail($data_class, $data_tutor, $admin_emails) {
             // $class_info, $tutor_info, $email_address
             $mail = new PHPMailer(true);
             try {
                 Email::configMailer($mail);
-                $mail->addAddress('rostom13299@gmail.com');                                                // Add a recipient
+                $mail->CharSet = 'UTF-8';
+                foreach($admin_emails as $value) {
+                    $mail->addAddress($value);  
+                }
+                
                 $mail_content = Config::getMailContent()['mailRegisterClass']['body'];
 
                 $array_cid = array_keys(Config::getMailContent()['mailRegisterClassImages']);
@@ -59,6 +63,17 @@
 
                 array_walk( $array_cid, function(&$value, $key) { $value =  str_replace('cid:','',$value); } );
 
+                //Insert data of class 
+                // $mail_content = str_replace(array_keys(Config::getMailContent()['mailRegisterClassMatches']['class']), $data_class[]);
+                foreach( Config::getMailContent()['mailRegisterClassMatches']['class'] as $key => $value) {
+                    $mail_content = str_replace($key, $data_class[$value],$mail_content);
+                }
+
+                //Insert data of tutor
+                foreach( Config::getMailContent()['mailRegisterClassMatches']['tutor'] as $key => $value) {
+                    $mail_content = str_replace($key, $data_tutor[$value],$mail_content);
+                }
+
                 // Content
                 $mail->isHTML(true);                                                        // Set email format to HTML
                 $mail->Subject = Config::getMailContent()['mailRegisterClass']['topic'];
@@ -66,7 +81,6 @@
                 $mail->msgHTML( $mail_content, __DIR__);
                 
                 foreach ( array_values(Config::getMailContent()['mailRegisterClassImages']) as $key => $value) {
-                    error_log($value,3,'../my_errors.log');
                     $mail->AddEmbeddedImage($value, $array_cid[$key]);
                 }
 

@@ -39,7 +39,6 @@
             array_push($page_content , "../views/$page.html");
             break;
         default:
-            error_log('loop', 3, '../my_errors.log');
             header("Location: ".Config::getConfig()['domain'] ."bodyBanner");
     }
 
