@@ -10,6 +10,12 @@
             return true;
         }
 
+        static function validateLogin($loginData) {
+            $password_status = preg_match(Config::get()['validateCommon']['password'], $loginData['password']);
+            $username_status = preg_match(Config::get()['validateCommon']['username'], $loginData['username']);
+            return ($password_status && $username_status);
+        }
+
         static function validateInfo($input_info) {
             $failValidate = array();
             foreach ($input_info as $col => $value) {

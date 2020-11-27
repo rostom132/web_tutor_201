@@ -36,8 +36,8 @@
 
         //Information must be input when update user info
         'validateCommon' => array (
-            'username' => '/^[A-za-z0-9]{4,}$/',
-            'password' => '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'username' => '/^[a-zA-Z0-9]{4,}$/',
+            'password' => '/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
         ),
 
         'validateInfo' => array (

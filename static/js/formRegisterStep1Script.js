@@ -238,7 +238,6 @@ $("button[id^='continue']").click(function continueButton() {
             registerData: infoRegister
         },
         success: function(data) {
-            console.log(data);
             switch (data) {
                 case 'success':
                     alert('Create new account sucessful!!');
