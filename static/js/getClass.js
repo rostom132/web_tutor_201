@@ -50,7 +50,7 @@ function createTemplate(class_list) {
         var date = class_list[i]['post_date'];
         template.setAttribute('class', 'row-wrapper shadow-box');
         template.innerHTML =
-            `
+        `
         <div class="ribbon">
         <p>${date}</p>
         </div>
@@ -123,7 +123,6 @@ export function initClass() {
     ajax.send("init=1&current=" + current_page);
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             document.getElementById('show').removeChild(loading);
             if (this.responseText == 0) {
                 renderClassNum(0);
@@ -131,7 +130,6 @@ export function initClass() {
                 return;
             }
             var obj = JSON.parse(this.responseText);
-            console.log(obj[4][0]['name']);
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
@@ -176,7 +174,6 @@ export function filterClass(dist, sub, gender) {
         ajax.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('show').removeChild(loading);
-                console.log(this.responseText);
                 if (this.responseText == 0) {
                     renderClassNum(0);
                     noResultTemplate();
