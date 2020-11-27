@@ -227,7 +227,7 @@ function emailButton() {
 $("button[id^='continue']").click(function continueButton() {
     var role;
     if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
-    if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
+    else if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
     else role = 'admin'
 
     var infoRegister = getAllInfo(role);
@@ -238,7 +238,6 @@ $("button[id^='continue']").click(function continueButton() {
             registerData: infoRegister
         },
         success: function(data) {
-            console.log(data);
             switch (data) {
                 case 'success':
                     alert('Create new account sucessful!!');

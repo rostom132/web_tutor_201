@@ -23,8 +23,8 @@
                 if ($sql != "WHERE ") $sql.= ' and ';
                 $sql .= "$col LIKE '$val'";
             }
-            $temp = "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id " .$sql;
-            $temp.=" GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $temp = "SELECT class.id FROM class JOIN weakness ON class.id = weakness.class_id " .$sql;
+            $temp.=" GROUP BY class.id";
             $result = $GLOBALS['db_conn']->queryData($temp);
             if($result->num_rows != 0) {
                 return mysqli_num_rows($result);
@@ -37,7 +37,7 @@
         public static function getLimitClasses($current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit"
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class ORDER BY class.post_date DESC LIMIT $start, $limit"
             );
             if($result->num_rows != 0) {
                 return $GLOBALS['db_conn']->convertToArray($result);
@@ -50,7 +50,7 @@
         public static function getLimitClassesFilter($input_array, $current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $prefix ="SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id ";
-            $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id ORDER BY class.post_date DESC";
             $sql = null;
             if(sizeof($input_array) > 0) {
                 $prefix .= "WHERE ";
@@ -130,6 +130,14 @@
                 WHERE class_id = '$class_id'"
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0];
+        }
+
+        public static function deleteClass($class_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "DELETE FROM `class` WHERE id='$class_id'"
+            );
+            if ($result) return true;
+            return false;
         }
     }
 
