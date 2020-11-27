@@ -2,6 +2,7 @@
 include_once '../models/class.php';
 include_once "./common/getAvatar.php";
 include_once "../models/subject.php";
+const LIMIT = 2;
 function getAllAvatar($class_arr) {
     $arr = array();
     foreach($class_arr as $user) {
@@ -19,7 +20,7 @@ function getAllWeaknessOfClass($class_list) {
 function getAllClass($current_page) {
 
     $total_records = Classs::getNumberOfClass();
-    $limit = 1;
+    $limit = LIMIT;
     $total_page = ceil($total_records / $limit);
     $start = ($current_page - 1) * $limit;
     $class_arr = Classs::getLimitClasses($current_page, $limit);
@@ -51,11 +52,19 @@ function getClassWithFilter($filterVal, $current_page) {
             unset($filterArr[$key]);
         }
     }
-    $total_records = Classs::getNumberOfClassFilter($filterArr);
-    $limit = 1;
-    $total_page = ceil($total_records / $limit);
-    $start = ($current_page - 1) * $limit;
-    $class_arr = Classs::getLimitClassesFilter($filterArr, $current_page, $limit);
+    $limit = LIMIT;
+    if(sizeof($filterArr) != 0) {
+        $total_records = Classs::getNumberOfClassFilter($filterArr);
+        $total_page = ceil($total_records / $limit);
+        $start = ($current_page - 1) * $limit;
+        $class_arr = Classs::getLimitClassesFilter($filterArr, $current_page, $limit);
+    }
+    else {
+        $total_records = Classs::getNumberOfClass();
+        $total_page = ceil($total_records / $limit);
+        $start = ($current_page - 1) * $limit;
+        $class_arr = Classs::getLimitClasses($current_page, $limit);
+    }
     
     if($total_records > 0 && $class_arr != "0") { 
         $avatar_arr = getAllAvatar($class_arr);
