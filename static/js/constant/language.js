@@ -3,16 +3,16 @@ export const arrLang = {
         // HOMEPAGE
         "COMMON": {
             "NAVBAR_HOMEPAGE": "Home Page",
-            "NAVBAR_ABOUTUS": "About Us",
+            "NAVBAR_ABOUTUS": "About\u00a0Us",
             "NAVBAR_ACCOUNT": "Account",
             "NAVBAR_CONTACT": "Contact",
             "NAVBAR_CLASS": "Classes Info",
             "NAVBAR_LOGIN": "Login",
             "NAVBAR_REGISTRATION": "Registration",
             "NAVBAR_LOGOUT": "Logout",
-            "NAVBAR_REGISTERCLASS": "Register Class",
-            "NAVBAR_CLASSESLIST": "Classes List",
-            "NAVBAR_PROFILE": "My Profile",
+            "NAVBAR_REGISTERCLASS": "Register\u00a0Class",
+            "NAVBAR_CLASSESLIST": "Classes\u00a0List",
+            "NAVBAR_PROFILE": "My\u00a0Profile",
             "BODY_TITLE": "Center Activity",
             "BODY_SUB": "",
             "COUNTING_SQUARE1_LINE1": "700",
@@ -137,6 +137,8 @@ export const arrLang = {
             "FEE": "  Tuition fee: ",
             "DES": "  Description ",
             "BUTTON": " REGISTER ",
+            "REGISTERED": " REGISTERED ",
+            "DELETE": " DELETE",
             "AVAILABLE_TIME" : "Available time: "
         },
         "USER_REGISTER": {
@@ -173,16 +175,16 @@ export const arrLang = {
     "vn": {
         "COMMON": {
             "NAVBAR_HOMEPAGE": "Trang chủ",
-            "NAVBAR_ABOUTUS": "Về chúng tôi",
+            "NAVBAR_ABOUTUS": "Về\u00a0chúng\u00a0tôi",
             "NAVBAR_ACCOUNT": "Tài khoản",
-            "NAVBAR_CONTACT": "Liên hệ",
+            "NAVBAR_CONTACT": "Liên\u00a0hệ",
             "NAVBAR_CLASS": "Thông tin lớp",
             "NAVBAR_LOGIN": "Đăng nhập",
             "NAVBAR_REGISTRATION": "Đăng kí",
             "NAVBAR_LOGOUT": "Đăng xuất",
-            "NAVBAR_REGISTERCLASS": "Đăng kí lớp",
-            "NAVBAR_CLASSESLIST": "Danh sách lớp",
-            "NAVBAR_PROFILE": "Thông tin cá nhân",
+            "NAVBAR_REGISTERCLASS": "Đăng\u00a0kí\u00a0lớp",
+            "NAVBAR_CLASSESLIST": "Danh\u00a0sách\u00a0lớp",
+            "NAVBAR_PROFILE": "Thông\u00a0tin\u00a0cá\u00a0nhân",
         },
         "REGISTER": {
             // Title + placeholder
@@ -289,6 +291,8 @@ export const arrLang = {
             "FEE": "  Học phí: ",
             "DES": "  Miêu tả ",
             "BUTTON": " ĐĂNG KÝ ",
+            "REGISTERED": " Đã Đăng ký",
+            "DELETE": " XÓA LỚP ",
             "AVAILABLE_TIME": "Thời gian: "
         },
         "USER_REGISTER": {

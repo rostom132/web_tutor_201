@@ -48,3 +48,7 @@
     width: 100%;
     cursor: pointer;
 }
+
+.btnRegister:disabled{
+    background: #838788;
+}

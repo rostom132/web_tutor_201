@@ -12,6 +12,6 @@ RewriteRule ^secret/.* - [F,L,NC]
 
 RewriteRule ^infoClass/([0-9]+)$ "?page=infoClass"
 
-RewriteRule ^infoClass$ "?page=bodyBanner"
+RewriteRule ^infoClass$ "?page=classList"
 
 RewriteRule "^([a-zA-Z0-9]+)$" "?page=$1"

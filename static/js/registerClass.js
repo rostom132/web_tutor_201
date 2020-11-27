@@ -775,7 +775,7 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
                     alert("SUCCESS");
                     // Change url
                 } else if (
