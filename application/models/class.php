@@ -118,7 +118,7 @@
 
         public static function getDetaiClassInfo($class_id){
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT parent.first_name as fname, parent.last_name as lname, parent.email, parent.phone_number, class.no_students, class.gender_of_tutor, class.salary_per_lesson as salary, class.no_lesson_per_week as no_lesson, class.address, class.ward, class.district FROM class 
+                "SELECT parent.first_name as fname, parent.last_name as lname, parent.email, class.phone_number, class.no_students, class.gender_of_tutor, class.salary_per_lesson as salary, class.no_lesson_per_week as no_lesson, class.address, class.ward, class.district FROM class 
                 JOIN parent ON class.user_id = parent.id
                 Where class.id = '$class_id'"
             );
