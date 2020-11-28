@@ -21,7 +21,11 @@ function passDataIntoFormDB() {
 
             var languageValue = obj['language'];
             var languaue = document.getElementById("edit_language");
-            if (languageValue != "") languaue.value = languageValue;
+            if (languageValue != null && languageValue != undefined) {
+                languaue.value = languageValue;
+            } else {
+                languaue.value = "Language Teach";
+            }
 
             var genderValue = obj['gender'];
             var gender = document.getElementsByName("gender");
@@ -92,29 +96,29 @@ function getAllDataInForm() {
 function passDataIntoFormStorage() {
 
     var edit_fnameValue = sessionStorage.getItem("fname");
-    document.getElementById("edit_fname").value = edit_fnameValue;
+    if (edit_fnameValue != "null") document.getElementById("edit_fname").value = edit_fnameValue;
 
     var edit_lnameValue = sessionStorage.getItem("lname");
-    document.getElementById("edit_lname").value = edit_lnameValue;
+    if (edit_lnameValue != "null") document.getElementById("edit_lname").value = edit_lnameValue;
 
     var emailValue = sessionStorage.getItem("check_email");
-    document.getElementById("edit_check_email").value = emailValue;
+    if (emailValue != "null") document.getElementById("edit_check_email").value = emailValue;
 
     var phoneValue = sessionStorage.getItem("phone_number");
-    document.getElementById("edit_phone_number").value = phoneValue;
+    if (phoneValue != "null") document.getElementById("edit_phone_number").value = phoneValue;
 
     var phoneValue = sessionStorage.getItem("birth");
-    document.getElementById("edit_birth").value = phoneValue;
+    if (phoneValue != "null") document.getElementById("edit_birth").value = phoneValue;
 
     var languageValue = sessionStorage.getItem("language");
     var languaue = document.getElementById("edit_language");
-    languaue.value = languageValue;
+    if (languageValue != "null") languaue.value = languageValue;
 
     var jobValue = sessionStorage.getItem("job");
-    document.getElementById("edit_job").value = jobValue;
+    if (jobValue != "null") document.getElementById("edit_job").value = jobValue;
 
     var descriptionValue = sessionStorage.getItem("description");
-    document.getElementById("edit_description").value = descriptionValue;
+    if (descriptionValue != "null") document.getElementById("edit_description").value = descriptionValue;
 
     var genderValue = sessionStorage.getItem("gender");
     var gender = document.getElementsByName("gender");
