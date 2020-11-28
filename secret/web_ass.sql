@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2020 at 06:45 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.3.23
+-- Generation Time: Nov 28, 2020 at 03:22 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,9 +42,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `first_name`, `last_name`, `gender`, `phone_number`, `description`, `email`) VALUES
-(17, 'tkteducation', 'asdas', 'F', '0845425551', NULL, 'tien.trandinh99@gmail.com'),
+(17, 'tkteducation', 'asdas', 'M', '0845425551', NULL, 'tien.trandinh99@gmail.com'),
 (19, 'tientien', NULL, 'M', NULL, NULL, 'rostom13299@gmail.com'),
-(20, 'khoakhoa', NULL, 'M', NULL, NULL, 'unrealhappiness13@gmail.com');
+(20, 'khoakhoa', NULL, 'M', NULL, NULL, 'vietkhoa1999@gmail.com'),
+(24, 'Luckybeo', 'Phantom', 'M', '0917565059', NULL, 'huyenma91@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ CREATE TABLE `admincode` (
 --
 
 INSERT INTO `admincode` (`code`, `use_time`) VALUES
-(0004646, 43);
+(0004646, 5);
 
 -- --------------------------------------------------------
 
@@ -95,11 +96,12 @@ CREATE TABLE `class` (
 INSERT INTO `class` (`id`, `city`, `district`, `ward`, `address`, `phone_number`, `no_students`, `gender_of_tutor`, `salary_per_lesson`, `no_lesson_per_week`, `time_per_lesson`, `user_id`, `description`, `topic`, `post_date`) VALUES
 (1, '1', '10', '134', '82/8 Mạc Đỉnh Chi', '0908933671', 1, 'F', 200000, 3, '01:30:00', 4, 'Cần giáo viên nữ dạy cho con gái tui, dạy giỏi có thêm tiền. Con tui hơi rụt rè muốn có giáo viên nhiệt tình để quan tâm cháu hơn kjdfbkjsdnflskdlskdmflskdfmlSKDnJLFSNlKnvlklz;jnblzn;kxcmv;xc,b;bmlcvb', 'Cần giáo viên nữ dạy môn Toán', '2020-11-20'),
 (2, '1', '19', '254', '465/1/12 Trần Xuân Soạn', '0708091941', 2, 'M', 150000, 4, '02:00:00', 7, 'Con tôi cần giáo viên dạy Lý bằng Tiếng Anh vì cháu học trường quốc tế', 'Cần giáo viên dạy Lý Tiếng Anh', '2020-11-10'),
-(84, '1', '10', '129', '17/10 Đường Cây Điệp Phường Bến Nghé Quận 1', '0969935447', 4, 'M', 100000, 2, '02:30:00', 4, '', 'Tìm gia sư Toán quận', '2020-11-05'),
-(85, '1', '2', '20', '17/10 Đường 11A Phường Bình Hưng Hòa A Bình Tân', '0969935447', 4, 'M', 200000, 2, '03:00:00', 4, '', 'tìm gia sư abcd', '2020-10-24'),
-(91, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-09-09'),
-(92, '1', '23', '314', '123/12321/213 Đường Huỳnh Văn Chính Phường Tây Thạnh Tân Phú', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Thien ngu lz', 'hello', '2020-11-24'),
-(93, '1', '8', '105', 'Đường D6 Phường Hiệp Phước Nhà Bè', '0845425213', 1, 'B', 500000, 3, '02:00:00', 21, '', 'Find the best tutor for my child', '2020-11-27');
+(84, '1', '10', '129', '17/10 Đường Cây Điệp', '0969933455', 4, 'M', 100000, 2, '02:30:00', 4, 'Cháu cần ôn thi môn văn cho kì thi Trung học Phổ thông quốc gia sắp tới, cần giáo viên luyện thi cấp tốc', 'Tìm gia sư Văn giỏi vì cháu học lực tương đối kém', '2020-11-05'),
+(85, '1', '2', '20', '17/10 Đường 11A', '0969935447', 4, 'B', 200000, 2, '03:00:00', 4, 'Cần một người hiện đang làm giáo viên vật lý, vững chuyên ngành đề kèm các cháu thi học sinh giỏi', 'tuyển gia sư vững vật lý ôn thi học sinh giỏi tỉnh', '2020-10-24'),
+(91, '1', '23', '314', '93/17 Đường Gò Dầu', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Vì cháu đang học chương trình chất lượng cao nên cần dạy bằng TA, có thưởng nếu dạy tốt', 'Cần giáo viên giỏi dạy toán TA', '2020-09-09'),
+(92, '1', '23', '314', '123/78/29 Đường Huỳnh Văn Chính', '0851234526', 2, 'B', 250000, 2, '02:00:00', 7, 'Because my children have to take an important exam in the next year, i need the best tutor.', 'Need a tutor who is good at softskill and English', '2020-11-27'),
+(93, '1', '8', '105', '167/2A Đường D6', '0845425213', 1, 'F', 500000, 3, '02:00:00', 21, 'My child is not good at physic but her performance at literature is quite good', 'Find the best tutor for my child', '2020-11-30'),
+(95, '1', '9', '115', '17/10 Đường 9', '0969935447', 3, 'B', 200000, 4, '02:30:00', 23, 'Cháu cần môt gia sư nhiệt tình, tận tâm vì cháu tiếp thu hơi chậm', 'Tìm gia sư cho các cháu học lực khá', '2020-11-27');
 
 -- --------------------------------------------------------
 
@@ -121,6 +123,7 @@ CREATE TABLE `classschedule` (
 INSERT INTO `classschedule` (`start_time`, `end_time`, `date`, `class_id`) VALUES
 ('08:00:00', '23:00:00', 'SUN', 93),
 ('08:30:00', '10:30:00', 'MON', 91),
+('09:00:00', '13:00:00', 'MON', 95),
 ('10:30:00', '13:30:00', 'TUE', 91),
 ('10:30:00', '23:00:00', 'MON', 91);
 
@@ -145,9 +148,10 @@ CREATE TABLE `parent` (
 --
 
 INSERT INTO `parent` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`) VALUES
-(4, 'thienngu', NULL, '2020-11-15', 'M', NULL, 'nhanthien1012@gmail.com'),
-(7, 'khoangu', NULL, '2020-11-15', 'M', NULL, 'rostom13299@gmail.com'),
-(21, 'tientutor', NULL, '2020-11-27', 'M', NULL, 'rostom13299@gmail.com');
+(4, 'thien', NULL, '2020-11-15', 'M', NULL, 'nhanthien1012@gmail.com'),
+(7, 'khoa', NULL, '2020-11-15', 'M', NULL, 'rostom13299@gmail.com'),
+(21, 'tientutor', NULL, '2020-11-27', 'M', NULL, 'rostom13299@gmail.com'),
+(23, 'ngocthien', NULL, '2020-11-28', 'M', NULL, 'nhanthien1012@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -166,7 +170,8 @@ CREATE TABLE `registeredclass` (
 --
 
 INSERT INTO `registeredclass` (`register_date`, `tutor_id`, `class_id`) VALUES
-('2020-11-27', 6, 92);
+('2020-11-27', 6, 92),
+('2020-11-28', 25, 95);
 
 -- --------------------------------------------------------
 
@@ -189,8 +194,10 @@ INSERT INTO `specialize` (`years_of_ex`, `subject_id`, `tutor_id`) VALUES
 (NULL, 1, 6),
 (NULL, 1, 9),
 (NULL, 1, 18),
+(NULL, 1, 22),
 (NULL, 2, 18),
 (NULL, 3, 1),
+(NULL, 3, 22),
 (NULL, 6, 6);
 
 -- --------------------------------------------------------
@@ -211,10 +218,12 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`id`, `name`, `grade`, `teaching_language`) VALUES
-(1, 'toan', 12, 'ENG'),
-(2, 'van', 12, 'VIE'),
-(3, 'vat ly', 10, 'ENG'),
-(6, 'hoa', 11, 'ENG');
+(1, 'Toán', 12, 'ENG'),
+(2, 'Văn', 12, 'VIE'),
+(3, 'Vật Lý', 10, 'ENG'),
+(6, 'Hóa', 11, 'ENG'),
+(7, 'Vẽ', 9, 'ENG'),
+(8, 'Sinh học', 12, 'VIE');
 
 -- --------------------------------------------------------
 
@@ -256,10 +265,13 @@ CREATE TABLE `tutor` (
 
 INSERT INTO `tutor` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `phone_number`, `email`, `language`, `present_job`, `description`) VALUES
 (1, 'TIẾN PRO', 'Tran Dinh', '1999-04-30', 'F', '0845426661', 'tien.trantom@gmail.com', 'Both', 'sinh vien DHBK', 'gank full tem'),
-(6, 'tienn', 'tran', '2020-11-15', 'F', '0845283742', 'rostom13299@gmail.com', 'Vietnamese', '', 'asdaf'),
+(6, 'tienn', 'tran', '2020-11-15', 'F', '0841231241', 'rostom13299@gmail.com', 'Vietnamese', '', 'asdaf'),
 (8, 'thienn', NULL, '2020-11-17', 'M', NULL, 'nhanthien1012@gmail.com', NULL, NULL, NULL),
 (9, 'tiennn', 'tien', '2020-11-17', 'M', '0845162387', 'tien.trandinh99@gmail.com', 'Vietnamese', '', ''),
-(18, 'thien', 'aaa', '2020-11-24', 'F', '0972753757', 'nhanthien1012@gmail.com', 'Both', '', 'sadfdsafkjdsngkjfdngkjfdngkjdnfkjdsfkjsadnfkjsadnfkjsnfjksndfkjsndfkjsadf');
+(18, 'thien', 'aaa', '2020-11-24', 'F', '0972753757', 'nhanthien1012@gmail.com', 'Both', '', 'sadfdsafkjdsngkjfdngkjfdngkjdnfkjdsfkjsadnfkjsadnfkjsnfjksndfkjsndfkjsadf'),
+(22, 'Việt Khoa', 'Nguyễn', '1999-01-10', 'M', '0708091941', 'vietkhoa1999@gmail.com', 'Both', 'PM', 'Pro'),
+(25, 'aloalo', 'alo', '2020-11-28', 'M', '0834235111', 'rostom13299@gmail.com', 'Vietnamese', '', ''),
+(26, 'tientientien', NULL, '2020-11-28', 'M', NULL, 'rostom13299@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,16 +294,21 @@ CREATE TABLE `userinfo` (
 
 INSERT INTO `userinfo` (`id`, `username`, `password`, `salt`, `user_type`, `token`) VALUES
 (1, 'tien', 'a0ee70298c764574e2f4af678f827d07419a903370086557e329c2513b208a43', '1604936216971', 'tutor', '999f75f935bcc55ea9b028761f3964f42189bc70'),
-(4, 'thienngu', 'f57bd22a8f456f9e40a4ae5732d9fa2057afa50332e227882de593f0d567e2ae', '1605422611878', 'parent', NULL),
+(4, 'thien', 'f57bd22a8f456f9e40a4ae5732d9fa2057afa50332e227882de593f0d567e2ae', '1605422611878', 'parent', NULL),
 (6, 'tienn', 'ec355c9fb964b230bd1e22aa23ef49eec3bbcc8965ae9db10522f5d1437bcda2', '1605426734783', 'tutor', '6636914328d0942498e06d06b8585970b7e4add4'),
-(7, 'khoangu', '2e88bfeeebe8c6b947a20253d7d45154cbfc7726e744520ab832d1df689648f8', '1605428301016', 'parent', '3fec52ba11ebdbea5c34d75c4337c9d04998b5ed'),
+(7, 'khoa1234', '2e88bfeeebe8c6b947a20253d7d45154cbfc7726e744520ab832d1df689648f8', '1605428301016', 'parent', '3fec52ba11ebdbea5c34d75c4337c9d04998b5ed'),
 (8, 'thienn', '63c854642c3194cd1ad0b3b89895a12a6f1f874ee293261de531678134e2e63d', '1605613059924', 'tutor', NULL),
 (9, 'tiennn', '3294a05f6bd3dd40d5a853dc925f68abe45120a050fa156b428cbef08a0a5666', '1605613199261', 'tutor', NULL),
 (17, 'tkteducation', '1a3836f03122df6d092a01ea94cffb4ac13191b042e96312656c61f5c7a9fe70', '1606196535645', 'admin', '371c2631e44dcbaceb05e195c4f8c27f9ce0b27c'),
 (18, 'eduedu', '565ce7e300e213efd7e9a68aee18421f0999f58dae5447e4ff403dd9854e9053', '1606206036221', 'tutor', NULL),
 (19, 'tientien', 'bd8e35c35e54fc4a3ee91e5adb7dc9eb17cf0bed1bfc76b7fff567b00b8405bb', '1606363845701', 'admin', NULL),
 (20, 'khoakhoa', 'c9b9dcaba556572cf16ed985a1d4db3824cce65c12bf20e1615856bef444eb9b', '1606397164568', 'admin', NULL),
-(21, 'tientutor', 'f2975b09a1351a4f260299bcd401a3f2de2c9d4e1dd30724c83efb7758c3aa6c', '1606494708093', 'parent', NULL);
+(21, 'tientutor', 'f2975b09a1351a4f260299bcd401a3f2de2c9d4e1dd30724c83efb7758c3aa6c', '1606494708093', 'parent', NULL),
+(22, 'vietkhoa1999', 'a8f4f273b4f87885e6702c2aca7aa34b6851a0ce684fc337bec3574db6891e8c', '1606541896343', 'tutor', NULL),
+(23, 'ngocthien', '432dfda2bdf1616c92dcacf86c8c4892c8383b625d9821085fd6eb6a9043c3e3', '1606541913757', 'parent', NULL),
+(24, 'Luckybeo', 'cfab72e69cad80a9b2a1cecfb25d76dbab3816262996836fe0cbb7c6359cd586', '1606542008040', 'admin', NULL),
+(25, 'aloalo', '0093cb2169ccf1fd46e40ada5ccd097ddd466861ffe045f8d3ad8c4a2b538892', '1606546394222', 'tutor', '69c87e67b88e5dedcaf05ebd7fa9a0735816cfa6'),
+(26, 'tientientien', 'ed32c25ed65e1f69420f852124ff92bf0c3c504fa4fe1d1eeae66f4e30eeb2fb', '1606568390802', 'tutor', NULL);
 
 -- --------------------------------------------------------
 
@@ -317,7 +334,8 @@ INSERT INTO `weakness` (`class_id`, `subject_id`) VALUES
 (91, 1),
 (92, 1),
 (93, 2),
-(93, 3);
+(93, 3),
+(95, 1);
 
 --
 -- Indexes for dumped tables
@@ -412,13 +430,13 @@ ALTER TABLE `weakness`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `teaching`
@@ -430,7 +448,7 @@ ALTER TABLE `teaching`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
