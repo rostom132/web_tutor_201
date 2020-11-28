@@ -13,12 +13,7 @@ html {
     width: 100%;
 }
 
-.carousel {
-    height: 70vh;
-}
-
 .carousel-inner {
-    position: absolute !important;
     height: 100%;
     width: 100%;
 }

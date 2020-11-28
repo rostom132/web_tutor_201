@@ -110,7 +110,8 @@
                 JOIN weakness ON weakness.class_id = class.id
                 JOIN subject ON subject.id = weakness.subject_id
                 GROUP BY class.id
-                HAVING class.id IN ($str)"
+                HAVING class.id IN ($str)
+                ORDER BY class.post_date DESC"
             );
             return $GLOBALS['db_conn']->convertToArray($result);
         }
