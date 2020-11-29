@@ -1,5 +1,5 @@
 import { cityData } from "./constant/city.js";
-import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor } from "./constant/schedule.js";
+import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor, currencyFormat } from "./constant/schedule.js";
 import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
@@ -7,7 +7,6 @@ import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 const textField = ["topic", "salary_per_lesson", "no_students", "address", "phone_number", "description"];
 const selectField = ["district", "ward", "street"];
 const radioField = ["no_lesson_per_week", "time_per_lesson", "gender_of_tutor"];
-const magicField = ["subject"];
 
 const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
 const submit_data_url = "application/controllers/registerClass.php";
@@ -527,23 +526,33 @@ function renderSubject() {
 
 function renderAddressOnChange($cursor_position) {
     var $address = $(SUBMIT_PREFIX + "address");
+    var $street = $(SUBMIT_PREFIX + "street");
+    if ($street.val() !== "") {
+        $address[0].selectionStart = $cursor_position;
+        $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text());
+    }
+}
+
+function renderCombination() {
+    var $combination = $("#address_combination");
     var $district = $(SUBMIT_PREFIX + "district");
     var $ward = $(SUBMIT_PREFIX + "ward");
-    var $street = $(SUBMIT_PREFIX + "street");
-    if ($address.val().length > 0) {
-        $address[0].selectionStart = $cursor_position;
-        if ($ward.val() !== "" && $street.val() !== "") {
-            $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-        } else {
-            if ($ward.val() == "" && $street.val() !== "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
-            } else if ($ward.val() !== "" && $street.val() == "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-            } else {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
-            }
+    if ($district.val() !== "" && $ward.val() !== "") {
+        $combination.text($ward.find("option:selected").text() + ", " + $district.find("option:selected").text());
+    } else if ($district.val() !== "" && $ward.val() == "") {
+        $combination.text($district.find("option:selected").text());
+    } else $combination.text("");
+}
+
+function formatSalary() {
+    var $salary_per_lesson = $(SUBMIT_PREFIX + "salary_per_lesson");
+    $salary_per_lesson.on("input", function() {
+        if ($(this).val() !== "") {
+            console.log($(this).val());
+            var test = $(this).val().replace(/,/g, '');
+            $(this).val(currencyFormat.format(test));
         }
-    }
+    });
 }
 
 function renderAddress() {
@@ -552,35 +561,17 @@ function renderAddress() {
     var $ward = $(SUBMIT_PREFIX + "ward");
     var $street = $(SUBMIT_PREFIX + "street");
     var $cursor_position = 0;
-    $address.click(function() {
-        if ($address.val() === "") {
-            if ($district.val() !== "") {
-                $address.val(" " + $district.find("option:selected").text());
-            }
-            if ($ward.val() !== "") {
-                $address.val(" " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-            }
-            if ($street.val() !== "") {
-                if ($ward.val() !== "") {
-                    $address.val(" " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-                } else $address.val(" " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
-            }
-            $address[0].setSelectionRange(0, 0);
-        }
-    })
     $address.on("input", function() {
         $cursor_position = $address[0].selectionStart;
     })
-    $district.change(function() {
-        if ($address.val().length > 0) {
-            $address[0].selectionStart = $cursor_position;
-            if ($district.val() !== "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
-            } else $address.val($address.val().substr(0, $cursor_position));
-        }
-    })
-    $ward.change(() => renderAddressOnChange($cursor_position));
-    $street.change(() => renderAddressOnChange($cursor_position));
+    $street.change(function() {
+        if ($street.val() === "") {
+            $address.val(" " + $street.find("option:selected").text());
+            $address[0].setSelectionRange(0, 0);
+        } else renderAddressOnChange($cursor_position);
+    });
+    $district.change(() => renderCombination());
+    $ward.change(() => renderCombination());
 }
 
 function renderLessonPerWeek() {
@@ -790,6 +781,7 @@ function submitClassInfo() {
             timeout: 3000
         })
     } else {
+        alert("Please update again the information");
         enableAll();
     }
 }
@@ -813,9 +805,7 @@ function onInputCheck() {
                 if (value === "no_students" && parseInt($val) > 5) {
                     renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
                 } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
-            } else {
-                $check_val.parent().find(".error-message").remove();
-            }
+            } else $check_val.parent().find(".error-message").remove();
         });
     });
 }
@@ -823,6 +813,7 @@ function onInputCheck() {
 $(function() {
     onInputCheck();
     renderSubject();
+    formatSalary();
     renderLessonPerWeek();
     renderHourPerLesson();
     renderGenderOfTutor();
