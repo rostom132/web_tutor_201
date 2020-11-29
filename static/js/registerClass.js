@@ -774,12 +774,12 @@ function submitClassInfo() {
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
                     window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
-                    alert("SUCCESS");
+                    alert("Your class has been succesfully submitted");
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
-                    alert(responseText);
+                    alert("Please update again the information");
                 } else {
                     var errors = new Array();
                     errors = JSON.parse(responseText);
@@ -789,7 +789,9 @@ function submitClassInfo() {
             },
             timeout: 3000
         })
-    } else enableAll();
+    } else {
+        enableAll();
+    }
 }
 
 function disableAll() {
@@ -808,7 +810,9 @@ function onInputCheck() {
             var $val = $check_val.val();
             let $regex_pattern = registerClassRegex[value];
             if ($val !== "" && !$regex_pattern.test($val)) {
-                renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
+                if (value === "no_students" && parseInt($val) > 5) {
+                    renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
+                } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
             } else {
                 $check_val.parent().find(".error-message").remove();
             }
