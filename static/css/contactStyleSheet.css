@@ -1,0 +1,61 @@
+#contact_wrapper,
+#contact_wrapper * {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    box-sizing: border-box;
+}
+
+#contact_box {
+    background-image: linear-gradient(to right, rgb(38, 156, 192, 0), rgb(38, 156, 192, 0.7));
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#contact_address_phone_email_1 {
+    background-color: rgba(255, 255, 255);
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 35px;
+    opacity: 0.8;
+}
+
+#contact_address_phone_email_1 p i {
+    color: #4bbadc;
+}
+
+#contact_address_phone_email_2 {
+    background-color: rgba(255, 255, 255);
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 35px;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+#contact_address_phone_email_2 p i {
+    color: #4bbadc;
+}
+
+#contact_map {
+    margin-right: 10px;
+}
+
+#contact_title {
+    background-image: linear-gradient(to right, rgb(38, 156, 192, 0), rgb(38, 156, 192, 0.7));
+    padding-top: 15px;
+    text-align: center;
+    color: black;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+#contact_list {
+    margin-top: 105px;
+}
