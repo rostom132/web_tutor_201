@@ -50,7 +50,7 @@
          */ 
         public static function getInfo($admin_id) {
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT first_name AS fname, last_name AS lname, gender, phone_number FROM Admin
+                "SELECT first_name AS fname, last_name AS lname, gender, phone_number, email as check_email FROM Admin
                 WHERE Admin.id='$admin_id'"
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0];
@@ -71,13 +71,13 @@
                 if ($sql != "") $sql.= ", ";
                 $sql .= "$col = '$val'";
             }
-
+            
             $result_admin = $GLOBALS['db_conn']->queryData(
                 "UPDATE Admin
                 SET " .$sql
                 ." WHERE id='$admin_id'"
             );
-            
+
             if (!$result_admin) return false;
             return true;
         }
