@@ -68,19 +68,19 @@ function getAllDataInForm() {
 function passDataIntoFormStorage() {
 
     var edit_fnameValue = sessionStorage.getItem("fname");
-    document.getElementById("edit_fname").value = edit_fnameValue;
+    if (edit_fnameValue != "null") document.getElementById("edit_fname").value = edit_fnameValue;
 
     var edit_lnameValue = sessionStorage.getItem("lname");
-    document.getElementById("edit_lname").value = edit_lnameValue;
+    if (edit_lnameValue != "null") document.getElementById("edit_lname").value = edit_lnameValue;
 
     var emailValue = sessionStorage.getItem("check_email");
-    document.getElementById("edit_check_email").value = emailValue;
+    if (emailValue != "null") document.getElementById("edit_check_email").value = emailValue;
 
     var phoneValue = sessionStorage.getItem("phone_number");
-    document.getElementById("edit_phone_number").value = phoneValue;
+    if (phoneValue != "null") document.getElementById("edit_phone_number").value = phoneValue;
 
-    var phoneValue = sessionStorage.getItem("birth");
-    document.getElementById("edit_birth").value = phoneValue;
+    var birthValue = sessionStorage.getItem("birth");
+    if (birthValue != "null") document.getElementById("edit_birth").value = birthValue;
 
     var genderValue = sessionStorage.getItem("gender");
     var gender = document.getElementsByName("gender");

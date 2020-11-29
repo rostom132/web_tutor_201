@@ -5,7 +5,7 @@ window.alert = function(message) {
         .dialog({
             buttons: { OK: function() { $(this).dialog('close'); } },
             close: function() { $(this).remove(); },
-            draggable: false,
+            draggable: true,
             modal: true,
             resizable: false,
             width: 'auto'

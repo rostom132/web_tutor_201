@@ -13,12 +13,7 @@ html {
     width: 100%;
 }
 
-.carousel {
-    height: 70vh;
-}
-
 .carousel-inner {
-    position: absolute !important;
     height: 100%;
     width: 100%;
 }
@@ -349,6 +344,8 @@ ul {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 0px !important;
+    min-width: 230px;
+    max-width: 350px;
 }
 
 .ui-widget-header {
