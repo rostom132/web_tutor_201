@@ -193,7 +193,6 @@ $("#registerClass-schedule_container").on("click", ".edit_icon", function() {
     } else {
         var $check_flag = checkNotEmpty($schedule_row_id);
         // Require user to choose all fields
-        // console.log($check_flag);
         if ($check_flag == 0) {
             // Delete the existed time slot in other date DateSchedule
             removeTimeSlot($schedule_row_id);
@@ -243,7 +242,6 @@ function getStartTimeObj($id, date) {
         })
 
         // get all remaining free time slot
-        // console.log(Extract_Key);
         if (Extract_Key.length >= 1) {
             let start_ref = 0;
             $.each(Extract_Key, function(index, value) {
@@ -544,17 +542,6 @@ function renderCombination() {
     } else $combination.text("");
 }
 
-function formatSalary() {
-    var $salary_per_lesson = $(SUBMIT_PREFIX + "salary_per_lesson");
-    $salary_per_lesson.on("input", function() {
-        if ($(this).val() !== "") {
-            console.log($(this).val());
-            var test = $(this).val().replace(/,/g, '');
-            $(this).val(currencyFormat.format(test));
-        }
-    });
-}
-
 function renderAddress() {
     var $address = $(SUBMIT_PREFIX + "address");
     var $district = $(SUBMIT_PREFIX + "district");
@@ -715,7 +702,9 @@ function getAllDataInForm() {
     submitObj.registerClass["city"] = cityData.id;
     $.each(textField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        submitObj.registerClass[value] = $topic.val();
+        var $value = $topic.val();
+        if (value === "salary_per_lesson") $value = $topic.val().replace(/,/g, '');
+        submitObj.registerClass[value] = $value;
     });
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
@@ -765,12 +754,11 @@ function submitClassInfo() {
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
                     window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
-                    alert("Your class has been succesfully submitted");
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
-                    alert("Please update again the information");
+                    alert("Class registerd failed. Please check again");
                 } else {
                     var errors = new Array();
                     errors = JSON.parse(responseText);
@@ -805,7 +793,13 @@ function onInputCheck() {
                 if (value === "no_students" && parseInt($val) > 5) {
                     renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
                 } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
-            } else $check_val.parent().find(".error-message").remove();
+            } else {
+                if (value === "salary_per_lesson" && $val !== "") {
+                    var test = $check_val.val().replace(/,/g, '');
+                    $check_val.val(currencyFormat.format(test));
+                }
+                $check_val.parent().find(".error-message").remove();
+            }
         });
     });
 }
@@ -813,7 +807,6 @@ function onInputCheck() {
 $(function() {
     onInputCheck();
     renderSubject();
-    formatSalary();
     renderLessonPerWeek();
     renderHourPerLesson();
     renderGenderOfTutor();
