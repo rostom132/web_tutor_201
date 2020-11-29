@@ -238,7 +238,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Đăng kí",
             "ERROR": "Bạn phải điền/chọn vào ô này",
             "WRONG_FORMAT": "Không hợp lệ",
-            "WRONG_RANGE": "Tối thiểu 1 và tối đa 100",
+            "WRONG_RANGE": "Tối thiểu 1 và tối đa 5",
         },
         "DATE": {
             "MON": "Thứ 2",
