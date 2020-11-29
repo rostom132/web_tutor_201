@@ -56,7 +56,7 @@ export const arrLang = {
             "STREET_PLACEHOLDER": "- Choose Street -",
             "ADDRESS_LABEL": "House Address",
             "ADDRESS_PLACEHOLDER": "Enter House address",
-            "TIME_LABEL": "Schedule",
+            "TIME_LABEL": "Available Time",
             "TIME_ADD_LABEL": "Add more",
             "DESCRIPTION": "Describe specifically about class content you want (maximum 200 characters)",
             "DATE_PLACEHOLDER": "- Choose Date -",
