@@ -19,6 +19,54 @@ function getAllInfo(role) {
     return allInputData;
 }
 
+function chooseParent() {
+    if (document.getElementById("tabH1").classList.contains("active")) return;
+    document.getElementById("tabH2").classList.remove("active");
+    document.getElementById("tabH3").classList.remove("active");
+    document.getElementById("tabH1").classList.add("active");
+    document.getElementById("formParentAndTutor").classList.add("active");
+    document.getElementById("formAdmin").classList.remove("active");
+    document.getElementById("email-admin").value = null;
+    document.querySelector("#user").style.backgroundColor = "rgba(207, 239, 244, 0.5)";
+    document.querySelector("#tabH1").style.backgroundColor = "rgba(207, 239, 244, 0.5)";
+    document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
+    document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
+    resetAllData();
+    resetNoti();
+}
+
+function chooseTutor() {
+    if (document.getElementById("tabH2").classList.contains("active")) return;
+    document.getElementById("tabH1").classList.remove("active");
+    document.getElementById("tabH3").classList.remove("active");
+    document.getElementById("tabH2").classList.add("active");
+    document.getElementById("formParentAndTutor").classList.add("active");
+    document.getElementById("formAdmin").classList.remove("active");
+    document.getElementById("email-admin").value = null;
+    document.querySelector("#user").style.backgroundColor = "rgba(141, 213, 232, 0.5)";
+    document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
+    document.querySelector("#tabH2").style.backgroundColor = "rgba(141, 213, 232, 0.5)";
+    document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
+    resetAllData();
+    resetNoti();
+}
+
+function chooseAdmin() {
+    if (document.getElementById("tabH3").classList.contains("active")) return;
+    document.getElementById("tabH1").classList.remove("active");
+    document.getElementById("tabH2").classList.remove("active");
+    document.getElementById("tabH3").classList.add("active");
+    document.getElementById("formParentAndTutor").classList.remove("active");
+    document.getElementById("formAdmin").classList.add("active");
+    document.querySelector("#admin").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
+    document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
+    document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
+    document.querySelector("#tabH3").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
+    resetAllData();
+    resetNoti();
+}
+
+
 function resetAllData() {
     Array.from(document.getElementsByClassName('regFormRowInput')).forEach(function(element) {
         element.value = null;
@@ -36,63 +84,28 @@ function resetNoti() {
 
 /*decorate the header tab; begin*/
 $('#tabH1').click(function tabHeader1() {
-    if (document.getElementById("tabH1").classList.contains("active")) return;
-    document.getElementById("tabH2").classList.remove("active");
-    document.getElementById("tabH3").classList.remove("active");
-    document.getElementById("tabH1").classList.add("active");
-    document.getElementById("formParentAndTutor").classList.add("active");
-    document.getElementById("formAdmin").classList.remove("active");
-    document.getElementById("email-admin").value = null;
-    document.querySelector("#user").style.backgroundColor = "rgba(207, 239, 244, 0.5)";
-    document.querySelector("#tabH1").style.backgroundColor = "rgba(207, 239, 244, 0.5)";
-    document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
-    document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
-    resetAllData();
+    chooseParent();
     resetIntervalId(timerIntervalId);
     emailButton();
     $('#email_button').bind("click", () => sendUserMail());
-    resetNoti();
 });
 
 $('#tabH2').click(function tabHeader2() {
-    if (document.getElementById("tabH2").classList.contains("active")) return;
-    document.getElementById("tabH1").classList.remove("active");
-    document.getElementById("tabH3").classList.remove("active");
-    document.getElementById("tabH2").classList.add("active");
-    document.getElementById("formParentAndTutor").classList.add("active");
-    document.getElementById("formAdmin").classList.remove("active");
-    document.getElementById("email-admin").value = null;
-    document.querySelector("#user").style.backgroundColor = "rgba(141, 213, 232, 0.5)";
-    document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
-    document.querySelector("#tabH2").style.backgroundColor = "rgba(141, 213, 232, 0.5)";
-    document.querySelector("#tabH3").style.backgroundColor = "#28a6cc";
-    resetAllData();
+    chooseTutor();
     resetIntervalId(timerIntervalId);
     emailButton();
     $('#email_button').bind("click", () => sendUserMail());
-    resetNoti();
 });
 
 $('#tabH3').click(function tabHeader3() {
-    if (document.getElementById("tabH3").classList.contains("active")) return;
-    document.getElementById("tabH1").classList.remove("active");
-    document.getElementById("tabH2").classList.remove("active");
-    document.getElementById("tabH3").classList.add("active");
-    document.getElementById("formParentAndTutor").classList.remove("active");
-    document.getElementById("formAdmin").classList.add("active");
-    document.querySelector("#admin").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
-    document.querySelector("#tabH1").style.backgroundColor = "#28a6cc";
-    document.querySelector("#tabH2").style.backgroundColor = "#28a6cc";
-    document.querySelector("#tabH3").style.backgroundColor = "rgba(75, 186, 220, 0.5)";
-    resetAllData();
+    chooseAdmin();
     resetIntervalId(timerIntervalId);
     emailButton();
     $('#email_admin_button').bind("click", () => sendAdminMail());
-    resetNoti();
 });
 /*decorate the header tab; end*/
 
-//Countdown button
+//Countdown buttona
 var timerIntervalId = null;
 var time_limit = 10;
 
@@ -227,7 +240,7 @@ function emailButton() {
 $("button[id^='continue']").click(function continueButton() {
     var role;
     if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
-    if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
+    else if (document.getElementsByClassName("tabButton active")[0].id == "tabH2") role = 'tutor';
     else role = 'admin'
 
     var infoRegister = getAllInfo(role);
@@ -238,7 +251,6 @@ $("button[id^='continue']").click(function continueButton() {
             registerData: infoRegister
         },
         success: function(data) {
-            console.log(data);
             switch (data) {
                 case 'success':
                     alert('Create new account sucessful!!');
@@ -312,3 +324,15 @@ function sendUserMail() {
 $("#email_admin_button").click(() => sendAdminMail());
 
 $("#email_button").click(() => sendUserMail());
+
+$(document).ready(function checkRole() {
+    var role = localStorage.getItem("register-role");
+    if (role != null) {
+        if (role == 'tutor') {
+            chooseTutor();
+        } else if (role == 'parent') {
+            chooseParent();
+        }
+        localStorage.removeItem('register-role');
+    }
+});

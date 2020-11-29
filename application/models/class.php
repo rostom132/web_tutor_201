@@ -23,8 +23,8 @@
                 if ($sql != "WHERE ") $sql.= ' and ';
                 $sql .= "$col LIKE '$val'";
             }
-            $temp = "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id " .$sql;
-            $temp.=" GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $temp = "SELECT class.id FROM class JOIN weakness ON class.id = weakness.class_id " .$sql;
+            $temp.=" GROUP BY class.id";
             $result = $GLOBALS['db_conn']->queryData($temp);
             if($result->num_rows != 0) {
                 return mysqli_num_rows($result);
@@ -37,7 +37,7 @@
         public static function getLimitClasses($current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class LIMIT $start, $limit"
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class ORDER BY class.post_date DESC, class.id DESC LIMIT $start, $limit"
             );
             if($result->num_rows != 0) {
                 return $GLOBALS['db_conn']->convertToArray($result);
@@ -50,7 +50,7 @@
         public static function getLimitClassesFilter($input_array, $current_page, $limit) {
             $start = ($current_page - 1) * $limit;
             $prefix ="SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id FROM class JOIN weakness ON class.id = weakness.class_id ";
-            $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id";
+            $postfix = " GROUP BY class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id ORDER BY class.post_date DESC, class.id DESC";
             $sql = null;
             if(sizeof($input_array) > 0) {
                 $prefix .= "WHERE ";
@@ -110,14 +110,15 @@
                 JOIN weakness ON weakness.class_id = class.id
                 JOIN subject ON subject.id = weakness.subject_id
                 GROUP BY class.id
-                HAVING class.id IN ($str)"
+                HAVING class.id IN ($str)
+                ORDER BY class.post_date DESC, class.id DESC"
             );
             return $GLOBALS['db_conn']->convertToArray($result);
         }
 
         public static function getDetaiClassInfo($class_id){
             $result = $GLOBALS['db_conn']->queryData(
-                "SELECT parent.first_name as fname, parent.last_name as lname, parent.email, parent.phone_number, class.no_students, class.gender_of_tutor, class.salary_per_lesson as salary, class.no_lesson_per_week as no_lesson, class.address, class.ward, class.district FROM class 
+                "SELECT parent.first_name as fname, parent.last_name as lname, parent.email, class.phone_number, class.no_students, class.gender_of_tutor, class.salary_per_lesson as salary, class.no_lesson_per_week as no_lesson, class.address, class.ward, class.district FROM class 
                 JOIN parent ON class.user_id = parent.id
                 Where class.id = '$class_id'"
             );
@@ -130,6 +131,14 @@
                 WHERE class_id = '$class_id'"
             );
             return $GLOBALS['db_conn']->convertToArray($result)[0];
+        }
+
+        public static function deleteClass($class_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "DELETE FROM `class` WHERE id='$class_id'"
+            );
+            if ($result) return true;
+            return false;
         }
     }
 

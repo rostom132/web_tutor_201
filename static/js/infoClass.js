@@ -1,4 +1,5 @@
 import { cityData } from "./constant/city.js";
+import { getText } from "./translate.js";
 
 function getDistrict(info) {
     var districtId = parseInt(info['district']);
@@ -35,12 +36,21 @@ function getClassInfo() {
                             .width(220)
                             .height('auto');
                     }
-                    if (info['user'] == "tutor") {
-                        document.getElementById("register_button").hidden = false;
+                    switch (info['user']) {
+                        case "tutor":
+                            document.getElementById("register_button").hidden = false;
+                            if (info['is_registered'] == 'true') {
+                                $("#register_button").prop("disabled", true);
+                                $("#register_button").text(getText("INFO_CLASS.REGISTERED"));
+                            }
+                            break;
+                        case "admin":
+                            document.getElementById("delete_button").hidden = false;
+                            break;
                     }
                 }
             } catch (err) {
-                alert('This class is not exists!');
+                alert('The class is not found!');
             }
         }
     };
@@ -48,6 +58,8 @@ function getClassInfo() {
 }
 
 $("#register_button").click(function registerClass() {
+    $(this).prop("disabled", true);
+    alert("Please wait...");
     const id = window.location.pathname.split('/')[3];
     var ajax = new XMLHttpRequest();
     var method = "GET";
@@ -55,7 +67,40 @@ $("#register_button").click(function registerClass() {
     ajax.open(method, url, true);
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            switch (this.responseText) {
+                case "success":
+                    $("#register_button").text(getText("INFO_CLASS.REGISTERED"));
+                    alert('The registeration mail has been send to the center! Please wait for the confirmation!');
+                    break;
+                case "Can not register this class again!":
+                    $("#register_button").text(getText("INFO_CLASS.REGISTERED"));
+                    alert(this.responseText);
+                    break;
+                default:
+                    alert(this.responseText);
+                    $("#register_button").prop("disabled", false);
+            }
+        }
+    };
+    ajax.send();
+});
+
+$("#delete_button").click(function registerClass() {
+    $(this).prop("disabled", true);
+    const id = window.location.pathname.split('/')[3];
+    var ajax = new XMLHttpRequest();
+    var method = "GET";
+    var url = "application/controllers/infoClass.php?deleteClass=" + id;
+    ajax.open(method, url, true);
+    ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+            switch (this.responseText) {
+                case "success":
+                    break;
+                default:
+                    $("#delete_button").prop("disabled", false);
+            }
         }
     };
     ajax.send();

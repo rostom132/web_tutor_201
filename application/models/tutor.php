@@ -118,6 +118,42 @@
             return $GLOBALS['db_conn']->convertToArray($result)[0];
         }
 
+        /**
+         * Insert tutor id and class id in to registered class table
+         * 
+         * @param integer $tutor_id id of the tutor
+         * @param integer $class_id id of the class
+         * 
+         * @return boolean status
+         */ 
+        public static function registerClass($tutor_id, $class_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "INSERT INTO registeredclass (`tutor_id`, `class_id`) VALUES ('$tutor_id', '$class_id')"
+            );
+            if ($result) return true;
+            return false;
+        }
+
+        /**
+         * Check if the class is registered by the tutor
+         *
+         * @param integer $tutor_id id of the tutor
+         * @param integer $class_id id of the class
+         * 
+         * @return boolean status
+         */ 
+        public static function isRegistered($tutor_id, $class_id) {
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT * FROM registeredclass WHERE tutor_id='$tutor_id' and class_id='$class_id'"
+            );
+            if($result->num_rows != 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
     }
 
 ?>

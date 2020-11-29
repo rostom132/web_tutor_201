@@ -3,6 +3,7 @@
     include_once "../models/users.php";
     include_once "./common/autoAuthen.php";
     include_once "./common/authentication.php";
+    include_once "./common/validateInfo.php";
 
     /**
      * Authorization
@@ -13,19 +14,20 @@
      * @return string status of authorization
      */ 
     function checkLogin($loginData) {
+        if(!Validate::validateLogin($loginData)) return 'sai format roi';
         if (User::authorize($loginData['username'], $loginData['password'])) {
             Authen::login($loginData['username']);
             if ($loginData['rememberMe'] == 'true') {
                 AutoAuthen::loginWithRemember($loginData['username']);
             }
-            echo ('success');
+            return 'success';
         }
-        else echo 'login fail!';
+        return 'login fail!';
     }
 
     //Check for login request
     if(isset($_POST['loginData'])) {
         $loginData = $_POST['loginData'];
-        checkLogin($loginData); 
+        echo (checkLogin($loginData)); 
     }
 ?>

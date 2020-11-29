@@ -512,7 +512,6 @@ function renderSubject() {
         url: get_subject_url,
         cache: false,
         success: function(responseText) {
-            console.log(responseText);
             arrSubject = JSON.parse(responseText).subject;
             // Render subject input
             magicSelect = $(SUBMIT_PREFIX + "subject").magicSuggest({
@@ -766,7 +765,6 @@ function submitClassInfo() {
     var isTimeScheduleValid = checkTimeSchedule();
     if (isTextFieldValid + isSelectFieldValid + isRadioFieldValid + isMagicSelectValid + isTimeScheduleValid === 0) {
         var newClass = getAllDataInForm();
-        console.log(newClass);
         // Pass all pre-check
         $.ajax({
             type: "POST",
@@ -775,7 +773,7 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
                     alert("SUCCESS");
                     // Change url
                 } else if (
