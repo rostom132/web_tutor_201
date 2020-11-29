@@ -79,7 +79,7 @@ export const arrLang = {
             "SUBMIT_PLACEHOLDER": "Submit",
             "ERROR": "You must fill/select value in this field",
             "WRONG_FORMAT": "Invalid format",
-            "WRONG_RANGE": "Minium 1 and maximum 100",
+            "WRONG_RANGE": "Minium 1 and maximum 5",
         },
         "DATE": {
             "MON": "Monday",
@@ -139,7 +139,7 @@ export const arrLang = {
             "BUTTON": " REGISTER ",
             "REGISTERED": " REGISTERED ",
             "DELETE": " DELETE",
-            "AVAILABLE_TIME" : "Available time: "
+            "AVAILABLE_TIME": "Available time: "
         },
         "USER_REGISTER": {
             "TITLE": "Registration Form",
