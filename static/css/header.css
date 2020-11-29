@@ -95,6 +95,13 @@ ul {
     display: inline-block;
 }
 
+@media screen and (min-width: 1920px) {
+    .navbar__li {
+        top: 15px !important;
+        padding-bottom: 30px;
+    }
+}
+
 .navbar__li {
     top: 5px;
     padding-bottom: 30px;
