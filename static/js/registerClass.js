@@ -5,8 +5,8 @@ import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 
-const textField = ["topic", "salary_per_lesson", "no_students", "address", "phone_number", "description"];
-const selectField = ["district", "ward", "street"];
+const textField = ["topic", "salary_per_lesson", "no_students", "street", "address", "phone_number", "description"];
+const selectField = ["district", "ward"];
 const radioField = ["no_lesson_per_week", "time_per_lesson", "gender_of_tutor"];
 
 const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
@@ -690,7 +690,6 @@ function getAllDataInForm() {
     });
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        if (value === "street") return;
         submitObj.registerClass[value] = $topic.find("option:selected").val();
     })
     $.each(radioField, function(index, value) {
@@ -772,6 +771,7 @@ function onInputCheck() {
             var $val = $check_val.val();
             let $regex_pattern = registerClassRegex[value];
             if ($val !== "" && !$regex_pattern.test($val)) {
+                console.log(value);
                 if (value === "no_students" && parseInt($val) > 5) {
                     renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
                 } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
