@@ -1,5 +1,6 @@
 import { cityData } from "./constant/city.js";
 import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor, currencyFormat } from "./constant/schedule.js";
+import { autoComplete } from "./filterStreet.js";
 import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
@@ -474,16 +475,14 @@ function renderDistrict(districtObj) {
 
 $("#registerClass-district").change(function() {
     let $district_dropdown = $(this);
-    $(SUBMIT_PREFIX + "ward").prop("disabled", false);
-    $(SUBMIT_PREFIX + "street").prop("disabled", false);
     let $ward = $("#registerClass-ward");
-    let $street = $("#registerClass-street");
     if ($district_dropdown.find("option:selected").val() === "") {
         $(".ward_option").slice(1).remove();
-        $(".street_option").slice(1).remove();
         $(SUBMIT_PREFIX + "ward").prop("disabled", true);
         $(SUBMIT_PREFIX + "street").prop("disabled", true);
     } else {
+        $(SUBMIT_PREFIX + "ward").prop("disabled", false);
+        $(SUBMIT_PREFIX + "street").prop("disabled", false);
         var $district_name = $district_dropdown.find("option:selected").text();
         var ward_dropdown = [];
         ward_dropdown = cityData["districts"].filter(function(el) {
@@ -494,11 +493,8 @@ $("#registerClass-district").change(function() {
         $.each(ward_dropdown[0].wards, function(index, value) {
             $ward.append('<option class="ward_option"' + 'value=' + value.id + '>' + value.prefix + " " + value.name + '</option>');
         });
-        // // Filter out Street
-        $(".street_option").slice(1).remove();
-        $.each(ward_dropdown[0].streets, function(index, value) {
-            $street.append('<option class="street_option" ' + 'value=' + value.id + '>' + value.prefix + " " + value.name + '</option>');
-        });
+        // Filter out Street
+        autoComplete($(SUBMIT_PREFIX + "street"), ward_dropdown[0].streets);
     }
 })
 
@@ -522,15 +518,6 @@ function renderSubject() {
     });
 }
 
-function renderAddressOnChange($cursor_position) {
-    var $address = $(SUBMIT_PREFIX + "address");
-    var $street = $(SUBMIT_PREFIX + "street");
-    if ($street.val() !== "") {
-        $address[0].selectionStart = $cursor_position;
-        $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text());
-    }
-}
-
 function renderCombination() {
     var $combination = $("#address_combination");
     var $district = $(SUBMIT_PREFIX + "district");
@@ -547,15 +534,10 @@ function renderAddress() {
     var $district = $(SUBMIT_PREFIX + "district");
     var $ward = $(SUBMIT_PREFIX + "ward");
     var $street = $(SUBMIT_PREFIX + "street");
-    var $cursor_position = 0;
-    $address.on("input", function() {
-        $cursor_position = $address[0].selectionStart;
-    })
-    $street.change(function() {
+    $street.on("input", function() {
         if ($street.val() === "") {
-            $address.val(" " + $street.find("option:selected").text());
-            $address[0].setSelectionRange(0, 0);
-        } else renderAddressOnChange($cursor_position);
+            $address.val("");
+        }
     });
     $district.change(() => renderCombination());
     $ward.change(() => renderCombination());
@@ -821,4 +803,5 @@ $(function() {
     // Form Observation
     $(SUBMIT_PREFIX + "submit-btn").click(() => submitClassInfo());
     $(SUBMIT_PREFIX + "update-btn").click(() => updateData());
+    // Test filter street
 })
