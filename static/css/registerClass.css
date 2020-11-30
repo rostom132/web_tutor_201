@@ -33,6 +33,10 @@
     margin-top: 30px;
 }
 
+.form__field {
+    position: relative;
+}
+
 .form__field--format {
     color: #4BBADC;
     font-size: 18px;
@@ -47,16 +51,6 @@
     width: 90%;
     height: 35px;
     border: 1px solid #d3d3d3;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-}
-
-.street_input {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: none;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
@@ -156,6 +150,9 @@
     width: 90%;
     height: 35px;
     border: 1px solid #d3d3d3;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 .autocomplete-items {
@@ -164,6 +161,7 @@
     border-bottom: none;
     border-top: none;
     z-index: 99;
+    width: 90%;
     top: 100%;
     left: 0;
     right: 0;
