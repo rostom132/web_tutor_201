@@ -149,7 +149,7 @@ $('.check_pass_validation').after('<div class="error-message">Not same password!
  * Validate the extention of update files
  */
 $.fn.hasExtension = function(exts) {
-    return (new RegExp('(' + exts.map(function(x) { return x.replace(/^/g, '\\.'); }).join('|') + ')$')).test($(this).val());
+    return (new RegExp('(' + exts.map(function(x) { return x.replace(/^/g, '\\.'); }).join('|') + ')$')).test($(this).val().toLowerCase());
 }
 
 $(".uploader").change(function upImg() {

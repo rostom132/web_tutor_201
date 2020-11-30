@@ -1,5 +1,5 @@
 import { cityData } from "./constant/city.js";
-import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor } from "./constant/schedule.js";
+import { TimeSchedule, DateScheduleObj, LessonPerWeek, HourPerLesson, GenderOfTutor, currencyFormat } from "./constant/schedule.js";
 import { getText } from "./translate.js";
 import { arrLang } from "./constant/language.js";
 import { registerClassRegex } from "./validation/registerClassValidNoti.js";
@@ -7,7 +7,6 @@ import { registerClassRegex } from "./validation/registerClassValidNoti.js";
 const textField = ["topic", "salary_per_lesson", "no_students", "address", "phone_number", "description"];
 const selectField = ["district", "ward", "street"];
 const radioField = ["no_lesson_per_week", "time_per_lesson", "gender_of_tutor"];
-const magicField = ["subject"];
 
 const get_subject_url = "application/controllers/registerClass.php?get_subject_db=true";
 const submit_data_url = "application/controllers/registerClass.php";
@@ -194,7 +193,6 @@ $("#registerClass-schedule_container").on("click", ".edit_icon", function() {
     } else {
         var $check_flag = checkNotEmpty($schedule_row_id);
         // Require user to choose all fields
-        // console.log($check_flag);
         if ($check_flag == 0) {
             // Delete the existed time slot in other date DateSchedule
             removeTimeSlot($schedule_row_id);
@@ -244,7 +242,6 @@ function getStartTimeObj($id, date) {
         })
 
         // get all remaining free time slot
-        // console.log(Extract_Key);
         if (Extract_Key.length >= 1) {
             let start_ref = 0;
             $.each(Extract_Key, function(index, value) {
@@ -527,23 +524,22 @@ function renderSubject() {
 
 function renderAddressOnChange($cursor_position) {
     var $address = $(SUBMIT_PREFIX + "address");
+    var $street = $(SUBMIT_PREFIX + "street");
+    if ($street.val() !== "") {
+        $address[0].selectionStart = $cursor_position;
+        $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text());
+    }
+}
+
+function renderCombination() {
+    var $combination = $("#address_combination");
     var $district = $(SUBMIT_PREFIX + "district");
     var $ward = $(SUBMIT_PREFIX + "ward");
-    var $street = $(SUBMIT_PREFIX + "street");
-    if ($address.val().length > 0) {
-        $address[0].selectionStart = $cursor_position;
-        if ($ward.val() !== "" && $street.val() !== "") {
-            $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-        } else {
-            if ($ward.val() == "" && $street.val() !== "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
-            } else if ($ward.val() !== "" && $street.val() == "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-            } else {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
-            }
-        }
-    }
+    if ($district.val() !== "" && $ward.val() !== "") {
+        $combination.text($ward.find("option:selected").text() + ", " + $district.find("option:selected").text());
+    } else if ($district.val() !== "" && $ward.val() == "") {
+        $combination.text($district.find("option:selected").text());
+    } else $combination.text("");
 }
 
 function renderAddress() {
@@ -552,35 +548,17 @@ function renderAddress() {
     var $ward = $(SUBMIT_PREFIX + "ward");
     var $street = $(SUBMIT_PREFIX + "street");
     var $cursor_position = 0;
-    $address.click(function() {
-        if ($address.val() === "") {
-            if ($district.val() !== "") {
-                $address.val(" " + $district.find("option:selected").text());
-            }
-            if ($ward.val() !== "") {
-                $address.val(" " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-            }
-            if ($street.val() !== "") {
-                if ($ward.val() !== "") {
-                    $address.val(" " + $street.find("option:selected").text() + " " + $ward.find("option:selected").text() + " " + $district.find("option:selected").text());
-                } else $address.val(" " + $street.find("option:selected").text() + " " + $district.find("option:selected").text());
-            }
-            $address[0].setSelectionRange(0, 0);
-        }
-    })
     $address.on("input", function() {
         $cursor_position = $address[0].selectionStart;
     })
-    $district.change(function() {
-        if ($address.val().length > 0) {
-            $address[0].selectionStart = $cursor_position;
-            if ($district.val() !== "") {
-                $address.val($address.val().substr(0, $cursor_position) + " " + $district.find("option:selected").text());
-            } else $address.val($address.val().substr(0, $cursor_position));
-        }
-    })
-    $ward.change(() => renderAddressOnChange($cursor_position));
-    $street.change(() => renderAddressOnChange($cursor_position));
+    $street.change(function() {
+        if ($street.val() === "") {
+            $address.val(" " + $street.find("option:selected").text());
+            $address[0].setSelectionRange(0, 0);
+        } else renderAddressOnChange($cursor_position);
+    });
+    $district.change(() => renderCombination());
+    $ward.change(() => renderCombination());
 }
 
 function renderLessonPerWeek() {
@@ -724,7 +702,9 @@ function getAllDataInForm() {
     submitObj.registerClass["city"] = cityData.id;
     $.each(textField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
-        submitObj.registerClass[value] = $topic.val();
+        var $value = $topic.val();
+        if (value === "salary_per_lesson") $value = $topic.val().replace(/,/g, '');
+        submitObj.registerClass[value] = $value;
     });
     $.each(selectField, function(index, value) {
         var $topic = $(SUBMIT_PREFIX + value);
@@ -774,12 +754,11 @@ function submitClassInfo() {
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
                     window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
-                    alert("SUCCESS");
                     // Change url
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
-                    alert(responseText);
+                    alert("Class registerd failed. Please check again");
                 } else {
                     var errors = new Array();
                     errors = JSON.parse(responseText);
@@ -789,7 +768,10 @@ function submitClassInfo() {
             },
             timeout: 3000
         })
-    } else enableAll();
+    } else {
+        alert("Please update again the information");
+        enableAll();
+    }
 }
 
 function disableAll() {
@@ -808,8 +790,14 @@ function onInputCheck() {
             var $val = $check_val.val();
             let $regex_pattern = registerClassRegex[value];
             if ($val !== "" && !$regex_pattern.test($val)) {
-                renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
+                if (value === "no_students" && parseInt($val) > 5) {
+                    renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
+                } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
             } else {
+                if (value === "salary_per_lesson" && $val !== "") {
+                    var test = $check_val.val().replace(/,/g, '');
+                    $check_val.val(currencyFormat.format(test));
+                }
                 $check_val.parent().find(".error-message").remove();
             }
         });

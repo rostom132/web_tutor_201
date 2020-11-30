@@ -2,7 +2,7 @@
 include_once '../models/class.php';
 include_once "./common/getAvatar.php";
 include_once "../models/subject.php";
-const LIMIT = 2;
+const LIMIT = 3;
 function getAllAvatar($class_arr) {
     $arr = array();
     foreach($class_arr as $user) {
