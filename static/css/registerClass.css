@@ -33,6 +33,10 @@
     margin-top: 30px;
 }
 
+.form__field {
+    position: relative;
+}
+
 .form__field--format {
     color: #4BBADC;
     font-size: 18px;
@@ -138,4 +142,43 @@
 .no-padding {
     padding-left: 0px !important;
     padding-right: 0px !important;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    height: 35px;
+    border: 1px solid #d3d3d3;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d3d3d3;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    width: 90%;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
 }
