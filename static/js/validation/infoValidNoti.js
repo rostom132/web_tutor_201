@@ -21,8 +21,8 @@ function checkEnableUpdate() {
         enableUpdateFlag = false;
     });
 
-    if (document.getElementById("avatar_user").src == sessionStorage.getItem("avatar")) {
-        enableUpdateFlag = false;
+    if (document.getElementById("avatar_user").src != sessionStorage.getItem("avatar")) {
+        enableUpdateFlag = true;
     }
 
     if (enableUpdateFlag) enableUpdate();
@@ -148,6 +148,11 @@ $(".pass_validation").on("input", function checkPass(evt) {
 $('.main_pass_validation').after('<div class="error-message">Minimum 8 characters, at least one letter and one number!</div>');
 
 $('.check_pass_validation').after('<div class="error-message">Not same password!</div>');
+
+
+$('.description').on("input", function checkDiscription(evt) {
+    checkEnableUpdate();
+});
 
 /**
  * Validate the extention of update files
