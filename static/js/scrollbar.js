@@ -38,3 +38,8 @@ window.addEventListener("scroll", function() {
     }
     lastScrollTop = currentPos <= 0 ? 0 : currentPos;
 })
+
+var go_to_top = document.getElementById("go-to-top");
+go_to_top.addEventListener("click", function() {
+    window.scrollTo(0, 0);
+})

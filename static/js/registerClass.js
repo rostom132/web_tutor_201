@@ -686,6 +686,7 @@ function getAllDataInForm() {
         var $topic = $(SUBMIT_PREFIX + value);
         var $value = $topic.val();
         if (value === "salary_per_lesson") $value = $topic.val().replace(/,/g, '');
+        if (value === "street") return;
         submitObj.registerClass[value] = $value;
     });
     $.each(selectField, function(index, value) {
@@ -734,8 +735,9 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList");
-                    // Change url
+                    alert("Your class has been registered successfully",
+                        () => window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList"),
+                        () => window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList"));
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
@@ -771,7 +773,6 @@ function onInputCheck() {
             var $val = $check_val.val();
             let $regex_pattern = registerClassRegex[value];
             if ($val !== "" && !$regex_pattern.test($val)) {
-                console.log(value);
                 if (value === "no_students" && parseInt($val) > 5) {
                     renderErrorMsg($check_val, "REGISTER.WRONG_RANGE");
                 } else renderErrorMsg($check_val, "REGISTER.WRONG_FORMAT");
