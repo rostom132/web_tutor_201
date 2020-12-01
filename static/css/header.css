@@ -138,6 +138,10 @@ ul {
     display: block;
 }
 
+.navbar-wrapper ul li:hover a {
+    color: #4BBADC;
+}
+
 @keyframes leftToRight {
     0% {
         width: 0;
@@ -238,7 +242,7 @@ ul {
 .dropdown-container ul li .dropdown__item {
     position: relative;
     display: block;
-    color: black;
+    color: black !important;
     height: auto;
     padding: 5px 30px;
     text-transform: uppercase;
@@ -293,7 +297,11 @@ ul {
 }
 
 .dropdown-container ul li:hover {
-    background-color: gray;
+    background-color: #4BBADC;
+}
+
+.dropdown-container ul li:hover .dropdown__item {
+    color: white !important;
 }
 
 .dropdown-container ul li:hover .side-dropdown {
@@ -329,6 +337,7 @@ ul {
 }
 
 .go-to-top-link:hover {
+    cursor: pointer;
     text-decoration: none;
     color: #fff;
     background-color: black;
