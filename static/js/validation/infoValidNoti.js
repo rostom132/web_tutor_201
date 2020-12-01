@@ -21,6 +21,10 @@ function checkEnableUpdate() {
         enableUpdateFlag = false;
     });
 
+    if (document.getElementById("avatar_user").src == sessionStorage.getItem("avatar")) {
+        enableUpdateFlag = false;
+    }
+
     if (enableUpdateFlag) enableUpdate();
     else disableUpdate();
 }
@@ -179,6 +183,7 @@ $(".uploader").change(function upImg() {
                     .attr('src', e.target.result)
                     .width(200)
                     .height('auto');
+                checkEnableUpdate();
             };
             reader.readAsDataURL(this.files[0]);
         } else {
