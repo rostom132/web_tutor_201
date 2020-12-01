@@ -12,8 +12,10 @@ $('#loginButton').click(function() {
         success: function(data) {
             if (data == 'success') {
                 window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/bodyBanner");
+            } else if (data == 'sai format roi') {
+                alert('Username and password must not include special characters!');
             } else {
-                alert('Wrong password! please input again!');
+                alert('Wrong username or password! please input again!');
             }
         }
     });

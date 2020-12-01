@@ -25,17 +25,26 @@ function getClassInfo() {
                             document.getElementById("infoClass_" + key).innerText = info['class'][key];
                         }
                     }
+
+                    document.getElementById('infoClass_tutor_gender').classList.add("lang");
                     if (info['class']['gender_of_tutor'] === 'F') {
-                        document.getElementById('infoClass_tutor_gender').innerText = 'Nữ'
+                        document.getElementById('infoClass_tutor_gender').innerText = getText("INFO_CLASS.GENDER_FEMALE");
+                        document.getElementById('infoClass_tutor_gender').setAttribute("key", "INFO_CLASS.GENDER_FEMALE");
+                    } else if (info['class']['gender_of_tutor'] === 'M') {
+                        document.getElementById('infoClass_tutor_gender').innerText = getText("INFO_CLASS.GENDER_MALE");
+                        document.getElementById('infoClass_tutor_gender').setAttribute("key", "INFO_CLASS.GENDER_MALE");
                     } else {
-                        document.getElementById('infoClass_tutor_gender').innerText = 'Nam'
+                        document.getElementById('infoClass_tutor_gender').innerText = getText("INFO_CLASS.GENDER_BOTH");
+                        document.getElementById('infoClass_tutor_gender').setAttribute("key", "INFO_CLASS.GENDER_BOTH");
                     }
+
                     if (info['class']['publisher_ava'] != '') {
                         $("#infoClass_avatar")
                             .attr("src", info['class']['publisher_ava'] + "?" + new Date().getTime())
                             .width(220)
                             .height('auto');
                     }
+
                     switch (info['user']) {
                         case "tutor":
                             document.getElementById("register_button").hidden = false;

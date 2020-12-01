@@ -21,6 +21,10 @@ function checkEnableUpdate() {
         enableUpdateFlag = false;
     });
 
+    if (document.getElementById("avatar_user").src != sessionStorage.getItem("avatar")) {
+        enableUpdateFlag = true;
+    }
+
     if (enableUpdateFlag) enableUpdate();
     else disableUpdate();
 }
@@ -145,6 +149,11 @@ $('.main_pass_validation').after('<div class="error-message">Minimum 8 character
 
 $('.check_pass_validation').after('<div class="error-message">Not same password!</div>');
 
+
+$('.description').on("input", function checkDiscription(evt) {
+    checkEnableUpdate();
+});
+
 /**
  * Validate the extention of update files
  */
@@ -179,6 +188,7 @@ $(".uploader").change(function upImg() {
                     .attr('src', e.target.result)
                     .width(200)
                     .height('auto');
+                checkEnableUpdate();
             };
             reader.readAsDataURL(this.files[0]);
         } else {

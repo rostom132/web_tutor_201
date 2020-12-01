@@ -139,7 +139,10 @@ export const arrLang = {
             "BUTTON": " REGISTER ",
             "REGISTERED": " REGISTERED ",
             "DELETE": " DELETE",
-            "AVAILABLE_TIME": "Available time: "
+            "AVAILABLE_TIME": " Available time: ",
+            "GENDER_MALE": " Male Teacher",
+            "GENDER_FEMALE": " Female Teacher",
+            "GENDER_BOTH": " Male/Female Teacher",
         },
         "USER_REGISTER": {
             "TITLE": "Registration Form",
@@ -299,7 +302,10 @@ export const arrLang = {
             "BUTTON": " ĐĂNG KÝ ",
             "REGISTERED": " Đã Đăng ký",
             "DELETE": " XÓA LỚP ",
-            "AVAILABLE_TIME": "Thời gian: "
+            "AVAILABLE_TIME": "Thời gian: ",
+            "GENDER_MALE": "Giáo viên Nam",
+            "GENDER_FEMALE": "Giáo viên Nữ",
+            "GENDER_BOTH": "Giáo viên Nam/Nữ",
         },
         "USER_REGISTER": {
             "TITLE": "Đăng ký",
