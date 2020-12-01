@@ -735,7 +735,9 @@ function submitClassInfo() {
             cache: false,
             success: function(responseText) {
                 if (responseText === "SUCCESS") {
-                    alert("Your class has been registered successfully", () => window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList"));
+                    alert("Your class has been registered successfully",
+                        () => window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList"),
+                        () => window.location.replace(window.location.origin + "/" + window.location.pathname.split('/')[1] + "/classList"));
                 } else if (
                     responseText === "WRONG ELEMENT INFO" ||
                     responseText === "WRONG ELEMENT WEAKNESS" || responseText === "WRONG ELEMENT SCHEDULE" || responseText === "FAIL") {
