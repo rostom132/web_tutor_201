@@ -6,9 +6,9 @@ window.alert = function(message, callback) {
             buttons: {
                 OK: function() {
                     if (jQuery.isFunction(callback)) {
-                        $(this).dialog('close');
                         callback();
                     }
+                    $(this).dialog('close');
                 }
             },
             close: function() { $(this).remove(); },
