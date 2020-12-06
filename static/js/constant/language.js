@@ -33,6 +33,26 @@ export const arrLang = {
             "FOOTER_RIGHT_EMAIL": "Email",
             "FOOTER_RIGHT_SUBSCRIBE": "Subscribe"
         },
+        "BODY_BANNER": {
+            "HEADER": "Choose your best tutor for your children!",
+            "REGISTER": "Register",
+            "PARENTS": "Parents",
+            "TUTORS": "Tutors",
+            "BUDGES": "Budges",
+            "FLEX": "Flexiable",
+            "ENV": "Environment",
+            "POP_BUDGES": "The price is suitable for every class!",
+            "POP_FLEX": "The time is flexiable so you can choose the best schedule for your children",
+            "POP_ENV": "The Environment is friendly!",
+            "EXP": "Experience",
+            "TIME": "Time",
+            "ATTI": "Attitude",
+            "POP_EXP": "The tutor have lots of experience",
+            "POP_TIME": "The time is flexiable so you can choose the best schedule for your children",
+            "POP_ATTI": "The attitude of tutor is good!",
+            "ACTIVITY": "Center activity",
+            "ACTIVITY_CONTENT": "In this center, the children can learn many thing skjdaflkjdsaflkjsadnfkjsadnfalkjdsnflkjdsa fsan fdkj sadnf sajdfdsaf sadkfnsa kjfs djfhsa ifn sakjfdn sadf nsa nfsakjd nfksa dfk sadjfbskja dbfkjsa dfoas jdfoisa jdf"
+        },
         "REGISTER": {
             // Title + placeholder
             "FORM_LABEL": "Description for your new class",
@@ -193,6 +213,26 @@ export const arrLang = {
             "NAVBAR_REGISTERCLASS": "Đăng\u00a0kí\u00a0lớp",
             "NAVBAR_CLASSESLIST": "Danh\u00a0sách\u00a0lớp",
             "NAVBAR_PROFILE": "Thông\u00a0tin\u00a0cá\u00a0nhân",
+        },
+        "BODY_BANNER": {
+            "HEADER": "Hãy chọn gia sư tốt nhất cho con của bạn!",
+            "REGISTER": "Đăng kí",
+            "PARENTS": "Phụ huynh",
+            "TUTORS": "Gia sư",
+            "BUDGES": "Chi phí",
+            "FLEX": "Linh động",
+            "ENV": "Môi trường",
+            "POP_BUDGES": "Giá cả hợp lý với mọi đối tượng, giá cả linh động theo từng trường hợp, thời điểm, tạo điều kiện cho các bậc phụ huynh!",
+            "POP_FLEX": "Thời gian dạy linh động, giúp cho phụ huynh có nhiều lựa chọn thời gian phù hợp với thời khóa biểu của các bé",
+            "POP_ENV": "Môi trường dạy học lành mạnh, giáo viên chuyên nghiệp tạo sự sinh động, vui vẻ trong quá trình học tập",
+            "EXP": "Kinh nghiệm",
+            "TIME": "Thời gian",
+            "ATTI": "Thái độ",
+            "POP_EXP": "Giáo viên là những tấm chiếu cũ, những người từng trải",
+            "POP_TIME": "Thời gian linh động giúp gia sư có thể lựa chọn khung thời gian hợp lý",
+            "POP_ATTI": "Đạo đức của mỗi gia sư đều tốt",
+            "ACTIVITY": "Hoạt động ở TKT",
+            "ACTIVITY_CONTENT": "Các bé sẽ được đào tạo theo giáo trình đặc biệt, giáo trình này sẽ được soạn thảo phù hợp với trình độ, tính cách và sở thích học tập của từng bé, giúp cho các bé tiếp thu kiến thức nhanh và hiệu quả nhất có thể",
         },
         "REGISTER": {
             // Title + placeholder
