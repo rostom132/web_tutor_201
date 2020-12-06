@@ -1,0 +1,28 @@
+{
+    "default_change_frequency": "daily",
+    "urls": [{
+            "page_url": "bodyBanner",
+            "change_frequency": "monthly",
+            "priority": "0.8"
+        },
+        {
+            "page_url": "aboutUs",
+            "change_frequency": "monthly",
+            "priority": "0.8"
+        },
+        {
+            "page_url": "contact",
+            "change_frequency": "monthly"
+        },
+        {
+            "page_url": "classList",
+            "change_frequency": "always"
+        },
+        {
+            "page_url": "formLogin"
+        },
+        {
+            "page_url": "formRegister"
+        }
+    ]
+}

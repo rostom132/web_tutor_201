@@ -1,6 +1,8 @@
 Options -Indexes
 DirectoryIndex /web_tutor_201/application/controllers/index.php
 RewriteEngine On
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
  
 RewriteRule ^application/models/.* - [F,L,NC]
 
