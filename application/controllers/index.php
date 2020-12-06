@@ -6,7 +6,9 @@
 
     $page_content = array();
 
-    AutoAuthen::rememberMe();
+    if (!isset($_SESSION['user_type'])) {
+        AutoAuthen::rememberMe();
+    }
 
     // $_SESSION['user_id'] = '6';
     // $_SESSION['username'] = 'tienn';
