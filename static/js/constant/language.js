@@ -174,9 +174,8 @@ export const arrLang = {
             "FOURTH_RULE_LABEL": "THIRD RULE: ",
             "FOURTH_RULE": "- Phone number for main admin: 0917565059."
         },
-
         "CONTACT": {
-            "TITLE": "Find your nearest center",
+            "TITLE": "Find your nearest TKT center",
             "ADDRESS1": "268 Ly Thuong Kiet, District 10, Ho Chi Minh City",
             "ADDRESS2": "Vietnam National University, Linh Trung Ward, Thu Duc District, Ho Chi Minh City"
         }
@@ -339,7 +338,7 @@ export const arrLang = {
         },
 
         "CONTACT": {
-            "TITLE": "Tìm trung tâm gần nhất",
+            "TITLE": "Tìm trung tâm TKT gần nhất",
             "ADDRESS1": "268 Lý Thường Kiệt, quận 10, thành phố Hồ Chí Minh",
             "ADDRESS2": "Khu Đại học quốc gia, phường Linh Trung, quận Thủ Đức, thành phố Hồ Chí Minh"
         }

@@ -2,13 +2,13 @@
     <link rel="stylesheet" href="./static/css/classView.css">
     <script type="module" src="./static/js/filterForm.js"></script>
     <script type="module" src="./static/js/getClass.js"></script>
+    <title>TKT - Class list</title>
 </head>
+
 <body>
     <div style="background-color: #F0FFFF;">
+        <h1 style="text-align: center; font-size: 60px; font-weight:bolder;padding-top: 30px; padding-bottom:30px; color: #45C0F8;" class="lang" key="CLASSINFO.HEADER"></h1>
         <div class="class-container container-fluid">
-            <div class="class-header">
-                <span class="lang" key="CLASSINFO.HEADER"></span>
-            </div>
             <div class="search-container">
                 <form>
                     <select id="edit-place" class="form-select">
@@ -25,7 +25,7 @@
                     </select>
                     <button class="lang" key="CLASSINFO.FILTER_BUTTON" type="button" id="submit-button"></button>
                 </form>
-                <span class="lang" key="CLASSINFO.CLASS_COUNT" id="result-count" style="color: red;"></span><span id="count" style="color: red;"></span></span><span class="lang" key="CLASSINFO.CLASS"  style="color: red;"></span>
+                <span class="lang" key="CLASSINFO.CLASS_COUNT" id="result-count" style="color: red;"></span><span id="count" style="color: red;"></span></span><span class="lang" key="CLASSINFO.CLASS" style="color: red;"></span>
             </div>
             <div class="classView-container">
                 <div class="container" id="show"></div>
@@ -34,4 +34,5 @@
         </div>
     </div>
 </body>
+
 </html>
