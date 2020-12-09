@@ -22,6 +22,12 @@ $('#loginButton').click(function() {
 
 })
 
+$(document).keydown(function (e) {
+    if (e.keyCode == 13 && document.getElementById("loginButton").disabled == false) {
+        $('#loginButton').trigger("click");
+    }
+})
+
 $(document).ready(function clearData() {
     document.getElementById("loginFormPass").value = "";
     document.getElementById("loginFormUserName").value = "";

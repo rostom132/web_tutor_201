@@ -237,6 +237,18 @@ function emailButton() {
 
 }
 
+$(document).keydown(function (e) {
+    if (e.keyCode == 13 ) {
+        var roleHeader = document.getElementsByClassName("tabButton active")[0].id;
+        if ( (roleHeader == "tabH1" || roleHeader == "tabH2") && $("#continue").is('[disabled!=disabled]')){
+            $("#continue").trigger("click");
+        }
+        else if (roleHeader == "tabH3" && $("#continue-admin").is('[disabled!=disabled]')) {
+            $("#continue-admin").trigger("click");
+        }
+    }
+})
+
 $("button[id^='continue']").click(function continueButton() {
     var role;
     if (document.getElementsByClassName("tabButton active")[0].id == "tabH1") role = 'parent';
