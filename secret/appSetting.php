@@ -31,6 +31,8 @@
             )
         ),
 
+        'numberOfItemsClassList' => 4,
+
         'pageGoWithCouting' => array (
             'bodyBanner',
             'aboutUs',

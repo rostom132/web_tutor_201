@@ -2,7 +2,10 @@
 include_once '../models/class.php';
 include_once "./common/getAvatar.php";
 include_once "../models/subject.php";
-const LIMIT = 3;
+include_once '../../secret/config.php';
+
+define('LIMIT', Config::get()['numberOfItemsClassList'] );
+
 function getAllAvatar($class_arr) {
     $arr = array();
     foreach($class_arr as $user) {
