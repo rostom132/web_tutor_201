@@ -84,9 +84,6 @@ function getClassWithFilter($filterVal, $current_page) {
         echo("0");
     }
 }
-function getCurrentPage () {
-    return $this->current_page;
-}
 
 if(isset($_POST['filter'])) {
     getClassWithFilter(json_decode($_POST['filterVal']),$_POST['current']);

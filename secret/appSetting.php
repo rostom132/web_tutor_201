@@ -10,14 +10,16 @@
                 'aboutUs',
                 'infoClass',
                 'classList',
-                'contact'
+                'contact',
+                'registeredClass'
             ),
             'loginCommon' => array (
                 'bodyBanner',
                 'aboutUs',
                 'infoClass',
                 'classList',
-                'contact'
+                'contact',
+                'registeredClass'
             ),
             'tutor' => array (
                 'infoTutor',
@@ -31,7 +33,7 @@
             )
         ),
 
-        'numberOfItemsClassList' => 4,
+        'numberOfItemsClassList' => 2,
 
         'pageGoWithCouting' => array (
             'bodyBanner',

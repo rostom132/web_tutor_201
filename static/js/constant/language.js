@@ -11,6 +11,7 @@ export const arrLang = {
             "NAVBAR_REGISTRATION": "Registration",
             "NAVBAR_LOGOUT": "Logout",
             "NAVBAR_REGISTERCLASS": "Register\u00a0Class",
+            "NAVBAR_REGISTEREDCLASS": "Registered Classes",
             "NAVBAR_CLASSESLIST": "Classes\u00a0List",
             "NAVBAR_PROFILE": "My\u00a0Profile",
             "BODY_TITLE": "Center Activity",
@@ -213,6 +214,7 @@ export const arrLang = {
             "NAVBAR_REGISTERCLASS": "Đăng\u00a0kí\u00a0lớp",
             "NAVBAR_CLASSESLIST": "Danh\u00a0sách\u00a0lớp",
             "NAVBAR_PROFILE": "Thông\u00a0tin\u00a0cá\u00a0nhân",
+            "NAVBAR_REGISTEREDCLASS": "Lớp đã đăng kí",
         },
         "BODY_BANNER": {
             "HEADER": "Hãy chọn gia sư tốt nhất cho con của bạn!",
