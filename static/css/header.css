@@ -107,6 +107,19 @@ ul {
     padding-bottom: 30px;
 }
 
+#hamberger-navbar {
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-wrapper ul li {
+        display: none;
+    }
+    #hamberger-navbar {
+        display: block;
+    }
+}
+
 .sticky-li {
     top: -10px !important;
     padding-bottom: 0px !important;
