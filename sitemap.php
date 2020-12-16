@@ -1,6 +1,7 @@
 <?php
 
-    $base_url = "http://127.0.0.1/web_tutor_201/";
+    include_once "./secret/config.php";
+    $base_url = Config::getConfig()['domain'];
     $url_file = file_get_contents($base_url . "static/constants/sitemap_urls.json");
     $urls = json_decode($url_file, true);
 
