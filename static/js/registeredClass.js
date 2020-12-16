@@ -123,7 +123,6 @@ export function initClass() {
                 noResultTemplate();
                 return;
             }
-            console.log(obj);
             user_type = obj.user_type;
             class_num = obj[0];
             page_num = obj[1];

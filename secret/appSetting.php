@@ -11,7 +11,6 @@
                 'infoClass',
                 'classList',
                 'contact',
-                'registeredClass'
             ),
             'loginCommon' => array (
                 'bodyBanner',
@@ -33,7 +32,7 @@
             )
         ),
 
-        'numberOfItemsClassList' => 2,
+        'numberOfItemsClassList' => 3,
 
         'pageGoWithCouting' => array (
             'bodyBanner',

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./static/css/slideNav.css">
+<script type="module" src="./static/js/navbar.js"></script>
 <nav id="navbar" class="navbar-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -61,8 +63,21 @@
                         <a href="contact"><span class="lang contact-us" key="COMMON.NAVBAR_CONTACT"></span></a>
                     </li>
                 </ul>
+                <span style="padding-left: 20px; font-size:30px;cursor:pointer" id="hamberger-navbar">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </span>
                 </div>
             </div>
         </div>
     </div>
 </nav>
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" id="hamberger-navbar-close">&times;</a>
+    <a href="formLogin" class="dropdown__item lang" key="COMMON.NAVBAR_LOGIN"></a>
+    <a href="formRegister" class="dropdown__item lang" key="COMMON.NAVBAR_REGISTRATION"></a>
+    <a href="bodyBanner" class="lang" key="COMMON.NAVBAR_HOMEPAGE">
+    </a>
+    <a href="aboutUs" class="lang" key="COMMON.NAVBAR_ABOUTUS"></a>
+    <a href="classList" class="lang" key="COMMON.NAVBAR_CLASSESLIST"></a>
+    <a href="contact" class="lang" key="COMMON.NAVBAR_CONTACT"></a>
+</div>

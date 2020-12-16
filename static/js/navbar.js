@@ -11,7 +11,7 @@ $('#hamberger-navbar-close').click(function closeNav() {
     $("#navbar__options").slideDown(500);
 });
 
-$('#logout-button').click(function logOut() {
+function logOut() {
     var ajax = new XMLHttpRequest();
     var method = "GET";
     var url = "application/controllers/navbar.php?logout=true";
@@ -26,7 +26,11 @@ $('#logout-button').click(function logOut() {
         }
     };
     ajax.send();
-});
+}
+
+$('#logout-button').click(() => logOut());
+
+$('#logout-sidenav').click(() => logOut());
 
 $(document).ready(function() {
     getAvatar();
