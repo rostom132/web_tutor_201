@@ -2,25 +2,19 @@
 import { translate, getText } from "./translate.js";
 import * as constants from "./constant/city.js";
 // Global var
+var user_type;
 var class_num;
 var page_num;
 var class_list;
 let current_page = 1;
-//Show number of class found
-function renderClassNum(class_num) {
-    if (class_num <= 1) {
-        document.getElementById('count').innerHTML = class_num;
-    } else {
-        document.getElementById('count').innerHTML = class_num;
-    }
-}
+
 //Render all class information
 function createTemplate(class_list) {
     document.getElementById('show').innerHTML = "";
     var default_avatar = "https://cdn.dribbble.com/users/813156/screenshots/3557331/profile_pic-01.png";
     var infor_icon = "./static/images/icon/information.png";
     var money_icon = "./static/images/icon/moneybag.jpeg";
-    var registered_icon = "./static/images/icon/tick.png";
+    var registered_icon = user_type != "tutor" ? "./static/images/icon/tick.png" : "./static/images/icon/student.png";
     for (let i = 0; i < class_list.length; i++) {
         var class_title = class_list[i]['topic'];
         var class_id = class_list[i]['id'];
@@ -32,7 +26,7 @@ function createTemplate(class_list) {
             }
         });
         var salary = class_list[i]['salary_per_lesson'];
-        var student_no = class_list[i]['no_students'];
+        var registered_no = user_type != "tutor" ? "No of tutor: " + class_list[i]['registeredTutors'] : class_list[i]['no_students'];
         var template = document.createElement('div');
         var gender;
         if (class_list[i]['gender_of_tutor'] == 'F') {
@@ -76,7 +70,7 @@ function createTemplate(class_list) {
                 <img src=${money_icon} style="width: 30px; height: 30px;">
                 <div><span style="font-size:1.5em; color:gold">${String(salary).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</span><span class="lang" key="CLASSINFO.SALARY" id="salary">${getText("CLASSINFO.SALARY")}</span></div>
                 <img src=${registered_icon} style="width: 30px; height: 30px; margin-top:20%">
-                <p style="font-size:25px; bold ;color:#ff6600">${student_no}</p>
+                <p style="font-size:25px; bold ;color:#ff6600">${registered_no}</p>
             </div>
         </div>
         `;
@@ -91,19 +85,19 @@ function pagination(page_num) {
     page.setAttribute('id', 'pagination');
     document.getElementById('page-wrapper').appendChild(page);
     var num = document.createElement('a');
-    num.setAttribute('href', 'classList' + pageButtonURL(parseInt(getURLParam()['page']) - 1));
+    num.setAttribute('href', 'registeredClass' + pageButtonURL(parseInt(getURLParam()['page']) - 1));
     num.setAttribute('id', 'prev');
     num.innerHTML = '&laquo;';
     document.getElementById('pagination').appendChild(num);
     for (let i = 0; i < page_num; i++) {
         num = document.createElement('a');
         num.setAttribute('id', i + 1);
-        num.setAttribute('href', 'classList' + pageButtonURL(i + 1));
+        num.setAttribute('href', 'registeredClass' + pageButtonURL(i + 1));
         num.innerHTML = i + 1;
         document.getElementById('pagination').appendChild(num);
     }
     num = document.createElement('a');
-    num.setAttribute('href', 'classList' + pageButtonURL(parseInt(getURLParam()['page']) + 1));
+    num.setAttribute('href', 'registeredClass' + pageButtonURL(parseInt(getURLParam()['page']) + 1));
     num.setAttribute('id', 'next');
     num.innerHTML = '&raquo;';
     document.getElementById('pagination').appendChild(num);
@@ -112,24 +106,25 @@ function pagination(page_num) {
 //Run at beginning with jquery
 export function initClass() {
     var ajax = new XMLHttpRequest();
-    var method = "POST";
-    var url = "./application/controllers/classList.php";
+    var method = "GET";
+    current_page = getURLParam()['page'];
+    var url = "./application/controllers/registeredClass.php?current=" + current_page;
     var loading = document.createElement('div');
     loading.setAttribute('class', 'loader');
     document.getElementById('show').appendChild(loading);
     ajax.open(method, url, true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    current_page = getURLParam()['page'];
-    ajax.send("init=1&current=" + current_page);
+    ajax.send();
     ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('show').removeChild(loading);
-            if (this.responseText == 0) {
-                renderClassNum(0);
+            var obj = JSON.parse(this.responseText);
+            if (obj == "0") {
                 noResultTemplate();
                 return;
             }
-            var obj = JSON.parse(this.responseText);
+            console.log(obj);
+            user_type = obj.user_type;
             class_num = obj[0];
             page_num = obj[1];
             class_list = [];
@@ -138,14 +133,15 @@ export function initClass() {
                 obj[2][i].weak = obj[4][i]['name'];
                 class_list.push(obj[2][i]);
             }
-            renderClassNum(class_num);
             createTemplate(class_list);
             pagination(page_num);
             document.getElementById(current_page).setAttribute('class', 'active');
             checkPagingButton();
+            var title = user_type == "admin" ? "List of registered classes" : user_type == "tutor" ? "List of sign up classes" :
+                "List of posted classes";
+            document.getElementById("registeredTitle").innerHTML = title;
         }
     };
-
 }
 
 //Check next, prev disable button
@@ -205,3 +201,11 @@ function noResultTemplate() {
     document.getElementById("show").setAttribute('style', 'text-align:center')
     document.getElementById("show").innerHTML = `<img src="./static/images/background/404.png" style="margin-left:auto; margin-right:auto">`;
 }
+
+$(function() {
+    if (getURLParam()['page'] == null) {
+        window.location.replace(window.location.origin + window.location.pathname + '?page=1');
+    } else {
+        initClass();
+    }
+})

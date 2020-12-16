@@ -1,6 +1,6 @@
 /*check login JavaScript; begin*/
 function isInputInvalid() {
-    var testUsername = /^[A-za-z0-9]{4,}$/.test(document.getElementById("loginFormUserName").value);
+    var testUsername = /^[a-zA-Z0-9]{4,}$/.test(document.getElementById("loginFormUserName").value);
     var testPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(document.getElementById("loginFormPass").value);
     if (testUsername) {
         document.getElementById("checkUserNameP").innerHTML = "";
