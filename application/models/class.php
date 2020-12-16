@@ -140,6 +140,44 @@
             if ($result) return true;
             return false;
         }
+
+        public static function registeredClassesForTutor( $tutor_id, $current_page, $limit) {
+            $start = ($current_page - 1) * $limit;
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id, COUNT(class.id) as registeredTutors 
+                FROM class JOIN registeredclass ON registeredclass.class_id = class.id 
+                WHERE registeredclass.tutor_id = '$tutor_id' 
+                GROUP BY class.id 
+                ORDER BY registeredclass.register_date DESC, class.id DESC
+                LIMIT $start, $limit"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result);
+        }
+
+        public static function registeredClasses ($current_page, $limit) {
+            $start = ($current_page - 1) * $limit;
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id, COUNT(class.id) as registeredTutors
+                FROM class JOIN registeredclass ON registeredclass.class_id = class.id 
+                GROUP BY class.id 
+                ORDER BY  registeredclass.register_date DESC, class.id DESC
+                LIMIT $start, $limit"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result);
+        }
+
+        public static function postedClassesForParent ( $parent_id ,$current_page, $limit) {
+            $start = ($current_page - 1) * $limit;
+            $result = $GLOBALS['db_conn']->queryData(
+                "SELECT class.id, class.district, class.no_students, class.gender_of_tutor, class.description, class.topic, class.post_date, class.salary_per_lesson, class.user_id, COUNT(registeredclass.class_id) as registeredTutors 
+                FROM class LEFT JOIN registeredclass ON registeredclass.class_id = class.id 
+                WHERE class.user_id = '$parent_id' 
+                GROUP BY class.id 
+                ORDER BY class.post_date DESC, class.id DESC 
+                LIMIT $start, $limit"
+            );
+            return $GLOBALS['db_conn']->convertToArray($result);
+        }        
     }
 
 ?>
