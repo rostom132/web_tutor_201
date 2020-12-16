@@ -51,7 +51,7 @@ export const arrLang = {
             "POP_TIME": "The time is flexiable so you can choose the best schedule for your children",
             "POP_ATTI": "The attitude of tutor is good!",
             "ACTIVITY": "Center activity",
-            "ACTIVITY_CONTENT": "In this center, the children can learn many thing skjdaflkjdsaflkjsadnfkjsadnfalkjdsnflkjdsa fsan fdkj sadnf sajdfdsaf sadkfnsa kjfs djfhsa ifn sakjfdn sadf nsa nfsakjd nfksa dfk sadjfbskja dbfkjsa dfoas jdfoisa jdf"
+            "ACTIVITY_CONTENT": "The children will learn many things from one-on-one teaching our group teaching. Suitable learning materials will be assigned and used based on each child's level."
         },
         "REGISTER": {
             // Title + placeholder
